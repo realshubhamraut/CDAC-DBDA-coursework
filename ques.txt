@@ -33,3 +33,7 @@ assignment - 5
 Print numbers from 1 to 10 using a while loop
 Calculate the sum of digits of a number using a while loop.
 
+
+----------------------- weak areas ---------------------------
+- updating the values in the dictionary 
+
