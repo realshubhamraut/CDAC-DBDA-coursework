@@ -100,3 +100,124 @@ Here’s every command from your notes, formatted in Markdown for easy copy-past
 - `cal -3` — Show previous, current, and next month  
 - `cal -3 <m> <y>` — Show month `<m>` of year `<y>` with neighbors  
 - `cal <m> <y>` — Show calendar for month `<m>` in year `<y>`
+
+
+Absolutely, Shubham. Here's your **shell scripting keyword cheat sheet** in clean, markdown-style formatting—optimized for rapid review and retention:
+
+---
+
+## 🐚 Shell Scripting Keywords – One-Liner Notes
+
+### 📌 Basic Commands
+
+- `echo`: Prints text or variable to terminal  
+  _Example_: `echo "Hello $USER"`
+
+- `read`: Accepts user input and stores in variable  
+  _Example_: `read name`
+
+- `#`: Adds a comment in the script  
+  _Example_: `# This is a comment`
+
+- `#!/bin/bash`: Shebang line to specify shell interpreter  
+  _Example_: First line in script
+
+---
+
+### 🔁 Control Structures
+
+- `if [ condition ]; then ... fi`: Executes block if condition is true  
+  _Example_: `if [ $x -gt 0 ]; then echo "Positive"; fi`
+
+- `else`: Executes if `if` condition is false  
+  _Example_: `else echo "Negative"`
+
+- `elif`: Adds another condition check  
+  _Example_: `elif [ $x -eq 0 ]; then echo "Zero"`
+
+- `fi`: Ends the `if` block  
+  _Example_: `fi`
+
+- `case ... esac`: Multi-branch condition  
+  _Example_:  
+  ```bash
+  case $var in
+    1) echo "One";;
+    *) echo "Other";;
+  esac
+  ```
+
+---
+
+### 🔄 Loops
+
+- `for var in list; do ... done`: Iterates over items  
+  _Example_: `for i in 1 2 3; do echo $i; done`
+
+- `while [ condition ]; do ... done`: Loops while condition is true  
+  _Example_: `while [ $x -lt 5 ]; do echo $x; x=$((x+1)); done`
+
+- `until [ condition ]; do ... done`: Loops until condition becomes true  
+  _Example_: `until [ $x -eq 5 ]; do echo $x; x=$((x+1)); done`
+
+---
+
+### 🧩 Functions & Arguments
+
+- `function_name() { ... }`: Defines reusable code block  
+  _Example_:  
+  ```bash
+  greet() { echo "Hello, $1"; }
+  greet "Shubham"
+  ```
+
+- `$0`, `$1`, `$2`: Script name and positional arguments  
+  _Example_: `echo "Script: $0, Arg1: $1"`
+
+---
+
+### 🧪 Testing & Status
+
+- `$?`: Exit status of last command  
+  _Example_: `echo $?`
+
+- `[ condition ]`: Tests a condition  
+  _Example_: `[ $x -eq 5 ]`
+
+- `test`: Alternative to `[ ]`  
+  _Example_: `test $x -eq 5`
+
+---
+
+### 📂 File Handling & Redirection
+
+- `>`: Redirect output (overwrite)  
+  _Example_: `echo "log" > file.txt`
+
+- `>>`: Redirect output (append)  
+  _Example_: `echo "log" >> file.txt`
+
+- `<`: Input redirection  
+  _Example_: `while read line; do echo $line; done < file.txt`
+
+- `|`: Pipe output to another command  
+  _Example_: `cat file.txt | grep "error"`
+
+---
+
+### ⚙️ Execution & Logic
+
+- `chmod +x script.sh`: Makes script executable  
+  _Example_: `chmod +x myscript.sh`
+
+- `./script.sh`: Executes the script  
+  _Example_: `./myscript.sh`
+
+- `&&`: Executes next command if previous succeeds  
+  _Example_: `mkdir test && cd test`
+
+- `||`: Executes next command if previous fails  
+  _Example_: `mkdir test || echo "Failed"`
+
+---
+
