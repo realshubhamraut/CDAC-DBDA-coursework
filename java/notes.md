@@ -41,16 +41,12 @@ public class Hello {
 - **JIT (Just-In-Time Compiler):** Frequently used code is compiled at runtime for faster execution.
 - **Heap vs Stack:**
     - Heap: Stores objects, is expandable, starts from the top of memory.
-    - Stack: Stores method calls and local variables, is linear and limited, starts from the bottom.
     - Objects are stored in the heap; references/instances are stored in the stack.
 
 ---
 
 ## 4. Naming Conventions
 
-- Class names should start with a capital letter (e.g., `HelloWorld`).
-- File name must match the public class name.
-- Variables and methods use camelCase.
 
 ---
 
@@ -58,9 +54,6 @@ public class Hello {
 
 - Primitive types: `int`, `float`, `double`, `char`, `boolean`, `byte`, `short`, `long`
 - Reference types: `String`, arrays, objects
-- Arrays: `String[] args` is an array of strings
-
----
 
 ## 6. Access Modifiers
 
@@ -68,27 +61,18 @@ public class Hello {
 - `private`: accessible only within the class
 - `protected`: accessible within the package and subclasses
 - (default): accessible within the package
-
----
-
 ## 7. Key Concepts
 
 - **Object-Oriented:** Everything is part of a class/object
 - **Encapsulation:** Data hiding using access modifiers
 - **Inheritance:** Classes can inherit properties from other classes
 - **Polymorphism:** Methods can be overridden or overloaded
-
----
-
 ## 8. Other Basics
 
 - `args` refers to command-line arguments
 - `System.out.println()` is used for output
 - Java is case-sensitive
 - Comments: `// single-line`, `/* multi-line */`
-
----
-
 ## 9. Example: Hello World
 
 ```java
@@ -96,20 +80,16 @@ public class HelloWorld {
     public static void main(String[] args) {
         System.out.println("Hello, World!");
     }
-}
 ```
 
 ---
-
 ## 10. Compilation and Execution
 
 1. Save your file as `HelloWorld.java`
-2. Compile: `javac HelloWorld.java`
 3. Run: `java HelloWorld`
 
 ---
 
-## 11. Additional Notes
 
 - Java programs can be run from any drive/partition (e.g., C: or D:), as long as the JVM can access them.
 - Heap and stack separation helps avoid variable name collisions in different scopes.
@@ -130,7 +110,22 @@ public class HelloWorld {
 | System.out      | Used for output                                  |
 
 
+the java compiler can compiles the code without caring about if you have put the same file and class name
 
-there is the java.lang package which is already loaded while programmming without specifically mentioning it
+there is the java.lang package which is already loaded while programmming without specifically mentioning it, but after compiles we cannot really call the class with the filesname, because the class name declared is not matching with the filename itself.
+
+but we don't really need the file name and classname to be the same if we are running the compiled class name with the proper class name
+filename = javaclass.java
+classname = javaclass1
+
 
 while we need to import other packages. like `utils` and `io`
+
+the java compiler can compiles the code without caring about if you have put the same file and class name
+
+in java by default boolean values is false
+and character values by default is null
+
+
+
+z
