@@ -881,6 +881,532 @@
 
 # Bash Shell Scripting: Conditional Statements, File Operations, and More
 
+## Arithmetic Operators
+
+Bash provides arithmetic operations using the `$(( ))` syntax. This allows for integer calculations directly within your scripts.
+
+### Basic Arithmetic Operators
+
+```bash
+# Addition
+echo $((x + y))
+
+# Subtraction
+echo $((x - y))
+
+# Multiplication
+echo $((x * y))
+
+# Division (integer division)
+echo $((x / y))
+
+# Modulus (remainder)
+echo $((x % y))
+
+# Exponentiation
+echo $((x ** y))
+```
+
+**Example:**
+```bash
+#!/bin/bash
+# Basic calculator
+read -p "Enter first number: " x
+read -p "Enter second number: " y
+
+echo "Addition: $((x + y))"
+echo "Subtraction: $((x - y))"
+echo "Multiplication: $((x * y))"
+echo "Division: $((x / y))"
+echo "Remainder: $((x % y))"
+echo "Exponentiation: $((x ** y))"
+```
+
+### Compound Assignment Operators
+
+```bash
+# Addition assignment
+((x += y))  # Equivalent to x = x + y
+
+# Subtraction assignment
+((x -= y))  # Equivalent to x = x - y
+
+# Multiplication assignment
+((x *= y))  # Equivalent to x = x * y
+
+# Division assignment
+((x /= y))  # Equivalent to x = x / y
+
+# Modulus assignment
+((x %= y))  # Equivalent to x = x % y
+```
+
+**Example:**
+```bash
+#!/bin/bash
+# Compound assignment demo
+x=10
+echo "Initial value: $x"
+
+((x += 5))
+echo "After x += 5: $x"
+
+((x -= 3))
+echo "After x -= 3: $x"
+
+((x *= 2))
+echo "After x *= 2: $x"
+
+((x /= 4))
+echo "After x /= 4: $x"
+
+((x %= 3))
+echo "After x %= 3: $x"
+```
+
+### Increment and Decrement Operators
+
+```bash
+# Pre-increment
+((++x))  # Increment x before using its value
+
+# Post-increment
+((x++))  # Use x's value, then increment
+
+# Pre-decrement
+((--x))  # Decrement x before using its value
+
+# Post-decrement
+((x--))  # Use x's value, then decrement
+```
+
+**Example:**
+```bash
+#!/bin/bash
+# Increment/decrement demo
+x=5
+echo "Initial value: $x"
+
+y=$((x++))
+echo "y=\$((x++)): y=$y, x=$x"
+
+x=5
+y=$((++x))
+echo "y=\$((++x)): y=$y, x=$x"
+
+x=5
+y=$((x--))
+echo "y=\$((x--)): y=$y, x=$x"
+
+x=5
+y=$((--x))
+echo "y=\$((--x)): y=$y, x=$x"
+```
+
+### Bitwise Operators
+
+```bash
+# Bitwise AND
+echo $((x & y))
+
+# Bitwise OR
+echo $((x | y))
+
+# Bitwise XOR
+echo $((x ^ y))
+
+# Bitwise NOT
+echo $((~x))
+
+# Left shift
+echo $((x << y))
+
+# Right shift
+echo $((x >> y))
+```
+
+**Example:**
+```bash
+#!/bin/bash
+# Bitwise operations demo
+x=5  # Binary: 101
+y=3  # Binary: 011
+
+echo "Bitwise AND (5 & 3): $((x & y))"     # Result: 1 (001)
+echo "Bitwise OR (5 | 3): $((x | y))"      # Result: 7 (111)
+echo "Bitwise XOR (5 ^ 3): $((x ^ y))"     # Result: 6 (110)
+echo "Bitwise NOT (~5): $((~x))"           # Result: -6 (depends on word size)
+echo "Left shift (5 << 1): $((x << 1))"    # Result: 10 (1010)
+echo "Right shift (5 >> 1): $((x >> 1))"   # Result: 2 (10)
+```
+
+## The Difference Between Bracket Types in Bash
+
+Bash uses several types of brackets with different purposes:
+
+### Single Brackets [ ]
+
+Single brackets `[ ]` are a more portable form for conditional expressions but have limitations:
+
+- Less feature-rich than double brackets
+- Require quoting variables to prevent word splitting
+- Require escape characters for certain operators
+- Command substitution and pathname expansion occur
+
+**Example:**
+```bash
+#!/bin/bash
+# Single bracket conditionals
+file="example.txt"
+string="hello world"
+
+# File test
+if [ -f "$file" ]; then
+    echo "File exists"
+fi
+
+# String comparison (requires quoting)
+if [ "$string" = "hello world" ]; then
+    echo "Strings match"
+fi
+
+# Numeric comparison
+if [ "$count" -eq 5 ]; then
+    echo "Count equals 5"
+fi
+
+# AND condition (requires -a or && between brackets)
+if [ -f "$file" ] && [ "$count" -eq 5 ]; then
+    echo "Both conditions are true"
+fi
+```
+
+### Double Brackets [[ ]]
+
+Double brackets `[[ ]]` are a Bash-specific extension that provides more features:
+
+- Pattern matching and regex support
+- No need for quoting variables (though still recommended)
+- More intuitive syntax for logical operators
+- Word splitting and pathname expansion do not occur
+- Generally safer to use
+
+**Example:**
+```bash
+#!/bin/bash
+# Double bracket conditionals
+file="example.txt"
+string="hello world"
+pattern="h*d"
+
+# File test
+if [[ -f $file ]]; then
+    echo "File exists"
+fi
+
+# String comparison (quoting still recommended but not required)
+if [[ $string == "hello world" ]]; then
+    echo "Strings match"
+fi
+
+# Pattern matching
+if [[ $string == $pattern ]]; then
+    echo "String matches pattern"
+fi
+
+# Regular expression matching
+if [[ $string =~ ^h.*d$ ]]; then
+    echo "String matches regex"
+fi
+
+# AND condition (cleaner syntax)
+if [[ -f $file && $count -eq 5 ]]; then
+    echo "Both conditions are true"
+fi
+```
+
+### Double Parentheses (( ))
+
+Double parentheses `(( ))` are used specifically for arithmetic operations and evaluations:
+
+- Allows C-like arithmetic syntax
+- Variables don't need $ prefix inside
+- Returns 0 (true) if result is non-zero, 1 (false) if result is zero
+- Supports all arithmetic operators
+
+**Example:**
+```bash
+#!/bin/bash
+# Double parentheses for arithmetic
+x=5
+y=10
+
+# Arithmetic evaluation
+if ((x < y)); then
+    echo "x is less than y"
+fi
+
+# Calculation with assignment
+((result = x * y))
+echo "x * y = $result"
+
+# Increment in place
+((x++))
+echo "After increment, x = $x"
+
+# Complex arithmetic expression
+((result = x * 2 + y / 2))
+echo "Result of expression: $result"
+
+# Bitwise operations
+((bits = (1 << 3) | 2))
+echo "Bitwise result: $bits"
+```
+
+### Curly Braces { }
+
+Curly braces serve multiple purposes in Bash:
+
+- Parameter expansion: `${variable}`
+- Command grouping: `{ commands; }`
+- Brace expansion: `{1..5}` or `{a,b,c}`
+
+**Example:**
+```bash
+#!/bin/bash
+# Curly brace usage
+name="John"
+
+# Parameter expansion with manipulation
+echo "${name}"
+echo "${name}s"                  # Append directly
+echo "${name^}"                  # First letter uppercase
+echo "${name^^}"                 # All uppercase
+echo "${name:0:2}"               # First two characters
+echo "${name/o/a}"               # Replace first 'o' with 'a'
+
+# Command grouping (executes in current shell)
+{ echo "These commands"; echo "Run in sequence"; echo "In current shell"; }
+
+# Brace expansion for sequences
+echo {1..5}                      # Outputs: 1 2 3 4 5
+echo {a..e}                      # Outputs: a b c d e
+echo {01..05}                    # Outputs: 01 02 03 04 05
+echo {a,b,c}_file                # Outputs: a_file b_file c_file
+```
+
+## Arithmetic Comparison Operators
+
+When used with `(( ))` or within arithmetic expressions, these operators work like in C:
+
+```bash
+# Equal to
+((x == y))
+
+# Not equal to
+((x != y))
+
+# Less than
+((x < y))
+
+# Less than or equal to
+((x <= y))
+
+# Greater than
+((x > y))
+
+# Greater than or equal to
+((x >= y))
+
+# Logical AND
+((x < 10 && y > 5))
+
+# Logical OR
+((x < 3 || y > 15))
+
+# Logical NOT
+((!x))
+```
+
+**Example:**
+```bash
+#!/bin/bash
+# Arithmetic comparisons
+x=7
+y=10
+
+if ((x < y)); then
+    echo "x is less than y"
+fi
+
+if ((x * 2 > y)); then
+    echo "x times 2 is greater than y"
+fi
+
+# Ternary operator (condition ? value_if_true : value_if_false)
+max=$((x > y ? x : y))
+echo "Maximum value is: $max"
+
+# Using logical operators
+if ((x > 5 && y < 20)); then
+    echo "Both conditions are true"
+fi
+
+# Check if a number is even
+if ((x % 2 == 0)); then
+    echo "x is even"
+else
+    echo "x is odd"
+fi
+```
+
+## Practical Examples Combining These Concepts
+
+### Example 1: Finding Prime Numbers
+
+```bash
+#!/bin/bash
+# Check if a number is prime
+read -p "Enter a number to check if it's prime: " num
+
+if ((num < 2)); then
+    echo "$num is not a prime number"
+    exit 0
+fi
+
+is_prime=1
+for ((i=2; i*i<=num; i++)); do
+    if ((num % i == 0)); then
+        is_prime=0
+        break
+    fi
+done
+
+if ((is_prime)); then
+    echo "$num is a prime number"
+else
+    echo "$num is not a prime number"
+fi
+```
+
+### Example 2: Simple Calculator Script
+
+```bash
+#!/bin/bash
+# Interactive calculator script
+
+echo "Simple Calculator"
+echo "----------------"
+echo "1. Addition"
+echo "2. Subtraction"
+echo "3. Multiplication"
+echo "4. Division"
+echo "5. Modulus"
+echo "6. Exponentiation"
+read -p "Choose operation (1-6): " choice
+
+read -p "Enter first number: " a
+read -p "Enter second number: " b
+
+case $choice in
+    1)
+        result=$((a + b))
+        op="+"
+        ;;
+    2)
+        result=$((a - b))
+        op="-"
+        ;;
+    3)
+        result=$((a * b))
+        op="*"
+        ;;
+    4)
+        if ((b == 0)); then
+            echo "Error: Division by zero"
+            exit 1
+        fi
+        result=$((a / b))
+        op="/"
+        ;;
+    5)
+        if ((b == 0)); then
+            echo "Error: Division by zero"
+            exit 1
+        fi
+        result=$((a % b))
+        op="%"
+        ;;
+    6)
+        result=$((a ** b))
+        op="^"
+        ;;
+    *)
+        echo "Invalid choice"
+        exit 1
+        ;;
+esac
+
+echo "Result: $a $op $b = $result"
+```
+
+### Example 3: Combining Different Bracket Types
+
+```bash
+#!/bin/bash
+# Script demonstrating different bracket types
+
+file="data.txt"
+count=5
+threshold=10
+values=(8 15 3 42 7)
+
+# Create test file if it doesn't exist
+if [[ ! -f $file ]]; then
+    echo "Creating test file $file"
+    for ((i=0; i<5; i++)); do
+        echo "Line $i: Value=${values[i]}" >> $file
+    fi
+fi
+
+# Process file if it exists and is readable
+if [[ -f $file && -r $file ]]; then
+    echo "Processing $file..."
+    
+    # Calculate sum of values
+    sum=0
+    for value in "${values[@]}"; do
+        ((sum += value))
+    done
+    
+    echo "Sum of values: $sum"
+    average=$((sum / ${#values[@]}))
+    echo "Average: $average"
+    
+    # Check if average exceeds threshold
+    if ((average > threshold)); then
+        echo "Average exceeds threshold ($threshold)"
+        
+        # Find values above average
+        echo "Values above average:"
+        for value in "${values[@]}"; do
+            if ((value > average)); then
+                echo "- $value"
+            fi
+        done
+    else
+        echo "Average is below or equal to threshold"
+    fi
+    
+    # Pattern matching with double brackets
+    grep_count=$(grep -c "Value=[0-9]" $file)
+    if [[ $grep_count -gt 0 ]]; then
+        echo "Found $grep_count lines with single-digit values"
+    fi
+else
+    echo "Cannot access $file"
+fi
+```
 ## Conditional Statements
 
 ### Basic If-Else Statement
