@@ -15,7 +15,7 @@ public class BooleanBoxing {
         System.out.println("Original boolean: " + isTired);
         System.out.println("Boolean object: " + tiredObject);
         
-        // Prove they are objects by checking their type
+
         System.out.println("happyObject is a: " + happyObject.getClass().getSimpleName());
         System.out.println("tiredObject is a: " + tiredObject.getClass().getSimpleName());
     }
