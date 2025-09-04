@@ -24,5 +24,5 @@ String rainStatus = String.value0f(isRaining);
 
 ![referece](/img-refs/autoboxing.png)
 
-booleans can be null primitives cannot
+booleans can be null primitives cannotw
 
