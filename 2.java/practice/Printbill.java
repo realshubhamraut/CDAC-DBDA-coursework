@@ -9,13 +9,16 @@
 // How to encapsulate logic (like bill calculation) within methods
 
 
-class Customer{
+private class Customer{
     int id;
     String name;
     int unit_cons;
     int bill_gen;
 
 
+    public Customer() {
+        //TODO Auto-generated constructor stub
+    }
     public void electricity_bill(int a, String b, int c){
         id = a;
         name = b;
