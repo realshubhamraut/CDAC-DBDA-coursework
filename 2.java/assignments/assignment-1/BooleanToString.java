@@ -5,3 +5,6 @@ public class BooleanToString{
         System.out.println("Light"+lightStatus);
     }
 }
+
+
+
