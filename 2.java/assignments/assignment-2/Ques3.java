@@ -39,5 +39,8 @@ public class Ques3{
         Manager m1 = new Manager("Shubham",2300,5000);
         m1.Print();
     }
+
+
+    
     
 }
