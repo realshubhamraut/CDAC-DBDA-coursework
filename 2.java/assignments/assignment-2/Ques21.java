@@ -2,20 +2,26 @@
 // Car and Bike that provide their own implementation of start ().
 
 abstract class Vehicle{
-    abstract void start();
+    public abstract void start();
 }
 
 class Bike extends Vehicle{
-    void start(){
+    public void start(){
+        System.out.println("The bike start with kick");
     }
 }
 
 class Car extends Vehicle{
-    void start(){
+    public void start(){
+        System.out.println("The car starts with the starter");  
     }
 }
 
 public class Ques21 {
     public static void main(String[] args){
+        Bike b = new Bike();
+        Car c = new Car();
+        c.start();
+        b.start();
     }
 }
