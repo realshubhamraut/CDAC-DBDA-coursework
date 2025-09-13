@@ -1,8 +1,4 @@
-// 33. Pass integer, float and double value from command line. Parse
-// it appropriately and perform arithmetic operations (+,-,*,/›
-// on it. Here you can you switch case.
-// Reference:https://docs.oracle.com/javase/tutorial/java/nutsand
-// bolts/switch.html
+// w
 
 public class Ques33 {
 	public static void main(String[] args) {
