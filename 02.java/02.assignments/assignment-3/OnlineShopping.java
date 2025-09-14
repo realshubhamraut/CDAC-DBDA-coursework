@@ -1,4 +1,4 @@
-
+// online shopping
 import java.util.Scanner;
 
 public class OnlineShopping{
