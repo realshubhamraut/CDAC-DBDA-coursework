@@ -31,22 +31,11 @@ class Book{
 
 
 public class LibraryManagementSystem{
-    private ArrayList<Book> books;
-
-    public LibraryManagementSystem{
-        Private ArrayList<Book> books;
-
-
-        public LibraryManagementSystem(){
-            books = new ArrayList();
-        }
+    private ArrayList<Book> book;
+    
+    public LibraryManagementSystem(){
+        books = new ArrayList<>();
+        
     }
-
-    public void addBook(Book book){
-        books.add(book);
-        System.out.println("Bood added successfully.");
-    }
-
 }
-
 
