@@ -102,3 +102,74 @@ alter_email varchar(10),
 unique(email,alter_email));
 
 
+
+create table employee_check(
+emp_name varchar(20) primary key,
+u_email varchar(10) unique,
+email varchar(10) not null,
+dept_name varchar(10) default 'IT',
+age int check(age>20));
+
+
+
+desc employee_check;
+
+insert into employee_check value('Sam','a@g.com','b@g.com', default, 21);
+
+insert into employee_default(emp_name, u_email, email)
+value('Samay','z@g.com','y@g.com');
+
+
+select * from employee_default1;
+
+
+
+create table employee_check2(
+username varchar(10) not null,
+password_c varchar(20) check(char_length(password_c)>=8) and char_length(username)>=6));
+
+
+
+create table  employee_check2(
+username varchar(10) not null,
+password_c varchar(20),
+check(char_length(password_c)>=8 and char_length(username)>=6));
+
+insert into employee_check2 value('admin','abc');
+insert into employee_check2 value('admin', '123412');
+
+
+create table employee_check4(username varchar(10) not null,
+password_c varchar(20),
+check(char_length(password_c)>=8 and char_length(username)>=6 and username regexp '^[A-Za-z]+$'));
+
+
+
+create table department(
+dept_id int, dept_name varchar(20),
+location varchar(20),
+constraint pk_dept_id primary key(dept_id)
+);
+
+
+create table employee(
+emp_id int, emp_name varchar(20),
+dept_id int, constraint fk_emp_dept foreign key(dept_id)
+references department(dept_id));
+
+desc employee;
+show databases;
+use performance_schema;
+
+
+SELECT table_name, constraint_name from Information_schema.Table_constraints
+where table_schema = database() and table_name IN ('employees', 'department','employee_default','employee_Uk');
+
+
+create table employee_UK1(
+emp_name varchar(20), username varchar(10) unique not null, 
+age int);
+
+
+show tables from assignment1;
+	
