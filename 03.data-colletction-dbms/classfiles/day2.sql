@@ -7,13 +7,11 @@ CREATE TABLE char_2(s_name char(256), s_id int);
 
 SELECT length(s_name) from char_1;
 
-
 create table varchar_1(s_name varchar(5), s_id int);
 INSERT into varchar_1 value('Radha',10);
 select * from varchar_1;
 
 select * from assignment1;
-
 
 CREATE TABLE blob_ex(tag varchar(10), img blob);
 
@@ -111,6 +109,50 @@ age int);
 select length(age) as age_len, length(student_id) as len_st_id from numeric_examples;
 
 insert into numeric_examples values(123, 'sai', 25);
+
+
+
+
+create table numeric_example1(
+student_id int(12),
+student_name varchar(50), 
+age int, marks float(3,2));
+
+insert into numeric_example1 value (123,'sai', 25, 1.23);
+insert into numeric_example1 value (123,'sai', 25, 1.23);
+
+
+
+SELECT length(age) as age_len, length(student_id) as len_st_id, length(marks) from numeric_example1;
+
+
+SELECT * from numeric_example1;
+
+
+
+CREATE table numeric_example2(
+student_id int,
+student_name varchar(50), age int, 
+p_marks float(3,2),
+j_marks decimal(3,2));
+
+
+insert into numeric_example2 value(90221, 'sai', 26, 1.99, 1.99);
+
+SELECT * from numeric_example2;
+
+
+
+create table bool_ex, name varchar(30), attendance boolean);
+insert into bool_ex values('sai','P'); 
+
+insert into bool_ex values('sai select p_marks* 19890, J_marks * 19890 from numeric_example2	");
+
+
+
+
+
+
 
 
 
