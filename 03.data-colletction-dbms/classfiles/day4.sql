@@ -597,3 +597,41 @@ alter table emp_ex2 modify column emp_id int(10) auto_increment, auto_increment=
 
 insert into emp_ex2 (ename, dept_id) values('sam',10);
 select * from emp_ex2;
+
+-- rename directly (we can also change the data type with this)
+alter table regions change column region_id r_id decimal(6.2);
+desc regions;
+-- rename with using rename
+alter table regions rename column region_name to r_name;
+desc regions;
+
+alter table regions rename column r_name to region_name, rename column r_id to region_id;
+desc regions;
+
+
+alter table regions drop column dept_id;
+
+select * from regions;
+alter table regions drop column emp_id,
+drop column depart_name;
+
+
+desc emp_ex2;
+
+alter table emp_ex2
+drop column salary;
+
+
+DESC emp_ex2;
+
+alter table emp_ex2 drop column emp_id;
+show indexes from emp_ex2;
+ALTER table emp_ex2
+ADD column emp_p int(10) auto_increment primary key;
+
+SELECT * FROM employees;
+drop table employees;
+truncate table employees;
+
+
+
