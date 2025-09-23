@@ -97,3 +97,21 @@ select * from t_emp;
 
 
 select employee_id, concat(first_name, last_name) as full_name from employees;
+
+select employee_id, concat(first_name, '', last_name) as full_name, salary, salary*100 increment, year(hire_date) hire_year from employees;
+
+select e.employee_id, concat(e.first_name,' ', e.last_name) full_name from employees e;
+
+SELECT salary, (incremented_salary - salary) as diff_in_salary from employees
+WHERE incremented_salary in (SELECT salary, salary*100 as incremented_salary);
+
+
+
+
+
+SELECT salary, (incremented_salary - salary) as diff_in_salary from employees
+WHERE incremented_salary in (SELECT salary, salary*100 as incremented_salary)]
+
+
+
+

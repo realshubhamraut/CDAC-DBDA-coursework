@@ -121,6 +121,8 @@ CREATE TABLE IF NOT EXISTS `employees` (
 -- Dumping data for table `employees`
 --
 
+select * from employees;
+
 INSERT INTO `employees` (`EMPLOYEE_ID`, `FIRST_NAME`, `LAST_NAME`, `EMAIL`, `PHONE_NUMBER`, `HIRE_DATE`, `JOB_ID`, `SALARY`, `COMMISSION_PCT`, `MANAGER_ID`, `DEPARTMENT_ID`) VALUES
 ('100', 'Steven', 'King', 'SKING', '515.123.4567', '1987-06-17', 'AD_PRES', '24000.00', '0.00', '0', '90'),
 ('101', 'Neena', 'Kochhar', 'NKOCHHAR', '515.123.4568', '1987-06-18', 'AD_VP', '17000.00', '0.00', '100', '90'),
@@ -262,8 +264,8 @@ INSERT INTO `job_history` (`EMPLOYEE_ID`, `START_DATE`, `END_DATE`, `JOB_ID`, `D
 ('200', '1987-09-17', '1993-06-17', 'AD_ASST', '90'),
 ('176', '1998-03-24', '1998-12-31', 'SA_REP', '80'),
 ('176', '1999-01-01', '1999-12-31', 'SA_MAN', '80'),
-('200', '1994-07-01', '1998-12-31', 'AC_ACCOUNT', '90'),
-('0', '0000-00-00', '0000-00-00', '', '0');
+('200', '1994-07-01', '1998-12-31', 'AC_ACCOUNT', '90');
+
 
 -- --------------------------------------------------------
 
@@ -417,7 +419,7 @@ CREATE TABLE IF NOT EXISTS `departments` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 
-
+use hr;
 CREATE TABLE IF NOT EXISTS `employees` (
   `EMPLOYEE_ID` decimal(6,0) NOT NULL DEFAULT '0',
   `FIRST_NAME` varchar(20) DEFAULT NULL,
@@ -632,6 +634,5 @@ ADD column emp_p int(10) auto_increment primary key;
 SELECT * FROM employees;
 drop table employees;
 truncate table employees;
-
 
 
