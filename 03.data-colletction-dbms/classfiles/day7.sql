@@ -95,6 +95,123 @@ WHERE (month(hire_date) + interval 1 month);
 SELECT employee_id, CONCAT(first_name, ' ', last_name) AS full_name
 FROM employees
 WHERE date_format(hire_date, '%m-%d') between date_format(current_date, '%m-%d') and date_format(date_add(current_date, interval 30 day), '%m-%d');
-select employee_id, concat(first_name, ' ', last_name) as full_name from employees
-where date_format(hire_date, '%m-%d') between date_format(current_date, '%m-%d') and date_format(date_add
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- WORKING WITH NORTHWIND DATA
+
+
+
+
+
+
+
+
+
+
+
+
+select concat(first_name,' ', last_name) as full_name, birth_date, timestampdiff(year, birth_date, curdate()) as diff_year from employees;
+
+desc orders;
+
+
+-- how many days ago the orders were placed from today
+
+select order_id, order_date, timestampdiff(day, order_date, curdate()) as days_since_order from orders;
+
+
+-- find the order that was placed in year 1997;
+
+SELECT order_id, order_date from orders
+WHERE YEAR(order_date) =1997;
+
+
+-- time betwen the orders and the ship date
+
+
+SELECT order_id, order_date, shipped_date, timestampdiff(day, order_date, shipped_date) as time_between from orders
+WHERE shipped_date is not null;
+
+
+-- 
+
+use hr;
+
+select concat(first_name,' ', last_name) as full_name, salary, if(salary>10000, 'High Salary','Low Salary') as sal_cat
+from employees;
+
+
+select concat(first_name,' ', last_name) as full_name, commission_pct,
+if(commission_pct>0.15, 'high commision', 'low commision') as comm_cat from employees
+where department_id in (90,70,100);
+
+
+select concat(first_name, ' ', last_name) as full_name, hire_date, if(year(hire_date)> '1997', "Vetran", "regular") as emp_cat from employees;
+
+
+-- classify the employees ffrom there job_id if the emp jobid is fi_mgr or pu_man
+
+SELECT concat(first_name, ' ', last_name) as full_name, job_id, if (job_id in ('PU_MAN', 'FI_MGR'), 'manager', 'employee')  as role from employees
+group by role;
+
+
+SELECT IF(job_id IN ('PU_MAN', 'FI_MGR'), 'manager', 'employee') AS role, COUNT(*) AS total_count
+FROM employees
+GROUP BY role;
+
+
+
+ SELECT (concat(first_name, ' ', last_name)) as full_name, if (length(first_name)>5, 'long name', 'short name') from employees;
+
+
+SELECT (concat(first_name, ' ', last_name)) as full_name, job_id, case when job_id like 'FI_MRG' THEN 'Finance Manager' when job_id like 'AD_pres' then 'President'
+else 'other'
+end as job_cat from employees;
+
+
+SELECT (concat(first_name, ' ', last_name)) as full_name, salary,
+CASE WHEN salary<5000 then 'low range' when salary>5000 and salary<1000 then 'mid range' WHEN salary>10000 then 'high sal' else 'other' end as sal_cat from employees;
+
+select * from employees;
+
+
+
+select first_name, salary, commission_pct from employees;
+
+show tables;
+
+desc orders;
+
+use northwind;
+
+select * from orders;
+
+
+select order_id, customer_id, shipped_date, ifnull(shipped_date, 'NA') as ship_check from orders;
+
+
+
+select first_name, last_name, coalesce(home_phone, extension,'NO Infor') as no_info from employees;
+
+use northwind;
+SELECT customer_id, company_name, region, postal_code, coalesce(region, postal_code,'NA') as region_check from customers;
+
+
+
+select avg(salary) from employees;
+use hr;
+
+
+
 
