@@ -246,3 +246,184 @@ select employee_id,manager_id,department_id,first_name,1 as level
 from employees
 where department_id=90)
 select *from ex_rec;
+
+
+select job_id from employees
+union all
+select job_id from jobs;
+
+
+
+
+
+WITH ex_recc AS (
+    SELECT e.first_name, e.employee_id, e.salary,
+           j.job_id, j.job_title, j.min_salary, j.max_salary,
+           CASE
+               WHEN e.salary < j.min_salary THEN 'underpaid employee'
+               WHEN e.salary > j.max_salary THEN 'overpaid employee'
+           END AS sal_cat
+    FROM jobs j
+    LEFT JOIN employees e 
+           ON e.job_id = j.job_id
+)
+SELECT DISTINCT employee_id, sal_cat
+FROM ex_recc
+WHERE sal_cat IS NOT NULL
+  AND (sal_cat LIKE 'underpaid%' OR sal_cat LIKE 'overpaid%');
+  
+  
+  
+  -- stored function --
+  
+  
+-- “Write a SQL function that accepts an employee ID and returns the total years of experience
+-- of that employee based on their hire date.”
+
+  
+delimiter $$
+  
+  create function get_expre_details(emp_id int)
+  returns int
+  deterministic
+  begin
+	declare yrs int;
+	select timestampdiff(year, hire_date, curdate()) into yrs
+	from employees where employee_id = emp_id;
+	return yrs;
+  end;
+$$
+delimiter ;
+  
+select get_expre_details(101);
+drop function get_expre_Details;
+
+
+select * from employees;
+
+-- find the no of employees with  of working in job_id = 'IT_programmer';
+
+delimiter $$
+
+create function get_emp_count()
+returns int
+deterministic
+begin
+    declare emp_count int;
+    select count(employee_id) into emp_count
+    from employees
+    where job_id = 'IT_PROG';
+    return emp_count;
+end$$
+
+delimiter ;
+
+select get_emp_count();
+
+
+
+
+-- “Write a SQL function that accepts a job role and a minimum salary, and returns the number of employees working in that role earning above the given salary.”
+
+delimiter $$
+
+create function get_emp_count_by_job_details(jobid varchar(20), min_sal decimal(10,2))
+returns int
+deterministic
+begin
+    declare emp_count int;
+
+    select count(employee_id) into emp_count
+    from employees
+    where job_id = jobid
+      and salary > min_sal;
+
+    return emp_count;
+end$$
+
+delimiter ;
+
+-- usage
+select get_emp_count_by_job_details('IT_PROG', 1000);
+
+
+
+-- “Write a SQL function that accepts a job ID (or department filter)
+-- and returns a comma-separated list of employee names (first name + last name)
+-- working in that job/department.”
+
+delimiter $$
+
+create function empl_details(j_id varchar(50))
+returns varchar(5000)
+deterministic
+begin
+		declare emp_list varchar(5000);
+        select group_concat(concat(first_name,'',last_name)separator',')into emp_list
+        from employees e
+        join departments d 
+        on e.department_id=d.department_id;
+        return emp_list ;
+end;;
+$$
+delimiter ;
+select empl_details('it');
+
+
+-- Write a stored procedure that retrieves and displays all details
+-- of employees from the employees table.
+
+delimiter $$
+create procedure get_all_emp_name_details()
+deterministic
+begin
+	select * from employees;
+end;;
+$$
+
+delimiter ;
+call get_all_emp_name_details();
+
+show function status;
+
+-- “Write a stored procedure that displays each employee’s full name along with the
+-- department they belong to, even if some employees are not assigned to any department.”
+
+
+delimiter $$
+
+create procedure get_all_emp_dept_details()
+begin
+    select concat(e.first_name, ' ', e.last_name) as full_name,
+           d.department_name
+    from employees e
+    left join departments d
+      on e.department_id = d.department_id;
+end$$
+
+delimiter ;
+
+-- call it
+call get_all_emp_dept_details();
+
+-- check stored procedures
+show procedure status like 'get_all_emp_dept_details';
+
+
+-- “Write a stored procedure that accepts an employee ID as input and returns all
+-- details of that employee from the employees table.”
+
+
+delimiter $$
+
+create procedure get_emp_by_id(in emp_id int)
+begin
+    select *
+    from employees
+    where employee_id = emp_id;
+end$$
+
+delimiter ;
+
+-- usage
+call get_emp_by_id(101);
