@@ -47,8 +47,6 @@ select d.department_name, count(e.employee_id) from employees e
 join departments d on e.department_id = d.department_id
 group by d.department_name;
 
-
-
 -- 7. Write a query to find the employee ID, job title, number of days between ending date and starting date for all jobs in department 90.
 
 select e.employee_id, j.job_title, datediff(jh.end_date, jh.start_date) as days_worked from employees e
