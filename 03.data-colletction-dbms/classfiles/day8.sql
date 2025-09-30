@@ -427,3 +427,160 @@ delimiter ;
 
 -- usage
 call get_emp_by_id(101);
+
+
+select e.employee_id,
+       get_emp_details(e.employee_id) as emp_name,
+       get_expre_details(e.employee_id) as experience_years
+from employees e;
+
+select get_emp_details(101) as emp_name,
+       get_expre_details(101) as emp_experience;
+       
+
+set @emp_id = 105;
+
+call get_emp_by_dept_id(@emp_id, @dept_id, @f_name);
+select @emp_id as employee_id, @dept_id as department_id, @f_name as full_name;
+
+
+-- Write a stored procedure that accepts an employee ID as input, checks whether the employee exists,
+-- and deletes their record if found. If the employee does not exist, return a message indicating so.
+
+
+
+delimiter $$
+
+create procedure delete_employee_by_id(in emp_id int)
+begin
+    -- check if employee exists
+    if exists (select 1 from employees where employee_id = emp_id) then
+        delete from employees where employee_id = emp_id;
+    else
+        select concat('Employee with ID ', emp_id, ' does not exist.') as message;
+    end if;
+end$$
+
+delimiter ;
+
+
+
+--
+
+create database db_adv;
+
+use db_adv;
+
+CREATE TABLE salary_history (
+    emp_id INT,
+    first_name VARCHAR(50),
+    old_salary DECIMAL(10, 2),
+    new_salary DECIMAL(10, 2),
+    department_id INT
+);
+
+
+CREATE TABLE employee (
+  employee_id INT,
+  name VARCHAR(50),
+  salary FLOAT,
+  department_id INT
+);
+
+
+INSERT INTO employee (employee_id, name, salary, department_id)
+VALUES
+  (1, 'John Smith', 50000.0, 101),
+  (2, 'Jane Doe', 60000.0, 102),
+  (3, 'Bob Johnson', 55000.0, 101),
+  (4, 'Mary Brown', 65000.0, 103),
+  (5, 'Tom Davis', 70000.0, 102);
+
+
+-- usage
+call delete_employee_by_id(101);
+
+
+
+-- 
+
+
+delimiter $$
+create trigger before_insert_into_employee
+before insert on employee
+for each row
+begin
+	-- new === this take new value 
+    -- old == this take old vvalues in the table
+    if new.salary is null then
+		set new.salary=15000.0;
+	end if;
+    
+end;;
+$$
+delimiter ;
+
+drop trigger before_insert_into_employee;
+select * from  employee;
+ 
+INSERT INTO employee (employee_id, name,  department_id)
+VALUES(6, 'Karen Smith', 101);
+
+
+
+delimiter $$
+create trigger before_insert_into_employee_eg2
+before insert on employee
+for each row
+begin
+	
+    if new.department_id is null then
+		set new.department_id=100;
+	end if;
+    
+end;;
+$$
+delimiter ;
+
+
+
+-- Create a logging table to store the messages
+CREATE TABLE employee_log (
+    log_id INT AUTO_INCREMENT PRIMARY KEY,
+    log_message VARCHAR(255),
+    log_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+-- Create the trigger to log messages after employee insertions
+
+
+
+DELIMITER $$
+
+
+CREATE TRIGGER after_employee_insert
+AFTER INSERT ON employee
+FOR EACH ROW
+BEGIN
+    -- Insert the message into the logging table
+    INSERT INTO employee_log (log_message)
+    VALUES (CONCAT('A new employee has been inserted with ID: ', NEW.employee_id));
+END;
+$$
+
+
+DELIMITER ;
+INSERT INTO employee (employee_id, name, salary)
+VALUES (10, 'John Doe', 50000.00);
+
+
+select * from employee;
+select * from employee_log;
+
+
+
+
+
+
+
