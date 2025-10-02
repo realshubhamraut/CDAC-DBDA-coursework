@@ -1,99 +1,76 @@
 create database operator_ex;
 use operator_ex;
 show tables;
+
 use hr;
--- arithmentic operators
-SELECT salary, salary* 1000 as mul_bonus FROM employees;
-SELECT salary, salary - 1000 as min_bonus FROM employees;
-SELECT salary, salary + 1000 as add_bonus FROM employees;
-SELECT salary, salary % 1000 as mod_bonus FROM employees;
-SELECT salary, salary / 1000 as div_bonus from employees;
+show tables;
+
+select * from employees
+where first_name like 'd%';
+
+SELECT * FROM employees
+WHERE BINARY first_name LIKE 'D%';
 
 
+select * from employees where first_name like '%e';
+
+select * from employees where first_name like '%ah%';
 
 
+SELECT * FROM employees where first_name like '_d%';
 
-select salary, check_bonus+1000 as bonus from employees;
+SELECT count(*) from employees where first_name like '%a_';
 
--- comparison operators (=,<>,<=,>=,<,>)
-
-select * from jobs;
-
-SELECT employee_id, concat(first_name,' ',last_name) as full_name from employees where first_name = 'Steven';
+select * from employees
+where first_name NOT LIKE 'a%';
 
 
-SELECT employee_id, concat(first_name,' ', last_name) full_name, department_id from employees WHERE salary > 12000;
+select first_name from employees
+WHERE first_name regexp '^[aeiou]';
 
-SELECT employee_id, concat(first_name,' ', last_name) full_name, department_id from employees WHERE department_id = 12;
+select first_name from employees
+where lower(left(first_name,1)) in ('a','e','i','o','u');
 
-SELECT employee_id, concat(first_name,' ', last_name) full_name, department_id from employees where check_bonus is null;
+SELECT * from employees
+WHERE department_id = 90 and salary = 24000;
+
+select * from employees
+where department_id = 90 or salary = 24000 and check_bonus is null;
+
+
+SELECT * from employees
+where  department_id >100;
+
+select * from employees where check_bonus is null and check_bonus is null;
+
+SELECT * from employees where 
+salary > 10000 and department_id in (80,90,70,100);
 
 select * from employees;
 
-show tables;
-
-select * from bad_employees;
-
-SELECT * FROM employees where department_id != 90;
-
-
-SELECT * FROM employees WHERE manager_id <> 199;
-
-SELECT first_name, last_name from employees WHERE year(hire_date) <> 1990;
-
-SELECT * from employees
-WHERE salary > 1000 order by salary desc;
-
-
--- to find employees who are working since 1987-08-01
-
-
-select first_name, last_namefrom employees
-WHERE hire_date >= '1987-08-01';
-
-
-SELECT * from employees;
-WHERE year(hire_date) >= 1980;
-
-select * from employees where
-salary < 10000;
-
-select * from employees where salary <= 10000;
-
-select * from employees where salary >= 10000;
-
-SELECT count(*) from employees where commission_pct <  0.15;
 
 select * from employees
-where salary between 2000 and 100000;
+WHERE job_id IN ('IT_PROG') AND hire_date BETWEEN '1987-08-01' AND '2008-08-01' and salary > 10000;
+
 
 
 select * from employees
-WHERE hire_date between '1987-08-01' AND '1987-08-30';
+WHERE salary > 15000 OR commission_pct < 0.30
+ORDER BY commission_pct desc;
 
-SELECT * From employees
-WHERE year(hire_date) LIKE 1989;
+select * from employees
+where not(salary between 5000 and 10000) and salary is not null;
 
+select * from employees
+WHERE year(hire_date) <> '1982';
 
-SELECT count(*) FROM employees
-where department_id BETWEEN 70 AND 100;
-
-
-SELECT first_name, last_name from employees
-
-WHERE first_name BETWEEN 'a%' AND 'd%';
+SELECT * from 
+employees where first_name regexp '^A';
 
 
-SELECT first_name, last_name from employees
-WHERE manager_id NOT between 70 and 105;
 
 
-SELECT * FROM employees where department_id IN (70,40,90,100);
 
-SELECT * FROM employees where job_id IN ('AD_VP','IT_PROG','FI_MGR');
-
-SELECT * FROM employees where first_name LIKE 'DIANA';
+SELECT * FROM employees where phone_number regexp '^[0-9]$';
 
 
-SELECT * from employees where 
-job_id not in('HR_REP', 'AD_PRES','AD_VP');
