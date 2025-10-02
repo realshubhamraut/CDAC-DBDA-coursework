@@ -462,10 +462,3 @@ begin
 end$$
 
 delimiter ;
-
-
-
-
-
-
-
