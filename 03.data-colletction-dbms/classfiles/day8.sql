@@ -2,8 +2,10 @@ use northwind;
 
 
 select first_name, department_name, emp_salary
-from (select e.first_name, d.department_name, e.salary as emp_salary, e. Department_id from employees e
-join departments d on d.department_id = e.department_id) as join_d where department_name = 'IT';
+from (select e.first_name, d.department_name, e.salary as emp_salary, e.Department_id 
+from employees e
+join departments d on d.department_id = e.department_id) as join_d
+ where department_name = 'IT';
 
 
 
@@ -180,7 +182,7 @@ JOIN r_map r ON r.department_id = e.department_id
 JOIN dept_co d ON d.department_id = e.department_id;
 
 
--- write a query to job_id, job_title, count(job_id), region_name
+-- write a query to find job_id, job_title, count(job_id), for every region_name
 
 WITH r_map AS (
     SELECT d.department_id, 
@@ -462,3 +464,6 @@ begin
 end$$
 
 delimiter ;
+
+
+

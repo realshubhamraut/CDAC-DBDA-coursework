@@ -12,8 +12,7 @@ begin
 		set new.salary=15000.0;
 	end if;
     
-end;;
-$$
+end $$
 delimiter ;
 
 drop trigger before_insert_into_employee;
@@ -22,7 +21,25 @@ select * from  employee;
 INSERT INTO employee (employee_id, name,  department_id)
 VALUES(7, 'shubham Smith', 101);
 
+--
+use hr;
+delimiter $$
+create trigger before_insert_into_employee1
+before insert on employees
+for each row
+begin
+	-- new === this take new value 
+    -- old == this take old values in the table
+    if new.salary = 15000.0 then
+		set new.salary = NULL;
+	end if;
+    
+end;;
+$$
+delimiter ;
 
+select * from employees;
+--
 
 delimiter $$
 create trigger before_insert_into_employee_eg2
