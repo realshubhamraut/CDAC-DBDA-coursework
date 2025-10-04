@@ -91,7 +91,7 @@ VALUES (10, 'John Doe', 50000.00);
 
 select * from employee;
 select * from employee_log;
-
+    
 DELIMITER $$
 create trigger after_employee_insert
 after insert on employee
