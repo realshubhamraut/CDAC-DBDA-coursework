@@ -16,7 +16,7 @@ read 2 pages, git, leet, explain frnd-read rpaper/write blog/ quick journal, sun
 04:30 - classes
 07:20 - bath -> dinner
 07:55 - talk, socialize
-08:15 - study ~ 1 hr (assignment and remaining checks in todo)
+08:15 - study ~ 1 hr (notes, assignment and remaining checks in todo)
 09:15 - charge mobile -> skin care routine -> meditation -> sleep
 
 
@@ -42,3 +42,11 @@ Think about those things that you struggled
 
 Think about what you have done x
 
+
+
+
+--- todos
+
+[] ask 1 question
+
+[]
