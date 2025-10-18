@@ -1,1 +1,3 @@
 *.class
+.ipynb_checkpoints
+.vscode
