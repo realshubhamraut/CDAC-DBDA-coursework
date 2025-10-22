@@ -1,4 +1,4 @@
-package javaProject;
+
 import java.util.*;
 interface EmpDatabase{	
 	void addEmployee();
