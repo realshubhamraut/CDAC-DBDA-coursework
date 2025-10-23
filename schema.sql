@@ -1,0 +1,296 @@
+Business Context:
+You're a data analyst at FinCore, a global investment bank. The database tracks trading activities, client portfolios, risk management, compliance, and financial performance across multiple regions and asset classes.
+
+Database Schema & Table Creation
+
+-- =============================================
+-- FINCORE ANALYTICS DATABASE
+-- Financial Domain - MySQL Analytics Assessment
+-- =============================================
+
+CREATE DATABASE fincore_analytics;
+USE fincore_analytics;
+
+-- 1. CLIENTS TABLE
+CREATE TABLE clients (
+    client_id INT PRIMARY KEY,
+    client_name VARCHAR(100),
+    client_type ENUM('Individual', 'Institutional', 'Corporate', 'Government'),
+    country VARCHAR(50),
+    registration_date DATE,
+    risk_profile ENUM('Conservative', 'Moderate', 'Aggressive', 'Very Aggressive'),
+    credit_rating VARCHAR(5),
+    relationship_manager_id INT,
+    is_active BOOLEAN DEFAULT TRUE
+);
+
+-- 2. RELATIONSHIP MANAGERS
+CREATE TABLE relationship_managers (
+    manager_id INT PRIMARY KEY,
+    manager_name VARCHAR(100),
+    region VARCHAR(50),
+    hire_date DATE,
+    performance_rating DECIMAL(3,2),
+    department VARCHAR(50)
+);
+
+-- 3. ACCOUNTS
+CREATE TABLE accounts (
+    account_id INT PRIMARY KEY,
+    client_id INT,
+    account_type ENUM('Savings', 'Checking', 'Investment', 'Margin', 'Retirement'),
+    currency VARCHAR(3),
+    opening_date DATE,
+    current_balance DECIMAL(15,2),
+    interest_rate DECIMAL(5,4),
+    status ENUM('Active', 'Frozen', 'Closed'),
+    FOREIGN KEY (client_id) REFERENCES clients(client_id)
+);
+
+-- 4. ASSET CLASSES
+CREATE TABLE asset_classes (
+    asset_class_id INT PRIMARY KEY,
+    asset_class_name VARCHAR(50),
+    risk_category ENUM('Low', 'Medium', 'High', 'Very High'),
+    liquidity_rating INT CHECK (liquidity_rating BETWEEN 1 AND 10)
+);
+
+-- 5. SECURITIES
+CREATE TABLE securities (
+    security_id INT PRIMARY KEY,
+    security_symbol VARCHAR(10),
+    security_name VARCHAR(100),
+    asset_class_id INT,
+    exchange VARCHAR(50),
+    sector VARCHAR(50),
+    listing_date DATE,
+    market_cap DECIMAL(18,2),
+    FOREIGN KEY (asset_class_id) REFERENCES asset_classes(asset_class_id)
+);
+
+-- 6. TRADING TRANSACTIONS
+CREATE TABLE transactions (
+    transaction_id INT PRIMARY KEY,
+    account_id INT,
+    security_id INT,
+    transaction_type ENUM('Buy', 'Sell', 'Dividend', 'Interest', 'Fee'),
+    transaction_date DATETIME,
+    quantity DECIMAL(15,4),
+    price_per_unit DECIMAL(15,4),
+    total_amount DECIMAL(18,2),
+    commission DECIMAL(10,2),
+    trader_id INT,
+    FOREIGN KEY (account_id) REFERENCES accounts(account_id),
+    FOREIGN KEY (security_id) REFERENCES securities(security_id)
+);
+
+-- 7. PORTFOLIO HOLDINGS
+CREATE TABLE portfolio_holdings (
+    holding_id INT PRIMARY KEY,
+    account_id INT,
+    security_id INT,
+    quantity DECIMAL(15,4),
+    average_cost DECIMAL(15,4),
+    current_price DECIMAL(15,4),
+    holding_date DATE,
+    FOREIGN KEY (account_id) REFERENCES accounts(account_id),
+    FOREIGN KEY (security_id) REFERENCES securities(security_id)
+);
+
+-- 8. MARKET PRICES (Historical)
+CREATE TABLE market_prices (
+    price_id INT PRIMARY KEY AUTO_INCREMENT,
+    security_id INT,
+    price_date DATE,
+    open_price DECIMAL(15,4),
+    high_price DECIMAL(15,4),
+    low_price DECIMAL(15,4),
+    close_price DECIMAL(15,4),
+    volume BIGINT,
+    FOREIGN KEY (security_id) REFERENCES securities(security_id)
+);
+
+-- 9. TRADERS
+CREATE TABLE traders (
+    trader_id INT PRIMARY KEY,
+    trader_name VARCHAR(100),
+    specialization VARCHAR(50),
+    desk VARCHAR(50),
+    hire_date DATE,
+    performance_score DECIMAL(5,2)
+);
+
+-- 10. ORDERS
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY,
+    account_id INT,
+    security_id INT,
+    order_type ENUM('Market', 'Limit', 'Stop', 'Stop-Limit'),
+    side ENUM('Buy', 'Sell'),
+    quantity DECIMAL(15,4),
+    limit_price DECIMAL(15,4),
+    order_date DATETIME,
+    status ENUM('Pending', 'Executed', 'Cancelled', 'Partial'),
+    executed_quantity DECIMAL(15,4),
+    FOREIGN KEY (account_id) REFERENCES accounts(account_id),
+    FOREIGN KEY (security_id) REFERENCES securities(security_id)
+);
+
+-- 11. RISK METRICS
+CREATE TABLE risk_metrics (
+    metric_id INT PRIMARY KEY AUTO_INCREMENT,
+    account_id INT,
+    calculation_date DATE,
+    value_at_risk DECIMAL(15,2),
+    beta DECIMAL(8,4),
+    sharpe_ratio DECIMAL(8,4),
+    max_drawdown DECIMAL(8,4),
+    volatility DECIMAL(8,4),
+    FOREIGN KEY (account_id) REFERENCES accounts(account_id)
+);
+
+-- 12. COMPLIANCE EVENTS
+CREATE TABLE compliance_events (
+    event_id INT PRIMARY KEY,
+    account_id INT,
+    event_type VARCHAR(100),
+    event_date DATETIME,
+    severity ENUM('Low', 'Medium', 'High', 'Critical'),
+    status ENUM('Open', 'Under Review', 'Resolved', 'Escalated'),
+    resolution_date DATETIME,
+    FOREIGN KEY (account_id) REFERENCES accounts(account_id)
+);
+
+-- 13. DEPOSITS AND WITHDRAWALS
+CREATE TABLE cash_movements (
+    movement_id INT PRIMARY KEY,
+    account_id INT,
+    movement_type ENUM('Deposit', 'Withdrawal', 'Transfer In', 'Transfer Out'),
+    amount DECIMAL(15,2),
+    movement_date DATETIME,
+    description VARCHAR(200),
+    FOREIGN KEY (account_id) REFERENCES accounts(account_id)
+);
+
+-- 14. LOAN APPLICATIONS
+CREATE TABLE loans (
+    loan_id INT PRIMARY KEY,
+    client_id INT,
+    loan_type ENUM('Personal', 'Mortgage', 'Business', 'Margin'),
+    loan_amount DECIMAL(15,2),
+    interest_rate DECIMAL(6,4),
+    term_months INT,
+    application_date DATE,
+    approval_date DATE,
+    status ENUM('Applied', 'Approved', 'Rejected', 'Disbursed', 'Closed'),
+    FOREIGN KEY (client_id) REFERENCES clients(client_id)
+);
+
+-- 15. LOAN PAYMENTS
+CREATE TABLE loan_payments (
+    payment_id INT PRIMARY KEY,
+    loan_id INT,
+    payment_date DATE,
+    principal_amount DECIMAL(15,2),
+    interest_amount DECIMAL(15,2),
+    payment_status ENUM('Paid', 'Late', 'Missed'),
+    FOREIGN KEY (loan_id) REFERENCES loans(loan_id)
+);
+
+-- 16. CURRENCY EXCHANGE RATES
+CREATE TABLE exchange_rates (
+    rate_id INT PRIMARY KEY AUTO_INCREMENT,
+    base_currency VARCHAR(3),
+    quote_currency VARCHAR(3),
+    rate_date DATE,
+    exchange_rate DECIMAL(12,6)
+);
+
+-- 17. BRANCHES
+CREATE TABLE branches (
+    branch_id INT PRIMARY KEY,
+    branch_name VARCHAR(100),
+    country VARCHAR(50),
+    city VARCHAR(50),
+    opening_date DATE,
+    branch_type ENUM('Retail', 'Corporate', 'Private Banking', 'Investment')
+);
+
+-- 18. EMPLOYEE PERFORMANCE
+CREATE TABLE employee_performance (
+    performance_id INT PRIMARY KEY AUTO_INCREMENT,
+    employee_id INT,
+    review_quarter VARCHAR(6), -- e.g., '2024Q1'
+    revenue_generated DECIMAL(15,2),
+    client_satisfaction DECIMAL(3,2),
+    compliance_score DECIMAL(3,2),
+    targets_met INT
+);
+
+-- 19. PRODUCT CATALOG
+CREATE TABLE financial_products (
+    product_id INT PRIMARY KEY,
+    product_name VARCHAR(100),
+    product_type ENUM('Mutual Fund', 'ETF', 'Bond', 'Structured Product', 'Derivative'),
+    launch_date DATE,
+    management_fee DECIMAL(5,4),
+    minimum_investment DECIMAL(15,2),
+    is_active BOOLEAN
+);
+
+-- 20. PRODUCT SUBSCRIPTIONS
+CREATE TABLE product_subscriptions (
+    subscription_id INT PRIMARY KEY,
+    account_id INT,
+    product_id INT,
+    subscription_date DATE,
+    amount_invested DECIMAL(15,2),
+    units DECIMAL(15,4),
+    FOREIGN KEY (account_id) REFERENCES accounts(account_id),
+    FOREIGN KEY (product_id) REFERENCES financial_products(product_id)
+);
+
+-- 21. AUDIT LOG
+CREATE TABLE audit_log (
+    log_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    action_type VARCHAR(50),
+    table_affected VARCHAR(50),
+    action_date DATETIME,
+    ip_address VARCHAR(45),
+    details TEXT
+);
+
+-- 22. ALERTS
+CREATE TABLE alerts (
+    alert_id INT PRIMARY KEY,
+    account_id INT,
+    alert_type ENUM('Unusual Activity', 'Large Transaction', 'Concentration Risk', 'Margin Call', 'Compliance'),
+    alert_date DATETIME,
+    severity ENUM('Info', 'Warning', 'Critical'),
+    message TEXT,
+    acknowledged BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (account_id) REFERENCES accounts(account_id)
+);
+
+-- 23. BENCHMARK INDICES
+CREATE TABLE benchmark_indices (
+    index_id INT PRIMARY KEY,
+    index_name VARCHAR(50),
+    index_date DATE,
+    index_value DECIMAL(12,2)
+);
+
+-- 24. DIVIDENDS
+CREATE TABLE dividends (
+    dividend_id INT PRIMARY KEY,
+    security_id INT,
+    ex_dividend_date DATE,
+    payment_date DATE,
+    dividend_per_share DECIMAL(10,4),
+    dividend_type ENUM('Regular', 'Special', 'Stock'),
+    FOREIGN KEY (security_id) REFERENCES securities(security_id)
+);
+
+
+
