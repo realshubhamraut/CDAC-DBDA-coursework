@@ -1,0 +1,512 @@
+﻿🎯 Your Mission
+FinCore's executive team, relationship managers, and compliance officers need data-driven insights to make critical business decisions. Your manager has assigned you a series of analytical challenges that directly impact business operations.
+Each problem represents a real stakeholder request that landed in your inbox this morning. Your job is to write SQL queries that answer these questions accurately and efficiently.
+________________
+
+
+📁 Database Overview
+You have access to the fincore_analytics database containing 24 tables tracking:
+* 👥 Client relationships and demographics
+* 💰 Account balances and transactions
+* 📈 Securities trading and portfolio holdings
+* ⚠️ Risk metrics and compliance events
+* 💳 Loans and payment history
+* 📊 Performance tracking and benchmarks
+________________
+
+
+🟢 LEVEL 1: OPERATIONAL REPORTING
+Difficulty: Entry Level | Time: 30-45 minutes total
+________________
+
+
+Problem 1.1: Active Client Directory 📋
+FROM: Sarah Martinez, Marketing Director
+SUBJECT: Need clean client list for Q4 campaign
+Email:
+Hi Data Team,
+We're launching a new wealth management campaign next month and need a complete list of all our active clients. Can you pull together:
+* Client ID and full name
+* Their country and client type (Individual/Corporate/etc.)
+* Risk profile
+* How many days they've been with us (since registration)
+We only want ACTIVE clients. Please sort by country, then by client name.
+Thanks!
+Sarah
+Your Task: Write a query that delivers exactly what Sarah needs.
+
+
+________________
+
+
+Problem 1.2: High-Value Account Identification 💎
+FROM: James Chen, Head of Private Banking
+SUBJECT: URGENT - VIP client list needed
+Email:
+Team,
+Private Banking division is launching a white-glove service for high-net-worth clients. I need to identify all accounts with balances exceeding $1,000,000.
+For each account, show me:
+* Account ID and type
+* Which client owns it (name and ID)
+* Current balance
+* Account currency
+* Status
+Only include ACTIVE accounts. Sort by balance from highest to lowest.
+I need this by EOD for tomorrow's exec meeting.
+James
+Your Task: Identify FinCore's most valuable accounts.
+
+
+________________
+
+
+Problem 1.3: Transaction Type Breakdown 📊
+FROM: Michael Torres, Head of Operations
+SUBJECT: Monthly transaction summary for board deck
+Email:
+Hi Analytics,
+Board meeting on Friday - need a high-level summary of our transaction activity. Can you break down ALL transactions by type?
+For each transaction type, show me:
+* Total count of transactions
+* Total dollar volume
+* Average transaction size
+* Total commission earned
+Format amounts in a readable way. Sort by total volume (highest first).
+Mike
+Your Task: Summarize transaction activity across all types.
+
+
+________________
+
+
+Problem 1.4: Securities Trading Catalog 📈
+FROM: Rachel Kim, Trading Desk Manager
+SUBJECT: Need organized securities reference list
+Email:
+Analytics Team,
+Our new traders need a clean reference guide for all securities we trade. Can you create a catalog showing:
+* Symbol and full security name
+* Sector and which exchange it trades on
+* Market cap in BILLIONS (formatted nicely)
+* Market cap category
+Market Cap Categories:
+* Mega Cap: > $200B
+* Large Cap: $10B - $200B
+* Mid Cap: $2B - $10B
+* Small Cap: < $2B
+Sort by market cap (largest first).
+Rachel
+Your Task: Build a comprehensive securities catalog.
+
+
+________________
+
+
+Problem 1.5: Monthly Trading Activity - 2024 📅
+FROM: David Park, CFO
+SUBJECT: Trading pattern analysis for 2024
+Email:
+Data Team,
+I need to understand our trading patterns throughout 2024 for the annual report.
+For EACH MONTH of 2024, show me:
+* Month name and number
+* Total number of transactions
+* Total volume traded (in dollars)
+* Number of unique traders who executed trades
+Only include BUY and SELL transactions (not dividends, fees, etc.).
+Present chronologically (Jan → Dec).
+David
+Your Task: Create monthly trading activity report for 2024.
+
+
+________________
+
+
+Problem 1.6: Client Account Ownership 🏦
+FROM: Lisa Wong, Relationship Manager
+SUBJECT: Need account summary for client meetings
+Email:
+Hi there,
+I have client review meetings all next week and need to know the account structure for each of my active clients.
+For each ACTIVE client, show:
+* Client name and type
+* How many accounts they have with us
+* What types of accounts (as a comma-separated list)
+* Total balance across ALL their accounts
+Only active accounts should be counted. Sort by total balance (highest first).
+This helps me prepare for conversations about their relationship with FinCore.
+Lisa
+
+
+________________
+
+
+Problem 1.7: Trader Performance Snapshot 🎯
+FROM: Robert Lee, Trading Desk Director
+SUBJECT: Q4 trader performance review prep
+Email:
+Analytics,
+Performance reviews are coming up. I need a snapshot of each trader's activity this year.
+For EACH trader, calculate:
+* Total trades executed (BUY and SELL only)
+* Total trading volume (dollars)
+* Total commission they generated
+* Average commission per trade
+Include all 2024 data. Sort by total volume (highest first).
+Robert
+Your Task: Evaluate trader performance metrics.
+________________
+Problem 1.8: Loan Portfolio Overview 💼
+FROM: Amanda Foster, Head of Credit
+SUBJECT: Loan portfolio snapshot for risk committee
+Email:
+Data Team,
+Risk committee meeting tomorrow - need a quick overview of our loan portfolio.
+Break down by loan type and show me:
+* Number of loans
+* Total loan amount outstanding
+* Average interest rate
+* Count by status (Applied, Approved, Disbursed)
+Sort by total loan amount (largest first).
+Amanda
+Your Task: Summarize loan portfolio by type.
+
+
+________________
+
+
+Problem 1.9: Top 10 Most Popular Securities
+FROM: Dr. Jennifer Liu, Head of Research
+SUBJECT: Client holdings concentration study
+Analytics Team,
+
+
+Research is analyzing which securities are most popular among our clients.
+
+
+Can you identify the TOP 10 most widely held securities? Show:
+- Security name and symbol
+- Number of UNIQUE clients holding it
+- Total quantity held (across all clients combined)
+- Total current market value (quantity × current_price)
+
+
+Sort by number of clients (most popular first).
+Dr. Liu
+Your Task: Find the most popular securities by client ownership.
+________________
+
+
+Problem 1.10: Compliance Events Dashboard
+FROM: Thomas Anderson, Chief Compliance Officer
+SUBJECT: Weekly compliance status report
+Analytics,
+
+
+I need our weekly compliance status update by severity level.
+
+
+For EACH severity level (Low, Medium, High, Critical), show:
+- Total events recorded
+- How many are still OPEN vs RESOLVED
+- Average resolution time in DAYS (for resolved cases only)
+
+
+This helps me prioritize which cases need immediate attention.
+
+
+Sort by severity (Critical first).
+Thomas
+Your Task: Summarize compliance event status.
+________________
+
+
+LEVEL 2: ANALYTICAL INSIGHTS
+Problem 2.1: 360° Client Portfolio View
+FROM: Patricia Rodriguez, VP of Wealth Management
+SUBJECT: Need comprehensive client profiles before meetings
+Data Team,
+
+
+Our advisors spend too much time gathering client information before meetings. We need a complete client dashboard they can pull up instantly.
+
+
+For EVERY client (even those without current holdings), show:
+- Client name, country, and risk profile
+- Number of accounts they have
+- Total current portfolio value (sum of all holdings)
+- Number of unique securities they hold
+- Date of their most recent transaction
+
+
+Critical: Use LEFT JOINs so we see clients even if they have zero holdings!
+
+
+Portfolio value = SUM(quantity × current_price) across all holdings.
+
+
+Sort by portfolio value (highest first), then by client name.
+Patricia
+Your Task: Build a comprehensive 360° view of each client.
+________________
+
+
+Problem 2.2: Unrealized Gains/Losses Report
+FROM: Harold Martinez, Tax Advisory Director
+SUBJECT: URGENT - Clients need year-end tax planning data
+Hi Analytics,
+
+
+Tax season approaching - clients are calling asking about their unrealized gains/losses. I need a detailed position-level report.
+
+
+For EACH current holding, show:
+- Client name
+- Security symbol
+- Quantity held and average cost basis
+- Current market price
+- Position value (quantity × current_price)
+- Unrealized gain/loss = (current_price - avg_cost) × quantity
+- Return percentage = ((current_price - avg_cost) / avg_cost) × 100
+
+
+Include BOTH profitable and losing positions. Sort by absolute gain/loss (largest movers first, regardless of direction).
+
+
+Format percentages to 2 decimal places.
+Harold
+Your Task: Calculate unrealized gains/losses for all current positions.
+________________
+
+
+Problem 2.3: Cash Flow Analysis by Account
+FROM: Katherine Chen, Treasury Manager
+SUBJECT: Cash movement patterns - need account-level detail
+Analytics Team,
+
+
+Treasury needs to understand cash movement patterns across all accounts for liquidity planning.
+
+
+For EACH account, analyze:
+- Total deposits (include "Deposit" AND "Transfer In" types)
+- Total withdrawals (include "Withdrawal" AND "Transfer Out")
+- Net cash flow = deposits - withdrawals
+- Number of cash transactions
+- Average transaction size
+
+
+Include the client name for context. Only analyze the cash_movements table.
+
+
+Sort by net cash flow (largest positive first).
+Katherine
+Your Task: Analyze cash flow patterns by account.
+________________
+
+
+
+
+Problem 2.4: Loan Payment Performance Analysis
+FROM: Marcus Williams, Risk Management
+SUBJECT: Loan repayment health assessment needed
+Data Team, Risk committee wants to assess loan repayment performance by loan type. For EACH loan type, calculate: - Total number of loans (that have at least 1 payment) - Total payments made - Count and % of ON-TIME payments - Count and % of LATE payments - Count and % of MISSED payments Formula: Payment rate = (count / total payments) × 100 Sort by late payment rate (highest risk first). Only include loans that have had at least one payment recorded. Marcus
+Your Task: Evaluate loan payment performance by type.
+Problem 2.5: Sector Exposure Analysis
+FROM: Dr. Emily Zhang, Chief Risk Officer
+SUBJECT: URGENT - Sector concentration risk for board meeting
+Analytics, Board meeting TOMORROW - they want to understand our sector concentration risk firm-wide. For EACH sector, calculate: - Total market value held across all client portfolios - Number of different securities in that sector - Number of unique clients with exposure - Percentage of total firm portfolio - Average position size - Flag as "High Concentration" if sector > 20% of total portfolio This requires joining: portfolio_holdings → securities → asset_classes Sort by total value (largest exposure first). Emily
+Your Task: Analyze sector concentration across the firm.
+Problem 2.6: Product Subscription Analysis
+FROM: Steven Park, Head of Product Management
+SUBJECT: Product performance evaluation for strategy review
+Hi Data Team, We're reviewing our product lineup next quarter. Need performance metrics for all financial products. For EACH product, show: - Product name and type - Total number of subscriptions - Total AUM (Assets Under Management) - sum of all amounts invested - Number of unique clients subscribed - Average subscription amount - Management fee revenue = total AUM × management_fee Only include ACTIVE products. Sort by total AUM (highest first). Steven
+Your Task: Evaluate financial product performance.
+Problem 2.7: Trader Efficiency Metrics
+FROM: Jessica Martinez, Trading Operations Director
+SUBJECT: Identifying top trader performers - Q4 bonus review
+Analytics, Time for trader performance evaluations. For EACH trader, calculate: - Number of trades executed - Total volume traded - Average trade size - Average commission per trade - Most traded security (the symbol they traded most frequently) Important: - Only count BUY and SELL transactions - Only 2024 data - For "most traded security," use the one with highest count of trades by that trader Sort by total volume (highest first). Jessica
+Your Task: Calculate comprehensive trader performance metrics.
+Problem 2.8: Client Risk Profile Distribution
+FROM: Michelle Adams, Head of Marketing Analytics
+SUBJECT: Client segmentation for targeted campaigns
+Data Team, Marketing wants to understand our client base by risk appetite for targeted product campaigns. Group clients by risk profile and show: - Risk profile category - Number of clients in each category - Average portfolio value - Total AUM for that segment - Percentage of total clients = (count / all clients) × 100 Order by risk level: Conservative → Moderate → Aggressive → Very Aggressive This tells us which segments are largest and most valuable. Michelle
+Your Task: Analyze client distribution by risk profile.
+Problem 2.9: Daily Trading Volume - October 2024
+FROM: Daniel Kim, Head of Trading Operations
+SUBJECT: October trading patterns analysis
+Analytics Team, Need to analyze our trading activity for every day in October 2024. For EACH trading day, show: - Date - Total number of transactions - Buy volume (dollars) - Sell volume (dollars) - Net volume = buy volume - sell volume - Number of unique securities traded that day Only include BUY and SELL transactions. Order chronologically. Use CASE WHEN to separate buy vs sell volume. Daniel
+Your Task: Create daily trading activity report for October 2024.
+Problem 2.10: Relationship Manager Workload
+FROM: Carol Henderson, VP of Human Resources
+SUBJECT: RM workload analysis - need balanced distribution
+Hi Analytics, We're concerned some RMs are overloaded while others have capacity. Need workload analysis. For EACH relationship manager, show: - Manager name and region - Number of ACTIVE clients assigned - Total AUM they manage - Average client portfolio size - Breakdown: # of Conservative clients and # of Aggressive clients Only include active clients. Sort by total AUM (highest first). This helps us redistribute clients if needed. Carol
+Your Task: Analyze RM workload and client distribution.
+LEVEL 3: ADVANCED WINDOW FUNCTIONS
+Problem 3.1: Running Portfolio Value Over Time
+FROM: Andrew Liu, Client Reporting Manager
+SUBJECT: Clients want to see portfolio growth visualization
+Data Team, Clients are asking to see how their portfolio value evolved over time. We need a running total report. For EACH account, show EACH transaction/cash movement chronologically with: - Transaction date - Transaction type - Amount - Running total balance after that transaction Use window function: SUM() OVER (PARTITION BY account_id ORDER BY date) Include the client name for context. Order by account, then date. This will power our new "Portfolio Growth" dashboard. Andrew
+Your Task: Calculate running portfolio balance for each account.
+Problem 3.2: Transaction Ranking by Volume
+FROM: Rachel Green, Trading Analytics
+SUBJECT: Identifying each trader's biggest trades per month
+Analytics, For trader performance reviews, we want to see each trader's TOP 3 largest trades for every month in 2024. Show: - Trader name - Month - Transaction ID, date, security - Total amount - Rank within that trader-month (1 = largest trade) Use ROW_NUMBER() or RANK() partitioned by trader AND month. Only show ranks 1, 2, and 3. Only Buy/Sell transactions from 2024. Rachel
+Your Task: Rank transactions within trader-month combinations.
+Problem 3.3: Moving Average Price Analysis
+FROM: Dr. Kevin Wu, Quantitative Research
+SUBJECT: Technical analysis signals for AAPL
+Data Team, Quant team needs technical analysis on Apple (AAPL) stock for trading signals. For each trading day, calculate: - Date and closing price - 3-day moving average of closing price - 7-day moving average of closing price - Flag "Golden Cross" when 3-day MA crosses ABOVE 7-day MA Use: AVG() OVER (ORDER BY date ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) for 3-day Use LAG() to detect crossover by comparing today's values with yesterday's. Kevin
+Your Task: Calculate moving averages and detect golden cross signals.
+Problem 3.4: Year-over-Year Growth Comparison
+FROM: Elizabeth Carter, Executive Reporting
+SUBJECT: YoY performance comparison for exec dashboard
+Analytics, Executives want to see year-over-year quarterly performance for relationship managers. Compare 2024 vs 2023 revenue: - Manager name - Quarter (Q1, Q2, Q3) - Revenue in 2023 (same quarter) - Revenue in 2024 - YoY growth % = ((2024 - 2023) / 2023) × 100 - Rank managers by growth rate Use employee_performance table. Use LAG() with year offset or self-join. Elizabeth
+Your Task: Compare year-over-year quarterly revenue growth.
+Problem 3.5: Portfolio Concentration Risk Analysis
+FROM: Mark Johnson, Portfolio Risk Manager
+SUBJECT: Identifying over-concentrated positions
+Data Team, Risk committee is concerned about concentration risk. For EACH account, I need to see what % each security represents. For each holding, calculate: - Security symbol - Position value - Total portfolio value (for that account) - Position as % of portfolio - Risk flag: "High Risk" if position > 25%, otherwise "Normal" Use window function to calculate total portfolio per account. Sort by concentration % (highest first). Mark
+Your Task: Calculate position concentration within each portfolio.
+Problem 3.6: Client Ranking - Global & Country-Level
+FROM: Victoria Stone, Private Banking Director
+SUBJECT: VIP client identification - need rankings
+Analytics, We need to identify VIP clients for our premium services. Rank clients: - Globally by portfolio value - Within their country by portfolio value - Show percentile position globally Use: - RANK() OVER (ORDER BY portfolio_value) for global - RANK() OVER (PARTITION BY country ORDER BY portfolio_value) for country - PERCENT_RANK() for percentile Sort by global rank. Victoria
+Your Task: Rank clients globally and within countries.
+Problem 3.7: Quarterly Trading Volume Trends
+FROM: Nathan Brooks, Business Analytics
+SUBJECT: QoQ trend analysis for investor presentation
+Data Team, Creating investor deck - need to show trading volume trends quarter-over-quarter for 2024. For each quarter, show: - Quarter name - Total transaction value - Number of trades - Average trade size - QoQ % change for each metric (vs previous quarter) Use LAG() to get previous quarter values, then calculate % change. Nathan
+Your Task: Analyze quarter-over-quarter trading trends.
+Problem 3.8: Risk-Adjusted Returns Ranking
+FROM: Dr. Sarah Thompson, Investment Performance
+SUBJECT: Sharpe ratio improvement tracking
+Analytics, We track portfolio performance using Sharpe ratios. Need to see which accounts are improving. For each account, show: - Current Sharpe ratio (most recent calculation) - Previous quarter's Sharpe ratio - Change in Sharpe ratio - Rank by improvement (highest improvement = rank 1) Use risk_metrics table. Use LAG() to get previous period value. Only accounts with at least 2 risk calculations. Sarah
+Your Task: Track and rank Sharpe ratio improvements.
+Problem 3.9: Top 3 Holdings Per Client
+FROM: Richard Hayes, Client Advisory
+SUBJECT: Need to see each client's largest positions
+Data Team, Advisors need a quick view of each client's TOP 3 largest holdings for risk conversations. For EACH client, show their 3 largest positions: - Security symbol - Position value - % of their total portfolio - Position rank (1, 2, 3) Use ROW_NUMBER() OVER (PARTITION BY client ORDER BY position_value DESC) Filter to only ranks 1-3. Sort by client name, then rank. Richard
+Your Task: Show top 3 holdings for each client.
+Problem 3.10: Commission Revenue Moving Average
+FROM: Laura Martinez, Finance Director
+SUBJECT: Commission trend analysis with smoothing
+Analytics, Finance needs to see commission revenue trends with noise smoothed out using moving averages. For each month in 2024, calculate: - Monthly total commission revenue - 3-month moving average of commission - Trend indicator: - "↑" if current month > 3-month MA - "↓" if current month < 3-month MA - "→" if equal Use: AVG() OVER (ORDER BY month ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) Laura
+Your Task: Calculate commission trends with moving averages.
+LEVEL 4: COMPLEX BUSINESS ANALYTICS
+Problem 4.1: Realized vs Unrealized Gains (Comprehensive)
+FROM: George Wilson, Tax Strategy Director
+SUBJECT: CRITICAL - Year-end tax reporting
+Data Team, Tax deadline approaching - clients need complete profit/loss statements. This is COMPLEX - three parts: Part A - Realized Gains: - Match SELL transactions to earlier BUY transactions - Calculate: (sell_price - buy_price) × quantity - Sum all realized gains/losses per account Part B - Unrealized Gains: - Current holdings: (current_price - average_cost) × quantity - Sum unrealized gains/losses per account Part C - Total Return: - Combined return % = (realized + unrealized) / total_invested × 100 Show account_id, client, realized_gain, unrealized_gain, total_return_pct This requires CTEs and complex joins! George
+Your Task: Calculate comprehensive realized and unrealized gains.
+Problem 4.2: Asset Allocation Drift Detection
+FROM: Dr. Jennifer Clark, Portfolio Management
+SUBJECT: Rebalancing analysis - accounts out of balance
+Analytics, We need to identify portfolios that have drifted from target allocation. For each client, compare ACTUAL allocation vs TARGET (based on risk profile): Targets by Risk Profile: - Conservative: 70% Bonds, 20% Equities, 10% Other - Moderate: 50% Bonds, 40% Equities, 10% Other - Aggressive: 20% Bonds, 70% Equities, 10% Other - Very Aggressive: 10% Bonds, 80% Equities, 10% Other Calculate: - Current % in each asset class - Target % - Deviation (current - target) - Flag "Rebalance Needed" if ANY asset class is >10% off target Sort by largest deviation. Jennifer
+Your Task: Detect portfolio allocation drift from targets.
+Problem 4.3: Client Profitability Ranking
+FROM: Michael Stevens, CFO
+SUBJECT: Most profitable clients analysis for board
+Data Team - BOARD PRESENTATION NEXT WEEK Need to identify our most profitable clients considering ALL revenue sources: 1. Trading commissions they paid 2. Management fees from product subscriptions (AUM × fee rate) 3. Loan interest they paid 4. Net investment gains (assume we earn 20% of their gains as performance fees) Calculate total profitability score, then rank clients. Show TOP 20 and BOTTOM 10 clients. This drives our client retention and acquisition strategy! Michael
+Your Task: Calculate multi-source client profitability.
+Problem 4.4: Suspicious Trading Pattern Detection
+FROM: Thomas Anderson, Chief Compliance Officer
+SUBJECT: URGENT - Potential insider trading detection
+Analytics, Compliance needs to identify suspicious trading patterns that might indicate insider trading or market manipulation. Find accounts that executed MORE THAN 10 transactions in a SINGLE DAY: - Account and date - Number of transactions - Total volume - Securities traded - Any open compliance cases? - Any critical alerts generated? Requirements: - Group by account and date - Use HAVING for filtering - Join with compliance_events and alerts - Flag suspicious patterns Sort by transaction count (highest first). Thomas
+Your Task: Identify potential suspicious trading activity.
+Problem 4.5: Margin Call Risk Assessment
+FROM: Dr. Emily Zhang, Chief Risk Officer
+SUBJECT: URGENT - Margin liquidation risk
+Analytics, Risk management needs to prevent margin liquidations. Identify at-risk accounts immediately. For accounts with margin loans, calculate: - Current holdings value - Outstanding loan amount - Equity position (holdings - loan) - Margin ratio (equity / loan) × 100 - Flag if ratio < 130% as "MARGIN CALL RISK" - Calculate deficit amount needed to reach 130% Requirements: - Calculate current portfolio value - Join with loans table - Compute remaining loan balance - Identify accounts below 130% threshold Sort by margin ratio (lowest first = highest risk). Emily
+Your Task: Assess margin call risk across accounts.
+Problem 4.6: Compliance Event Resolution Time
+FROM: Sarah Mitchell, Head of Compliance Operations
+SUBJECT: Compliance efficiency metrics
+Data Team, Need to evaluate our compliance team's efficiency. Calculate resolution metrics by severity: - Average resolution time (in days) - Fastest resolution - Slowest resolution - Total open cases - Resolution rate % = (resolved / total) × 100 Requirements: - Use DATEDIFF for resolution time - Handle NULL for open cases - Group by severity level - Calculate statistical aggregations Sort by severity (Critical first). Sarah
+Your Task: Calculate compliance resolution efficiency.
+Problem 4.7: Portfolio Turnover Ratio
+FROM: Jessica Martinez, Trading Operations
+SUBJECT: Identifying excessive trading activity
+Analytics, We need to identify accounts with excessive trading activity (high turnover). Calculate portfolio turnover ratio for each account in 2024: - Total value of securities SOLD in 2024 - Average portfolio value = (beginning + ending) / 2 - Turnover ratio = sales / average value - Flag high turnover (>100%) Requirements: - Calculate total sales volume - Calculate average portfolio value - Compute turnover ratio - Categorize: Low (<50%), Medium (50-100%), High (>100%) High turnover may indicate day-trading or excessive churning. Sort by turnover ratio (highest first). Jessica
+Your Task: Calculate and categorize portfolio turnover.
+Problem 4.8: Dividend Income Forecast
+FROM: Robert Chen, Income Planning Advisor
+SUBJECT: Q4 2024 dividend income projections
+Data Team, Clients need to plan their Q4 income. Based on historical patterns, forecast dividend income. For each account holding dividend-paying securities: - Securities held that pay dividends - Historical dividend amounts - Expected Q4 payment date - Expected income = dividend_per_share × quantity held - Total forecasted income per account Requirements: - Join holdings with dividends table - Use historical patterns to forecast - Calculate per-share income × quantity - Sum by account Filter to only Q4 2024 expected payments. Robert
+Your Task: Forecast Q4 dividend income by account.
+Problem 4.9: Top Performing Securities
+FROM: Dr. Jennifer Liu, Head of Research
+SUBJECT: Best performing securities across all portfolios
+Analytics, Investment research wants to identify which securities performed best across ALL client portfolios. Identify TOP 5 securities by total return %: - Security name and symbol - Total amount invested (all clients combined) - Current total value (all clients) - Overall return % = ((current - invested) / invested) × 100 - Number of clients holding it Requirements: - Aggregate across all holdings - Calculate weighted average return - Rank by return % - Show top 5 only This helps identify winning investments. Sort by return % (highest first). Dr. Liu
+Your Task: Identify best performing securities firm-wide.
+Problem 4.10: Loan Delinquency Analysis
+FROM: Amanda Foster, Head of Credit Risk
+SUBJECT: Credit risk reporting - loan performance
+Data Team, Credit committee needs comprehensive loan performance analysis. For each loan type, calculate: - Total loans - Payments due (scheduled) - On-time payment rate % - Late payment rate % - Missed payment rate % - Average days past due (for late payments only) Requirements: - Join loans with loan_payments - Calculate payment statistics - Only include loans with payments due - Compute average lateness for late payments This helps assess credit risk by loan type. Sort by late payment rate (highest risk first). Amanda
+Your Task: Analyze loan delinquency patterns.
+LEVEL 5: EXECUTIVE DASHBOARDS
+👨‍💼Problem 5.1: Relationship Manager Performance Dashboard
+FROM: Patricia Rodriguez, VP of Wealth Management
+SUBJECT: URGENT - Executive review of RM performance
+Data Team - EXECUTIVE PRESENTATION TOMORROW CEO wants comprehensive RM performance evaluation. Create complete dashboard: Required Metrics per RM: 1. Total AUM (Assets Under Management) 2. Number of active clients 3. YTD revenue generated: - Trading commissions - Management fees from products - Loan origination fees 4. Average client satisfaction score (from employee_performance) 5. Compliance issues in their client portfolio 6. Client risk profile distribution (Conservative, Moderate, Aggressive) Requirements: - Join 6+ tables - Multiple aggregations - Revenue from multiple sources - Performance scoring system This determines bonuses and promotions! Sort by total AUM (highest first). Patricia
+Your Task: Create comprehensive RM performance report.
+Problem 5.2: Comprehensive Risk Report
+FROM: Dr. Emily Zhang, Chief Risk Officer
+SUBJECT: BOARD MEETING - Enterprise-wide risk overview
+Analytics - BOARD OF DIRECTORS MEETING MONDAY Create executive risk dashboard with FIVE sections: Part A: Aggregate Portfolio Risk - Total portfolio VaR across all accounts - Average portfolio volatility - Number of accounts with VaR > $10,000 Part B: Top 10 Concentrated Positions - Largest positions by absolute value - Positions > 30% of any portfolio - Firm-wide sector concentration Part C: Risk Limit Breaches - Accounts with Sharpe ratio < 1.0 - Accounts with Beta > 1.5 (for conservative profiles) - Accounts with Volatility > 0.25 Part D: Critical Compliance Events - Critical severity + Open status - Events open > 30 days - Accounts with multiple critical events Part E: Margin Utilization - Total accounts with margin loans - Average utilization rate - Accounts near margin call (<130%) This is THE most important report of the quarter! Emily
+Your Task: Build comprehensive enterprise risk dashboard (5 sections).
+Problem 5.3: Monthly Asset Inflows/Outflows
+FROM: David Park, CFO
+SUBJECT: Treasury planning - cash flow forecasting
+Data Team, Treasury needs monthly cash flow analysis for 2024 to forecast liquidity needs. For EACH month of 2024, calculate: - Total deposits (all types) - Total withdrawals (all types) - Net cash flow = deposits - withdrawals - Running balance = cumulative net flow - Month-over-month growth rate = ((current - previous) / previous) × 100 - Trend analysis (Growing/Declining) Requirements: - Group by month - Calculate running totals using window functions - Compute MoM growth percentage - Include breakdown by deposit/withdrawal type - Flag months with negative net flow Sort chronologically. David
+Your Task: Create monthly cash flow forecast report.
+Problem 5.4: Cohort Analysis - Q1 2024 Clients
+FROM: Michelle Adams, Head of Growth Analytics
+SUBJECT: Client lifecycle value analysis
+Analytics, Growth team needs cohort analysis to understand client lifecycle value. Cohort Definition: Clients registered Jan 1 - Mar 31, 2024 Track their journey QUARTERLY: Q1 2024 (Registration Quarter): - Number of active clients - Average account balance - Total deposits - Number of trades - Products subscribed Q2 2024: - Retention rate % from Q1 - Average balance growth - Trading activity evolution - New product adoption Q3 2024: - Continuing trends - Churn analysis - Revenue per client Q4 2024 (if data available): - Long-term value projection - Customer lifetime value estimate Requirements: - Track same cohort across quarters - Calculate retention rates - Show behavior evolution - Identify success patterns Michelle
+Your Task: Perform cohort analysis tracking Q1 2024 registrations.
+Problem 5.5: Product Subscription Analysis
+FROM: Steven Park, Head of Product Management
+SUBJECT: Complete product performance evaluation
+Data Team - PRODUCT STRATEGY REVIEW Comprehensive analysis needed for each financial product: Part A: Subscription Metrics - Total subscriptions - Total AUM - Average subscription size - Unique subscribers - Quarter-over-quarter growth rate Part B: Performance vs Benchmark - Average return for clients holding the product - Comparison to S&P 500 benchmark - Risk-adjusted return (Sharpe ratio) - Volatility measure Part C: Client Retention - Client retention rate - Average holding period - Churn rate - Renewal rate (for positions that closed and reopened) Requirements: - Join product_subscriptions, accounts, portfolio_holdings - Calculate returns for product holders - Compare to benchmark_indices table - Identify best/worst performing products Sort by total AUM (highest first). Steven
+Your Task: Create comprehensive product performance report (3 parts).
+Problem 5.6: Branch Performance Comparison
+FROM: Carol Henderson, VP of Regional Operations
+SUBJECT: Regional performance - optimize branch operations
+Analytics, Regional management needs branch performance comparison. Connect the dots: - Branches → Relationship Managers (via region matching) - RMs → Clients - Clients → Accounts → Transactions/Loans/Products Metrics per Branch: 1. Number of active clients 2. Total AUM under management 3. YTD deposits/withdrawals 4. Total trading volume 5. Number of loans originated 6. Total revenue generated (commissions + fees + interest) 7. Operating efficiency ratio = revenue / # of clients Requirements: - Connect branches through relationship managers - Aggregate client metrics to branch level - Calculate profitability by branch - Identify best/worst performing branches Sort by total revenue (highest first). Carol
+Your Task: Compare branch performance across all metrics.
+Problem 5.7: Market Impact Analysis
+FROM: Dr. Kevin Wu, Quantitative Research
+SUBJECT: Correlation between market movements and client behavior
+Analytics, Research wants to understand how clients react to major market events. Part A: Identify Market Event Days - Calculate daily S&P 500 % change - Flag days with >2% movement (up OR down) - Identify magnitude and direction Part B: Client Trading Behavior on Event Days - Number of trades executed - Buy vs Sell ratio - Total volume - Most traded securities - Number of clients trading Part C: Comparison to Normal Days - Event day metrics vs average normal day - Client response time (hours after event) - Sector rotation patterns - Panic selling indicators Requirements: - Use benchmark_indices for S&P 500 data - Identify event days using window functions - Analyze client behavior patterns - Compare event vs non-event days Kevin
+Your Task: Analyze market impact on trading behavior (3 parts).
+Problem 5.8: Seasonal Trading Patterns
+FROM: Nathan Brooks, Business Analytics Director
+SUBJECT: Capacity planning - understanding seasonal trends
+Data Team, Operations needs to understand seasonal patterns for capacity planning. Part A: Monthly Patterns - Average trading volume per month (across all available years) - Identify high season vs low season - Statistical significance of patterns Part B: Security-Specific Seasonality - For each major security, find peak trading months - Volume concentration analysis - Sector-based seasonal trends Part C: Day-of-Week Patterns - Average volume by weekday (Mon-Fri) - Monday effect, Friday effect analysis - Optimal trading days Part D: Holiday Effects - Volume before/after major holidays - Quarter-end rebalancing patterns - Year-end tax selling Requirements: - Analyze multi-year data if available - Use window functions for moving patterns - Identify statistically significant trends - Provide actionable insights for staffing Nathan
+Your Task: Identify comprehensive seasonal trading patterns (4 parts).
+Problem 5.9: Value at Risk (VaR) Trend Analysis
+FROM: Dr. Emily Zhang, Chief Risk Officer
+SUBJECT: Portfolio risk evolution tracking
+Analytics - RISK COMMITTEE QUARTERLY REVIEW Need comprehensive VaR trend analysis showing how portfolio risk evolved. For each account with multiple VaR calculations: 1. VaR Trend Over Time - Track VaR across all calculation dates - Identify increasing/decreasing risk trends - Calculate rate of change (VaR velocity) 2. Risk-Adjusted Performance - Portfolio return / VaR ratio - Compare to volatility trends - Sharpe ratio correlation 3. Risk Limit Breaches - Accounts exceeding VaR thresholds - Duration of breaches - Corrective actions needed Requirements: - Use risk_metrics table with multiple calculation dates - Calculate rate of change using LAG() - Compare VaR to portfolio performance - Identify deteriorating risk profiles - Flag accounts requiring immediate attention Sort by VaR velocity (fastest increasing risk first). Emily
+Your Task: Analyze VaR trends and risk-adjusted performance.
+Problem 5.10: Client Lifecycle Analysis
+FROM: Michelle Adams, Head of CRM Analytics
+SUBJECT: Customer segmentation and targeting strategy
+Data Team, CRM needs client lifecycle segmentation for targeted marketing. Segment clients by tenure: 1. New (0-6 months): Onboarding phase 2. Growing (7-24 months): Building portfolio 3. Established (25-48 months): Mature relationship 4. Mature (48+ months): Loyal long-term clients Metrics per Segment: - Number of clients - Average account balance - Average portfolio return - Transaction frequency (trades per month) - Product holdings (avg products per client) - Attrition rate (clients who became inactive) - Revenue per client - Net Promoter Score (if available) Requirements: - Calculate months since registration using TIMESTAMPDIFF - Segment using CASE WHEN - Aggregate metrics by segment - Compare segment performance - Identify at-risk segments This drives our customer retention and acquisition strategy. Sort by segment (New → Mature). Michelle
+Your Task: Perform comprehensive client lifecycle segmentation.
+Problem 1: Optimal Portfolio Rebalancing Recommendations
+FROM: Dr. Jennifer Clark, Portfolio Management
+SUBJECT: Automated rebalancing system
+Analytics - BUILDING AUTOMATED SYSTEM For accounts with significant allocation drift (>10% from target): 1. Calculate required trades to rebalance 2. Minimize transaction costs 3. Generate specific buy/sell recommendations 4. Show before/after allocation Requirements: - Identify out-of-balance accounts (from Problem 4.2) - Calculate $ amount to buy/sell per asset class - Suggest specific securities to trade - Estimate commission costs - Prioritize by largest drift first Output should provide: - Current vs target allocation - Specific trades: "SELL 1000 shares of AAPL" or "BUY $50,000 of bonds" - Expected commission cost - Post-rebalance allocation This will automate our rebalancing process! Jennifer
+Your Task: Generate actionable rebalancing recommendations.
+Problem 2: Alert Response Time Analysis
+FROM: Robert Lee, Operations Director
+SUBJECT: Operations efficiency - alert handling SLAs
+Data Team, Operations needs to monitor alert response times and SLA compliance. Calculate average time between alert generation and acknowledgment: Dimensions: - By severity level (Info, Warning, Critical) - By alert type - By time of day generated (business hours vs after-hours) - By day of week Metrics: - Average response time (hours) - Median response time - 95th percentile response time - SLA breach count (>24 hours for Critical, >48 hours for Warning) - Response trend (improving/deteriorating) Identify patterns: - Unacknowledged critical alerts - Alerts open > 7 days - Recommend staffing improvements Requirements: - Calculate time difference between alert_date and acknowledged time - Handle NULL for unacknowledged alerts - Group by various dimensions - Statistical analysis of response times Robert
+Your Task: Analyze alert response efficiency and SLA compliance.
+Problem 3: Cross-Border Transaction Analysis
+FROM: Katherine Chen, FX Trading Desk
+SUBJECT: Currency impact on transactions
+Analytics, FX desk needs to understand currency conversion impact on transactions. Identify all transactions involving currency conversion: - Account currency ≠ Security trading currency - Calculate FX impact using exchange_rates table - Show gain/loss from currency movements Requirements: 1. Join accounts, transactions, securities, exchange_rates 2. Match exchange rate by transaction date 3. Calculate FX impact: (trade amount × rate) - base amount 4. Aggregate by currency pair 5. Show total FX gains/losses Additional Analysis: - Identify clients with significant FX exposure - Calculate FX impact on portfolio returns - Recommend hedging strategies Example: - Client account in USD - Buys EUR-denominated security - Transaction involves EUR/USD conversion - Calculate profit/loss from FX movement This helps clients understand hidden FX risks. Katherine
+Your Task: Analyze cross-border transactions and FX impact.
