@@ -1,3 +1,4 @@
 *.class
 .ipynb_checkpoints
 .vscode
+.DS_store
