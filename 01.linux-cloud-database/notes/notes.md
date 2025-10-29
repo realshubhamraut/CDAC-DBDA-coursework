@@ -1010,7 +1010,7 @@ echo "y=\$((--x)): y=$y, x=$x"
 echo $((x & y))
 
 # Bitwise OR
-echo $((x | y))
+echo $((x | y)) 
 
 # Bitwise XOR
 echo $((x ^ y))
