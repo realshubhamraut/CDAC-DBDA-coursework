@@ -1,0 +1,152 @@
+[
+  {
+    "question": "Is Python case sensitive when dealing with identifiers?",
+    "code": "",
+    "hint": "Yes, Python is case sensitive.",
+    "options": [
+      "yes",
+      "no",
+      "machine dependent",
+      "none of the mentioned"
+    ],
+    "correct_answer": "yes",
+    "description": "* Yes, Python is case sensitive. For example, Variable, variable, and VARIABLE are all treated as different identifiers.",
+    "answer_code": "",
+    "reference": "https://www.sanfoundry.com/python-questions-answers-variable-names/"
+  },
+  {
+    "question": "What is the maximum possible length of an identifier?",
+    "code": "",
+    "hint": "In Python, identifiers can be of any length.",
+    "options": [
+      "31 characters",
+      "63 characters",
+      "79 characters",
+      "none of the mentioned"
+    ],
+    "correct_answer": "none of the mentioned",
+    "description": "* In Python, identifiers can be of any length. There is no fixed maximum, though extremely long names are not practical.",
+    "answer_code": "",
+    "reference": "https://www.sanfoundry.com/python-questions-answers-variable-names/"
+  },
+  {
+    "question": "Which of the following is not allowed in Python?",
+    "code": "",
+    "hint": "All the given statements are valid in Python and will run without errors.",
+    "options": [
+      "_a = 1",
+      "__a = 1",
+      "__str__ = 1",
+      "none of the mentioned"
+    ],
+    "correct_answer": "none of the mentioned",
+    "description": "* All the given statements are valid in Python and will run without errors. However, using names like __str__ can reduce readability or interfere with built-in functionality.",
+    "answer_code": "",
+    "reference": "https://www.sanfoundry.com/python-questions-answers-variable-names/"
+  },
+  {
+    "question": "Which of the following is an invalid variable?",
+    "code": "",
+    "hint": "Variable names in Python cannot start with a digit.",
+    "options": [
+      "my_string_1",
+      "1st_string",
+      "foo",
+      "_"
+    ],
+    "correct_answer": "1st_string",
+    "description": "* Variable names in Python cannot start with a digit. Since 1st_string begins with the digit 1, it is invalid. The other options follow Python’s variable naming rules, where names can start with letters or underscores and can include digits after the first character.",
+    "answer_code": "",
+    "reference": "https://www.sanfoundry.com/python-questions-answers-variable-names/"
+  },
+  {
+    "question": "Why are local variable names beginning with an underscore discouraged?",
+    "code": "",
+    "hint": "As Python has no concept of private variables, leading underscores are used to indicate variables th...",
+    "options": [
+      "they are used to indicate a private variables of a class",
+      "they confuse the interpreter",
+      "they are used to indicate global variables",
+      "they slow down execution"
+    ],
+    "correct_answer": "they are used to indicate a private variables of a class",
+    "description": "* As Python has no concept of private variables, leading underscores are used to indicate variables that must not be accessed from outside the class.",
+    "answer_code": "",
+    "reference": "https://www.sanfoundry.com/python-questions-answers-variable-names/"
+  },
+  {
+    "question": "Which of the following is not a keyword in Python?",
+    "code": "",
+    "hint": "eval is a built-in function, not a keyword.",
+    "options": [
+      "eval",
+      "assert",
+      "nonlocal",
+      "pass"
+    ],
+    "correct_answer": "eval",
+    "description": "* eval is a built-in function, not a keyword. The others (assert, nonlocal, and pass) are Python keywords.",
+    "answer_code": "",
+    "reference": "https://www.sanfoundry.com/python-questions-answers-variable-names/"
+  },
+  {
+    "question": "All keywords in Python are in _________",
+    "code": "",
+    "hint": "Most keywords are in lowercase, but some like True, False, and None are capitalized.",
+    "options": [
+      "lower case",
+      "UPPER CASE",
+      "Capitalized",
+      "None of the mentioned"
+    ],
+    "correct_answer": "None of the mentioned",
+    "description": "* Most keywords are in lowercase, but some like True, False, and None are capitalized.",
+    "answer_code": "",
+    "reference": "https://www.sanfoundry.com/python-questions-answers-variable-names/"
+  },
+  {
+    "question": "Which of the following is true for variable names in Python?",
+    "code": "",
+    "hint": "Python allows variable names of unlimited length.",
+    "options": [
+      "unlimited length",
+      "all private members must have leading and trailing underscores",
+      "underscore and ampersand are the only two special characters allowed",
+      "none of the mentioned"
+    ],
+    "correct_answer": "unlimited length",
+    "description": "* Python allows variable names of unlimited length. Private members usually have only a leading underscore, not both leading and trailing. The ampersand (&) is not permitted in variable names; only the underscore (_) is allowed as a special character.",
+    "answer_code": "",
+    "reference": "https://www.sanfoundry.com/python-questions-answers-variable-names/"
+  },
+  {
+    "question": "Which of the following is an invalid statement?",
+    "code": "",
+    "hint": "In Python, variable names cannot have spaces between them, so a b c = 1000 2000 3000 is invalid synt...",
+    "options": [
+      "abc = 1,000,000",
+      "a b c = 1000 2000 3000",
+      "a,b,c = 1000, 2000, 3000",
+      "a_b_c = 1,000,000"
+    ],
+    "correct_answer": "a b c = 1000 2000 3000",
+    "description": "* In Python, variable names cannot have spaces between them, so a b c = 1000 2000 3000 is invalid syntax.",
+    "answer_code": "",
+    "reference": "https://www.sanfoundry.com/python-questions-answers-variable-names/"
+  },
+  {
+    "question": "Which of the following cannot be a variable name in Python?",
+    "code": "",
+    "hint": "in is a reserved keyword in Python used for membership testing and loops, so it cannot be used as a variable name.",
+    "options": [
+      "__init__",
+      "in",
+      "it",
+      "on"
+    ],
+    "correct_answer": "in",
+    "description": "* in is a reserved keyword in Python used for membership testing and loops, so it cannot be used as a variable name. The other options (__init__, it, on) are valid identifiers.",
+    "answer_code": "",
+    "reference": "https://www.sanfoundry.com/python-questions-answers-variable-names/"
+  }
+]
