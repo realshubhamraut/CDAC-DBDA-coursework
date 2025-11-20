@@ -451,6 +451,166 @@ df2
 length(which(is.na(df0$Ozone) | is.na(df0$Solar.R)))
 
 length(which(is.na(df0$Temp>65) | is.na(df0$Solar.R)))
-l
 
+
+d = airquality 
+head(d)
        
+
+d1 = d[which(d$Temp > 45 & d$Temp<=65), ]
+d1
+df1 = subset(airquality, airquality$Temp<=65)
+df1
+x1
+x3 = sort(x1, decreasing = T)
+x3
+
+setwd('/Users/proxim/Desktop/CDAC-DBDA-coursework/04.python/R-Programming/datasets')
+x1
+order(x1)                                             # gives the index of (lowest, ... highest) values 
+library(readxl)
+df = read_excel('CDAC_DataBook.xlsx', sheet = 'ERPData')
+
+
+mat_id = length(unique(df$MaterialID))
+mat_id
+  
+dj = unique(df$MaterialID)
+dj
+
+ord1 = order(df$Quantity)                                # single column based sorting
+ord1
+df = df[ord1,]
+df
+
+
+
+ord1 = order(df$Quantity, df$MaterialID, df$Location)     # multi-level sorting 
+ord1
+df = df[ord1,]
+df
+
+
+
+
+df1 = data.frame(Name=c('A','B','C'), Marks = c(45,67,83))
+df2 = data.frame(Name=c('F','N'), Grades=c(37,68))
+df1
+df2
+
+
+# here the column names are different so we explicitly rename from the df1
+colnames(df2) = colnames(df1)
+df2
+df1
+
+
+rbind(df1, df2)
+
+
+pune_df = read_excel('CDAC_DataBook.xlsx', sheet = 'Pune')
+mum_df = read_excel('CDAC_Databook.xlsx', sheet = 'Mumbai')
+pune_df
+merge(pune_df, mum_df)                  # if the every columns value matches against other dataframe completly, then the matching records are returned
+
+merge(pune_df, mum_df, by='Grade')     # so the common records are returned for the common subjects in both tables
+
+cat("
+Grade A combos:
+
+       Vaibhav     Arjun      Chetan
+        |           |           |
+Rakesh--+-----------+-----------+
+        |           |           |
+Hitesh--+-----------+-----------+
+
+Grade B combos:
+
+          Deepika      Abhishek
+             |            |
+Vaibhav------+------------+
+             |            |
+Suyash-------+------------+
+")
+
+
+merge(pune_df, mum_df, by=c('Subject', 'Grade'))
+
+
+merge(pune, mumbain , by = c('Grade', 'Subject','Name'))
+
+
+sal = read_excel('CDAC_DataBook.xlsx', sheet = 'Salary')
+dep = read_excel('CDAC_DataBook.xlsx', sheet = 'Deptt')
+
+sal
+dep
+merge(sal,dep, all = T)
+merge(sal, dep, all.y = T)       # y = dep, and y must be true
+merge(sal, dep, all.x = T)       # x = sal, and x must be true
+
+install.packages('dplyr')
+install.packages('tidyr')
+library(dplyr)
+library(tidyr)
+
+head(mtcars)
+df = mtcars
+
+
+summarize(group_by(df, cyl), NewCol = mean(mpg))      # summarize gives every combination 
+
+
+mean(mtcars$mpg[which(mtcars$cyl==4)])                # otherwise individual finds goes like this
+
+chk = summarize(group_by(df,cyl,gear), NewCol=mean(mpg))
+
+
+com = c()
+g = df$gear
+c = df$cyl
+fu = function(){
+  a <- numeric(readline('enter num of gear'))
+  b <- numeric(readling('enter num of cyl'))
+  a = which(chk, cyl = a)
+  b = which(chk, gear = b)
+      
+  print
+}
+fu()
+df = read_excel('CDAC_DataBook.xlsx', sheet= 'ERPData')
+
+df1 = summarise(group_by(df,Location), NumPacks = n(), TotalQuantity=sum(Quantity))
+df1
+
+
+df = read_excel('CDAC_Databook.xlsx', sheet ="Health")
+df
+
+df1 = gather(df, Year, Cases, c('2019','2020','2021'))
+df2 = spread(df1, Disease, Cases)
+df2
+
+24+22+3+8+8
+
+x1 = c('shubham', 43,123)
+x1
+x1 = list(c('shubham', 43,123))
+x1
+
+x1 = list(Name='shubham', Age=48, Height=160)
+x1
+str(x1)
+
+# we can also store entire data.frame in the list
+
+
+{
+  sal = as.numeric(readline("Enter the salary "))
+  rate = ifelse(sal<=20000,0.05,ifelse(sal <=50000,0.1,0.15))
+  print(rate)
+}
+places = c("Navi Mumbai", 'Khargar', 'Hyderabad','Gaziabad', 'Chennai')
+places
+d = grep(' ', places)
+d
