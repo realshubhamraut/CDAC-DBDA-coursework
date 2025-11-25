@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Python Exercise Book</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Slate and Blue -->
+    <!-- Application Structure Plan: A single-page app with a top navigation bar to filter questions by difficulty level (Beginner, Intermediate, Advanced). Questions for the selected level are displayed in a responsive grid of cards. Each card contains the question and a toggleable section for sample input/output. This structure allows users to focus on a specific difficulty without overwhelming them with a single long list, and the toggle encourages attempting the problem before seeing the solution details. -->
+    <!-- Visualization & Content Choices: The source material is textual exercises. Therefore, no charts are needed. The primary presentation method is a structured HTML card layout using Tailwind CSS. Goal: Organize/Inform. Method: A grid of collapsible 'card' components. Interaction: Filtering via level buttons and toggling details on each card. Justification: This is the clearest and most user-friendly way to present a large set of text-based problems. Library: Vanilla JS for DOM manipulation and event handling. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            background-color: #f8fafc; /* slate-50 */
+            font-family: 'Inter', sans-serif;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        .details-content {
+            display: none;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .details-content.show {
+            display: block;
+            opacity: 1;
+        }
+        .nav-btn.active {
+            background-color: #3b82f6; /* blue-500 */
+            color: white;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        pre {
+            background-color: #f1f5f9; /* slate-100 */
+            border-radius: 0.375rem;
+            padding: 0.75rem;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 0.875rem;
+        }
+        code {
+            color: #1e293b; /* slate-800 */
+        }
+        /* Custom styles for social icons using unicode/text */
+        .social-icon-text {
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+        <header class="text-center mb-8 md:mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-900">Python Placement Readiness</h1>
+            <p class="mt-2 text-lg text-slate-600">An interactive exercise book with 100 challenges to sharpen your skills.</p>
+        </header>
+
+        <nav class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8 md:mb-12" id="level-filters">
+            <button data-level="all" class="nav-btn active px-4 py-2 font-semibold text-slate-700 bg-white rounded-lg shadow-sm hover:bg-slate-100 transition-all">All Questions</button>
+            <button data-level="Level 1" class="nav-btn px-4 py-2 font-semibold text-slate-700 bg-white rounded-lg shadow-sm hover:bg-slate-100 transition-all">Level 1: Beginner</button>
+            <button data-level="Level 2" class="nav-btn px-4 py-2 font-semibold text-slate-700 bg-white rounded-lg shadow-sm hover:bg-slate-100 transition-all">Level 2: Intermediate</button>
+            <button data-level="Level 3" class="nav-btn px-4 py-2 font-semibold text-slate-700 bg-white rounded-lg shadow-sm hover:bg-slate-100 transition-all">Level 3: Advanced</button>
+        </nav>
+
+        <main id="questions-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Questions will be dynamically inserted here -->
+        </main>
+
+        <footer class="text-center mt-12 pt-6 border-t border-slate-200">
+            <p class="text-lg font-semibold text-slate-700">Created by Dr. Amar Panchal</p>
+            
+            <div class="flex justify-center space-x-4 mt-3 mb-4">
+                <!-- LinkedIn -->
+                <a href="https://www.linkedin.com/in/theamarpanchal/" target="_blank" class="text-blue-700 hover:text-blue-500 transition-colors text-3xl" aria-label="LinkedIn">
+                    <span class="social-icon-text">in</span>
+                </a>
+                <!-- YouTube -->
+                <a href="https://www.youtube.com/@amar.career" target="_blank" class="text-red-600 hover:text-red-400 transition-colors text-3xl" aria-label="YouTube">
+                    &#x25B6;
+                </a>
+                <!-- Instagram (Camera Emoji) -->
+                <a href="https://www.instagram.com/amar.career/" target="_blank" class="text-pink-600 hover:text-pink-400 transition-colors text-3xl" aria-label="Instagram">
+                    &#x1F4F8;
+                </a>
+                <!-- Website/Globe -->
+                <a href="https://amarpanchal.in/" target="_blank" class="text-slate-600 hover:text-slate-400 transition-colors text-3xl" aria-label="Website">
+                    &#x1F310;
+                </a>
+                <!-- Facebook (Simple 'f') -->
+                <a href="https://www.facebook.com/imamarpanchal/" target="_blank" class="text-blue-500 hover:text-blue-300 transition-colors text-3xl" aria-label="Facebook">
+                    <span class="social-icon-text">f</span>
+                </a>
+            </div>
+            
+            <p class="text-sm text-slate-500">&copy; 2025 Python Practice Portal. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        const questions = [
+            // Level 1
+            {
+                id: 1,
+                level: 'Level 1',
+                title: 'Divisibility Filter',
+                question: 'Write a program which will find all such numbers which are divisible by 7 but are not a multiple of 5, between 2000 and 3200 (both included). The numbers obtained should be printed in a comma-separated sequence on a single line.',
+                input: '(No input required, the range is fixed)',
+                output: '2002,2009,2016,2023,2037,2044,2051,2058,2072,2079,2086,2093,2107,2114,2121,2128,2142,2149,2156,2163,2177,2184,2191,2198,2212,2219,2226,2233,2247,2254,2261,2268,2282,2289,2296,2303,2317,2324,2331,2338,2352,2359,2366,2373,2387,2394,2401,2408,2422,2429,2436,2443,2457,2464,2471,2478,2492,2499,2506,2513,2527,2534,2541,2548,2562,2569,2576,2583,2597,2604,2611,2618,2632,2639,2646,2653,2667,2674,2681,2688,2702,2709,2716,2723,2737,2744,2751,2758,2772,2779,2786,2793,2807,2814,2821,2828,2842,2849,2856,2863,2877,2884,2891,2898,2912,2919,2926,2933,2947,2954,2961,2968,2982,2989,2996,3003,3017,3024,3031,3038,3052,3059,3066,3073,3087,3094,3101,3108,3122,3129,3136,3143,3157,3164,3171,3178,3192,3199'
+            },
+            {
+                id: 2,
+                level: 'Level 1',
+                title: 'Factorial Calculation',
+                question: 'Write a program which can compute the factorial of a given number. The result should be printed on a single line.',
+                input: '8',
+                output: '40320'
+            },
+            {
+                id: 3,
+                level: 'Level 1',
+                title: 'Dictionary of Squares',
+                question: 'With a given integral number n, write a program to generate a dictionary that contains (i, i*i) such that i is an integral number between 1 and n (both included). Then the program should print the dictionary.',
+                input: '8',
+                output: '{1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36, 7: 49, 8: 64}'
+            },
+            {
+                id: 4,
+                level: 'Level 1',
+                title: 'List and Tuple Generator',
+                question: 'Write a program which accepts a sequence of comma-separated numbers from the console and generates a list and a tuple which contains every number.',
+                input: '34,67,55,33,12,98',
+                output: "['34', '67', '55', '33', '12', '98']\n('34', '67', '55', '33', '12', '98')"
+            },
+            {
+                id: 5,
+                level: 'Level 1',
+                title: 'Simple Class Definition',
+                question: 'Define a class which has at least two methods:\n1. getString: to get a string from console input.\n2. printString: to print the string in upper case.',
+                input: 'hello world',
+                output: 'HELLO WORLD'
+            },
+            {
+                id: 6,
+                level: 'Level 1',
+                title: 'Method to Calculate Square',
+                question: 'Write a method which can calculate the square value of a number.',
+                input: '# Call with square(2) and square(3)',
+                output: '4\n9'
+            },
+            {
+                id: 7,
+                level: 'Level 1',
+                title: 'Documenting Functions',
+                question: 'Python has a built-in document function `__doc__` for every function. Write a program to print the documents for built-in functions like `abs()` and `int()`, and also add and print a document string for your own simple function.',
+                input: '(No input required, just execution)',
+                output: "Return the absolute value of the argument.\n\nint(x=0) -> integer\nint(x, base=10) -> integer\n...\n\n4\nReturn the square value of the input number."
+            },
+            {
+                id: 8,
+                level: 'Level 1',
+                title: 'Class and Instance Parameters',
+                question: 'Define a class, which has a class parameter and a same-named instance parameter. Show the difference when accessing the class parameter versus the instance parameter.',
+                input: '(No input required, just execution of the class demonstration)',
+                output: 'Person name is Jeffrey\nPerson name is Nico'
+            },
+            {
+                id: 56, level: 'Level 1', title: 'Basic Function Sum',
+                question: 'Define a function which can compute the sum of two numbers and return the result. Print the result of calling the function.',
+                input: '# Assuming you call the function with SumFunction(10, 5)',
+                output: '15'
+            },
+            {
+                id: 57, level: 'Level 1', title: 'Integer to String Conversion',
+                question: 'Define a function that can convert an integer into a string and print it in the console.',
+                input: '# Assuming you call the function with printValue(123)',
+                output: '123'
+            },
+            {
+                id: 58, level: 'Level 1', title: 'String Concatenation',
+                question: 'Define a function that can accept two strings as input and concatenate them, then print the result.',
+                input: '# Assuming you call the function with printValue("Python", "3")',
+                output: 'Python3'
+            },
+            {
+                id: 59, level: 'Level 1', title: 'Length Comparison and Printing',
+                question: 'Define a function that can accept two strings as input and print the string with the maximum length. If two strings have the same length, the function should print both strings line by line.',
+                input: '# Sample 1: printValue("apple", "orange")\n# Sample 2: printValue("one", "two")',
+                output: '# Output 1:\norange\n\n# Output 2:\none\ntwo'
+            },
+            {
+                id: 60, level: 'Level 1', title: 'Even or Odd Checker',
+                question: 'Define a function that can accept an integer number as input and print the message "It is an even number" if the number is even, otherwise print "It is an odd number".',
+                input: '# Assuming you call the function with checkValue(11)',
+                output: 'It is an odd number'
+            },
+            {
+                id: 61, level: 'Level 1', title: 'Dictionary of Squares (1 to 3)',
+                question: 'Define a function which can print a dictionary where the keys are numbers between 1 and 3 (both included) and the values are the square of the keys.',
+                input: '(No input required)',
+                output: '{1: 1, 2: 4, 3: 9}'
+            },
+            {
+                id: 62, level: 'Level 1', title: 'Print List (1 to 20, Squares)',
+                question: 'Define a function which can generate and print a list where the values are the square of numbers between 1 and 20 (both included).',
+                input: '(No input required)',
+                output: '[1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256, 289, 324, 361, 400]'
+            },
+            {
+                id: 63, level: 'Level 1', title: 'Print First 5 Elements',
+                question: 'Define a function which can generate a list where the values are the square of numbers between 1 and 20 (both included). Then the function needs to print the first 5 elements in the list.',
+                input: '(No input required)',
+                output: '[1, 4, 9, 16, 25]'
+            },
+            {
+                id: 64, level: 'Level 1', title: 'Print Last 5 Elements',
+                question: 'Define a function which can generate a list where the values are the square of numbers between 1 and 20 (both included). Then the function needs to print the last 5 elements in the list.',
+                input: '(No input required)',
+                output: '[256, 289, 324, 361, 400]'
+            },
+            {
+                id: 65, level: 'Level 1', title: 'Print All Except First 5',
+                question: 'Define a function which can generate a list where the values are the square of numbers between 1 and 20 (both included). Then the function needs to print all values except the first 5 elements in the list.',
+                input: '(No input required)',
+                output: '[36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256, 289, 324, 361, 400]'
+            },
+            {
+                id: 66, level: 'Level 1', title: 'Generate and Print Tuple',
+                question: 'Define a function which can generate and print a tuple where the values are the square of numbers between 1 and 20 (both included).',
+                input: '(No input required)',
+                output: '(1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256, 289, 324, 361, 400)'
+            },
+            {
+                id: 67, level: 'Level 1', title: 'Tuple Halves',
+                question: 'With a given tuple (1,2,3,4,5,6,7,8,9,10), write a program to print the first half of the values in one line and the last half of the values in a separate line.',
+                input: '(No input required)',
+                output: '(1, 2, 3, 4, 5)\n(6, 7, 8, 9, 10)'
+            },
+            {
+                id: 68, level: 'Level 1', title: 'Even Numbers in a Tuple',
+                question: 'Write a program to generate and print another tuple whose values are the even numbers in the given tuple (1,2,3,4,5,6,7,8,9,10).',
+                input: '(No input required)',
+                output: '(2, 4, 6, 8, 10)'
+            },
+            {
+                id: 69, level: 'Level 1', title: 'Case-Insensitive Yes/No Check',
+                question: 'Write a program which accepts a string as input to print "Yes" if the string is "yes", "YES", or "Yes", otherwise print "No".',
+                input: 'YES',
+                output: 'Yes'
+            },
+            {
+                id: 70, level: 'Level 1', title: 'Sum of String Integers',
+                question: 'Define a function that can receive two integral numbers in string form and compute their sum, then print it in the console.',
+                input: '# Assuming you call the function with printValue("100", "50")',
+                output: '150'
+            },
+            
+            // Level 2
+            {
+                id: 9,
+                level: 'Level 2',
+                title: 'Formula Calculation and Rounding',
+                question: 'Write a program that calculates and prints the value according to the given formula: Q = sqrt((2 * C * D)/H). Following are the fixed values: C = 50, H = 30. D is the variable whose values should be input to your program in a comma-separated sequence. Round the output off to its nearest integer.',
+                input: '100,150,180',
+                output: '18,22,24'
+            },
+            {
+                id: 10,
+                level: 'Level 2',
+                title: '2D Array Generation',
+                question: 'Write a program which takes 2 digits, X,Y as input and generates a 2-dimensional array. The element value in the i-th row and j-th column of the array should be i * j.',
+                input: '3,5',
+                output: '[[0, 0, 0, 0, 0], [0, 1, 2, 3, 4], [0, 2, 4, 6, 8]]'
+            },
+            {
+                id: 11,
+                level: 'Level 2',
+                title: 'Alphabetical Word Sorting',
+                question: 'Write a program that accepts a comma separated sequence of words as input and prints the words in a comma-separated sequence after sorting them alphabetically.',
+                input: 'without,hello,bag,world',
+                output: 'bag,hello,without,world'
+            },
+            {
+                id: 12,
+                level: 'Level 2',
+                title: 'Capitalizing Input Lines',
+                question: 'Write a program that accepts a sequence of lines as input (until an empty line is entered) and prints the lines after making all characters in the sentence capitalized.',
+                input: 'Hello world\nPractice makes perfect\n',
+                output: 'HELLO WORLD\nPRACTICE MAKES PERFECT'
+            },
+            {
+                id: 13,
+                level: 'Level 2',
+                title: 'Removing Duplicates and Sorting Words',
+                question: 'Write a program that accepts a sequence of whitespace-separated words as input and prints the words after removing all duplicate words and sorting them alphanumerically.',
+                input: 'hello world and practice makes perfect and hello world again',
+                output: 'again and hello makes perfect practice world'
+            },
+            {
+                id: 14,
+                level: 'Level 2',
+                title: 'Binary Divisibility Check',
+                question: 'Write a program which accepts a sequence of comma-separated 4-digit binary numbers as its input and then checks whether they are divisible by 5 or not. The numbers that are divisible by 5 are to be printed in a comma-separated sequence.',
+                input: '0100,0011,1010,1001,1111,1100',
+                output: '1010,1111'
+            },
+            {
+                id: 15,
+                level: 'Level 2',
+                title: 'All Even Digits Filter',
+                question: 'Write a program which will find all such numbers between 1000 and 3000 (both included) such that each digit of the number is an even number. The numbers obtained should be printed in a comma-separated sequence on a single line.',
+                input: '(No input required)',
+                output: '2000,2002,2004,2006,2008,2020,2022,2024,2026,2028,2040,2042,2044,2046,2048,2060,2062,2064,2066,2068,2080,2082,2084,2086,2088,2200,2202,2204,2206,2208,2220,2222,2224,2226,2228,2240,2242,2244,2246,2248,2260,2262,2264,2266,2268,2280,2282,2284,2286,2288,2400,2402,2404,2406,2408,2420,2422,2424,2426,2428,2440,2442,2444,2446,2448,2460,2462,2464,2466,2468,2480,2482,2484,2486,2488,2600,2602,2604,2606,2608,2620,2622,2624,2626,2628,2640,2642,2644,2646,2648,2660,2662,2664,2666,2668,2680,2682,2684,2686,2688,2800,2802,2804,2806,2808,2820,2822,2824,2826,2828,2840,2842,2844,2846,2848,2860,2862,2864,2866,2868,2880,2882,2884,2886,2888'
+            },
+            {
+                id: 16,
+                level: 'Level 2',
+                title: 'Counting Letters and Digits',
+                question: 'Write a program that accepts a sentence and calculates the number of letters and digits.',
+                input: 'hello world! 123',
+                output: 'LETTERS 10\nDIGITS 3'
+            },
+            {
+                id: 17,
+                level: 'Level 2',
+                title: 'Counting Upper and Lower Case Letters',
+                question: 'Write a program that accepts a sentence and calculates the number of upper case letters and lower case letters.',
+                input: 'Hello world!',
+                output: 'UPPER CASE 1\nLOWER CASE 9'
+            },
+            {
+                id: 18,
+                level: 'Level 2',
+                title: 'Sum of Repeated Digits',
+                question: 'Write a program that computes the value of a + aa + aaa + aaaa with a given digit a as input.',
+                input: '9',
+                output: '11106'
+            },
+            {
+                id: 19,
+                level: 'Level 2',
+                title: 'List Comprehension for Odd Squares',
+                question: 'Use a list comprehension to square each odd number in a list. The list is input by a sequence of comma-separated numbers.',
+                input: '1,2,3,4,5,6,7,8,9',
+                output: '1,9,25,49,81'
+            },
+            {
+                id: 20,
+                level: 'Level 2',
+                title: 'Bank Account Transaction Log',
+                question: 'Write a program that computes the net amount of a bank account based on a transaction log from console input. The transaction log format is `D <amount>` (Deposit) or `W <amount>` (Withdrawal). Stop reading input when an empty line is supplied.',
+                input: 'D 300\nD 300\nW 200\nD 100\n',
+                output: '500'
+            },
+            {
+                id: 21,
+                level: 'Level 2',
+                title: 'Class for Nationality',
+                question: 'Define a class named `American` which has a static method called `printNationality`.',
+                input: '# Call American.printNationality()',
+                output: 'America'
+            },
+            {
+                id: 22,
+                level: 'Level 2',
+                title: 'Inheritance (American and NewYorker)',
+                question: 'Define a class named `American` and its subclass `NewYorker`. Print the objects of both classes to demonstrate the inheritance relationship.',
+                input: '(No input required, just instantiation and printing)',
+                output: '<__main__.American object at 0x...>\n<__main__.NewYorker object at 0x...>'
+            },
+            {
+                id: 23,
+                level: 'Level 2',
+                title: 'Class for Circle Area',
+                question: 'Define a class named `Circle` which can be constructed by a radius. The `Circle` class has a method which can compute the area (π * r^2). Use π ≈ 3.14.',
+                input: '# Instantiate with Circle(2) and call .area()',
+                output: '12.56'
+            },
+            {
+                id: 24,
+                level: 'Level 2',
+                title: 'Class for Rectangle Area',
+                question: 'Define a class named `Rectangle` which can be constructed by a length and width. The `Rectangle` class has a method which can compute the area.',
+                input: '# Instantiate with Rectangle(2, 10) and call .area()',
+                output: '20'
+            },
+            {
+                id: 25,
+                level: 'Level 2',
+                title: 'Polymorphism with Area',
+                question: 'Define a class named `Shape` and its subclass `Square`. The `Square` class has an `init` function that takes a length as an argument. Both classes must have an `area` method, where `Shape`\'s area is 0 by default.',
+                input: '# Instantiate Square(3) and call .area()',
+                output: '9'
+            },
+             {
+                id: 71, level: 'Level 2', title: 'Filter Even Numbers (filter function)',
+                question: 'Write a program which can filter even numbers in a list by using the `filter()` function. The list is: `[1,2,3,4,5,6,7,8,9,10]`.',
+                input: '(No input required)',
+                output: '[2, 4, 6, 8, 10]'
+            },
+            {
+                id: 72, level: 'Level 2', title: 'Square Elements (map function)',
+                question: 'Write a program which can use `map()` to make a list whose elements are the square of elements in `[1,2,3,4,5,6,7,8,9,10]`.',
+                input: '(No input required)',
+                output: '[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]'
+            },
+            {
+                id: 73, level: 'Level 2', title: 'Map and Filter: Even Squares',
+                question: 'Write a program which can use `map()` and `filter()` to make a list whose elements are the square of even numbers in `[1,2,3,4,5,6,7,8,9,10]`.',
+                input: '(No input required)',
+                output: '[4, 16, 36, 64, 100]'
+            },
+            {
+                id: 74, level: 'Level 2', title: 'Filter Even Numbers in Range',
+                question: 'Write a program which can use `filter()` to make a list whose elements are even numbers between 1 and 20 (both included).',
+                input: '(No input required)',
+                output: '[2, 4, 6, 8, 10, 12, 14, 16, 18, 20]'
+            },
+            {
+                id: 75, level: 'Level 2', title: 'Map Squares in Range',
+                question: 'Write a program which can use `map()` to make a list whose elements are the square of numbers between 1 and 20 (both included).',
+                input: '(No input required)',
+                output: '[1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256, 289, 324, 361, 400]'
+            },
+
+            // Level 3
+            {
+                id: 26,
+                level: 'Level 3',
+                title: 'Password Validation with Regex',
+                question: 'A website requires users to input a password. Write a program to check the validity of passwords based on the following criteria: At least 1 [a-z], 1 [0-9], 1 [A-Z], 1 [$#@]. Minimum length: 6, Maximum length: 12. Your program should accept a sequence of comma-separated passwords and print only the valid ones.',
+                input: 'ABd1234@1,a F1#,2w3E*,2We3345',
+                output: 'ABd1234@1'
+            },
+            {
+                id: 27,
+                level: 'Level 3',
+                title: 'Multi-Key Tuple Sorting',
+                question: 'You are required to write a program to sort a list of (name, age, height) tuples by ascending order. The sort criteria priority is: Name -> Age -> Height. The tuples are input by console, one per line (until an empty line).',
+                input: 'Tom,19,80\nJohn,20,90\nJony,17,91\nJony,17,93\nJson,21,85\n',
+                output: "[('John', '20', '90'), ('Jony', '17', '91'), ('Jony', '17', '93'), ('Json', '21', '85'), ('Tom', '19', '80')]"
+            },
+            {
+                id: 28,
+                level: 'Level 3',
+                title: 'Generator for Divisibility by 7',
+                question: 'Define a class with a generator method which can iterate the numbers, which are divisible by 7, between a given range 0 and n.',
+                input: '# Call generator for n=15 and print results',
+                output: '0\n7\n14'
+            },
+            {
+                id: 29,
+                level: 'Level 3',
+                title: 'Robot Movement Distance',
+                question: 'A robot moves in a plane starting from (0,0). The robot can move toward UP, DOWN, LEFT, and RIGHT. Compute the distance from the current position to the origin. If the distance is a float, print the nearest integer. Input lines stop when an empty line is entered.',
+                input: 'UP 5\nDOWN 3\nLEFT 3\nRIGHT 2\n',
+                output: '2'
+            },
+            {
+                id: 30,
+                level: 'Level 3',
+                title: 'Word Frequency Counter',
+                question: 'Write a program to compute the frequency of words from the input. The output should be sorted alphabetically by word and formatted as word:frequency.',
+                input: 'New to Python or choosing between Python 2 and Python 3? Read Python 2 or Python 3.',
+                output: '2:2\n3.:1\n3?:1\nNew:1\nPython:5\nRead:1\nand:1\nbetween:1\nchoosing:1\nor:2\nto:1'
+            },
+            {
+                id: 31, level: 'Level 3', title: 'Extracting Username from Email',
+                question: 'Assuming we have email addresses in the "username@companyname.com" format, write a program to print the user name of a given email address.',
+                input: 'john@google.com',
+                output: 'john'
+            },
+            {
+                id: 32, level: 'Level 3', title: 'Extracting Company Name from Email',
+                question: 'Assuming we have email addresses in the "username@companyname.com" format, write a program to print the company name of a given email address.',
+                input: 'john@google.com',
+                output: 'google'
+            },
+            {
+                id: 33, level: 'Level 3', title: 'Filtering Digits with Regex',
+                question: 'Write a program which accepts a sequence of words separated by whitespace as input to print the words composed of digits only.',
+                input: '2 cats and 3 dogs.',
+                output: "['2', '3']"
+            },
+            {
+                id: 34, level: 'Level 3', title: 'Sum of Series i/(i+1)',
+                question: 'Write a program to compute 1/2 + 2/3 + 3/4 + ... + n/(n+1) with a given integer n input by console (n>0). Print the result with two decimal places.',
+                input: '5',
+                output: '3.55'
+            },
+            {
+                id: 35, level: 'Level 3', title: 'Recursive Function f(n)',
+                question: 'Write a program to compute the value of f(n) defined by: f(n) = f(n-1) + 100 when n > 0 and f(0) = 0, with a given integer n input by console (n>0).',
+                input: '5',
+                output: '500'
+            },
+            {
+                id: 36, level: 'Level 3', title: 'Fibonacci Sequence f(n)',
+                question: 'The Fibonacci Sequence is computed based on the formula: f(n)=0 if n=0, f(n)=1 if n=1, f(n)=f(n-1)+f(n-2) if n>1. Please write a program to compute the value of f(n) with a given integer n input by console.',
+                input: '7',
+                output: '13'
+            },
+            {
+                id: 37, level: 'Level 3', title: 'Fibonacci Sequence Generation',
+                question: 'Use list comprehension and a recursive function to print the Fibonacci Sequence in comma-separated form for all values from f(0) up to f(n) where n is input by console.',
+                input: '7',
+                output: '0,1,1,2,3,5,8,13'
+            },
+            {
+                id: 38, level: 'Level 3', title: 'Even Number Generator',
+                question: 'Please write a program using a generator to print the even numbers between 0 and n (both inclusive) in comma-separated form, where n is input by console.',
+                input: '10',
+                output: '0,2,4,6,8,10'
+            },
+            {
+                id: 39, level: 'Level 3', title: 'Divisible by 5 and 7 Generator',
+                question: 'Please write a program using a generator to print the numbers which can be divisible by 5 and 7 between 0 and n (both inclusive) in comma-separated form, where n is input by console.',
+                input: '100',
+                output: '0,35,70'
+            },
+            {
+                id: 40, level: 'Level 3', title: 'Simple Expression Evaluation',
+                question: 'Please write a program which accepts a basic mathematical expression (e.g., 35+3, 5*6) from the console and prints the evaluation result.',
+                input: '35+3',
+                output: '38'
+            },
+            {
+                id: 41, level: 'Level 3', title: 'Binary Search Implementation',
+                question: 'Please write a binary search function which searches for an item in a sorted list. The function should return the index of the element to be searched in the list, or -1 if not found.',
+                input: '# list: [2,5,7,9,11,17,222]\n# search for 11 and 12',
+                output: '4\n-1'
+            },
+            {
+                id: 42, level: 'Level 3', title: 'Sentence Generation from Lists',
+                question: 'Please write a program to generate all sentences where the subject is in ["I", "You"], the verb is in ["Play", "Love"], and the object is in ["Hockey","Football"].',
+                input: '(No input required)',
+                output: 'I Play Hockey.\nI Play Football.\nI Love Hockey.\nI Love Football.\nYou Play Hockey.\nYou Play Football.\nYou Love Hockey.\nYou Love Football.'
+            },
+            {
+                id: 43, level: 'Level 3', title: 'List Comprehension Filter',
+                question: 'Please write a program to print the list after removing all even numbers in [5,6,77,45,22,12,24] using list comprehension.',
+                input: '(No input required)',
+                output: '[5, 77, 45]'
+            },
+            {
+                id: 44, level: 'Level 3', title: 'List Comprehension: Multi-Divisibility Removal',
+                question: 'By using list comprehension, please write a program to print the list after removing numbers which are divisible by both 5 and 7 in [12,24,35,70,88,120,155].',
+                input: '(No input required)',
+                output: '[12, 24, 88, 120, 155]'
+            },
+            {
+                id: 45, level: 'Level 3', title: 'List Comprehension: Index Removal',
+                question: 'By using list comprehension, please write a program to print the list after removing the 0th, 2nd, 4th, and 6th numbers in [12,24,35,70,88,120,155].',
+                input: '(No input required)',
+                output: '[24, 70, 120]'
+            },
+            {
+                id: 46, level: 'Level 3', title: '3D Array Generation',
+                question: 'By using list comprehension, please write a program to generate a 3x5x8 3D array whose each element is 0.',
+                input: '(No input required)',
+                output: '[[[0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0]], [[0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0]], [[0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0]]]'
+            },
+            {
+                id: 47, level: 'Level 3', title: 'Set Intersection',
+                question: 'With two given lists [1,3,6,78,35,55] and [12,24,35,24,88,120,155], write a program to make a new list whose elements are the intersection of the two given lists.',
+                input: '(No input required)',
+                output: '[35]'
+            },
+            {
+                id: 48, level: 'Level 3', title: 'Remove Duplicates (Order Preserved)',
+                question: 'With a given list [12,24,35,24,88,120,155,88,120,155], write a program to print this list after removing all duplicate values, with the original order preserved.',
+                input: '(No input required)',
+                output: '[12, 24, 35, 88, 120, 155]'
+            },
+            {
+                id: 49, level: 'Level 3', title: 'Character Frequency Counter',
+                question: 'Please write a program which counts and prints the numbers of each character in a string input by the console. The output should be formatted as character,count, one pair per line.',
+                input: 'abcdefgabc',
+                output: 'a,2\nb,2\nc,2\nd,1\ne,1\nf,1\ng,1'
+            },
+            {
+                id: 50, level: 'Level 3', title: 'Chinese Puzzle Solver',
+                question: 'Write a program to solve a classic ancient Chinese puzzle: We count 35 heads and 94 legs among the chickens and rabbits in a farm. How many rabbits and how many chickens do we have?',
+                input: '# solve(35, 94)',
+                output: '(23, 12)'
+            },
+            {
+                id: 51, level: 'Level 3', title: 'String Reversal (Slicing)',
+                question: 'Please write a program which accepts a string from the console and prints it in reverse order.',
+                input: 'rise to vote sir',
+                output: 'ris etov ot esir'
+            },
+            {
+                id: 52, level: 'Level 3', title: 'Even Index Characters (Slicing)',
+                question: 'Please write a program which accepts a string from the console and prints the characters that have even indexes (index 0, 2, 4, ...).',
+                input: 'H1e2l3l4o5w6o7r8l9d',
+                output: 'Helloworld'
+            },
+            {
+                id: 53, level: 'Level 3', title: 'List Permutations',
+                question: 'Please write a program which prints all possible permutations of the list [1,2,3].',
+                input: '(No input required)',
+                output: '[(1, 2, 3), (1, 3, 2), (2, 1, 3), (2, 3, 1), (3, 1, 2), (3, 2, 1)]'
+            },
+            {
+                id: 54, level: 'Level 3', title: 'Handling ZeroDivisionError',
+                question: 'Write a function to compute 5/0 and use try/except to catch the exceptions and print a friendly message.',
+                input: '# Call the function within a try/except block',
+                output: 'division by zero!\nIn finally block for cleanup'
+            },
+            {
+                id: 55, level: 'Level 3', title: 'Custom Exception Class',
+                question: 'Define a custom exception class named `MyError` which takes a string message as an attribute and inherits from the base `Exception` class.',
+                input: '# error = MyError("Something wrong")\n# print(error.msg)',
+                output: 'Something wrong'
+            },
+            {
+                id: 76, level: 'Level 3', title: 'Timeit for Code Execution',
+                question: 'Please write a program to print the running time of execution of the command "1+1" repeated 100 times using the `timeit` module.',
+                input: '(No input required)',
+                output: '(A small float number, e.g., 0.0001358)'
+            },
+            {
+                id: 77, level: 'Level 3', title: 'List Shuffle',
+                question: 'Please write a program to shuffle and print the list [3,6,7,8] using the `random` module.',
+                input: '(No input required)',
+                output: '(A shuffled list, e.g., [6, 3, 8, 7])'
+            },
+            {
+                id: 78, level: 'Level 3', title: 'Random Float (10 to 100)',
+                question: 'Please generate a random float where the value is between 10 and 100 (inclusive) using the `random` module.',
+                input: '(No input required)',
+                output: '(A float between 10.0 and 100.0, e.g., 54.789)'
+            },
+            {
+                id: 79, level: 'Level 3', title: 'Random Even Number (0 to 10)',
+                question: 'Please write a program to output a random even number between 0 and 10 (inclusive) using the `random` module and list comprehension.',
+                input: '(No input required)',
+                output: '(An even number from 0, 2, 4, 6, 8, 10)'
+            },
+            {
+                id: 80, level: 'Level 3', title: 'Random Divisible by 5 and 7',
+                question: 'Please write a program to output a random number, which is divisible by 5 and 7, between 0 and 200 (inclusive) using the `random` module and list comprehension.',
+                input: '(No input required)',
+                output: '(A number from 0, 35, 70, 105, 140, 175)'
+            },
+            {
+                id: 81, level: 'Level 3', title: 'Random Sample (100 to 200)',
+                question: 'Please write a program to generate a list with 5 random numbers between 100 and 200 (inclusive) using `random.sample()`.',
+                input: '(No input required)',
+                output: '(A list of 5 unique numbers, e.g., [134, 192, 101, 155, 178])'
+            },
+            {
+                id: 82, level: 'Level 3', title: 'Random Even Sample',
+                question: 'Please write a program to randomly generate a list with 5 even numbers between 100 and 200 (inclusive).',
+                input: '(No input required)',
+                output: '(A list of 5 unique even numbers, e.g., [106, 144, 198, 122, 180])'
+            },
+            {
+                id: 83, level: 'Level 3', title: 'Random Divisible Sample',
+                question: 'Please write a program to randomly generate a list with 5 numbers, which are divisible by 5 and 7, between 1 and 1000 (inclusive).',
+                input: '(No input required)',
+                output: '(A list of 5 unique numbers divisible by 35, e.g., [490, 770, 105, 210, 805])'
+            },
+            {
+                id: 84, level: 'Level 3', title: 'Random Integer in Range',
+                question: 'Please write a program to randomly print an integer number between 7 and 15 (inclusive) using `random.randrange()`.',
+                input: '(No input required)',
+                output: '(An integer between 7 and 15, e.g., 12)'
+            },
+            {
+                id: 85, level: 'Level 3', title: 'List Comprehension: Index Removal (Specific)',
+                question: 'By using list comprehension, please write a program to print the list after removing the 0th, 4th, and 5th numbers in [12,24,35,70,88,120,155].',
+                input: '(No input required)',
+                output: '[24, 35, 70, 155]'
+            },
+            {
+                id: 86, level: 'Level 3', title: 'List Comprehension: Value Removal (Duplicate)',
+                question: 'By using list comprehension, please write a program to print the list after removing all instances of the value 24 in [12,24,35,24,88,120,155].',
+                input: '(No input required)',
+                output: '[12, 35, 88, 120, 155]'
+            },
+            {
+                id: 87, level: 'Level 3', title: 'Class Inheritance (Male/Female)',
+                question: 'Define a class `Person` and its two child classes: `Male` and `Female`. All classes have a method "getGender" which can return "Male" for Male class, "Female" for Female class, and "Unknown" for Person.',
+                input: '# Call getGender() on instances of Male and Female',
+                output: 'Male\nFemale'
+            },
+            {
+                id: 88, level: 'Level 3', title: 'Unicode String Definition',
+                question: 'Print a unicode string "hello world".',
+                input: '(No input required)',
+                output: 'hello world'
+            },
+            {
+                id: 89, level: 'Level 3', title: 'ASCII to Unicode Conversion (utf-8)',
+                question: 'Write a program to read an ASCII string from console input and convert it to a unicode string encoded by utf-8, then print the unicode string.',
+                input: 'test string',
+                output: 'test string'
+            },
+            {
+                id: 90, level: 'Level 3', title: 'Python Source Encoding Comment',
+                question: 'Write a special comment that is commonly used to indicate a Python source code file is in unicode (specifically, utf-8 encoding). Print the comment as a string.',
+                input: '(No input required)',
+                output: '# -*- coding: utf-8 -*-'
+            },
+            {
+                id: 91, level: 'Level 3', title: 'Data Compression/Decompression (zlib)',
+                question: 'Please write a program to compress and decompress the string "hello world!hello world!hello world!hello world!" using the zlib module. Print both the compressed and decompressed results.',
+                input: '(No input required)',
+                output: "Compressed: b'x\\x9c\\xcbH\\xcd\\xc9\\xc9W(\\xcf/\\xcaIQ\\xcc \\x82\\r\\x00\\xd3\\x05\\x13\\xfb' \nDecompressed: hello world!hello world!hello world!hello world!"
+            },
+            {
+                id: 92, level: 'Level 3', title: 'Raising a RuntimeError',
+                question: 'Please write a program that will explicitly raise a RuntimeError exception with the message "Something went wrong".',
+                input: '(No input required)',
+                output: 'Traceback (most recent call last):\n  ...\nRuntimeError: Something went wrong'
+            },
+            {
+                id: 93, level: 'Level 3', title: 'Fibonacci Function (Iterative)',
+                question: 'The Fibonacci Sequence is defined as Fn = Fn-1 + Fn-2. Write a function to compute Fn using an iterative approach to avoid performance issues for large n. Compute F(10).',
+                input: '# Call fib_iterative(10)',
+                output: '55'
+            },
+            {
+                id: 94, level: 'Level 3', title: 'Dictionary Keys Only',
+                question: 'Define a function which can generate a dictionary where the keys are numbers between 1 and 20 (both included) and the values are the square of keys. The function should then print the keys only, one per line.',
+                input: '(No input required)',
+                output: '1\n2\n3\n...\n20'
+            },
+            {
+                id: 95, level: 'Level 3', title: 'Dictionary Values Only',
+                question: 'Define a function which can generate a dictionary where the keys are numbers between 1 and 20 (both included) and the values are the square of keys. The function should then print the values only, one per line.',
+                input: '(No input required)',
+                output: '1\n4\n9\n...\n400'
+            },
+            {
+                id: 96, level: 'Level 3', title: 'Assert for Evenness',
+                question: 'Please write `assert` statements to verify that every number in the list [2,4,6,8] is even. Your program should run without output if successful.',
+                input: '(No input required)',
+                output: '(No output, as all assertions pass)'
+            },
+            {
+                id: 97, level: 'Level 3', title: 'Assert for Failure',
+                question: 'Write a program that uses an `assert` statement to check if a user-input number is greater than 10. If the input is less than or equal to 10, the program should terminate with an AssertionError.',
+                input: '5',
+                output: 'Traceback (most recent call last):\n  ...\nAssertionError'
+            },
+            {
+                id: 98, level: 'Level 3', title: 'String Formatting (f-strings)',
+                question: 'Given the variables name = "John" and age = 30, use an f-string to print the sentence: "Hello, my name is John and I am 30 years old."',
+                input: '(No input required)',
+                output: 'Hello, my name is John and I am 30 years old.'
+            },
+            {
+                id: 99, level: 'Level 3', title: 'List Comprehension: Flattening a List',
+                question: 'Given a nested list [[1, 2], [3, 4], [5, 6]], use list comprehension to create a flattened list [1, 2, 3, 4, 5, 6].',
+                input: '(No input required)',
+                output: '[1, 2, 3, 4, 5, 6]'
+            },
+            {
+                id: 100, level: 'Level 3', title: 'Simple Lambda Function',
+                question: 'Define a simple lambda function that takes two arguments, x and y, and returns their product. Use this lambda function to calculate the product of 12 and 5.',
+                input: '# Call lambda function with (12, 5)',
+                output: '60'
+            }
+        ];
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const questionsContainer = document.getElementById('questions-container');
+            const levelFilters = document.getElementById('level-filters');
+
+            const renderQuestions = (filterLevel) => {
+                questionsContainer.innerHTML = '';
+                const filteredQuestions = filterLevel === 'all' 
+                    ? questions 
+                    : questions.filter(q => q.level === filterLevel);
+
+                filteredQuestions.forEach(q => {
+                    const card = document.createElement('div');
+                    card.className = 'bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col';
+                    card.innerHTML = `
+                        <div class="flex-grow">
+                            <span class="inline-block bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">${q.level}</span>
+                            <h3 class="text-xl font-bold mt-2 mb-2 text-slate-900">Q${q.id}: ${q.title}</h3>
+                            <p class="text-slate-600 mb-4">${q.question.replace(/\n/g, '<br>')}</p>
+                        </div>
+                        <div>
+                             <button class="toggle-details-btn text-blue-500 font-semibold hover:text-blue-700 transition-colors duration-200">Show Details ▼</button>
+                             <div class="details-content mt-4 border-t pt-4">
+                                <h4 class="font-semibold text-slate-700">Sample Input:</h4>
+                                <pre><code>${q.input}</code></pre>
+                                <h4 class="font-semibold text-slate-700 mt-4">Expected Output:</h4>
+                                <pre><code>${q.output}</code></pre>
+                            </div>
+                        </div>
+                    `;
+                    questionsContainer.appendChild(card);
+                });
+
+                document.querySelectorAll('.toggle-details-btn').forEach(button => {
+                    button.addEventListener('click', (event) => {
+                        const details = event.target.nextElementSibling;
+                        const isVisible = details.classList.contains('show');
+                        if (isVisible) {
+                            details.classList.remove('show');
+                            event.target.textContent = 'Show Details ▼';
+                        } else {
+                            details.classList.add('show');
+                            event.target.textContent = 'Hide Details ▲';
+                        }
+                    });
+                });
+            };
+
+            levelFilters.addEventListener('click', (event) => {
+                if (event.target.tagName === 'BUTTON') {
+                    document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+                    event.target.classList.add('active');
+                    const level = event.target.getAttribute('data-level');
+                    renderQuestions(level);
+                }
+            });
+
+            renderQuestions('all');
+        });
+    </script>
+</body>
+</html>
