@@ -1,0 +1,361 @@
+Consumer Lending Risk Insights Through Data-Driven Analytics
+
+1. Background & Business Context
+Consumer finance companies face significant challenges when lending money to individuals with limited, insufficient, or non-existent credit history. A lack of credit information increases the uncertainty involved in predicting whether a customer will repay the loan on time.
+Loan defaults lead to direct financial losses and increase the company’s risk exposure. Conversely, incorrectly rejecting a potentially good customer results in lost business opportunities. Therefore, data-driven decision-making is essential for:
+Reducing credit risk
+
+
+Improving loan approval strategies
+
+
+Identifying high-risk applicants early
+
+
+Setting appropriate credit limits and interest rates
+
+
+Your role is to perform Exploratory Data Analysis (EDA) and Statistical Hypothesis Testing to uncover the drivers of loan default using real-world customer data.
+The assignment simulates work typically done by analysts in risk management teams at banks, NBFCs, and fintech lenders.
+
+2. Objective of the Case Study
+The main aim is to:
+Understand the customer attributes and loan characteristics
+Identify behavioral and demographic variables that drive default
+Discover patterns that differentiate “defaulters” from “non-defaulters”
+Use hypothesis testing to validate whether observed patterns are statistically significant
+Provide actionable recommendations that reduce credit risk
+You must work with two provided datasets that capture customer information at the time of applying for the loan and their previous loan histories.
+
+3. Dataset Description
+You are provided with three files:
+
+3.1 Dataset 1 — credit_risk_applicants.csv
+This dataset includes information about current loan applicants and contains:
+a. Target variable
+TARGET = 1 → The client had payment difficulties (defaulted or significantly delayed installment payments)
+
+
+TARGET = 0 → The client repaid on time
+
+
+b. Demographics & Personal Information
+CODE_GENDER (Gender)
+
+
+DAYS_BIRTH (Age in days; negative values)
+
+
+NAME_EDUCATION_TYPE
+
+
+NAME_FAMILY_STATUS
+
+
+CNT_CHILDREN
+
+
+CNT_FAM_MEMBERS
+
+
+c. Financial Variables
+AMT_INCOME_TOTAL (Annual Income)
+
+
+AMT_CREDIT (Loan amount requested)
+
+
+AMT_ANNUITY
+
+
+AMT_GOODS_PRICE
+
+
+d. Employment & History
+DAYS_EMPLOYED
+
+
+OCCUPATION_TYPE
+
+
+FLAG_OWN_CAR, FLAG_OWN_REALTY
+
+
+e. Risk & External Score Features
+EXT_SOURCE_1, EXT_SOURCE_2, EXT_SOURCE_3
+ These are external credit bureau or scoring system indicators.
+
+
+f. Housing & Living Conditions
+Variables such as:
+APARTMENTS_AVG, YEARS_BUILD_AVG, LIVINGAREA_AVG, etc.
+ provide information on the living conditions and real estate characteristics.
+
+
+These variables may indicate stability or affordability.
+
+3.2 Dataset 2 — credit_risk_previous_loans.csv
+This dataset contains details about credit risk and previous loan applications made by the same customers (SK_ID_CURR is the linking key).
+Key attributes include:
+NAME_CONTRACT_STATUS (Approved, Refused, Cancelled, Unused Offer)
+
+
+AMT_CREDIT (Credit applied previously)
+
+
+AMT_APPLICATION
+
+
+AMT_DOWN_PAYMENT
+
+
+CNT_PAYMENT (Installment count)
+
+
+NAME_CASH_LOAN_PURPOSE
+
+
+RATE_INTEREST_PRIMARY
+
+
+DAYS_DECISION (How many days before the current application the decision was made)
+
+
+This dataset helps analyze patterns such as:
+Repeated rejections
+
+
+High-risk behavior
+
+
+History of applying for multiple loans
+
+
+Past loan outcomes that may influence future defaults
+
+
+
+3.3 Dataset 3 — credit_risk_metadata.csv
+This file explains the meaning, data type, and context of every variable.
+Students are expected to use it for:
+Understanding variable significance
+
+
+Choosing appropriate plots and transformations
+
+
+Interpreting results accurately
+
+
+
+4. Business Challenge
+You are hired as a Data Analyst in the Credit Risk Department of a lending company. Your task is to analyze applicant profiles to assist in the following major business goals:
+
+4.1 Reduce the Risk of Approving High-Risk Customers
+Identifying attributes that strongly correlate with defaults helps minimize bad loans.
+
+4.2 Avoid Rejecting Creditworthy Customers
+If good customers are mistakenly classified as risky, the business loses revenue.
+
+4.3 Recommend Data-Driven Strategies
+Based on your analytical findings, the company expects actionable recommendations on:
+Loan approval criteria
+
+
+Customer profiling
+
+
+Interest rate adjustments
+
+
+Required documentation
+
+
+Employment verification policies
+
+
+
+5. Analytical Tasks Expected from Students
+You must perform the following structured analysis steps:
+
+5.1 Data Cleaning
+Identify missing values
+
+
+Handle outliers
+
+
+Detect anomalies in variables (e.g., impossible values in DAYS_EMPLOYED)
+
+
+Decide which features to retain or discard based on business utility
+
+
+
+5.2 Exploratory Data Analysis (EDA)
+Univariate Analysis
+Study distribution patterns of:
+Income
+
+
+Credit amount
+
+
+Age
+
+
+Annuity
+
+
+Education
+
+
+Employment length
+
+
+Bivariate Analysis
+Compare defaulters vs non-defaulters across:
+Credit amount
+
+
+Income groups
+
+
+Housing type
+
+
+Occupation type
+
+
+External scores
+
+
+Multivariate Analysis
+Observe relationships among:
+Income × Credit × Default
+
+
+Age × Occupation × Default
+
+
+Housing conditions × External scores
+
+
+Correlation Analysis
+Identify the strongest relationships among numeric variables and interpret their significance.
+
+5.3 Hypothesis Testing
+Students must formulate and test hypotheses such as:
+Do defaulters have significantly lower income than non-defaulters?
+
+
+Is the default rate different across genders?
+
+
+Are education level and default correlated?
+
+
+Do previous loan rejections predict higher current default probability?
+
+
+Is the company’s default rate higher than the industry benchmark?
+
+
+These require statistical tests such as:
+T-tests
+
+
+Z-tests
+
+
+ANOVA
+
+
+Chi-square tests
+
+
+F-tests
+
+
+Proportion tests
+
+
+Each test must include:
+Null and alternate hypotheses
+
+
+Choice of test and justification
+
+
+Assumptions validation
+
+
+Test statistic and p-value
+
+
+Final conclusion in plain business language
+
+
+
+6. Expected Deliverables
+Students must submit:
+A structured Jupyter Notebook / Python script
+containing the full workflow and analysis.
+A presentation summarizing findings
+including:
+Key EDA insights
+
+
+Driver variables of default
+
+
+Results of hypothesis tests
+
+
+Business recommendations
+
+
+Actionable credit policy strategy
+based on discovered patterns.
+
+7. Important Guidelines for Students
+Visualizations must be clear, labeled, and business-readable.
+
+
+Interpretations must connect analysis to real-world lending decisions.
+
+
+Avoid technical jargon; use business-friendly language.
+
+
+State assumptions clearly for every hypothesis test.
+
+
+Data cleaning decisions must be justified.
+
+
+Focus on insights, not just plots.
+
+
+
+8. Final Outcome
+By the end of the project, students must be able to:
+Identify risk indicators
+
+
+Describe customer behavioral patterns
+
+
+Evaluate loan eligibility patterns
+
+
+Provide data-driven lending recommendations
+
+
+Understand how statistical significance validates insights
+
+
+Build an analytics mindset aligned with credit risk management
+
+
+

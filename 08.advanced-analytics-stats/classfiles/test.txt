@@ -1,0 +1,16 @@
+Continuous data
+1. one sample z - test / t - test
+2. Two sample z - test / t - test
+3. paired t test
+4. One way anova
+5. Two way anova
+6. One sample variance
+7. Two sample vairance
+
+
+8. One sample proportion
+9. Two sample proportion
+10. Chi square for good
+11. Chi square for degree of association
+12. One sample  poisson
+13. Two sample poisson
