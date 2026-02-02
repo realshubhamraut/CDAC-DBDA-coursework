@@ -1,0 +1,10 @@
+Q.NO.1]    1] Read the data from a jamesbond.csv file from Dataset folder
+	2] use the style ggplot
+	3] plot scatter plot where xlable - Year . Ylable - Box Office title - Box Office vs Year
+	4] save the graph to an image
+ 
+Q.NO.2]    1] Read the data from a jamesbond.csv file from Dataset folder
+	2] use the style ggplot
+	3] plot scatter plot where xlable - Year . Ylable - Budget title - Budget Vs Year
+	4] save the graph to an image
+ 

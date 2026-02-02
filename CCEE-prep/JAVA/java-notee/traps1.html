@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java MCQ TRAPS - Part 1</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px
+        }
+
+        h1 {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 2px solid #333;
+            margin-bottom: 20px
+        }
+
+        h2 {
+            margin: 20px 0 10px;
+            padding: 10px;
+            background: #333;
+            color: #fff
+        }
+
+        .trap {
+            background: #fff;
+            margin: 10px 0;
+            padding: 15px;
+            border-left: 4px solid #dc3545;
+            border-radius: 0 4px 4px 0
+        }
+
+        .trap-q {
+            font-weight: bold;
+            margin-bottom: 10px
+        }
+
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 10px 0
+        }
+
+        details {
+            margin-top: 10px;
+            cursor: pointer
+        }
+
+        summary {
+            background: #e8e8e8;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #333
+        }
+
+        summary:hover {
+            background: #ddd
+        }
+
+        .answer {
+            color: #28a745;
+            font-weight: bold;
+            padding: 10px 0
+        }
+
+        .why {
+            background: #e7f5ff;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 4px
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🔥 Java MCQ TRAPS 🔥<br><small style="font-size:0.5em">Questions 1-50</small></h1>
+
+        <h2>Data Types & Variables</h2>
+
+        <div class="trap">
+            <div class="trap-q">1. What is the output?</div>
+            <pre>byte b = 127;
+b++;
+System.out.println(b);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">-128</div>
+                <div class="why">Byte overflow! 127 + 1 wraps to -128</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">2. What is the output?</div>
+            <pre>int i = 5/2;
+System.out.println(i);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">2</div>
+                <div class="why">Integer division truncates decimal</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">3. Will this compile?</div>
+            <pre>byte b = 10;
+b = b + 1;</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">No - Compile Error</div>
+                <div class="why">b + 1 is int. Need explicit cast: b = (byte)(b + 1)</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">4. Will this compile?</div>
+            <pre>byte b = 10;
+b += 1;</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Yes - Compiles fine</div>
+                <div class="why">+= includes implicit cast!</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">5. What is the output?</div>
+            <pre>char c = 'A';
+System.out.println(c + 1);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">66</div>
+                <div class="why">char + int = int (ASCII of 'A' is 65)</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">6. What is the output?</div>
+            <pre>System.out.println(1 + 2 + "3");</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">"33"</div>
+                <div class="why">Left to right: 1+2=3, then 3+"3"="33"</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">7. What is the output?</div>
+            <pre>System.out.println("1" + 2 + 3);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">"123"</div>
+                <div class="why">"1"+2="12", "12"+3="123"</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">8. What is the output?</div>
+            <pre>float f = 3.14;
+System.out.println(f);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Compile Error</div>
+                <div class="why">3.14 is double. Need f suffix: 3.14f</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">9. What is the output?</div>
+            <pre>double d = 5/2;
+System.out.println(d);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">2.0</div>
+                <div class="why">5/2 is integer division (2), then assigned to double</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">10. What is the output?</div>
+            <pre>int x;
+System.out.println(x);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Compile Error</div>
+                <div class="why">Local variables must be initialized before use!</div>
+            </details>
+        </div>
+
+        <h2>String Comparisons</h2>
+
+        <div class="trap">
+            <div class="trap-q">11. What is the output?</div>
+            <pre>String s1 = "Hello";
+String s2 = "Hello";
+System.out.println(s1 == s2);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">true</div>
+                <div class="why">String pool - same reference</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">12. What is the output?</div>
+            <pre>String s1 = new String("Hello");
+String s2 = new String("Hello");
+System.out.println(s1 == s2);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">false</div>
+                <div class="why">new creates different objects</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">13. What is the output?</div>
+            <pre>String s1 = "Hello";
+String s2 = new String("Hello");
+System.out.println(s1.equals(s2));</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">true</div>
+                <div class="why">equals() compares content</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">14. What is the output?</div>
+            <pre>String s = "Hello";
+s.concat(" World");
+System.out.println(s);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">"Hello"</div>
+                <div class="why">Strings are immutable! concat() returns new String</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">15. What is the output?</div>
+            <pre>String s = "Hello";
+s = s.concat(" World");
+System.out.println(s);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">"Hello World"</div>
+                <div class="why">Reassigning reference to new String</div>
+            </details>
+        </div>
+
+        <h2>Operators</h2>
+
+        <div class="trap">
+            <div class="trap-q">16. What is the output?</div>
+            <pre>int a = 5;
+System.out.println(a++ + ++a);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">12</div>
+                <div class="why">5 (post) + 7 (pre) = 12. a becomes 6, then 7</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">17. What is the output?</div>
+            <pre>int a = 5;
+int b = a++;
+System.out.println(a + " " + b);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">6 5</div>
+                <div class="why">Post-increment: use then increment</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">18. What is the output?</div>
+            <pre>int a = 5;
+int b = ++a;
+System.out.println(a + " " + b);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">6 6</div>
+                <div class="why">Pre-increment: increment then use</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">19. What is the output?</div>
+            <pre>boolean x = false;
+if (x = true) {
+    System.out.println("Yes");
+} else {
+    System.out.println("No");
+}</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Yes</div>
+                <div class="why">Assignment (=) not comparison (==)! x becomes true</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">20. What is the output?</div>
+            <pre>System.out.println(10 > 5 ? 1 : 2 > 1 ? 3 : 4);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">1</div>
+                <div class="why">10>5 is true, returns 1. Second ternary not evaluated</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">21. What is the output?</div>
+            <pre>int x = 5;
+System.out.println(x > 3 & ++x > 3);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">true</div>
+                <div class="why">& (non-short-circuit) evaluates both. x becomes 6</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">22. What is the output?</div>
+            <pre>int x = 5;
+System.out.println(x > 3 && ++x > 10);
+System.out.println(x);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">false, 6</div>
+                <div class="why">&& short-circuits, but first was true so second evaluated</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">23. What is the output?</div>
+            <pre>int x = 5;
+System.out.println(x < 3 && ++x > 10);
+System.out.println(x);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">false, 5</div>
+                <div class="why">&& short-circuits. First is false, second NOT evaluated</div>
+            </details>
+        </div>
+
+        <h2>Arrays</h2>
+
+        <div class="trap">
+            <div class="trap-q">24. What is the output?</div>
+            <pre>int[] arr = new int[3];
+System.out.println(arr[0]);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">0</div>
+                <div class="why">Array elements have default values</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">25. What is the output?</div>
+            <pre>String[] arr = new String[3];
+System.out.println(arr[0]);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">null</div>
+                <div class="why">Object array elements default to null</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">26. What is the output?</div>
+            <pre>int[] arr = {1, 2, 3};
+System.out.println(arr.length());</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Compile Error</div>
+                <div class="why">length is a field, not method! Use arr.length</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">27. What is the output?</div>
+            <pre>int[] arr1 = {1, 2, 3};
+int[] arr2 = arr1;
+arr2[0] = 10;
+System.out.println(arr1[0]);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">10</div>
+                <div class="why">Both reference same array!</div>
+            </details>
+        </div>
+
+        <h2>Control Flow</h2>
+
+        <div class="trap">
+            <div class="trap-q">28. What is the output?</div>
+            <pre>for (int i = 0; i < 5; i++);
+{
+    System.out.println("Hello");
+}</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Hello (once)</div>
+                <div class="why">Semicolon ends for loop! Block executes once</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">29. What is the output?</div>
+            <pre>int x = 2;
+switch(x) {
+    case 1: System.out.println("One");
+    case 2: System.out.println("Two");
+    case 3: System.out.println("Three");
+}</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Two Three</div>
+                <div class="why">No break! Fall-through to next cases</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">30. Will this compile?</div>
+            <pre>long x = 5;
+switch(x) {
+    case 5: System.out.println("Five");
+}</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Compile Error</div>
+                <div class="why">switch doesn't support long!</div>
+            </details>
+        </div>
+
+        <h2>OOPs</h2>
+
+        <div class="trap">
+            <div class="trap-q">31. What is the output?</div>
+            <pre>class Parent {
+    void show() { System.out.println("Parent"); }
+}
+class Child extends Parent {
+    void show() { System.out.println("Child"); }
+}
+Parent p = new Child();
+p.show();</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Child</div>
+                <div class="why">Runtime polymorphism - actual object's method called</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">32. What is the output?</div>
+            <pre>class Parent {
+    static void show() { System.out.println("Parent"); }
+}
+class Child extends Parent {
+    static void show() { System.out.println("Child"); }
+}
+Parent p = new Child();
+p.show();</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Parent</div>
+                <div class="why">Static methods are not overridden! Reference type used</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">33. What is the output?</div>
+            <pre>class A {
+    int x = 10;
+}
+class B extends A {
+    int x = 20;
+}
+A a = new B();
+System.out.println(a.x);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">10</div>
+                <div class="why">Variables are not polymorphic! Reference type used</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">34. What is the output?</div>
+            <pre>class Test {
+    Test() {
+        System.out.println("Constructor");
+    }
+    static {
+        System.out.println("Static");
+    }
+}
+new Test();
+new Test();</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Static Constructor Constructor</div>
+                <div class="why">Static block runs once when class loaded</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">35. Can this class be instantiated?</div>
+            <pre>class Test {
+    private Test() {}
+}</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Yes, but only within the class itself</div>
+                <div class="why">Private constructor prevents external instantiation (Singleton pattern)</div>
+            </details>
+        </div>
+
+        <h2>Inheritance & Interfaces</h2>
+
+        <div class="trap">
+            <div class="trap-q">36. What is the output?</div>
+            <pre>class Parent {
+    Parent() { System.out.println("Parent"); }
+}
+class Child extends Parent {
+    Child() { System.out.println("Child"); }
+}
+new Child();</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Parent Child</div>
+                <div class="why">super() called implicitly first</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">37. Will this compile?</div>
+            <pre>class Parent {
+    Parent(int x) {}
+}
+class Child extends Parent {
+}</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Compile Error</div>
+                <div class="why">Parent has no no-arg constructor, Child must call super(int)</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">38. Will this compile?</div>
+            <pre>interface A {
+    int x = 10;
+}
+class Test implements A {
+    void method() {
+        x = 20;
+    }
+}</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Compile Error</div>
+                <div class="why">Interface variables are implicitly final!</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">39. What is the output?</div>
+            <pre>interface A { default void show() { System.out.println("A"); } }
+interface B { default void show() { System.out.println("B"); } }
+class C implements A, B {
+    public void show() { A.super.show(); }
+}
+new C().show();</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">A</div>
+                <div class="why">Diamond problem solved by explicit override calling A.super</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">40. Will this compile?</div>
+            <pre>abstract class A {
+    abstract void show();
+    abstract void display();
+}
+class B extends A {
+    void show() {}
+}</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Compile Error</div>
+                <div class="why">Must implement ALL abstract methods or be abstract</div>
+            </details>
+        </div>
+
+        <h2>Exceptions</h2>
+
+        <div class="trap">
+            <div class="trap-q">41. What is the output?</div>
+            <pre>try {
+    System.out.println("Try");
+    return;
+} finally {
+    System.out.println("Finally");
+}</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Try Finally</div>
+                <div class="why">finally always executes (except System.exit)</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">42. What is the output?</div>
+            <pre>int getValue() {
+    try {
+        return 1;
+    } finally {
+        return 2;
+    }
+}
+System.out.println(getValue());</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">2</div>
+                <div class="why">finally return overrides try return!</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">43. Will this compile?</div>
+            <pre>void method() {
+    throw new Exception("Error");
+}</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Compile Error</div>
+                <div class="why">Exception is checked - must declare throws or catch</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">44. Will this compile?</div>
+            <pre>void method() {
+    throw new RuntimeException("Error");
+}</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Yes</div>
+                <div class="why">RuntimeException is unchecked - no declaration needed</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">45. What is the output?</div>
+            <pre>try {
+    System.out.println("Try");
+} catch (Exception e) {
+    System.out.println("Catch");
+} finally {
+    System.out.println("Finally");
+}</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Try Finally</div>
+                <div class="why">No exception, catch skipped</div>
+            </details>
+        </div>
+
+        <h2>Miscellaneous</h2>
+
+        <div class="trap">
+            <div class="trap-q">46. What is the output?</div>
+            <pre>Integer a = 127;
+Integer b = 127;
+System.out.println(a == b);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">true</div>
+                <div class="why">Integer caching for -128 to 127</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">47. What is the output?</div>
+            <pre>Integer a = 128;
+Integer b = 128;
+System.out.println(a == b);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">false</div>
+                <div class="why">Outside cache range, different objects</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">48. What is the output?</div>
+            <pre>Integer a = 128;
+Integer b = 128;
+System.out.println(a.equals(b));</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">true</div>
+                <div class="why">equals() compares value</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">49. What is the output?</div>
+            <pre>String s = null;
+System.out.println(s + "test");</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">"nulltest"</div>
+                <div class="why">null converted to "null" string</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">50. What is the output?</div>
+            <pre>String s = null;
+System.out.println(s.length());</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">NullPointerException</div>
+                <div class="why">Can't call method on null reference!</div>
+            </details>
+        </div>
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Notes Part 2 - Functions to OOPs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px
+        }
+
+        h1 {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 2px solid #333;
+            margin-bottom: 20px
+        }
+
+        .dropdown {
+            background: #fff;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px
+        }
+
+        .dropdown-header {
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 1.1em
+        }
+
+        .dropdown-header:hover {
+            background: #f9f9f9
+        }
+
+        .dropdown-header::after {
+            content: '+';
+            font-size: 1.5em
+        }
+
+        .dropdown.active .dropdown-header::after {
+            content: '−'
+        }
+
+        .dropdown-content {
+            display: none;
+            padding: 20px;
+            border-top: 1px solid #ddd;
+            background: #fafafa
+        }
+
+        .dropdown.active .dropdown-content {
+            display: block
+        }
+
+        h3 {
+            margin: 15px 0 10px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px
+        }
+
+        code {
+            background: #e8e8e8;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.95em
+        }
+
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 10px 0
+        }
+
+        ul,
+        ol {
+            margin-left: 25px;
+            margin-bottom: 10px
+        }
+
+        li {
+            margin-bottom: 5px
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0
+        }
+
+        th,
+        td {
+            border: 1px solid #333;
+            padding: 10px;
+            text-align: left
+        }
+
+        th {
+            background: #333;
+            color: #fff
+        }
+
+        tr:nth-child(even) {
+            background: #f2f2f2
+        }
+
+        .note {
+            background: #fff3cd;
+            padding: 10px;
+            border-left: 4px solid #ffc107;
+            margin: 10px 0
+        }
+
+        .important {
+            background: #f8d7da;
+            padding: 10px;
+            border-left: 4px solid #dc3545;
+            margin: 10px 0
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Python Programming Notes<br><small style="font-size:0.5em">Part 2: Functions to OOPs</small></h1>
+
+        <div class="dropdown">
+            <div class="dropdown-header">10. Functions</div>
+            <div class="dropdown-content">
+                <h3>Defining Functions</h3>
+                <pre>def function_name(parameters):
+    """docstring"""
+    # code
+    return value
+
+# Example
+def greet(name):
+    """Greets the user"""
+    return f"Hello, {name}!"
+
+result = greet("John")  # "Hello, John!"</pre>
+
+                <h3>Parameters vs Arguments</h3>
+                <ul>
+                    <li><strong>Parameters</strong> - Variables in function definition</li>
+                    <li><strong>Arguments</strong> - Values passed when calling</li>
+                </ul>
+
+                <h3>Types of Arguments</h3>
+                <pre># 1. Positional arguments
+def add(a, b):
+    return a + b
+add(2, 3)  # a=2, b=3
+
+# 2. Keyword arguments
+add(b=3, a=2)  # named, order doesn't matter
+
+# 3. Default arguments
+def greet(name="Guest"):
+    return f"Hello, {name}"
+greet()        # "Hello, Guest"
+greet("John")  # "Hello, John"
+
+# 4. Variable-length arguments (*args)
+def sum_all(*args):
+    return sum(args)
+sum_all(1, 2, 3, 4)  # 10
+
+# 5. Keyword variable-length (**kwargs)
+def info(**kwargs):
+    for k, v in kwargs.items():
+        print(f"{k}: {v}")
+info(name="John", age=25)</pre>
+
+                <h3>Argument Order</h3>
+                <pre>def func(pos, *args, default=10, **kwargs):
+    pass
+# Order: positional → *args → default → **kwargs</pre>
+
+                <h3>Return Statement</h3>
+                <pre>def divide(a, b):
+    if b == 0:
+        return None     # early return
+    return a / b
+
+# Multiple returns
+def get_stats(nums):
+    return min(nums), max(nums), sum(nums)
+
+mn, mx, total = get_stats([1,2,3,4,5])</pre>
+
+                <h3>Lambda Functions (Anonymous)</h3>
+                <pre>lambda arguments: expression
+
+# Examples
+square = lambda x: x ** 2
+square(5)  # 25
+
+add = lambda a, b: a + b
+add(2, 3)  # 5
+
+# With built-in functions
+nums = [1, 2, 3, 4, 5]
+list(map(lambda x: x*2, nums))      # [2, 4, 6, 8, 10]
+list(filter(lambda x: x%2==0, nums)) # [2, 4]
+sorted(names, key=lambda x: len(x)) # sort by length</pre>
+
+                <h3>Scope (LEGB Rule)</h3>
+                <pre># L - Local (inside function)
+# E - Enclosing (outer function)
+# G - Global (module level)
+# B - Built-in (Python built-ins)
+
+x = "global"
+
+def outer():
+    x = "enclosing"
+    def inner():
+        x = "local"
+        print(x)  # local
+    inner()
+
+# global keyword
+def modify():
+    global x
+    x = "modified"
+
+# nonlocal keyword (for enclosing scope)
+def outer():
+    x = 10
+    def inner():
+        nonlocal x
+        x = 20
+    inner()
+    print(x)  # 20</pre>
+
+                <div class="important"><strong>Key:</strong> Default arguments are evaluated ONCE at function
+                    definition, not each call!</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">11. Built-in Functions</div>
+            <div class="dropdown-content">
+                <h3>Commonly Used Built-ins</h3>
+                <table>
+                    <tr>
+                        <th>Function</th>
+                        <th>Purpose</th>
+                        <th>Example</th>
+                    </tr>
+                    <tr>
+                        <td><code>len()</code></td>
+                        <td>Length</td>
+                        <td><code>len([1,2,3]) → 3</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>type()</code></td>
+                        <td>Get type</td>
+                        <td><code>type(10) → int</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>id()</code></td>
+                        <td>Memory address</td>
+                        <td><code>id(x)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>print()</code></td>
+                        <td>Output</td>
+                        <td><code>print("hi")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>input()</code></td>
+                        <td>Get input</td>
+                        <td><code>input("Name: ")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>range()</code></td>
+                        <td>Number sequence</td>
+                        <td><code>range(5)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>abs()</code></td>
+                        <td>Absolute value</td>
+                        <td><code>abs(-5) → 5</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>round()</code></td>
+                        <td>Round number</td>
+                        <td><code>round(3.7) → 4</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>pow()</code></td>
+                        <td>Power</td>
+                        <td><code>pow(2,3) → 8</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>sum()</code></td>
+                        <td>Sum of iterable</td>
+                        <td><code>sum([1,2,3]) → 6</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>min()</code></td>
+                        <td>Minimum</td>
+                        <td><code>min(1,2,3) → 1</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>max()</code></td>
+                        <td>Maximum</td>
+                        <td><code>max(1,2,3) → 3</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>sorted()</code></td>
+                        <td>Sorted list</td>
+                        <td><code>sorted([3,1,2])</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>reversed()</code></td>
+                        <td>Reverse iterator</td>
+                        <td><code>list(reversed([1,2]))</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>enumerate()</code></td>
+                        <td>Index + value</td>
+                        <td><code>enumerate(['a','b'])</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>zip()</code></td>
+                        <td>Pair iterables</td>
+                        <td><code>zip([1,2], ['a','b'])</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>map()</code></td>
+                        <td>Apply function</td>
+                        <td><code>map(str, [1,2,3])</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>filter()</code></td>
+                        <td>Filter by condition</td>
+                        <td><code>filter(bool, [0,1,2])</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>any()</code></td>
+                        <td>Any True?</td>
+                        <td><code>any([0,0,1]) → True</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>all()</code></td>
+                        <td>All True?</td>
+                        <td><code>all([1,1,0]) → False</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>isinstance()</code></td>
+                        <td>Type check</td>
+                        <td><code>isinstance(5, int)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>dir()</code></td>
+                        <td>List attributes</td>
+                        <td><code>dir(str)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>help()</code></td>
+                        <td>Documentation</td>
+                        <td><code>help(print)</code></td>
+                    </tr>
+                </table>
+
+                <h3>map(), filter(), reduce()</h3>
+                <pre># map - apply function to each element
+list(map(lambda x: x*2, [1,2,3]))  # [2,4,6]
+list(map(str, [1,2,3]))            # ['1','2','3']
+
+# filter - keep elements where function returns True
+list(filter(lambda x: x>2, [1,2,3,4]))  # [3,4]
+
+# reduce - accumulate (from functools)
+from functools import reduce
+reduce(lambda a,b: a+b, [1,2,3,4])  # 10</pre>
+
+                <div class="note"><strong>MCQ Tip:</strong> <code>map()</code> and <code>filter()</code> return
+                    iterators, not lists! Use <code>list()</code> to convert.</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">12. Files</div>
+            <div class="dropdown-content">
+                <h3>Opening Files</h3>
+                <pre>f = open("file.txt", "r")  # open
+# ... operations ...
+f.close()                   # must close!
+
+# Better: with statement (auto-close)
+with open("file.txt", "r") as f:
+    content = f.read()</pre>
+
+                <h3>File Modes</h3>
+                <table>
+                    <tr>
+                        <th>Mode</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td><code>r</code></td>
+                        <td>Read (default). Error if not exists</td>
+                    </tr>
+                    <tr>
+                        <td><code>w</code></td>
+                        <td>Write. Creates/overwrites file</td>
+                    </tr>
+                    <tr>
+                        <td><code>a</code></td>
+                        <td>Append. Creates if not exists</td>
+                    </tr>
+                    <tr>
+                        <td><code>x</code></td>
+                        <td>Create. Error if exists</td>
+                    </tr>
+                    <tr>
+                        <td><code>r+</code></td>
+                        <td>Read and write</td>
+                    </tr>
+                    <tr>
+                        <td><code>w+</code></td>
+                        <td>Write and read (overwrites)</td>
+                    </tr>
+                    <tr>
+                        <td><code>a+</code></td>
+                        <td>Append and read</td>
+                    </tr>
+                    <tr>
+                        <td><code>rb</code></td>
+                        <td>Read binary</td>
+                    </tr>
+                    <tr>
+                        <td><code>wb</code></td>
+                        <td>Write binary</td>
+                    </tr>
+                </table>
+
+                <h3>Reading Files</h3>
+                <pre>with open("file.txt", "r") as f:
+    content = f.read()        # entire file as string
+    content = f.read(10)      # first 10 chars
+    line = f.readline()       # one line
+    lines = f.readlines()     # list of lines
+    
+    # Iterate line by line (memory efficient)
+    for line in f:
+        print(line)</pre>
+
+                <h3>Writing Files</h3>
+                <pre>with open("file.txt", "w") as f:
+    f.write("Hello\n")
+    f.write("World\n")
+    f.writelines(["Line1\n", "Line2\n"])</pre>
+
+                <h3>File Position</h3>
+                <pre>f.tell()          # Current position
+f.seek(0)         # Go to beginning
+f.seek(10)        # Go to position 10</pre>
+
+                <h3>File Handling with os Module</h3>
+                <pre>import os
+os.path.exists("file.txt")    # Check exists
+os.path.isfile("file.txt")    # Is file?
+os.path.isdir("folder")       # Is directory?
+os.remove("file.txt")         # Delete file
+os.rename("old.txt", "new.txt")
+os.mkdir("folder")
+os.getcwd()                   # Current directory
+os.listdir(".")               # List directory</pre>
+
+                <div class="important"><strong>Key:</strong> Always use <code>with</code> statement - it auto-closes
+                    file even if error occurs!</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">13. Pickling (Serialization)</div>
+            <div class="dropdown-content">
+                <h3>What is Pickling?</h3>
+                <p>Converting Python objects to byte stream (serialization) for storage or transmission.</p>
+
+                <h3>pickle Module</h3>
+                <pre>import pickle
+
+# Serialize (dump)
+data = {"name": "John", "age": 25, "scores": [90, 85, 88]}
+
+# To file
+with open("data.pkl", "wb") as f:
+    pickle.dump(data, f)
+
+# To bytes
+bytes_data = pickle.dumps(data)
+
+# Deserialize (load)
+with open("data.pkl", "rb") as f:
+    loaded = pickle.load(f)
+
+# From bytes
+loaded = pickle.loads(bytes_data)</pre>
+
+                <h3>What Can Be Pickled?</h3>
+                <ul>
+                    <li>Numbers, strings, booleans</li>
+                    <li>Lists, tuples, dictionaries, sets</li>
+                    <li>Functions defined at module level</li>
+                    <li>Classes and instances</li>
+                </ul>
+
+                <h3>pickle vs json</h3>
+                <table>
+                    <tr>
+                        <th>pickle</th>
+                        <th>json</th>
+                    </tr>
+                    <tr>
+                        <td>Python-specific</td>
+                        <td>Language-independent</td>
+                    </tr>
+                    <tr>
+                        <td>Binary format</td>
+                        <td>Text format</td>
+                    </tr>
+                    <tr>
+                        <td>Any Python object</td>
+                        <td>Limited types</td>
+                    </tr>
+                    <tr>
+                        <td>Not human-readable</td>
+                        <td>Human-readable</td>
+                    </tr>
+                    <tr>
+                        <td>Security risk</td>
+                        <td>Safer</td>
+                    </tr>
+                </table>
+
+                <div class="note"><strong>MCQ Tip:</strong> Pickling uses binary mode (<code>wb</code>,
+                    <code>rb</code>). Never unpickle untrusted data!</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">14. Modules</div>
+            <div class="dropdown-content">
+                <h3>What is a Module?</h3>
+                <p>A .py file containing Python code (functions, classes, variables) that can be imported.</p>
+
+                <h3>Importing Modules</h3>
+                <pre>import math
+math.sqrt(16)           # 4.0
+math.pi                 # 3.14159...
+
+import math as m        # alias
+m.sqrt(16)
+
+from math import sqrt, pi   # specific items
+sqrt(16)
+
+from math import *      # all items (not recommended)
+sqrt(16)</pre>
+
+                <h3>Creating Your Own Module</h3>
+                <pre># mymodule.py
+def greet(name):
+    return f"Hello, {name}"
+
+PI = 3.14159
+
+# main.py
+import mymodule
+mymodule.greet("John")
+mymodule.PI</pre>
+
+                <h3>__name__ Variable</h3>
+                <pre># When run directly: __name__ == "__main__"
+# When imported: __name__ == module name
+
+if __name__ == "__main__":
+    # This runs only when file is executed directly
+    print("Running directly")
+    # Test code here</pre>
+
+                <h3>Common Standard Modules</h3>
+                <table>
+                    <tr>
+                        <th>Module</th>
+                        <th>Purpose</th>
+                    </tr>
+                    <tr>
+                        <td><code>math</code></td>
+                        <td>Mathematical functions</td>
+                    </tr>
+                    <tr>
+                        <td><code>random</code></td>
+                        <td>Random numbers</td>
+                    </tr>
+                    <tr>
+                        <td><code>datetime</code></td>
+                        <td>Date/time handling</td>
+                    </tr>
+                    <tr>
+                        <td><code>os</code></td>
+                        <td>Operating system interface</td>
+                    </tr>
+                    <tr>
+                        <td><code>sys</code></td>
+                        <td>System parameters</td>
+                    </tr>
+                    <tr>
+                        <td><code>json</code></td>
+                        <td>JSON encoding/decoding</td>
+                    </tr>
+                    <tr>
+                        <td><code>re</code></td>
+                        <td>Regular expressions</td>
+                    </tr>
+                    <tr>
+                        <td><code>collections</code></td>
+                        <td>Container datatypes</td>
+                    </tr>
+                    <tr>
+                        <td><code>itertools</code></td>
+                        <td>Iterator functions</td>
+                    </tr>
+                    <tr>
+                        <td><code>functools</code></td>
+                        <td>Higher-order functions</td>
+                    </tr>
+                </table>
+
+                <h3>Packages</h3>
+                <pre># Directory with __init__.py
+mypackage/
+    __init__.py
+    module1.py
+    module2.py
+    subpackage/
+        __init__.py
+        module3.py
+
+from mypackage import module1
+from mypackage.subpackage import module3</pre>
+
+                <div class="important"><strong>Key:</strong> <code>__init__.py</code> makes a directory a package (can
+                    be empty).</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">15. OOPs - Classes and Objects</div>
+            <div class="dropdown-content">
+                <h3>Class Definition</h3>
+                <pre>class ClassName:
+    # Class attribute (shared by all instances)
+    count = 0
+    
+    # Constructor
+    def __init__(self, param1, param2):
+        # Instance attributes
+        self.attr1 = param1
+        self.attr2 = param2
+        ClassName.count += 1
+    
+    # Instance method
+    def method(self):
+        return self.attr1
+    
+    # String representation
+    def __str__(self):
+        return f"Object: {self.attr1}"</pre>
+
+                <h3>Creating Objects</h3>
+                <pre>class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+    
+    def greet(self):
+        return f"Hello, I'm {self.name}"
+
+# Create object
+p1 = Person("John", 25)
+p2 = Person("Jane", 30)
+
+print(p1.name)      # John
+print(p1.greet())   # Hello, I'm John</pre>
+
+                <h3>self Keyword</h3>
+                <ul>
+                    <li>Refers to the current instance</li>
+                    <li>Must be first parameter of instance methods</li>
+                    <li>Not a keyword, just convention (could be any name)</li>
+                </ul>
+
+                <h3>Class vs Instance Attributes</h3>
+                <pre>class Dog:
+    species = "Canine"  # Class attribute
+    
+    def __init__(self, name):
+        self.name = name  # Instance attribute
+
+d1 = Dog("Buddy")
+d2 = Dog("Max")
+
+d1.species          # "Canine"
+Dog.species         # "Canine"
+d1.name             # "Buddy"
+d2.name             # "Max"</pre>
+
+                <h3>Types of Methods</h3>
+                <pre>class MyClass:
+    # Instance method
+    def instance_method(self):
+        return self
+    
+    # Class method
+    @classmethod
+    def class_method(cls):
+        return cls
+    
+    # Static method
+    @staticmethod
+    def static_method():
+        return "No self or cls"</pre>
+
+                <h3>Special (Dunder) Methods</h3>
+                <table>
+                    <tr>
+                        <th>Method</th>
+                        <th>Purpose</th>
+                        <th>Called By</th>
+                    </tr>
+                    <tr>
+                        <td><code>__init__</code></td>
+                        <td>Constructor</td>
+                        <td><code>Class()</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>__str__</code></td>
+                        <td>String for print</td>
+                        <td><code>str(obj), print(obj)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>__repr__</code></td>
+                        <td>Official string</td>
+                        <td><code>repr(obj)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>__len__</code></td>
+                        <td>Length</td>
+                        <td><code>len(obj)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>__add__</code></td>
+                        <td>Addition</td>
+                        <td><code>obj1 + obj2</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>__eq__</code></td>
+                        <td>Equality</td>
+                        <td><code>obj1 == obj2</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>__lt__</code></td>
+                        <td>Less than</td>
+                        <td><code>obj1 < obj2</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>__getitem__</code></td>
+                        <td>Indexing</td>
+                        <td><code>obj[key]</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>__iter__</code></td>
+                        <td>Iteration</td>
+                        <td><code>for x in obj</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>__call__</code></td>
+                        <td>Call as function</td>
+                        <td><code>obj()</code></td>
+                    </tr>
+                </table>
+
+                <div class="note"><strong>MCQ Tip:</strong> <code>__init__</code> is NOT a constructor, it's an
+                    initializer. <code>__new__</code> is the actual constructor.</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">16. Inheritance</div>
+            <div class="dropdown-content">
+                <h3>Basic Inheritance</h3>
+                <pre>class Parent:
+    def __init__(self, name):
+        self.name = name
+    
+    def greet(self):
+        return f"Hello from {self.name}"
+
+class Child(Parent):
+    def __init__(self, name, age):
+        super().__init__(name)  # Call parent constructor
+        self.age = age
+    
+    def info(self):
+        return f"{self.name} is {self.age}"
+
+c = Child("John", 25)
+c.greet()  # Inherited from Parent
+c.info()   # Defined in Child</pre>
+
+                <h3>Types of Inheritance</h3>
+                <table>
+                    <tr>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>Single</td>
+                        <td>One parent</td>
+                    </tr>
+                    <tr>
+                        <td>Multiple</td>
+                        <td>Multiple parents</td>
+                    </tr>
+                    <tr>
+                        <td>Multilevel</td>
+                        <td>Chain of inheritance</td>
+                    </tr>
+                    <tr>
+                        <td>Hierarchical</td>
+                        <td>One parent, multiple children</td>
+                    </tr>
+                    <tr>
+                        <td>Hybrid</td>
+                        <td>Mix of above</td>
+                    </tr>
+                </table>
+
+                <h3>Multiple Inheritance</h3>
+                <pre>class A:
+    def method_a(self):
+        return "A"
+
+class B:
+    def method_b(self):
+        return "B"
+
+class C(A, B):  # Multiple inheritance
+    pass
+
+c = C()
+c.method_a()  # "A"
+c.method_b()  # "B"</pre>
+
+                <h3>Method Resolution Order (MRO)</h3>
+                <pre>class A: pass
+class B(A): pass
+class C(A): pass
+class D(B, C): pass
+
+D.__mro__  # (D, B, C, A, object)
+# Uses C3 linearization algorithm</pre>
+
+                <h3>super() Function</h3>
+                <pre>class Parent:
+    def __init__(self):
+        print("Parent init")
+
+class Child(Parent):
+    def __init__(self):
+        super().__init__()  # Call parent
+        print("Child init")
+
+# Output:
+# Parent init
+# Child init</pre>
+
+                <div class="important"><strong>Key:</strong> Python supports multiple inheritance (unlike Java). Use MRO
+                    to understand method lookup order.</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">17. Overloading and Overriding</div>
+            <div class="dropdown-content">
+                <h3>Method Overriding</h3>
+                <p>Child class redefines parent's method with same name.</p>
+                <pre>class Animal:
+    def sound(self):
+        return "Some sound"
+
+class Dog(Animal):
+    def sound(self):  # Override
+        return "Bark"
+
+class Cat(Animal):
+    def sound(self):  # Override
+        return "Meow"
+
+d = Dog()
+d.sound()  # "Bark" (child's method)</pre>
+
+                <h3>Method Overloading</h3>
+                <p>Python doesn't support traditional overloading. Use default arguments or *args.</p>
+                <pre># Python way - default arguments
+def add(a, b=0, c=0):
+    return a + b + c
+
+add(1)        # 1
+add(1, 2)     # 3
+add(1, 2, 3)  # 6
+
+# Using *args
+def add(*args):
+    return sum(args)
+
+add(1)
+add(1, 2)
+add(1, 2, 3, 4, 5)</pre>
+
+                <h3>Operator Overloading</h3>
+                <pre>class Vector:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+    
+    def __add__(self, other):  # + operator
+        return Vector(self.x + other.x, self.y + other.y)
+    
+    def __str__(self):
+        return f"({self.x}, {self.y})"
+
+v1 = Vector(1, 2)
+v2 = Vector(3, 4)
+v3 = v1 + v2  # Uses __add__
+print(v3)     # (4, 6)</pre>
+
+                <h3>Common Operator Methods</h3>
+                <table>
+                    <tr>
+                        <th>Operator</th>
+                        <th>Method</th>
+                    </tr>
+                    <tr>
+                        <td><code>+</code></td>
+                        <td><code>__add__(self, other)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>-</code></td>
+                        <td><code>__sub__(self, other)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>*</code></td>
+                        <td><code>__mul__(self, other)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/</code></td>
+                        <td><code>__truediv__(self, other)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>==</code></td>
+                        <td><code>__eq__(self, other)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code><</code></td>
+                        <td><code>__lt__(self, other)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>[]</code></td>
+                        <td><code>__getitem__(self, key)</code></td>
+                    </tr>
+                </table>
+
+                <div class="note"><strong>MCQ Tip:</strong> Python doesn't support method overloading by different
+                    signatures. Last definition wins!</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">18. Data Hiding (Encapsulation)</div>
+            <div class="dropdown-content">
+                <h3>Access Modifiers (Convention)</h3>
+                <table>
+                    <tr>
+                        <th>Convention</th>
+                        <th>Meaning</th>
+                        <th>Access</th>
+                    </tr>
+                    <tr>
+                        <td><code>name</code></td>
+                        <td>Public</td>
+                        <td>Anywhere</td>
+                    </tr>
+                    <tr>
+                        <td><code>_name</code></td>
+                        <td>Protected (convention)</td>
+                        <td>Class & subclasses</td>
+                    </tr>
+                    <tr>
+                        <td><code>__name</code></td>
+                        <td>Private (name mangling)</td>
+                        <td>Only within class</td>
+                    </tr>
+                </table>
+
+                <h3>Name Mangling</h3>
+                <pre>class MyClass:
+    def __init__(self):
+        self.public = "public"
+        self._protected = "protected"
+        self.__private = "private"
+
+obj = MyClass()
+obj.public          # OK
+obj._protected      # OK (but shouldn't)
+obj.__private       # AttributeError!
+obj._MyClass__private  # Works (name mangling)</pre>
+
+                <h3>Property Decorator</h3>
+                <pre>class Person:
+    def __init__(self, name):
+        self._name = name
+    
+    @property
+    def name(self):
+        """Getter"""
+        return self._name
+    
+    @name.setter
+    def name(self, value):
+        """Setter"""
+        if not value:
+            raise ValueError("Name cannot be empty")
+        self._name = value
+    
+    @name.deleter
+    def name(self):
+        """Deleter"""
+        del self._name
+
+p = Person("John")
+print(p.name)      # Getter
+p.name = "Jane"    # Setter
+del p.name         # Deleter</pre>
+
+                <div class="important"><strong>Key:</strong> <code>__var</code> becomes <code>_ClassName__var</code>
+                    (name mangling), not truly private!</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">19. Generators</div>
+            <div class="dropdown-content">
+                <h3>What is a Generator?</h3>
+                <p>Function that yields values one at a time, maintaining state between calls. Memory efficient.</p>
+
+                <h3>Generator Function</h3>
+                <pre># Uses yield instead of return
+def count_up_to(n):
+    i = 1
+    while i <= n:
+        yield i
+        i += 1
+
+# Usage
+gen = count_up_to(5)
+next(gen)  # 1
+next(gen)  # 2
+next(gen)  # 3
+
+# In loop
+for num in count_up_to(5):
+    print(num)  # 1, 2, 3, 4, 5</pre>
+
+                <h3>Generator Expression</h3>
+                <pre># Like list comprehension but with ()
+squares = (x**2 for x in range(5))  # generator
+squares = [x**2 for x in range(5)]  # list
+
+list(squares)  # [0, 1, 4, 9, 16]</pre>
+
+                <h3>yield vs return</h3>
+                <table>
+                    <tr>
+                        <th>yield</th>
+                        <th>return</th>
+                    </tr>
+                    <tr>
+                        <td>Pauses function, saves state</td>
+                        <td>Ends function</td>
+                    </tr>
+                    <tr>
+                        <td>Can yield multiple times</td>
+                        <td>Returns once</td>
+                    </tr>
+                    <tr>
+                        <td>Returns generator</td>
+                        <td>Returns value</td>
+                    </tr>
+                    <tr>
+                        <td>Lazy evaluation</td>
+                        <td>Immediate evaluation</td>
+                    </tr>
+                </table>
+
+                <h3>Practical Example</h3>
+                <pre># Reading large file line by line
+def read_large_file(file_path):
+    with open(file_path) as f:
+        for line in f:
+            yield line.strip()
+
+# Memory efficient - only one line in memory at a time
+for line in read_large_file("huge.txt"):
+    process(line)</pre>
+
+                <div class="note"><strong>MCQ Tip:</strong> Generators are iterators that can only be iterated once!
+                </div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">20. Decorators</div>
+            <div class="dropdown-content">
+                <h3>What is a Decorator?</h3>
+                <p>Function that modifies behavior of another function without changing its code.</p>
+
+                <h3>Basic Decorator</h3>
+                <pre>def my_decorator(func):
+    def wrapper():
+        print("Before")
+        func()
+        print("After")
+    return wrapper
+
+@my_decorator
+def say_hello():
+    print("Hello!")
+
+say_hello()
+# Output:
+# Before
+# Hello!
+# After</pre>
+
+                <h3>Decorator with Arguments</h3>
+                <pre>def my_decorator(func):
+    def wrapper(*args, **kwargs):
+        print("Before")
+        result = func(*args, **kwargs)
+        print("After")
+        return result
+    return wrapper
+
+@my_decorator
+def add(a, b):
+    return a + b
+
+add(2, 3)  # Returns 5</pre>
+
+                <h3>Common Built-in Decorators</h3>
+                <pre>class MyClass:
+    @staticmethod
+    def static_method():
+        pass
+    
+    @classmethod
+    def class_method(cls):
+        pass
+    
+    @property
+    def my_property(self):
+        return self._value</pre>
+
+                <h3>Practical Decorators</h3>
+                <pre># Timer decorator
+import time
+
+def timer(func):
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        result = func(*args, **kwargs)
+        end = time.time()
+        print(f"{func.__name__} took {end-start:.2f}s")
+        return result
+    return wrapper
+
+@timer
+def slow_function():
+    time.sleep(2)
+
+# Debug decorator
+def debug(func):
+    def wrapper(*args, **kwargs):
+        print(f"Calling {func.__name__} with {args}, {kwargs}")
+        return func(*args, **kwargs)
+    return wrapper</pre>
+
+                <h3>Chaining Decorators</h3>
+                <pre>@decorator1
+@decorator2
+def func():
+    pass
+
+# Same as: func = decorator1(decorator2(func))</pre>
+
+                <div class="important"><strong>Key:</strong> Decorators are applied bottom-up when chained!</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.querySelectorAll('.dropdown-header').forEach(h => {
+            h.addEventListener('click', () => h.parentElement.classList.toggle('active'));
+        });
+    </script>
+</body>
+
+</html>

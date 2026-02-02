@@ -1,0 +1,815 @@
+
+1. If the probability of hitting the target is 0.4, find mean and variance.
+a) 0.4, 0.24
+b) 0.6, 0.24
+c) 0.4, 0.16
+d) 0.6, 0.16
+View Answer
+Answer: a
+Explanation: p = 0.4
+q = 1-p
+= 1-0.4 = 0.6
+Therefore, mean = p = 0.4 and
+Variance = pq = (0.4) (0.6) = 0.24.
+
+2. If the probability that a bomb dropped from a place will strike the target is 60% and if 10 bombs are dropped, find mean and variance?
+a) 0.6, 0.24
+b) 6, 2.4
+c) 0.4, 0.16
+d) 4, 1.6
+View Answer
+
+Answer: b
+Explanation: Here, p = 60% = 0.6 and q = 1-p = 40% = 0.4 and n = 10
+Therefore, mean = np = 6
+Variance = npq = (10)(0.6)(0.4)
+= 2.4.
+
+3. What is the mean and variance for standard normal distribution?
+a) Mean is 0 and variance is 1
+b) Mean is 1 and variance is 0
+c) Mean is 0 and variance is ∞
+d) Mean is ∞ and variance is 0
+
+Answer: a
+
+4. Find the mean of tossing 8 coins.
+a) 2
+b) 4
+c) 8
+d) 1
+
+Answer: b
+Explanation: p = 1⁄2
+n = 8
+q = 1⁄2
+Therefore, mean = np = 8 * 1⁄2 = 4.
+
+5. Mean and variance of Poisson’s distribution is the same.
+a) True
+b) False
+
+Answer: a
+
+6. In a Binomial Distribution, the mean and variance are equal.
+a) True
+b) False
+View Answer
+
+Answer: b
+
+7. It is suitable to use Binomial Distribution only for ___________
+a) Large values of ‘n’
+b) Fractional values of ‘n’
+c) Small values of ‘n’
+d) Any value of ‘n’
+
+Answer: c
+
+8. For larger values of ‘n’, Binomial Distribution ___________
+a) loses its discreteness
+b) tends to Poisson Distribution
+c) stays as it is
+d) gives oscillatory values
+
+Answer: b
+
+9. Binomial Distribution is a ___________
+a) Continuous distribution
+b) Discrete distribution
+c) Irregular distribution
+d) Not a Probability distribution
+
+Answer: b
+
+10. If ‘m’ is the mean of a Poisson Distribution, then variance is given by ___________
+a) m2
+b) m1⁄2
+c) m
+d) m⁄2
+
+Answer: c
+
+11. In a Poisson Distribution, if ‘n’ is the number of trials and ‘p’ is the probability of success, then the mean value is given by?
+a) m = np
+b) m = (np)2
+c) m = np(1-p)
+d) m = p
+
+Answer: a
+
+12. If ‘m’ is the mean of a Poisson Distribution, the standard deviation is given by ___________
+a) √m
+b) m2
+c) m
+d) m⁄2
+
+Answer: a
+
+13. The standard normal curve is symmetric about the value ___________
+a) 0.5
+b) 1
+c) ∞
+d) 0
+
+Answer: d
+
+14. The area under a standard normal curve is?
+a) 0
+b) 1
+c) ∞
+d) not defined
+
+Answer: b
+
+15. For a standard normal variate, the value of mean is?
+a) ∞
+b) 1
+c) 0
+d) not defined
+
+Answer: c
+
+16. Normal Distribution is symmetric is about ___________
+a) Variance
+b) Mean
+c) Standard deviation
+d) Covariance
+
+Answer: b
+
+17. The shape of the Normal Curve is ___________
+a) Bell Shaped
+b) Flat
+c) Circular
+d) Spiked
+
+Answer: a
+
+18. Normal Distribution is applied for ___________
+a) Continuous Random Distribution
+b) Discrete Random Variable
+c) Irregular Random Variable
+d) Uncertain Random Variable
+View Answer
+
+Answer: a
+
+19. Normal Distribution is also known as ___________
+a) Cauchy’s Distribution
+b) Laplacian Distribution
+c) Gaussian Distribution
+d) Lagrangian Distribution
+
+Answer: c
+
+20. Skewness of Normal distribution is ___________
+a) Negative
+b) Positive
+c) 0
+d) Undefined
+View Answer
+
+Answer: c
+
+21. For a normal distribution its mean, median, mode are equal.
+a) True
+b) False
+View Answer
+
+Answer: a
+
+22. In Normal distribution, the highest value of ordinate occurs at ___________
+a) Mean
+b) Variance
+c) Extremes
+d) Same value occurs at all points
+View Answer
+
+Answer: a
+
+23. The shape of the normal curve depends on its ___________
+a) Mean deviation
+b) Standard deviation
+c) Quartile deviation
+d) Correlation
+
+Answer: b
+
+24. In Standard normal distribution, the value of mode is ___________
+a) 2
+b) 1
+c) 0
+d) Not fixed
+
+Answer: c
+
+25. In Standard normal distribution, the value of median is ___________
+a) 1
+b) 0
+c) 2
+d) Not fixed
+
+Answer: b
+
+26. What does the central limit theorem state?
+a) if the sample size increases sampling distribution must approach normal distribution
+b) if the sample size decreases then the sample distribution must approach normal distribution
+c) if the sample size increases then the sampling distribution much approach an exponential distribution
+d) if the sample size decreases then the sampling distribution much approach an exponential distribution
+
+Answer: a
+
+27. Standard error is always non- negative.
+a) True
+b) False
+
+Answer: a
+
+28. Sampling error increases as we increase the sampling size.
+a) True
+b) False
+
+Answer: b
+Explanation: Sampling error is inversely proportional to the sampling
+
+29. The difference between the sample value expected and the estimates value of the parameter is called as?
+a) bias
+b) error
+c) contradiction
+d) difference
+
+Answer: a
+
+30. In which of the following types of sampling the information is carried out under the opinion of an expert?
+a) quota sampling
+b) convenience sampling
+c) purposive sampling
+d) judgement sampling
+
+Answer: d
+
+31. Which of the following is a subset of population?
+a) distribution
+b) sample
+c) data
+d) set
+
+Answer: b
+
+32. The sampling error is defined as?
+a) difference between population and parameter
+b) difference between sample and parameter
+c) difference between population and sample
+d) difference between parameter and sample
+
+Answer: c
+
+33. Any population which we want to study is referred as?
+a) standard population
+b) final population
+c) infinite population
+d) target population
+
+Answer: d
+
+34. Suppose we want to make a voters list for the general elections 2019 then we require __________
+a) sampling error
+b) random error
+c) census
+d) simple error
+
+Answer: c
+
+35. Selection of a football team for FIFA World Cup is called as?
+a) random sampling
+b) systematic sampling
+c) purposive sampling
+d) cluster sampling
+
+Answer: c
+
+36. If the mean of population is 29 then the mean of sampling distribution is __________
+a) 29
+b) 30
+c) 21
+d) 31
+
+Answer: a
+
+37. In systematic sampling, population is 240 and selected sample size is 60 then sampling interval is ________
+a) 240
+b) 60
+c) 4
+d) 0.25
+
+Answer: c
+
+38. The method of selecting a desirable portion from a population which describes the characteristics of whole population is called as ________
+a) sampling
+b) segregating
+c) dividing
+d) implanting
+View Answer
+
+Answer: a
+
+39. In sampling distribution what does the parameter k represents ________
+a) Sub stage interval
+b) Secondary interval
+c) Multi stage interval
+d) Sampling interval
+
+Answer: d
+
+40. If the distribution of sample and population changes then the mean of Sampling distribution must be equal to ________
+a) standard deviation of population
+b) variance of population
+c) sample of population
+d) mean of population
+
+Answer: d
+
+41. The cluster sampling, stratified sampling or systematic samplings are types of ________
+a) direct sampling
+b) indirect sampling
+c) random sampling
+d) non random sampling
+
+Answer: c
+
+42. Which of the following is classified as unknown or exact value that represents the whole population?
+a) predictor
+b) guider
+c) parameter
+d) estimator
+
+Answer: c
+
+43. A sample size is considered large in which of the following cases?
+a) n > or = 30
+b) n > or = 50
+c) n < or = 30
+d) n < or = 50
+
+Answer: a
+
+44. The selected clusters in a clustering sampling are known as ________
+a) elementary units
+b) primary units
+c) secondary units
+d) proportional units
+
+Answer: a
+
+45. Consider a set of 18 samples from a standard normal distribution. We square each sample and sum all the squares. The number of degrees of freedom for a Chi Square distribution will be?
+a) 17
+b) 18
+c) 19
+d) 20
+
+Answer: b
+
+46. What is the mean of a Chi Square distribution with 6 degrees of freedom?
+a) 4
+b) 12
+c) 6
+d) 8
+View Answer
+
+Answer: c
+
+47. Which of these distributions is used for a testing hypothesis?
+a) Normal Distribution
+b) Chi-Squared Distribution
+c) Gamma Distribution
+d) Poisson Distribution
+
+Answer: b
+
+48. A statement made about a population for testing purpose is called?
+a) Statistic
+b) Hypothesis
+c) Level of Significance
+d) Test-Statistic
+
+Answer: b
+
+49. If the assumed hypothesis is tested for rejection considering it to be true is called?
+a) Null Hypothesis
+b) Statistical Hypothesis
+c) Simple Hypothesis
+d) Composite Hypothesis
+View Answer
+
+Answer: a
+
+50. A statement whose validity is tested on the basis of a sample is called?
+a) Null Hypothesis
+b) Statistical Hypothesis
+c) Simple Hypothesis
+d) Composite Hypothesis
+
+Answer: b
+
+51. A hypothesis which defines the population distribution is called?
+a) Null Hypothesis
+b) Statistical Hypothesis
+c) Simple Hypothesis
+d) Composite Hypothesis
+
+Answer: c
+
+52. If the null hypothesis is false then which of the following is accepted?
+a) Null Hypothesis
+b) Positive Hypothesis
+c) Negative Hypothesis
+d) Alternative Hypothesis.
+
+Answer: d
+
+53. The rejection probability of Null Hypothesis when it is true is called as?
+a) Level of Confidence
+b) Level of Significance
+c) Level of Margin
+d) Level of Rejection
+
+Answer: b
+
+54. The point where the Null Hypothesis gets rejected is called as?
+a) Significant Value
+b) Rejection Value
+c) Acceptance Value
+d) Critical Value
+
+Answer: d
+
+55. If the Critical region is evenly distributed then the test is referred as?
+a) Two tailed
+b) One tailed
+c) Three tailed
+d) Zero tailed
+
+
+Answer: a
+
+56. The type of test is defined by which of the following?
+a) Null Hypothesis
+b) Simple Hypothesis
+c) Alternative Hypothesis
+d) Composite Hypothesis
+
+Answer: c
+Explanation: Alternative Hypothesis defines whether the test is one tailed or two tailed. It is also called as Research Hypothesis.
+
+
+57. Which of the following is defined as the rule or formula to test a Null Hypothesis?
+a) Test statistic
+b) Population statistic
+c) Variance statistic
+d) Null statistic
+
+Answer: a
+
+58. Consider a hypothesis H0 where ϕ0 = 5 against H1 where ϕ1 > 5. The test is?
+a) Right tailed
+b) Left tailed
+c) Center tailed
+d) Cross tailed
+
+Answer: a(also known as upper tail)
+
+59. Consider a hypothesis where H0 where ϕ0 = 23 against H1 where ϕ1 < 23. The test is?
+a) Right tailed
+b) Left tailed
+c) Center tailed
+d) Cross tailed
+
+Answer: b(also known as lower tail)
+
+60. Type 1 error occurs when?
+a) We reject H0 if it is True
+b) We reject H0 if it is False
+c) We accept H0 if it is True
+d) We accept H0 if it is False
+
+Answer: a
+
+61. Alternative Hypothesis is also called as?
+a) Composite hypothesis
+b) Research Hypothesis
+c) Simple Hypothesis
+d) Null Hypothesis
+
+Answer: b
+
+62. What is the assumption made for performing the hypothesis test with T distribution?
+a) the distribution is non-symmetric
+b) the distribution has more than one modal class
+c) the distribution has a constant variance
+d) the distribution follows a normal distribution
+
+Answer: d
+
+63. In a two tailed test when a Null Hypothesis is rejected for a True Alternative Hypothesis then it has ____________
+a) Type 1 error
+b) Type 2 error
+c) No error
+d) Many errors
+
+Answer: c
+
+64. In a hypothesis test, what does the p value signify?
+a) smallest level of significance for rejection of Null Hypothesis
+b) largest level of significance for rejection of Null Hypothesis
+c) smallest level of significance for acceptance of Null Hypothesis
+d) smallest level of significance for acceptance of Null Hypothesis
+
+Answer: a
+
+65. A Null Hypothesis has Level of Significance 9%. For what values of Level of Significances it will be rejected?
+a) 0.99
+b) 0.009
+c) 0.099
+d) 0.9
+
+Answer: b
+
+67. Consider a trial of a criminal. If a type 1 error has occurred in thee judgement then which of the following statement is true?
+a) a guilty person is set free
+b) an innocent person is convicted
+c) a guilty person is convicted
+d) an innocent person is set free
+
+Answer: b
+
+68. If a Null Hypothesis is accepted then the value of Test statistic lies in the ____________
+a) Acceptance region
+b) Rejection region
+c) Critical region
+d) Sample region
+
+Answer: a
+
+69. The range of Level of Significance lies between ____________
+a) -∞ and 0
+b) -∞ and ∞
+c) 0 and ∞
+d) 0 and 1
+
+Answer: d
+
+70. The effect of rejection of a hypothesis with decrease in sample size ____________
+a) decreases
+b) increases
+c) remains constant
+d) fluctuates
+View Answer
+
+Answer: b
+
+71. A paired T test consists of n pairs of observations. What is the number of degrees of freedom of the test?
+a) 2n-1
+b) 2n
+c) n-1
+d) n
+View Answer
+
+Answer: c
+
+72. The independent values in a set of values of a test is called as?
+a) Degrees of freedom
+b) Test Statistic
+c) Level of Significance
+d) Level of Confidence
+
+Answer: a
+
+73. A T-test sample has 7 pairs of samples. The distribution should contain ____________
+a) 16 degrees of freedom
+b) 15 degrees of freedom
+c) 5 degrees of freedom
+d) 6 degrees of freedom
+
+Answer: d (n-1) 7-1=6
+
+
+74)In case the estimated value is more than or less than the reference value, which of the following test is appropriate?
+a) One-Tailed Test
+b) Two-Tailed Test
+
+Answer: (B)
+
+75)P-value less than ________ would mean that null hypothesis can be rejected.
+
+Answer: 0.05
+
+76)Given two samples taken from the same population, a stronger null hypothesis would mean _______?
+
+Answer:Mean and variation of distribution are equal
+
+
+77)If the data observed in the sample test is highly unlikely to occur, then the null hypothesis is ________?
+Answer: Rejected
+
+78)If the data collected as a result of random sampling process does provide strong evidence against null hypothesis, then the null hypothesis is rejected.
+Answer:True
+
+
+79)If the sample size is 10 and the standard deviation of the population is unknown which test can be used?
+Answer: T distribution is used whenever the standard deviation of the population is unknown and the sample size is less than 30.
+
+80)Which variance is calculated as a part of the Chi-Square test?
+Answer:The variance between the expected and observed values.
+
+81)When you conduct a hypothesis test on which distribution do you find the critical values or the p-values to find the statistical significance?
+
+1.None of the above
+2.Population Distribution
+3.Sample Distribution
+4.Sampling Distribution
+
+Answer:
+Sampling Distribution
+
+82)If the sample size is 10 and the standard deviation of the population is known
+Which distribution should be used to calculate the critical values and make the decision during hypothesis testing?
+
+Answer:Standard normal distribution (z-distribution)
+
+83)Hypothesis Testing: Errors in Hypothesis Testing - Mark all the correct options below.
+A. type-I error occurs when a true null hypothesis is rejected.
+B. type-I error occurs when the null hypothesis is not rejected when it is, in fact, incorrect.
+C. type-II error occurs when the null hypothesis is rejected when it is, in fact, correct.
+D. type II error occurs when the null hypothesis is not rejected when it is, in fact, incorrect.
+
+Answer: A,D
+
+84)Make the decision on the basis of the p-value with respect to the given value of α (significance value).
+A.You fail to reject the null hypothesis because the p-value is more than 0.05.
+B.You reject the null hypothesis because the p-value is more than 0.05.
+C.You reject the null hypothesis because the p-value is less than 0.05.
+D.You fail to reject the null hypothesis because the p-value is less than 0.05.
+
+Answer: C
+
+85)Which of the following options hold true for null hypothesis?
+
+A.The claim with the “not equal to” sign
+B.The claim with only the “less than” sign
+C.The claim with the “equal to” sign
+D.The claim with the “less than or equal to” sign
+
+Answer: B,C
+
+86)The null and alternative hypotheses are statements about Population or Sample Parameters?
+
+A.Population parameters or sample parameters
+B.Sample parameters
+C.Population parameters
+
+Answer:
+Population parameters
+Explanation: The hypothesis is always made about the population parameters. The sample parameters are only used as evidence to test the hypothesis.
+
+
+88)Discrete probability distribution depends on the properties of ___________
+
+A. discrete variables
+B. probability function
+C. machine
+D. data
+View Answer
+
+Ans : D
+
+89) Data Analysis is a process of?
+
+A. inspecting data
+B. cleaning data
+C. transforming data
+D. All of the above
+
+Ans : D
+
+90)Which of the following is not a major data analysis approaches?
+
+A. Data Mining
+B. Predictive Intelligence
+C. Business Intelligence
+D. Text Analytics
+Ans : B
+Explanation: Predictive Analytics is major data analysis approaches not Predictive Intelligence.
+
+91)How many main statistical methodologies are used in data analysis?
+
+A. 2
+B. 3
+C. 4
+D. 5
+
+Ans : A
+Explanation: In data analysis, two main statistical methodologies are used Descriptive statistics and Inferential statistics.
+
+92)Which of the following is true about hypothesis testing?
+
+A. answering yes/no questions about the data
+B. estimating numerical characteristics of the data
+C. describing associations within the data
+D. modeling relationships within the data
+View Answer
+
+Ans : A
+Explanation: answering yes/no questions about the data (hypothesis testing)
+
+
+93)Which of the following is true about regression analysis?
+
+A. answering yes/no questions about the data
+B. estimating numerical characteristics of the data
+C. modeling relationships within the data
+D. describing associations within the data
+
+Ans : C
+Explanation: modeling relationships within the data (E.g. regression analysis).
+
+94) ___ are used when we want to visually examine the relationship between two quantitative variables.
+
+A.Bar graph
+B.Scatterplot
+C.Line graph
+D.Pie chart
+Answer: A) Bar graph
+
+95)A graph that uses vertical bars to represent data is called a ____.
+
+A.Bar graph
+B.Line graph
+C.Scatterplot
+D.All of the mentioned above
+Answer: A) Bar graph
+
+96)Least Square Method uses ___.
+
+A.Linear polynomial
+B.Linear regression
+C.Linear sequence
+D.None of the mentioned above
+Answer: B) Linear regression
+
+97)What is a hypothesis?
+
+A.A statement that the researcher wants to test through the data collected in a study
+B.A research question the results will answer
+C.A theory that underpins the study
+D.A statistical method for calculating the extent to which the results could have happened by chance
+
+Answer: A) A statement that the researcher wants to test through the data collected in a studyp
+
+98)Linear-regression models are relatively simple and provide an easy-to-interpret mathematical formula that can generate ___.
+
+A.Predictions
+B.Interpretation
+C.Conclusion
+D.None of the mentioned above
+Answer: A) Predictions
+
+99)Amongst which of the following is / are the applications of Linear Regression,
+
+A.Biological
+B.Behavioral
+C.Social sciences
+D.All of the mentioned above
+Answer: D) All of the mentioned above
+
+100)For each value of the ___, the distribution of the dependent variable must be normal.
+
+A.Independent variable
+B.Depended variable
+C.Intermediate variable
+D.None of the mentioned above
+Answer: A) Independent variable
+
+101)By 2025, the volume of data will increase to,
+
+A.TB
+B.YB
+C.ZB
+D.EB
+Answer: C) ZB
+
+102)___ refers to the ability to turn your data useful for business.
+
+A.Value
+B.Variety
+C.Velocity
+D.None of the mentioned above
+Answer: A) Value
+
+103 To glean insights from the data, many analysts and data scientists rely on ___.
+
+A.Data mining
+B.Data visualization
+C.Data warehouse
+D.All of the mentioned above
+Answer: B) Data visualization

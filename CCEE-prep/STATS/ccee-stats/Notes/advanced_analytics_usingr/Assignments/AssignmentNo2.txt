@@ -1,0 +1,8 @@
+
+Q.No.1 Daily Closing Prices of Two Stocks arranged as per returns. So calculate Covariance using R and Formula.
+	 
+	x: 1.8 , 1.5, 2.1 , 2.4 , 0.2
+	y: 2.5 , 4.3 , 4.5 , 4.1 ,2.2
+
+
+Q.No.2 Write down Difference Between Covariance and Correlation

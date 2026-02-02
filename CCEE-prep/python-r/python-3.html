@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Notes Part 3 - Exceptions to Advanced</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px
+        }
+
+        h1 {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 2px solid #333;
+            margin-bottom: 20px
+        }
+
+        .dropdown {
+            background: #fff;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px
+        }
+
+        .dropdown-header {
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 1.1em
+        }
+
+        .dropdown-header:hover {
+            background: #f9f9f9
+        }
+
+        .dropdown-header::after {
+            content: '+';
+            font-size: 1.5em
+        }
+
+        .dropdown.active .dropdown-header::after {
+            content: '−'
+        }
+
+        .dropdown-content {
+            display: none;
+            padding: 20px;
+            border-top: 1px solid #ddd;
+            background: #fafafa
+        }
+
+        .dropdown.active .dropdown-content {
+            display: block
+        }
+
+        h3 {
+            margin: 15px 0 10px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px
+        }
+
+        code {
+            background: #e8e8e8;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.95em
+        }
+
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 10px 0
+        }
+
+        ul,
+        ol {
+            margin-left: 25px;
+            margin-bottom: 10px
+        }
+
+        li {
+            margin-bottom: 5px
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0
+        }
+
+        th,
+        td {
+            border: 1px solid #333;
+            padding: 10px;
+            text-align: left
+        }
+
+        th {
+            background: #333;
+            color: #fff
+        }
+
+        tr:nth-child(even) {
+            background: #f2f2f2
+        }
+
+        .note {
+            background: #fff3cd;
+            padding: 10px;
+            border-left: 4px solid #ffc107;
+            margin: 10px 0
+        }
+
+        .important {
+            background: #f8d7da;
+            padding: 10px;
+            border-left: 4px solid #dc3545;
+            margin: 10px 0
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Python Programming Notes<br><small style="font-size:0.5em">Part 3: Exceptions & Advanced Topics</small></h1>
+
+        <div class="dropdown">
+            <div class="dropdown-header">21. Exception Handling</div>
+            <div class="dropdown-content">
+                <h3>try-except</h3>
+                <pre>try:
+    # risky code
+    x = 10 / 0
+except ZeroDivisionError:
+    print("Cannot divide by zero")
+except ValueError:
+    print("Invalid value")
+except Exception as e:
+    print(f"Error: {e}")</pre>
+
+                <h3>try-except-else-finally</h3>
+                <pre>try:
+    result = 10 / 2
+except ZeroDivisionError:
+    print("Error")
+else:
+    print("Success!")  # runs if NO exception
+finally:
+    print("Always runs")  # cleanup</pre>
+
+                <h3>Common Exceptions</h3>
+                <table>
+                    <tr>
+                        <th>Exception</th>
+                        <th>Cause</th>
+                    </tr>
+                    <tr>
+                        <td><code>ZeroDivisionError</code></td>
+                        <td>Division by zero</td>
+                    </tr>
+                    <tr>
+                        <td><code>TypeError</code></td>
+                        <td>Wrong type operation</td>
+                    </tr>
+                    <tr>
+                        <td><code>ValueError</code></td>
+                        <td>Invalid value</td>
+                    </tr>
+                    <tr>
+                        <td><code>NameError</code></td>
+                        <td>Undefined variable</td>
+                    </tr>
+                    <tr>
+                        <td><code>IndexError</code></td>
+                        <td>Invalid index</td>
+                    </tr>
+                    <tr>
+                        <td><code>KeyError</code></td>
+                        <td>Dict key not found</td>
+                    </tr>
+                    <tr>
+                        <td><code>AttributeError</code></td>
+                        <td>Invalid attribute</td>
+                    </tr>
+                    <tr>
+                        <td><code>FileNotFoundError</code></td>
+                        <td>File doesn't exist</td>
+                    </tr>
+                    <tr>
+                        <td><code>ImportError</code></td>
+                        <td>Module not found</td>
+                    </tr>
+                    <tr>
+                        <td><code>StopIteration</code></td>
+                        <td>Iterator exhausted</td>
+                    </tr>
+                </table>
+
+                <h3>raise Statement</h3>
+                <pre># Raise exception manually
+raise ValueError("Invalid input")
+raise TypeError("Expected int")
+
+# Re-raise current exception
+except Exception:
+    print("Logging error")
+    raise</pre>
+
+                <h3>Custom Exceptions</h3>
+                <pre>class CustomError(Exception):
+    def __init__(self, message):
+        self.message = message
+        super().__init__(message)
+
+raise CustomError("Something went wrong")</pre>
+
+                <h3>assert Statement</h3>
+                <pre>assert condition, "Error message"
+
+assert x > 0, "x must be positive"
+# Raises AssertionError if False</pre>
+
+                <div class="important"><strong>Key:</strong> <code>finally</code> ALWAYS runs, even after return or
+                    exception!</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">22. Matplotlib</div>
+            <div class="dropdown-content">
+                <h3>Basic Plotting</h3>
+                <pre>import matplotlib.pyplot as plt
+
+# Line plot
+x = [1, 2, 3, 4, 5]
+y = [2, 4, 6, 8, 10]
+plt.plot(x, y)
+plt.xlabel("X axis")
+plt.ylabel("Y axis")
+plt.title("Line Plot")
+plt.show()</pre>
+
+                <h3>Common Plot Types</h3>
+                <pre># Line
+plt.plot(x, y, color='red', linestyle='--', marker='o')
+
+# Scatter
+plt.scatter(x, y, c='blue', s=100)
+
+# Bar
+plt.bar(categories, values)
+plt.barh(categories, values)  # horizontal
+
+# Histogram
+plt.hist(data, bins=10)
+
+# Pie chart
+plt.pie(sizes, labels=labels, autopct='%1.1f%%')</pre>
+
+                <h3>Subplots</h3>
+                <pre>fig, axes = plt.subplots(2, 2)  # 2x2 grid
+axes[0, 0].plot(x, y)
+axes[0, 1].scatter(x, y)
+axes[1, 0].bar(x, y)
+axes[1, 1].hist(data)
+plt.tight_layout()
+plt.show()</pre>
+
+                <h3>Saving Figures</h3>
+                <pre>plt.savefig('plot.png', dpi=300, bbox_inches='tight')</pre>
+
+                <div class="note"><strong>MCQ Tip:</strong> <code>plt.show()</code> displays plot.
+                    <code>plt.savefig()</code> saves before show!</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">23. Seaborn</div>
+            <div class="dropdown-content">
+                <h3>Introduction</h3>
+                <p>Statistical data visualization built on Matplotlib. More attractive defaults.</p>
+                <pre>import seaborn as sns
+import matplotlib.pyplot as plt</pre>
+
+                <h3>Common Plots</h3>
+                <pre># Distribution plots
+sns.histplot(data, kde=True)
+sns.kdeplot(data)
+sns.boxplot(x='category', y='value', data=df)
+sns.violinplot(x='category', y='value', data=df)
+
+# Relationship plots
+sns.scatterplot(x='col1', y='col2', data=df, hue='category')
+sns.lineplot(x='col1', y='col2', data=df)
+sns.regplot(x='col1', y='col2', data=df)  # with regression line
+
+# Categorical plots
+sns.countplot(x='category', data=df)
+sns.barplot(x='category', y='value', data=df)
+
+# Heatmap
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm')
+
+# Pairplot
+sns.pairplot(df, hue='category')</pre>
+
+                <h3>Styling</h3>
+                <pre>sns.set_style("whitegrid")  # white, dark, whitegrid, darkgrid, ticks
+sns.set_palette("husl")
+sns.set_context("talk")  # paper, notebook, talk, poster</pre>
+
+                <div class="important"><strong>Key:</strong> Seaborn works with DataFrames. Use <code>data=df</code> and
+                    column names.</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">24. Data Wrangling & Cleaning</div>
+            <div class="dropdown-content">
+                <h3>Pandas Basics</h3>
+                <pre>import pandas as pd
+
+df = pd.DataFrame({'A': [1,2,3], 'B': [4,5,6]})
+df = pd.read_csv('file.csv')
+df = pd.read_excel('file.xlsx')</pre>
+
+                <h3>Viewing Data</h3>
+                <pre>df.head()         # First 5 rows
+df.tail()         # Last 5 rows
+df.info()         # Data types, non-null counts
+df.describe()     # Statistics
+df.shape          # (rows, cols)
+df.columns        # Column names
+df.dtypes         # Data types</pre>
+
+                <h3>Handling Missing Data</h3>
+                <pre># Check missing
+df.isnull().sum()
+df.isna().any()
+
+# Drop missing
+df.dropna()                    # Drop rows with any NaN
+df.dropna(subset=['col'])      # Drop if col is NaN
+df.dropna(how='all')           # Drop if all NaN
+
+# Fill missing
+df.fillna(0)                   # Fill with value
+df.fillna(df.mean())           # Fill with mean
+df.fillna(method='ffill')      # Forward fill
+df.fillna(method='bfill')      # Backward fill
+df['col'].interpolate()        # Interpolation</pre>
+
+                <h3>Data Selection</h3>
+                <pre>df['col']                # Single column
+df[['col1', 'col2']]     # Multiple columns
+df.loc[0]                # Row by label
+df.iloc[0]               # Row by index
+df.loc[0:5, 'col']       # Slice
+df[df['col'] > 10]       # Filter</pre>
+
+                <h3>Data Transformation</h3>
+                <pre>df['col'] = df['col'].apply(lambda x: x*2)
+df['new'] = df['a'] + df['b']
+df.rename(columns={'old': 'new'})
+df.drop(columns=['col'])
+df.drop_duplicates()
+df.sort_values('col')
+df.groupby('col').mean()
+df.merge(df2, on='key')
+pd.concat([df1, df2])</pre>
+
+                <h3>Data Types</h3>
+                <pre>df['col'] = df['col'].astype(int)
+df['date'] = pd.to_datetime(df['date'])
+df['cat'] = df['cat'].astype('category')</pre>
+
+                <div class="note"><strong>MCQ Tip:</strong> <code>loc</code> uses labels, <code>iloc</code> uses integer
+                    positions!</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">25. Loading Images & Audio</div>
+            <div class="dropdown-content">
+                <h3>Pillow (PIL) - Images</h3>
+                <pre>from PIL import Image
+
+# Open and display
+img = Image.open('image.jpg')
+img.show()
+
+# Properties
+img.size      # (width, height)
+img.format    # JPEG, PNG, etc.
+img.mode      # RGB, L (grayscale), etc.
+
+# Operations
+img.resize((100, 100))
+img.rotate(45)
+img.crop((left, top, right, bottom))
+img.convert('L')              # Grayscale
+img.transpose(Image.FLIP_LEFT_RIGHT)
+
+# Save
+img.save('output.png')</pre>
+
+                <h3>scikit-image</h3>
+                <pre>from skimage import io, filters, transform
+
+img = io.imread('image.jpg')
+img_gray = io.imread('image.jpg', as_gray=True)
+
+# Resize
+img_resized = transform.resize(img, (100, 100))
+
+# Filters
+edges = filters.sobel(img_gray)
+
+# Save
+io.imsave('output.jpg', img)</pre>
+
+                <h3>Audio with librosa</h3>
+                <pre>import librosa
+
+# Load audio
+y, sr = librosa.load('audio.wav', sr=22050)
+# y = audio time series
+# sr = sample rate
+
+# Duration
+duration = librosa.get_duration(y=y, sr=sr)
+
+# Features
+mfcc = librosa.feature.mfcc(y=y, sr=sr)</pre>
+
+                <h3>Audio with scipy</h3>
+                <pre>from scipy.io import wavfile
+
+sr, data = wavfile.read('audio.wav')
+wavfile.write('output.wav', sr, data)</pre>
+
+                <div class="important"><strong>Key:</strong> Pillow uses <code>Image.open()</code>, scikit uses
+                    <code>io.imread()</code></div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">26. Virtual Environments</div>
+            <div class="dropdown-content">
+                <h3>Why Virtual Environments?</h3>
+                <ul>
+                    <li>Isolate project dependencies</li>
+                    <li>Avoid version conflicts</li>
+                    <li>Reproducible environments</li>
+                </ul>
+
+                <h3>Using venv (built-in)</h3>
+                <pre># Create
+python -m venv myenv
+
+# Activate (Windows)
+myenv\Scripts\activate
+
+# Activate (Mac/Linux)
+source myenv/bin/activate
+
+# Deactivate
+deactivate
+
+# Install packages
+pip install package_name
+
+# Save dependencies
+pip freeze > requirements.txt
+
+# Install from requirements
+pip install -r requirements.txt</pre>
+
+                <h3>Using virtualenv</h3>
+                <pre>pip install virtualenv
+virtualenv myenv
+source myenv/bin/activate</pre>
+
+                <h3>Using conda</h3>
+                <pre>conda create -n myenv python=3.9
+conda activate myenv
+conda deactivate
+conda install package
+conda env export > environment.yml
+conda env create -f environment.yml</pre>
+
+                <div class="note"><strong>MCQ Tip:</strong> <code>venv</code> is built-in (Python 3.3+).
+                    <code>virtualenv</code> is a third-party package.</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">27. Logging</div>
+            <div class="dropdown-content">
+                <h3>Basic Logging</h3>
+                <pre>import logging
+
+logging.debug("Debug message")
+logging.info("Info message")
+logging.warning("Warning message")
+logging.error("Error message")
+logging.critical("Critical message")</pre>
+
+                <h3>Log Levels</h3>
+                <table>
+                    <tr>
+                        <th>Level</th>
+                        <th>Value</th>
+                        <th>Use Case</th>
+                    </tr>
+                    <tr>
+                        <td>DEBUG</td>
+                        <td>10</td>
+                        <td>Detailed debugging</td>
+                    </tr>
+                    <tr>
+                        <td>INFO</td>
+                        <td>20</td>
+                        <td>General info</td>
+                    </tr>
+                    <tr>
+                        <td>WARNING</td>
+                        <td>30</td>
+                        <td>Potential issues (default)</td>
+                    </tr>
+                    <tr>
+                        <td>ERROR</td>
+                        <td>40</td>
+                        <td>Errors occurred</td>
+                    </tr>
+                    <tr>
+                        <td>CRITICAL</td>
+                        <td>50</td>
+                        <td>Serious errors</td>
+                    </tr>
+                </table>
+
+                <h3>Configuration</h3>
+                <pre>logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    filename='app.log',
+    filemode='w'
+)</pre>
+
+                <h3>Logger Object</h3>
+                <pre>logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+
+# Handler
+handler = logging.FileHandler('app.log')
+handler.setLevel(logging.ERROR)
+
+# Formatter
+formatter = logging.Formatter('%(name)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+
+logger.addHandler(handler)
+logger.error("This goes to file")</pre>
+
+                <div class="important"><strong>Key:</strong> Default level is WARNING. Lower levels (DEBUG, INFO) won't
+                    show unless configured.</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">28. MCQ Quick Reference Table</div>
+            <div class="dropdown-content">
+                <h3>Data Types</h3>
+                <table>
+                    <tr>
+                        <th>Type</th>
+                        <th>Mutable?</th>
+                        <th>Ordered?</th>
+                        <th>Duplicates?</th>
+                    </tr>
+                    <tr>
+                        <td>list</td>
+                        <td>Yes</td>
+                        <td>Yes</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>tuple</td>
+                        <td>No</td>
+                        <td>Yes</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>set</td>
+                        <td>Yes</td>
+                        <td>No</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>dict</td>
+                        <td>Yes</td>
+                        <td>Yes (3.7+)</td>
+                        <td>Keys: No</td>
+                    </tr>
+                    <tr>
+                        <td>str</td>
+                        <td>No</td>
+                        <td>Yes</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>frozenset</td>
+                        <td>No</td>
+                        <td>No</td>
+                        <td>No</td>
+                    </tr>
+                </table>
+
+                <h3>Key Functions</h3>
+                <table>
+                    <tr>
+                        <th>Function</th>
+                        <th>Returns</th>
+                        <th>Modifies Original?</th>
+                    </tr>
+                    <tr>
+                        <td><code>sort()</code></td>
+                        <td>None</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td><code>sorted()</code></td>
+                        <td>New list</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td><code>reverse()</code></td>
+                        <td>None</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td><code>reversed()</code></td>
+                        <td>Iterator</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td><code>append()</code></td>
+                        <td>None</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td><code>extend()</code></td>
+                        <td>None</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td><code>pop()</code></td>
+                        <td>Element</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td><code>remove()</code></td>
+                        <td>None</td>
+                        <td>Yes</td>
+                    </tr>
+                </table>
+
+                <h3>Operators</h3>
+                <table>
+                    <tr>
+                        <th>Operator</th>
+                        <th>Purpose</th>
+                        <th>Example</th>
+                    </tr>
+                    <tr>
+                        <td><code>//</code></td>
+                        <td>Floor division</td>
+                        <td><code>5//2 = 2</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>**</code></td>
+                        <td>Power</td>
+                        <td><code>2**3 = 8</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>%</code></td>
+                        <td>Modulo</td>
+                        <td><code>5%2 = 1</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>is</code></td>
+                        <td>Identity</td>
+                        <td><code>x is None</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>==</code></td>
+                        <td>Equality</td>
+                        <td><code>x == y</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>in</code></td>
+                        <td>Membership</td>
+                        <td><code>'a' in 'abc'</code></td>
+                    </tr>
+                </table>
+
+                <h3>String Methods</h3>
+                <table>
+                    <tr>
+                        <th>Method</th>
+                        <th>Error if not found?</th>
+                    </tr>
+                    <tr>
+                        <td><code>find()</code></td>
+                        <td>No, returns -1</td>
+                    </tr>
+                    <tr>
+                        <td><code>index()</code></td>
+                        <td>Yes, ValueError</td>
+                    </tr>
+                    <tr>
+                        <td><code>get()</code> (dict)</td>
+                        <td>No, returns None</td>
+                    </tr>
+                    <tr>
+                        <td><code>[]</code> (dict)</td>
+                        <td>Yes, KeyError</td>
+                    </tr>
+                </table>
+
+                <h3>OOP Concepts</h3>
+                <table>
+                    <tr>
+                        <th>Concept</th>
+                        <th>Symbol</th>
+                        <th>Access</th>
+                    </tr>
+                    <tr>
+                        <td>Public</td>
+                        <td><code>name</code></td>
+                        <td>Anywhere</td>
+                    </tr>
+                    <tr>
+                        <td>Protected</td>
+                        <td><code>_name</code></td>
+                        <td>Class + subclass</td>
+                    </tr>
+                    <tr>
+                        <td>Private</td>
+                        <td><code>__name</code></td>
+                        <td>Class only (mangled)</td>
+                    </tr>
+                </table>
+
+                <h3>Exception Keywords</h3>
+                <table>
+                    <tr>
+                        <th>Keyword</th>
+                        <th>Purpose</th>
+                    </tr>
+                    <tr>
+                        <td><code>try</code></td>
+                        <td>Wrap risky code</td>
+                    </tr>
+                    <tr>
+                        <td><code>except</code></td>
+                        <td>Handle exception</td>
+                    </tr>
+                    <tr>
+                        <td><code>else</code></td>
+                        <td>Runs if no exception</td>
+                    </tr>
+                    <tr>
+                        <td><code>finally</code></td>
+                        <td>Always runs</td>
+                    </tr>
+                    <tr>
+                        <td><code>raise</code></td>
+                        <td>Throw exception</td>
+                    </tr>
+                    <tr>
+                        <td><code>assert</code></td>
+                        <td>Debug check</td>
+                    </tr>
+                </table>
+
+                <h3>Control Flow</h3>
+                <table>
+                    <tr>
+                        <th>Keyword</th>
+                        <th>Effect</th>
+                    </tr>
+                    <tr>
+                        <td><code>break</code></td>
+                        <td>Exit loop, skip else</td>
+                    </tr>
+                    <tr>
+                        <td><code>continue</code></td>
+                        <td>Next iteration</td>
+                    </tr>
+                    <tr>
+                        <td><code>pass</code></td>
+                        <td>Do nothing</td>
+                    </tr>
+                    <tr>
+                        <td><code>return</code></td>
+                        <td>Exit function</td>
+                    </tr>
+                    <tr>
+                        <td><code>yield</code></td>
+                        <td>Generator pause</td>
+                    </tr>
+                </table>
+
+                <h3>File Modes</h3>
+                <table>
+                    <tr>
+                        <th>Mode</th>
+                        <th>Read</th>
+                        <th>Write</th>
+                        <th>Create</th>
+                        <th>Truncate</th>
+                    </tr>
+                    <tr>
+                        <td>r</td>
+                        <td>✓</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>w</td>
+                        <td></td>
+                        <td>✓</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                    </tr>
+                    <tr>
+                        <td>a</td>
+                        <td></td>
+                        <td>✓</td>
+                        <td>✓</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>r+</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>w+</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.querySelectorAll('.dropdown-header').forEach(h => {
+            h.addEventListener('click', () => h.parentElement.classList.toggle('active'));
+        });
+    </script>
+</body>
+
+</html>

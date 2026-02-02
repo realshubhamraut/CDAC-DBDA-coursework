@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Notes Part 4 - Collections & Threads</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px
+        }
+
+        h1 {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 2px solid #333;
+            margin-bottom: 20px
+        }
+
+        .dropdown {
+            background: #fff;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px
+        }
+
+        .dropdown-header {
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 1.1em
+        }
+
+        .dropdown-header:hover {
+            background: #f9f9f9
+        }
+
+        .dropdown-header::after {
+            content: '+';
+            font-size: 1.5em
+        }
+
+        .dropdown.active .dropdown-header::after {
+            content: '−'
+        }
+
+        .dropdown-content {
+            display: none;
+            padding: 20px;
+            border-top: 1px solid #ddd;
+            background: #fafafa
+        }
+
+        .dropdown.active .dropdown-content {
+            display: block
+        }
+
+        h3 {
+            margin: 15px 0 10px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px
+        }
+
+        code {
+            background: #e8e8e8;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.95em
+        }
+
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 10px 0
+        }
+
+        ul,
+        ol {
+            margin-left: 25px;
+            margin-bottom: 10px
+        }
+
+        li {
+            margin-bottom: 5px
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0
+        }
+
+        th,
+        td {
+            border: 1px solid #333;
+            padding: 10px;
+            text-align: left
+        }
+
+        th {
+            background: #333;
+            color: #fff
+        }
+
+        tr:nth-child(even) {
+            background: #f2f2f2
+        }
+
+        .note {
+            background: #fff3cd;
+            padding: 10px;
+            border-left: 4px solid #ffc107;
+            margin: 10px 0
+        }
+
+        .important {
+            background: #f8d7da;
+            padding: 10px;
+            border-left: 4px solid #dc3545;
+            margin: 10px 0
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Java Programming Notes<br><small style="font-size:0.5em">Part 4: Collections & Threads</small></h1>
+
+        <div class="dropdown">
+            <div class="dropdown-header">1. Collections Framework Overview</div>
+            <div class="dropdown-content">
+                <h3>Collection Hierarchy</h3>
+                <pre>Iterable
+└── Collection
+    ├── List (ordered, duplicates allowed)
+    │   ├── ArrayList
+    │   ├── LinkedList
+    │   └── Vector (synchronized)
+    ├── Set (no duplicates)
+    │   ├── HashSet
+    │   ├── LinkedHashSet
+    │   └── TreeSet (sorted)
+    └── Queue
+        ├── PriorityQueue
+        └── LinkedList
+
+Map (separate hierarchy - key-value pairs)
+├── HashMap
+├── LinkedHashMap
+├── TreeMap (sorted)
+└── Hashtable (synchronized)</pre>
+
+                <h3>Collection vs Collections</h3>
+                <table>
+                    <tr>
+                        <th>Collection</th>
+                        <th>Collections</th>
+                    </tr>
+                    <tr>
+                        <td>Interface</td>
+                        <td>Utility class</td>
+                    </tr>
+                    <tr>
+                        <td>Root of hierarchy</td>
+                        <td>Static methods</td>
+                    </tr>
+                    <tr>
+                        <td><code>java.util.Collection</code></td>
+                        <td><code>java.util.Collections</code></td>
+                    </tr>
+                </table>
+
+                <h3>Common Methods (Collection Interface)</h3>
+                <pre>add(E e)           // Add element
+remove(Object o)   // Remove element
+contains(Object o) // Check existence
+size()             // Number of elements
+isEmpty()          // Check if empty
+clear()            // Remove all
+iterator()         // Get iterator
+toArray()          // Convert to array</pre>
+
+                <div class="note"><strong>MCQ Tip:</strong> Collection is interface (singular). Collections is utility
+                    class (plural) with static methods!</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">2. List Interface</div>
+            <div class="dropdown-content">
+                <h3>Characteristics</h3>
+                <ul>
+                    <li>Ordered (maintains insertion order)</li>
+                    <li>Allows duplicates</li>
+                    <li>Index-based access</li>
+                </ul>
+
+                <h3>ArrayList</h3>
+                <pre>ArrayList<String> list = new ArrayList<>();
+
+// Add elements
+list.add("Apple");
+list.add("Banana");
+list.add(1, "Cherry");  // at index 1
+
+// Access
+list.get(0);            // "Apple"
+list.set(0, "Apricot"); // replace
+
+// Remove
+list.remove(0);         // by index
+list.remove("Banana");  // by object
+
+// Other operations
+list.size();            // length
+list.contains("Apple"); // check
+list.indexOf("Apple");  // find index
+list.clear();           // remove all</pre>
+
+                <h3>LinkedList</h3>
+                <pre>LinkedList<String> list = new LinkedList<>();
+
+// Additional methods (Deque operations)
+list.addFirst("First");
+list.addLast("Last");
+list.getFirst();
+list.getLast();
+list.removeFirst();
+list.removeLast();</pre>
+
+                <h3>ArrayList vs LinkedList</h3>
+                <table>
+                    <tr>
+                        <th>ArrayList</th>
+                        <th>LinkedList</th>
+                    </tr>
+                    <tr>
+                        <td>Dynamic array</td>
+                        <td>Doubly linked list</td>
+                    </tr>
+                    <tr>
+                        <td>Fast random access O(1)</td>
+                        <td>Slow random access O(n)</td>
+                    </tr>
+                    <tr>
+                        <td>Slow insert/delete O(n)</td>
+                        <td>Fast insert/delete O(1)</td>
+                    </tr>
+                    <tr>
+                        <td>Less memory</td>
+                        <td>More memory (pointers)</td>
+                    </tr>
+                </table>
+
+                <h3>Iteration</h3>
+                <pre>// For loop
+for (int i = 0; i < list.size(); i++) {
+    System.out.println(list.get(i));
+}
+
+// Enhanced for
+for (String s : list) {
+    System.out.println(s);
+}
+
+// Iterator
+Iterator<String> it = list.iterator();
+while (it.hasNext()) {
+    System.out.println(it.next());
+}
+
+// forEach (Java 8+)
+list.forEach(s -> System.out.println(s));</pre>
+
+                <div class="important"><strong>Key:</strong> Use ArrayList for frequent read. Use LinkedList for
+                    frequent insert/delete.</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">3. Set Interface</div>
+            <div class="dropdown-content">
+                <h3>Characteristics</h3>
+                <ul>
+                    <li>No duplicates allowed</li>
+                    <li>At most one null (HashSet, LinkedHashSet)</li>
+                </ul>
+
+                <h3>HashSet</h3>
+                <pre>HashSet<String> set = new HashSet<>();
+set.add("Apple");
+set.add("Banana");
+set.add("Apple");  // Ignored - duplicate
+
+System.out.println(set.size());  // 2
+System.out.println(set.contains("Apple"));  // true</pre>
+
+                <h3>LinkedHashSet</h3>
+                <pre>// Maintains insertion order
+LinkedHashSet<String> set = new LinkedHashSet<>();
+set.add("C");
+set.add("A");
+set.add("B");
+// Iteration: C, A, B</pre>
+
+                <h3>TreeSet</h3>
+                <pre>// Sorted order (natural ordering)
+TreeSet<Integer> set = new TreeSet<>();
+set.add(30);
+set.add(10);
+set.add(20);
+// Iteration: 10, 20, 30
+
+// Navigation methods
+set.first();     // 10
+set.last();      // 30
+set.higher(15);  // 20 (next higher)
+set.lower(15);   // 10 (next lower)</pre>
+
+                <h3>Set Comparison</h3>
+                <table>
+                    <tr>
+                        <th>HashSet</th>
+                        <th>LinkedHashSet</th>
+                        <th>TreeSet</th>
+                    </tr>
+                    <tr>
+                        <td>No order</td>
+                        <td>Insertion order</td>
+                        <td>Sorted order</td>
+                    </tr>
+                    <tr>
+                        <td>O(1) operations</td>
+                        <td>O(1) operations</td>
+                        <td>O(log n) operations</td>
+                    </tr>
+                    <tr>
+                        <td>Allows null</td>
+                        <td>Allows null</td>
+                        <td>No null</td>
+                    </tr>
+                </table>
+
+                <div class="note"><strong>MCQ Tip:</strong> HashSet uses equals() and hashCode(). TreeSet uses
+                    Comparable/Comparator.</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">4. Map Interface</div>
+            <div class="dropdown-content">
+                <h3>Characteristics</h3>
+                <ul>
+                    <li>Key-value pairs</li>
+                    <li>Keys are unique</li>
+                    <li>One null key in HashMap</li>
+                </ul>
+
+                <h3>HashMap</h3>
+                <pre>HashMap<String, Integer> map = new HashMap<>();
+
+// Add
+map.put("Apple", 10);
+map.put("Banana", 20);
+map.put("Apple", 15);  // Updates value
+
+// Access
+map.get("Apple");      // 15
+map.getOrDefault("Cherry", 0);  // 0 if not found
+
+// Check
+map.containsKey("Apple");
+map.containsValue(15);
+
+// Remove
+map.remove("Apple");
+
+// Size
+map.size();
+map.isEmpty();</pre>
+
+                <h3>Iteration</h3>
+                <pre>// Keys
+for (String key : map.keySet()) {
+    System.out.println(key + ": " + map.get(key));
+}
+
+// Values
+for (Integer value : map.values()) {
+    System.out.println(value);
+}
+
+// Entries
+for (Map.Entry<String, Integer> entry : map.entrySet()) {
+    System.out.println(entry.getKey() + ": " + entry.getValue());
+}
+
+// forEach (Java 8+)
+map.forEach((k, v) -> System.out.println(k + ": " + v));</pre>
+
+                <h3>TreeMap (Sorted by Key)</h3>
+                <pre>TreeMap<String, Integer> map = new TreeMap<>();
+map.put("Cherry", 30);
+map.put("Apple", 10);
+map.put("Banana", 20);
+// Keys in order: Apple, Banana, Cherry
+
+map.firstKey();    // "Apple"
+map.lastKey();     // "Cherry"</pre>
+
+                <h3>Map Comparison</h3>
+                <table>
+                    <tr>
+                        <th>HashMap</th>
+                        <th>LinkedHashMap</th>
+                        <th>TreeMap</th>
+                    </tr>
+                    <tr>
+                        <td>No order</td>
+                        <td>Insertion order</td>
+                        <td>Sorted by key</td>
+                    </tr>
+                    <tr>
+                        <td>O(1)</td>
+                        <td>O(1)</td>
+                        <td>O(log n)</td>
+                    </tr>
+                    <tr>
+                        <td>1 null key</td>
+                        <td>1 null key</td>
+                        <td>No null key</td>
+                    </tr>
+                </table>
+
+                <div class="important"><strong>Key:</strong> HashMap allows one null key and multiple null values.
+                    Hashtable allows NO null!</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">5. Threads - Basics</div>
+            <div class="dropdown-content">
+                <h3>What is a Thread?</h3>
+                <p>Lightweight subprocess, smallest unit of processing. Java supports multithreading natively.</p>
+
+                <h3>Creating Threads - Extending Thread</h3>
+                <pre>class MyThread extends Thread {
+    @Override
+    public void run() {
+        System.out.println("Thread running: " + getName());
+    }
+}
+
+MyThread t = new MyThread();
+t.start();  // Don't call run() directly!</pre>
+
+                <h3>Creating Threads - Implementing Runnable</h3>
+                <pre>class MyRunnable implements Runnable {
+    @Override
+    public void run() {
+        System.out.println("Runnable running");
+    }
+}
+
+Thread t = new Thread(new MyRunnable());
+t.start();
+
+// Lambda version (Java 8+)
+Thread t2 = new Thread(() -> System.out.println("Lambda thread"));
+t2.start();</pre>
+
+                <h3>Thread vs Runnable</h3>
+                <table>
+                    <tr>
+                        <th>extends Thread</th>
+                        <th>implements Runnable</th>
+                    </tr>
+                    <tr>
+                        <td>Cannot extend other class</td>
+                        <td>Can extend other class</td>
+                    </tr>
+                    <tr>
+                        <td>Each thread = new object</td>
+                        <td>Same runnable, multiple threads</td>
+                    </tr>
+                    <tr>
+                        <td>In-built thread methods</td>
+                        <td>Need Thread object for methods</td>
+                    </tr>
+                </table>
+
+                <h3>Thread Methods</h3>
+                <table>
+                    <tr>
+                        <th>Method</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td><code>start()</code></td>
+                        <td>Start thread execution</td>
+                    </tr>
+                    <tr>
+                        <td><code>run()</code></td>
+                        <td>Entry point for thread code</td>
+                    </tr>
+                    <tr>
+                        <td><code>sleep(ms)</code></td>
+                        <td>Pause thread (static)</td>
+                    </tr>
+                    <tr>
+                        <td><code>join()</code></td>
+                        <td>Wait for thread to finish</td>
+                    </tr>
+                    <tr>
+                        <td><code>yield()</code></td>
+                        <td>Suggest giving up CPU</td>
+                    </tr>
+                    <tr>
+                        <td><code>getName()/setName()</code></td>
+                        <td>Get/set thread name</td>
+                    </tr>
+                    <tr>
+                        <td><code>getPriority()/setPriority()</code></td>
+                        <td>Thread priority (1-10)</td>
+                    </tr>
+                    <tr>
+                        <td><code>isAlive()</code></td>
+                        <td>Check if thread is running</td>
+                    </tr>
+                </table>
+
+                <h3>Thread Lifecycle</h3>
+                <pre>NEW → RUNNABLE → RUNNING → BLOCKED/WAITING → TERMINATED
+         ↑_____________________________|</pre>
+
+                <div class="note"><strong>MCQ Tip:</strong> Call <code>start()</code> not <code>run()</code>! Calling
+                    run() directly won't create new thread.</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">6. Thread Synchronization</div>
+            <div class="dropdown-content">
+                <h3>Why Synchronization?</h3>
+                <p>Prevent race conditions when multiple threads access shared resources.</p>
+
+                <h3>synchronized Method</h3>
+                <pre>class Counter {
+    private int count = 0;
+    
+    public synchronized void increment() {
+        count++;  // Thread-safe
+    }
+    
+    public synchronized int getCount() {
+        return count;
+    }
+}</pre>
+
+                <h3>synchronized Block</h3>
+                <pre>class Example {
+    private Object lock = new Object();
+    
+    void method() {
+        synchronized(lock) {
+            // only one thread can execute this block
+        }
+    }
+    
+    void method2() {
+        synchronized(this) {
+            // lock on current object
+        }
+    }
+}</pre>
+
+                <h3>volatile Keyword</h3>
+                <pre>class SharedData {
+    volatile boolean flag = false;
+    // Changes visible to all threads immediately
+}</pre>
+
+                <h3>wait(), notify(), notifyAll()</h3>
+                <pre>class Buffer {
+    private int data;
+    private boolean hasData = false;
+    
+    synchronized void produce(int value) throws InterruptedException {
+        while (hasData) {
+            wait();  // Wait until consumed
+        }
+        data = value;
+        hasData = true;
+        notify();  // Notify consumer
+    }
+    
+    synchronized int consume() throws InterruptedException {
+        while (!hasData) {
+            wait();  // Wait until produced
+        }
+        hasData = false;
+        notify();  // Notify producer
+        return data;
+    }
+}</pre>
+
+                <h3>Thread Safety</h3>
+                <table>
+                    <tr>
+                        <th>Class</th>
+                        <th>Thread-Safe?</th>
+                    </tr>
+                    <tr>
+                        <td>ArrayList</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>Vector</td>
+                        <td>Yes (synchronized)</td>
+                    </tr>
+                    <tr>
+                        <td>HashMap</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>Hashtable</td>
+                        <td>Yes (synchronized)</td>
+                    </tr>
+                    <tr>
+                        <td>StringBuilder</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>StringBuffer</td>
+                        <td>Yes (synchronized)</td>
+                    </tr>
+                </table>
+
+                <div class="important"><strong>Key:</strong> <code>wait()</code>, <code>notify()</code>,
+                    <code>notifyAll()</code> must be called from synchronized context!</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">7. Deadlock and Thread States</div>
+            <div class="dropdown-content">
+                <h3>Deadlock</h3>
+                <p>Two or more threads waiting for each other forever to release resources.</p>
+                <pre>// Thread 1 holds lock A, waits for lock B
+// Thread 2 holds lock B, waits for lock A
+// = DEADLOCK!
+
+// Avoid by:
+// 1. Acquiring locks in same order
+// 2. Using timeouts
+// 3. Using tryLock()</pre>
+
+                <h3>Thread States (Thread.State)</h3>
+                <table>
+                    <tr>
+                        <th>State</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>NEW</td>
+                        <td>Thread created, not started</td>
+                    </tr>
+                    <tr>
+                        <td>RUNNABLE</td>
+                        <td>Executing or ready to execute</td>
+                    </tr>
+                    <tr>
+                        <td>BLOCKED</td>
+                        <td>Waiting to acquire lock</td>
+                    </tr>
+                    <tr>
+                        <td>WAITING</td>
+                        <td>Waiting indefinitely (wait(), join())</td>
+                    </tr>
+                    <tr>
+                        <td>TIMED_WAITING</td>
+                        <td>Waiting with timeout (sleep(), wait(ms))</td>
+                    </tr>
+                    <tr>
+                        <td>TERMINATED</td>
+                        <td>Completed execution</td>
+                    </tr>
+                </table>
+
+                <h3>Thread Priority</h3>
+                <pre>Thread t = new Thread();
+t.setPriority(Thread.MAX_PRIORITY);  // 10
+t.setPriority(Thread.MIN_PRIORITY);  // 1
+t.setPriority(Thread.NORM_PRIORITY); // 5 (default)</pre>
+
+                <h3>Daemon Threads</h3>
+                <pre>Thread t = new Thread();
+t.setDaemon(true);  // Set before start()
+t.start();
+
+// Daemon threads are background threads
+// JVM exits when only daemon threads remain</pre>
+
+                <div class="note"><strong>MCQ Tip:</strong> <code>sleep()</code> doesn't release lock.
+                    <code>wait()</code> releases lock!</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.querySelectorAll('.dropdown-header').forEach(h => {
+            h.addEventListener('click', () => h.parentElement.classList.toggle('active'));
+        });
+    </script>
+</body>
+
+</html>

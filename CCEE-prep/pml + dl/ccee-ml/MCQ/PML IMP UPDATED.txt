@@ -1,0 +1,1577 @@
+1)The difference between the actual Y value and the predicted Y value found using a regression equation is called the
+A. slope
+
+B. residual
+
+C. outlier
+
+D. scatter plot
+
+Answer:
+A.residual
+
+2)Neural networks
+A. optimize a convex cost function
+
+B. always output values between 0 and 1
+
+C. can be used for regression as well as classification
+
+D. all of the above
+
+Answer:
+C.can be used for regression as well as classification
+
+3)Linear Regression is a _______ machine learning algorithm.
+A. supervised
+
+B. unsupervised
+
+C. semi-supervised
+
+D. can\t say
+
+Answer:
+A.supervised
+
+5)Which of the following methods/methods do we use to find the best fit line for data in Linear Regression?
+A. least square error
+
+B. maximum likelihood
+
+C. logarithmic loss
+
+D. both a and b
+
+Answer:
+A.least square error
+
+6)Which of the following methods do we use to best fit the data in Logistic Regression?
+A. least square error
+
+B. maximum likelihood
+
+C. jaccard distance
+
+D. both a and b
+
+Answer:
+B.maximum likelihood
+
+9)Regarding bias and variance, which of the following statements are true? (Here ‘high’ and ‘low’ are relative to the ideal model.
+(i) Models which overfit are more likely to have high bias
+
+(ii) Models which overfit are more likely to have low bias
+
+(iii) Models which overfit are more likely to have high variance
+
+(iv) Models which overfit are more likely to have low variance
+A. (i) and (ii)
+
+B. (ii) and (iii)
+
+C. (iii) and (iv)
+
+D. none of these
+
+Answer:
+B.(ii) and (iii)
+
+10)Which of the following indicates the fundamental of least squares?
+A. arithmetic mean should be maximized
+
+B. arithmetic mean should be zero
+
+C. arithmetic mean should be neutralized
+
+D. arithmetic mean should be minimized
+
+Answer:
+D.arithmetic mean should be minimized
+
+11)Point out the wrong statement.
+A. regression through the origin yields an equivalent slope if you center the data first
+
+B. normalizing variables results in the slope being the correlation
+
+C. least squares is not an estimation tool
+
+D. none of the mentioned
+
+Answer:
+C.least squares is not an estimation tool
+
+12)If X and Y in a regression model are totally unrelated,
+
+A. the correlation coefficient would be -1
+
+B. the coefficient of determination would be 0
+
+C. the coefficient of determination would be 1
+
+D. the sse would be 0
+
+answer:
+B. the coefficient of determination would be 0
+
+13)Problem in multi regression is ?
+A. multicollinearity
+
+B. overfitting
+
+C. both multicollinearity & overfitting
+
+D. underfitting
+
+Answer:
+C.both multicollinearity & overfitting
+
+14) What are tree based classifiers?
+A. classifiers which form a tree with each attribute at one level
+
+B. classifiers which perform series of condition checking with one attributeat a time
+
+C. both options except none
+
+D. none of the options
+
+Answer:
+C.both options except none
+
+15)What is gini index?
+A. it is a type of index structure
+
+B. it is a measure of purity
+
+C. both options except none
+
+D. none of the options
+
+Answer:
+B. it is a measure of purity
+
+16)The gini index is not biased towards multivalued attributed.
+A. true
+
+B. false
+
+Answer:
+B.false
+
+17)this clustering approach initially assumes that each data instance represents a single cluster.
+A. expectation maximization
+
+B. k-means clustering
+
+C. agglomerative clustering
+
+D. conceptual clustering
+
+Answer:
+C.agglomerative clustering
+
+18)Which statement is true about the K-Means algorithm?
+A. the output attribute must be cateogrical
+
+B. all attribute values must be categorical
+
+C. all attributes must be numeric
+
+D. attribute values may be either categorical or numeric
+
+Answer:
+C.all attributes must be numeric
+
+19)The most general form of distance is
+A. manhattan
+
+B. eucledian
+
+C. mean
+
+D. minkowski
+
+Answer:
+B.eucledian
+
+20)Which of the following algorithm comes under the classification
+A. apriori
+
+B. brute force
+
+C. dbscan
+
+D. k-nearest neighbor
+
+Answer:
+D.k-nearest neighbor
+
+21)Hierarchical agglomerative clustering is typically visualized as?
+A. dendrogram
+
+B. binary trees
+
+C. block diagram
+
+D. graph
+
+Answer:
+A.dendrogram
+
+22)The distance between two points calculated using Pythagoras theorem is
+A. supremum distance
+
+B. eucledian distance
+
+C. linear distance
+
+D. manhattan distance
+
+Answer:
+B.eucledian distance
+
+23)What is the approach of basic algorithm for decision tree induction?
+A. greedy
+
+B. top down
+
+C. procedural
+
+D. step by step
+Answer:
+A. greedy
+
+24)Frequent item sets is
+A. superset of only closed frequent item sets
+
+B. superset of only maximal frequent item sets
+
+C. subset of maximal frequent item sets
+
+D. superset of both closed frequent item sets and maximal frequent item sets
+
+Answer:
+D.superset of both closed frequent item sets and maximal frequent item sets
+
+25)Which statement is true about neural network and linear regression models?
+A. both techniques build models whose output is determined by a linear sum of weighted input attribute values
+
+B. the output of both models is a categorical attribute value
+
+C. both models require numeric attributes to range between 0 and 1
+
+D. both models require input attributes to be numeric
+
+Answer:
+D.both models require input attributes to be numeric
+
+26)Which Association Rule would you prefer
+A. high support and medium confidence
+
+B. high support and low confidence
+
+C. low support and high confidence
+
+D. low support and low confidence
+
+Answer:
+C.low support and high confidence
+
+27)Clustering is ___________ and is example of ____________learning
+A. predictive and supervised
+
+B. predictive and unsupervised
+
+C. descriptive and supervised
+
+D. descriptive and unsupervised
+
+Answer:
+D.descriptive and unsupervised
+
+28)Classification rules are extracted from _____________
+A. decision tree
+
+B. root node
+
+C. branches
+
+D. siblings
+
+Answer:
+A) decision tree
+
+29)What does K refers in the K-Means algorithm which is a non-hierarchical clustering approach?
+A. complexity
+
+B. fixed value
+
+C. no of iterations
+
+D. number of clusters
+
+Answer:
+D.number of clusters
+
+30)Which of the following properties are characteristic of decision trees?
+(a) High bias
+(b) High variance
+(c) Lack of smoothness of prediction surfaces
+(d) Unbounded parameter set
+A. a and b
+
+B. a and d
+
+C. b, c and d
+
+D. all of the above
+
+Answer:
+C.b, c and d
+(decision tree are prone to overfit which means low bais so a option is not true)
+
+31)Machine learning techniques differ from statistical techniques in that machine learning methods
+A. are better able to deal with missing and noisy data
+
+B. typically assume an underlying distribution for the data
+
+C. have trouble with large-sized datasets
+
+D. are not able to explain their behavior
+
+Answer:
+A.are better able to deal with missing and noisy data
+
+32)Which Statement is not true statement.
+A. k-means clustering is a linear clustering algorithm.
+
+B. k-means clustering aims to partition n observations into k clusters
+
+C. k-nearest neighbor is same as k-means
+
+D. k-means is sensitive to outlier
+
+Answer:
+B.k-means clustering aims to partition n observations into k clusters
+
+33) which of the following cases will K-Means clustering give poor results?
+1. Data points with outliers
+2. Data points with different densities
+3. Data points with round shapes
+4. Data points with non-convex shapes
+A. 1 and 2
+
+B. 2 and 3
+
+C. 2 and 4
+
+D. 1, 2 and 4
+
+Answer:
+C.2 and 4
+
+34)What are two steps of tree pruning work?
+A. pessimistic pruning and optimistic pruning
+
+B. postpruning and prepruning
+
+C. cost complexity pruning and time complexity pruning
+
+D. none of the options
+
+Answer:
+B.postpruning and prepruning
+
+35)How to select best hyperparameters in tree based models?
+A. measure performance over training data
+
+B. measure performance over validation data
+
+C. both of these
+
+D. random selection of hyper parameters
+
+Answer:
+B.measure performance over validation data
+
+36)What is true about K-Mean Clustering?
+1. K-means is extremely sensitive to cluster center initializations
+2. Bad initialization can lead to Poor convergence speed
+3. Bad initialization can lead to bad overall clustering
+A. 1 and 3
+
+B. 1 and 2
+
+C. 2 and 3
+
+D. 1, 2 and 3
+
+Answer:
+D.1, 2 and 3
+
+37)What is gini index?
+A. gini index??operates on the categorical target variables
+
+B. it is a measure of purity
+
+C. gini index performs only binary split
+
+D. all (1,2 and 3)
+
+Answer:
+D.all (1,2 and 3)
+
+38)Decision Tree is
+A. flow-chart
+
+B. structure in which internal node represents test on an attribute, each branch represents outcome of test and each leaf node represents class label
+
+C. both a & b
+
+D. class of instance
+
+Answer:
+C.both a & b
+
+39)Which of the following is true about Manhattan distance?
+A. it can be used for continuous variables
+
+B. it can be used for categorical variables
+
+C. it can be used for categorical as well as continuous
+
+D. it can be used for constants
+
+Answer:
+A.it can be used for continuous variables
+
+40)In which of the following cases will K-means clustering fail to give good results? 1) Data points with outliers 2) Data points with different densities 3) Data points with nonconvex shapes
+A. 1 and 2
+
+B. 2 and 3
+
+C. 1, 2, and 3??
+
+D. 1 and 3
+
+Answer:
+C.1, 2, and 3
+
+41)How will you counter over-fitting in decision tree?
+A. by pruning the longer rules
+
+B. by creating new rules
+
+C. both by pruning the longer rules’ and ‘ by creating new rules’
+
+D. over-fitting is not possible
+
+Answer:
+A.by pruning the longer rules
+
+42)This  clustering algorithm terminates when mean values computed for the current iteration of the algorithm are identical to the computed mean values for the previous iteration Select one:
+A. k-means clustering
+
+B. conceptual clustering
+
+C. expectation maximization
+
+D. agglomerative clustering
+
+Answer:
+A.k-means clustering
+
+43)Which one of the following is the main reason for pruning a Decision Tree?
+A. to save computing time during testing
+
+B. to save space for storing the decision tree
+
+C. to make the training set error smaller
+
+D. to avoid overfitting the training set
+
+Answer:
+D.to avoid overfitting the training set
+
+44)The K-means algorithm:
+A. requires the dimension of the feature space to be no bigger than the number of samples
+
+B. has the smallest value of the objective function when k = 1
+
+C. minimizes the within class variance for a given number of clusters
+
+D. converges to the global optimum if and only if the initial means are chosen as some of the samples themselves
+
+Answer:
+C.minimizes the within class variance for a given number of clusters
+
+45)Hierarchical clustering is slower than non-hierarchical clustering?
+A. true
+
+B. false
+
+C. depends on data
+
+D. cannot say
+
+Answer:
+A.true
+
+46)High entropy means that the partitions in classification are
+A. pure
+
+B. not pure
+
+C. useful
+
+D. useless
+
+Answer:
+B.not pure
+
+47)Suppose we would like to perform clustering on spatial data such as the geometrical locations of houses. We wish to produce clusters of many different sizes and shapes. Which of the following methods is the most appropriate?
+A. decision trees
+
+B. density-based clustering
+
+C. model-based clustering
+
+D. k-means clustering
+
+Answer:
+B.density-based clustering
+
+48)The main disadvantage of maximum likelihood methods is that they are _____
+A. mathematically less folded
+
+B. mathematically less complex
+
+C. mathematically less complex
+
+D. computationally intense
+
+Answer:
+D.computationally intense
+
+49)Which Statement is not true statement.
+A. k-means clustering is a linear clustering algorithm.
+
+B. k-means clustering aims to partition n observations into k clusters
+
+C. k-nearest neighbor is same as k-means
+
+D. k-means is sensitive to outlier
+
+Answer:
+C.k-nearest neighbor is same as k-means
+
+50)What is the naïve assumption in a Naïve Bayes Classifier.
+A. all the classes are independent of each other
+
+B. all the features of a class are independent of each other
+
+C. the most probable feature for a class is the most important feature to be cinsidered for classification
+
+D. all the features of a class are conditionally dependent on each other
+
+Answer:
+D.all the features of a class are conditionally dependent on each other
+
+51)Which of the following statements about Naive Bayes is incorrect?
+A. attributes are equally important.
+
+B. attributes are statistically dependent of one another given the class value.
+
+C. attributes are statistically independent of one another given the class value.
+
+D. attributes can be nominal or numeric
+
+Answer:
+B.attributes are statistically dependent of one another given the class value.
+
+52)Skewness of Normal distribution is ___________
+A. negative
+
+B. positive
+
+C. 0
+
+D. undefined
+
+Answer:
+C.0
+
+53)The correlation coefficient for two real-valued attributes is –0.85. What does this value tell you?
+A. the attributes are not linearly related.
+
+B. as the value of one attribute increases the value of the second attribute also increases
+
+C. as the value of one attribute decreases the value of the second attribute increases
+
+D. the attributes show a linear relationship
+
+Answer:
+C.as the value of one attribute decreases the value of the second attribute increases
+
+54)Which of the following option is / are correct regarding benefits of ensemble model? 1. Better performance
+2. Generalized models
+3. Better interpretability
+A. 1 and 3
+
+B. 2 and 3
+
+C. 1, 2 and 3
+
+D. 1 and 2
+
+Answer:
+D.1 and 2
+
+55)Which of the following is an application of NN (Neural Network)?
+A. sales forecasting
+
+B. data validation
+
+C. risk management
+
+D. all of the mentioned
+
+Answer:
+D.all of the mentioned
+
+56)Neural Networks are complex ______________ with many parameters.
+A. linear functions
+
+B. nonlinear functions
+
+C. discrete functions
+
+D. exponential functions
+
+Answer:
+A.linear functions
+
+57)Which one of the following is not a major strength of the neural network approach?
+A. neural network learning algorithms are guaranteed to converge to an optimal solution
+
+B. neural networks work well with datasets containing noisy data
+
+C. neural networks can be used for both supervised learning and unsupervised clustering
+
+D. neural networks can be used for applications that require a time element to be included in the data
+
+Answer:
+A.neural network learning algorithms are guaranteed to converge to an optimal solution
+
+58)The network that involves backward links from output to the input and hidden layers is called
+A. self organizing maps
+
+B. perceptrons
+
+C. recurrent neural network
+
+D. multi layered perceptron
+
+Answer:
+C. recurrent neural network
+
+59)In an election for the head of college, N candidates are competing against each other and people are voting for either of the candidates. Voters don’t communicate with each other while casting their votes.which of the following ensembles method works similar to the discussed elction Procedure?
+A. ??bagging
+
+B. boosting
+
+C. stacking
+
+D. randomization
+
+Answer:
+A.bagging
+
+60)Given above is a description of a neural network. When does a neural network model become a deep learning model?
+A. when you add more hidden layers and increase depth of neural network
+
+B. when there is higher dimensionality of data
+
+
+C. when the problem is an image recognition problem
+
+D. when there is lower dimensionality of data
+
+Answer:
+A.when you add more hidden layers and increase depth of neural network
+
+61)What is true about an ensembled classifier?
+1. Classifiers that are more “sure” can vote with more conviction
+2. Classifiers can be more “sure” about a particular part of the space
+3. Most of the times, it performs better than a single classifier
+A. 1 and 2
+
+B. 1 and 3
+
+C. 2 and 3
+
+D. all of the above
+
+Answer:
+D.all of the above
+
+62)Which of the following can be true for selecting base learners for an ensemble?
+1. Different learners can come from same algorithm with different hyper parameters
+2. Different learners can come from different algorithms
+3. Different learners can come from different training spaces
+A. 1
+
+B. 2
+
+C. 1 and 3
+
+D. 1, 2 and 3
+
+Answer:
+D.1, 2 and 3
+
+63)True or False: Ensemble learning can only be applied to supervised learning methods.
+A. true
+
+B. false
+
+Answer:
+B.false
+
+63)Which of the following is / are true about weak learners used in ensemble model?
+1. They have low variance and they don’t usually overfit
+2. They have high bias, so they can not solve hard learning problems
+3. They have high variance and they don’t usually overfit
+A. 1 and 2
+
+B. 1 and 3
+
+C. 2 and 3
+
+D. none of these
+
+Answer:
+A.1 and 2
+
+64)True or False: Ensemble of classifiers may or may not be more accurate than any of its individual model.
+A. true
+
+B. false
+
+Answer:
+A.true
+
+65)If you use an ensemble of different base models, is it necessary to tune the hyper parameters of all base models to improve the ensemble performance?
+A. yes
+
+B. no
+
+C. can’t say
+
+Answer:
+B.no
+
+66)Which of the following parameters can be tuned for finding good ensemble model in bagging based algorithms?
+1. Max number of samples
+2. Max features
+3. Bootstrapping of samples
+4. Bootstrapping of features
+A. 1 and 3
+
+B. 2 and 3
+
+C. 1 and 2
+
+D. all of above
+
+Answer:
+D.all of above
+
+67)Which of the following is true about bagging?
+1. Bagging can be parallel
+2. The aim of bagging is to reduce bias not variance
+3. Bagging helps in reducing overfitting
+A. 1 and 2
+
+B. 2 and 3
+
+C. 1 and 3
+
+D. all of these
+
+Answer:
+C.1 and 3
+
+68)Which of the following is NOT supervised learning?
+A. pca
+
+B. decision tree
+
+C. linear regression
+
+D. naive bayesian
+
+Answer:
+A.pca
+
+69)How can you avoid overfitting ?
+A. by using a lot of data
+
+B. by using inductive machine learning
+
+C. by using validation only
+
+D. none of above
+
+Answer:
+A.by using a lot of data
+
+70)What are the popular algorithms of Machine Learning?
+A. decision trees and neural networks (back propagation)
+
+B. probabilistic networks and nearest neighbor
+
+C. support vector machines
+
+D. all
+
+Answer:
+D.all
+
+71)What is Training set?
+A. training set is used to test the accuracy of the hypotheses generated by the learner.
+
+B. a set of data is used to discover the potentially predictive relationship.
+
+C. both a & b
+
+D. none of above
+
+Answer:
+B.a set of data is used to discover the potentially predictive relationship
+
+72)Common deep learning applications include        
+A. image classification, real-time visual tracking
+
+B. autonomous car driving, logistic optimization
+
+C. bioinformatics, speech recognition
+
+D. all above
+
+Answer:
+D.all above
+
+73)what is the function of Supervised Learning?
+A. classifications, predict time series, annotate strings
+
+B. speech recognition, regression
+
+C. both a & b
+
+D. none of above
+
+Answer:
+C.both a & b
+
+74)Commons unsupervised applications include
+A. object segmentation
+
+B. similarity detection
+
+C. automatic labeling
+
+D. all above
+
+Answer:
+D.all above
+
+75)Reinforcement learning is particularly efficient when                         .
+A. the environment is not completely deterministic
+
+B. it\s often very dynamic
+
+C. it\s impossible to have a precise error measure
+
+D. all above
+
+Answer:
+D.all above
+
+76)if there is only a discrete number of possible outcomes (called categories), the process becomes a           .
+A. regression
+
+B. classification.
+
+C. modelfree
+
+D. categories
+
+Answer:
+B.classification.
+
+77)Which of the following are supervised learning applications
+A. spam detection, pattern detection, natural language processing
+
+B. image classification, real-time visual tracking
+
+C. autonomous car driving, logistic optimization
+
+D. bioinformatics, speech recognition
+
+Answer:
+A.spam detection, pattern detection, natural language processing
+
+78)What is Overfitting in Machine learning?
+A. when a statistical model describes random error or noise instead of underlying relationship overfitting occurs.
+
+B. robots are programed so that they can perform the task based on data they gather from sensors.
+
+C. while involving the process of learning overfitting occurs.
+
+D. a set of data is used to discover the potentially predictive relationship
+
+Answer:
+A.when a statistical model describes random error or noise instead of underlying relationship overfitting occurs.
+
+79) What is Test set?
+A. test set is used to test the accuracy of the hypotheses generated by the learner.
+
+B. it is a set of data is used to discover the potentially predictive relationship.
+
+C. both a & b
+
+D. none of above
+
+Answer:
+A.test set is used to test the accuracy of the hypotheses generated by the learner.
+
+80) How it's possible to use a different placeholder through the parameter             .
+A. regression
+
+B. classification
+
+C. random_state
+
+D. missing_values
+
+Answer:
+D.missing_values
+
+81) There are also many univariate methods that can be used in order to select the best features according to specific criteria based on              .
+A. f-tests and p-values
+
+B. chi-square
+
+C. anova
+
+D. all above
+
+Answer:
+A.f-tests and p-values
+
+82)Which learning Requires Self Assessment to identify patterns within data?
+A. unsupervised learning
+
+B. supervised learning
+
+C. semisupervised learning
+
+D. reinforced learning
+
+Answer:
+A.unsupervised learning
+
+83) Different learning methods does not include?
+A. memorization
+
+B. analogy
+
+C. deduction
+
+D. introduction
+
+Answer:
+D.introduction
+
+84) measurable property or parameter of the data-set is
+A. training data
+
+B. feature
+
+C. test data
+
+D. validation data
+
+Answer:
+B.feature
+
+85)Feature can be used as a
+A. binary split
+
+B. predictor
+
+C. both a and b??
+
+D. none of the above
+
+Answer:
+C.both a and b??
+
+86)Which of the folllowing is an example of feature extraction?
+A. construction bag of words from an email
+
+B. applying pca to project high dimensional data
+
+C. removing stop words
+
+D. forward selection
+
+Answer:
+B.applying pca to project high dimensional data
+
+87)What can be major issue in Leave-One-Out-Cross-Validation(LOOCV)?
+A. low variance
+
+B. high variance
+
+C. faster runtime compared to k-fold cross validation
+
+D. slower runtime compared to normal validation
+
+Answer:
+B.high variance
+
+88)You trained a binary classifier model which gives very high accuracy on the training data, but much lower accuracy on validation data. Which is false.
+A. this is an instance of overfitting
+
+B. this is an instance of underfitting
+
+C. the training was not well regularized
+
+D. the training and testing examples are sampled from different distributions
+
+Answer:
+B.this is an instance of underfitting
+
+89)Which of the following are components of generalization Error?
+A. bias
+
+B. vaiance
+
+C. both of them
+
+D. none of them
+
+Answer:
+C.both of them
+
+90)Which one of the following is suitable? 1. When the hypothsis space is richer, overfitting is more likely.
+2. when the feature space is larger , overfitting is more likely.
+A. true, false
+
+B. false, true
+
+C. true,true
+
+D. false,false
+
+Answer:
+C.true,true
+
+91)What is the naïve assumption in a Naïve Bayes Classifier.
+A. all the classes are independent of each other
+
+B. all the features of a class are independent of each other
+
+C. the most probable feature for a class is the most important feature to be cinsidered for classification
+
+D. all the features of a class are conditionally dependent on each other
+
+Answer:(A)
+
+92)What is back propagation?
+a) It is another name given to the curvy function in the perceptron
+b) It is the transmission of error back through the network to adjust the inputs
+c) It is the transmission of error back through the network to allow weights to be adjusted so that the network can learn
+d) None of the mentioned
+Answer:
+B)
+
+93)What is PCA, KPCA and ICA used for?
+A. principal components analysis
+
+B. kernel based principal component analysis
+
+C. independent component analysis
+
+D. all above
+
+Answer:
+D.all above
+
+94)What are common feature selection methods in regression task?
+A. correlation coefficient
+
+B. greedy algorithms
+
+C. all above
+
+D. none of these
+
+Answer:
+C.all above
+
+95)If Linear regression model perfectly first i.e., train error is zero, then
+A. a) test error is also always zero
+
+B. b) test error is non zero
+
+C. c) couldnt comment on test error
+
+D. d) test error is equal to train error
+
+Answer:
+C.c) couldn�t comment on test error
+
+96)Function used for linear regression in R is                    
+A. a) lm(formula, data)
+
+B. b) lr(formula, data)
+
+C. c) lrm(formula, data)
+
+D. d) regression.linear(formula, data)
+
+Answer:
+A.a) lm(formula, data)
+
+97)In syntax of linear model lm(formula,data,..), data refers to             
+A. a) matrix
+
+B. b) vector
+
+C. c) array
+
+D. d) list
+
+Answer:
+B.b) vector
+
+98)Which of the following is true about Residuals ?
+A. a) lower is better
+
+B. b)higher is better
+
+C. c)a or b depend on the situation
+
+D. d)none of these
+
+Answer
+A.a) lower is better
+
+99)Naive Bayes classifiers are a collection------------------of algorithms
+
+A. classification
+
+B. clustering
+
+C. regression
+
+D. all
+
+Answer:
+A.classification
+
+100)Naive Bayes classifiers is                             Learning
+A. supervised
+
+B. unsupervised
+
+C. both
+
+D. none
+
+Answer:
+A.supervised
+
+101)Features being classified is                    of each other in Nave Bayes Classifier
+A. independent
+
+B. dependent
+
+C. partial dependent
+
+D. none
+
+Answer:
+A.independent
+
+102)Bernoulli Nave Bayes Classifier is                    distribution
+A. continuous
+
+B. discrete
+
+C. binary
+
+Answer:
+C.binary
+
+103)Multinomial Nave Bayes Classifier is                    distribution
+A. continuous
+
+B. discrete
+
+C. binary
+
+Answer:
+B.discrete
+
+104)Gaussian Nave Bayes Classifier is                    distribution
+A. continuous
+
+B. discrete
+
+C. binary
+
+Answer:
+A.continuous
+
+105)SVM is a algorithm
+A. classification
+
+B. clustering
+
+C. regression
+
+D. all
+
+Answer:
+A.classification
+
+106) Even if there are no actual supervisors               learning is also based on feedback provided by the environment
+A. supervised
+
+B. reinforcement
+
+C. unsupervised
+
+D. none of the above
+
+Answer:
+B.reinforcement
+
+107) What does learning exactly mean?
+A. robots are programed so that they can perform the task based on data they gather from sensors.
+
+B. a set of data is used to discover the potentially predictive relationship.
+
+C. learning is the ability to change according to external stimuli and remembering most of all previous experiences.
+
+D. it is a set of data is used to discover the potentially predictive relationship.
+
+Answer:
+C.learning is the ability to change according to external stimuli and remembering most of all previous experiences
+
+108)Techniques involve the usage of both labeled and unlabeled data is called     .
+A. supervised
+
+B. semi-supervised
+
+C. unsupervised
+
+D. none of the above
+
+Answer:
+B.semi-supervised
+
+109) A supervised scenario is characterized by the concept of a          .
+A. programmer
+
+B. teacher
+
+C. author
+
+D. farmer
+
+Answer:
+B.teacher
+
+110) In a linear regression problem, we are using R-squared to measure goodness-of-fit. We add a feature in linear regression model and retrain the same model.Which of the following option is true?
+A. if r squared increases, this variable is significant.
+
+B. if r squared decreases, this variable is not significant.
+
+C. individually r squared cannot tell about variable importance. we cant say anything about it right now.
+
+D. none of these.
+
+Answer:
+C.individually r squared cannot tell about variable importance. we can�t say anything about it right now.
+
+111) which of the following step / assumption in regression modeling impacts the trade- off between under-fitting and over-fitting the most.
+A. the polynomial degree
+
+B. whether we learn the weights by matrix inversion or gradient descent
+
+C. the use of a constant-term
+
+Answer:
+A.the polynomial degree
+
+112)How many coefficients do you need to estimate in a simple linear regression model (One independent variable)?
+A. 1
+
+B. 2
+
+C. cant say
+
+Answer:
+B.2
+
+113)The SVMs are less effective when:
+A. the data is linearly separable
+
+B. the data is clean and ready to use
+
+C. the data is noisy and contains overlapping points
+
+Answer:
+C.the data is noisy and contains overlapping points
+
+114)Some people are using the term        instead of prediction only to avoid the weird idea that machine learning is a sort of modern magic.
+A. inference
+
+B. interference
+
+C. accuracy
+
+D. none of above
+
+Answer:
+A.inference
+
+115)If there is only a discrete number of possible outcomes called          .
+A. modelfree
+
+B. categories
+
+C. prediction
+
+D. none of above
+
+Answer:
+B.categories
+
+116)what is the function of Unsupervised Learning?
+A. find clusters of the data and find low-dimensional representations of the data
+
+B. find interesting directions in data and find novel observations/ database cleaning
+
+C. interesting coordinates and correlations
+
+D. all
+
+Answer:
+D.all
+
+117)Generally, which of the following method(s) is used for predicting continuous dependent variable?1. Linear Regression2. Logistic Regression
+A. a. 1 and 2
+
+B. b. only 1
+
+C. c. only 2
+
+D. d. none of these.
+
+Answer:
+B.b. only 1 (linear regression)
+
+118)If two variables are correlated, is it necessary that they have a linear relationship?
+A. a. yes
+
+B. b. no
+
+Answer:
+B.b. no
+
+112)Correlated variables can have zero correlation coeffficient. True or False?
+A. a. true
+
+B. b. false
+
+Answer:
+A.a. true
+
+113)Which of the following option is true regarding Regression andCorrelation ?Note: y is dependent variable and x is independent variable.
+
+A. the relationship is symmetric between x and y in both.
+
+B. the relationship is not symmetric between x and y in both.
+
+C. the relationship is not symmetric between x and y in case of correlation but in case of regression it is symmetric.
+
+D. the relationship is symmetric between x and y in case of correlation but in case of regression it is not symmetric.
+
+Answer:
+D.the relationship is symmetric between x and y in case of correlation but in case of regression it is not symmetric.
+
+115)Which of the following sentence is FALSE regarding regression?
+A. it relates inputs to outputs.
+
+B. it is used for prediction.
+
+C. it may be used for interpretation.
+
+D. it discovers causal relationships.
+
+Answer:
+D.it discovers causal relationships
+
+116)Which of the following method(s) does not have closed form solution for its coefficients?
+A. ridge regression
+
+B. lasso
+
+C. both ridge and lasso
+
+D. none of both
+
+Answer:
+B.lasso
+
+117)Commons unsupervised applications include
+A. object segmentation
+
+B. similarity detection
+
+C. automatic labeling
+
+D. all above
+
+Answer:
+D.all above
+
+118) What is Artificial Intelligence?
+a) Artificial Intelligence is a field that aims to make humans more intelligent
+b) Artificial Intelligence is a field that aims to improve the security
+c) Artificial Intelligence is a field that aims to develop intelligent machines
+d) Artificial Intelligence is a field that aims to mine the data
+
+Answer: c
+
+119)Which of the following is the branch of Artificial Intelligence?
+
+a) Machine Learning
+b) Cyber forensics
+c) Full-Stack Developer
+d) Network Design
+
+Answer: a
+
+120)What is the goal of Artificial Intelligence?
+
+a) To solve artificial problems
+b) To extract scientific causes
+c) To explain various sorts of intelligence
+d) To solve real-world problems
+
+Answer: c
+
+121)Which of the following is an application of Artificial Intelligence?
+
+a) It helps to exploit vulnerabilities to secure the firm
+b) Language understanding and problem-solving (Text analytics and NLP)
+c) Easy to create a website
+d) It helps to deploy applications on the cloud
+
+Answer: b
+
+122)Which of the following is not an application of artificial intelligence?
+
+a) Face recognition system
+b) Chatbots
+c) LIDAR
+d) DBMS
+Answer: D
+
+123)Face Recognition system is based on which type of approach?
+
+a) Weak AI approach
+b) Applied AI approach
+c) Cognitive AI approach
+d) Strong AI approach
+
+Answer: B
+
+124)Which of the following can improve the performance of an AI agent?
+
+a) Perceiving
+b) Learning
+c) Observing
+d) All of the mentioned
+
+Answer: b
+
+125)Artificial Intelligence has evolved extremely in all the fields except for _________
+
+a) Web mining
+b) Construction of plans in real time dynamic systems
+c) Understanding natural language robustly
+d) All of the mentioned
+
+Answer: d
+
+126)Which of the following is an example of artificial intelligent agent/agents?
+
+a) Autonomous Spacecraft
+b) Human
+c) Robot
+d) All of the mentioned
+Answer: d
+
+127)Machine Translation is that converts -
+
+A. Human language to machine language
+B. One human language to another
+C. Any human language to English
+D. Machine language to human language
+
+Answer: B
+
+128)Which of the following is the field of Natural Language Processing (NLP)?
+
+A. Computer Science
+B. Artificial Intelligence
+C. Computational linguistics
+D. All of the above
+
+Answer: A
+
+129)One of the main challenge/s of NLP Is _________________ .
+
+A. Handling Tokenization
+B. Handling Ambiguity of Sentences
+C. Handling POS-Tagging
+D. All of the above
+
+Answer: B
+
+130)In linguistic morphology, _____________ is the process for reducing inflected words 
+to their root form.
+
+A. Stemming
+B. Rooting
+C. Text-Proofing
+D. Both a & b
+
+Answer: A
+
+131)Natural language processing is divided into the two subfields of -
+
+A. symbolic and numeric
+B. algorithmic and heuristic
+C. time and motion
+D. understanding and generation
+
+Answer: D

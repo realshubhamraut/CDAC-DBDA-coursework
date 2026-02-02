@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Notes Part 2 - OOPs Concepts</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px
+        }
+
+        h1 {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 2px solid #333;
+            margin-bottom: 20px
+        }
+
+        .dropdown {
+            background: #fff;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px
+        }
+
+        .dropdown-header {
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 1.1em
+        }
+
+        .dropdown-header:hover {
+            background: #f9f9f9
+        }
+
+        .dropdown-header::after {
+            content: '+';
+            font-size: 1.5em
+        }
+
+        .dropdown.active .dropdown-header::after {
+            content: '−'
+        }
+
+        .dropdown-content {
+            display: none;
+            padding: 20px;
+            border-top: 1px solid #ddd;
+            background: #fafafa
+        }
+
+        .dropdown.active .dropdown-content {
+            display: block
+        }
+
+        h3 {
+            margin: 15px 0 10px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px
+        }
+
+        code {
+            background: #e8e8e8;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.95em
+        }
+
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 10px 0
+        }
+
+        ul,
+        ol {
+            margin-left: 25px;
+            margin-bottom: 10px
+        }
+
+        li {
+            margin-bottom: 5px
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0
+        }
+
+        th,
+        td {
+            border: 1px solid #333;
+            padding: 10px;
+            text-align: left
+        }
+
+        th {
+            background: #333;
+            color: #fff
+        }
+
+        tr:nth-child(even) {
+            background: #f2f2f2
+        }
+
+        .note {
+            background: #fff3cd;
+            padding: 10px;
+            border-left: 4px solid #ffc107;
+            margin: 10px 0
+        }
+
+        .important {
+            background: #f8d7da;
+            padding: 10px;
+            border-left: 4px solid #dc3545;
+            margin: 10px 0
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Java Programming Notes<br><small style="font-size:0.5em">Part 2: OOPs Concepts</small></h1>
+
+        <div class="dropdown">
+            <div class="dropdown-header">1. Classes and Objects</div>
+            <div class="dropdown-content">
+                <h3>Class Definition</h3>
+                <pre>class ClassName {
+    // Fields (Instance Variables)
+    int field1;
+    String field2;
+    
+    // Constructor
+    ClassName() {
+        // initialization
+    }
+    
+    // Methods
+    void method1() {
+        // code
+    }
+}</pre>
+
+                <h3>Creating Objects</h3>
+                <pre>// Declaration + Instantiation + Initialization
+ClassName obj = new ClassName();
+
+// Access members
+obj.field1 = 10;
+obj.method1();</pre>
+
+                <h3>Constructors</h3>
+                <pre>class Person {
+    String name;
+    int age;
+    
+    // Default constructor
+    Person() {
+        name = "Unknown";
+        age = 0;
+    }
+    
+    // Parameterized constructor
+    Person(String name, int age) {
+        this.name = name;   // 'this' refers to current object
+        this.age = age;
+    }
+    
+    // Copy constructor (manual)
+    Person(Person p) {
+        this.name = p.name;
+        this.age = p.age;
+    }
+}</pre>
+
+                <h3>Constructor Overloading</h3>
+                <pre>class Box {
+    int length, width, height;
+    
+    Box() { length = width = height = 1; }
+    Box(int side) { length = width = height = side; }
+    Box(int l, int w, int h) { length = l; width = w; height = h; }
+}</pre>
+
+                <h3>this Keyword</h3>
+                <ul>
+                    <li>Refers to current object</li>
+                    <li>Distinguish instance variables from parameters</li>
+                    <li>Call another constructor: <code>this()</code></li>
+                    <li>Pass current object as argument</li>
+                    <li>Return current object</li>
+                </ul>
+                <pre>class Example {
+    int x;
+    
+    Example(int x) {
+        this.x = x;  // this.x is instance, x is parameter
+    }
+    
+    Example() {
+        this(10);    // calls parameterized constructor
+    }
+}</pre>
+
+                <div class="important"><strong>Key:</strong> If no constructor defined, Java provides default
+                    constructor. If you define ANY constructor, default is NOT provided!</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">2. Encapsulation</div>
+            <div class="dropdown-content">
+                <h3>What is Encapsulation?</h3>
+                <p>Bundling data (fields) and methods that operate on data into a single unit (class), and restricting
+                    direct access to some components.</p>
+
+                <h3>Access Modifiers</h3>
+                <table>
+                    <tr>
+                        <th>Modifier</th>
+                        <th>Class</th>
+                        <th>Package</th>
+                        <th>Subclass</th>
+                        <th>World</th>
+                    </tr>
+                    <tr>
+                        <td>private</td>
+                        <td>✓</td>
+                        <td>✗</td>
+                        <td>✗</td>
+                        <td>✗</td>
+                    </tr>
+                    <tr>
+                        <td>default (no modifier)</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                        <td>✗</td>
+                        <td>✗</td>
+                    </tr>
+                    <tr>
+                        <td>protected</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                        <td>✗</td>
+                    </tr>
+                    <tr>
+                        <td>public</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                    </tr>
+                </table>
+
+                <h3>Getters and Setters</h3>
+                <pre>class Person {
+    private String name;
+    private int age;
+    
+    // Getter
+    public String getName() {
+        return name;
+    }
+    
+    // Setter with validation
+    public void setAge(int age) {
+        if (age > 0) {
+            this.age = age;
+        }
+    }
+    
+    public int getAge() {
+        return age;
+    }
+}</pre>
+
+                <h3>Benefits of Encapsulation</h3>
+                <ul>
+                    <li>Data hiding and protection</li>
+                    <li>Flexibility to change implementation</li>
+                    <li>Control over data (validation)</li>
+                    <li>Easy to test and maintain</li>
+                </ul>
+
+                <div class="note"><strong>MCQ Tip:</strong> Encapsulation = private fields + public getters/setters
+                </div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">3. Inheritance</div>
+            <div class="dropdown-content">
+                <h3>What is Inheritance?</h3>
+                <p>Mechanism where a new class (child/subclass) inherits properties and behaviors from existing class
+                    (parent/superclass).</p>
+
+                <h3>extends Keyword</h3>
+                <pre>class Animal {
+    String name;
+    void eat() { System.out.println("Eating..."); }
+}
+
+class Dog extends Animal {
+    void bark() { System.out.println("Barking..."); }
+}
+
+Dog d = new Dog();
+d.name = "Buddy";   // inherited
+d.eat();            // inherited
+d.bark();           // own method</pre>
+
+                <h3>Types of Inheritance</h3>
+                <table>
+                    <tr>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Supported?</th>
+                    </tr>
+                    <tr>
+                        <td>Single</td>
+                        <td>One parent, one child</td>
+                        <td>✓</td>
+                    </tr>
+                    <tr>
+                        <td>Multilevel</td>
+                        <td>Chain: A → B → C</td>
+                        <td>✓</td>
+                    </tr>
+                    <tr>
+                        <td>Hierarchical</td>
+                        <td>One parent, multiple children</td>
+                        <td>✓</td>
+                    </tr>
+                    <tr>
+                        <td>Multiple</td>
+                        <td>Multiple parents (classes)</td>
+                        <td>✗ (use interfaces)</td>
+                    </tr>
+                    <tr>
+                        <td>Hybrid</td>
+                        <td>Combination</td>
+                        <td>✗ (for classes)</td>
+                    </tr>
+                </table>
+
+                <h3>super Keyword</h3>
+                <pre>class Parent {
+    int x = 10;
+    Parent() { System.out.println("Parent constructor"); }
+    void show() { System.out.println("Parent show"); }
+}
+
+class Child extends Parent {
+    int x = 20;
+    
+    Child() {
+        super();  // calls parent constructor (must be first line!)
+        System.out.println("Child constructor");
+    }
+    
+    void show() {
+        System.out.println(super.x);  // 10 (parent's x)
+        System.out.println(this.x);   // 20 (child's x)
+        super.show();                 // calls parent's show()
+    }
+}</pre>
+
+                <h3>Method Overriding</h3>
+                <pre>class Animal {
+    void sound() { System.out.println("Some sound"); }
+}
+
+class Dog extends Animal {
+    @Override   // annotation (optional but recommended)
+    void sound() { System.out.println("Bark"); }
+}</pre>
+
+                <h3>Overriding Rules</h3>
+                <ul>
+                    <li>Same method name and parameters</li>
+                    <li>Return type: same or covariant (subtype)</li>
+                    <li>Access modifier: same or less restrictive</li>
+                    <li>Cannot override: static, final, private methods</li>
+                    <li>Can throw: same or narrower exceptions</li>
+                </ul>
+
+                <div class="important"><strong>Key:</strong> Java doesn't support multiple inheritance with classes to
+                    avoid Diamond Problem. Use interfaces instead!</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">4. Polymorphism</div>
+            <div class="dropdown-content">
+                <h3>What is Polymorphism?</h3>
+                <p>Ability of an object to take many forms. Same method behaves differently based on the object.</p>
+
+                <h3>Two Types</h3>
+                <table>
+                    <tr>
+                        <th>Compile-time (Static)</th>
+                        <th>Runtime (Dynamic)</th>
+                    </tr>
+                    <tr>
+                        <td>Method Overloading</td>
+                        <td>Method Overriding</td>
+                    </tr>
+                    <tr>
+                        <td>Resolved at compile time</td>
+                        <td>Resolved at runtime</td>
+                    </tr>
+                    <tr>
+                        <td>Same class</td>
+                        <td>Parent-child classes</td>
+                    </tr>
+                </table>
+
+                <h3>Method Overloading</h3>
+                <pre>class Calculator {
+    int add(int a, int b) { return a + b; }
+    int add(int a, int b, int c) { return a + b + c; }
+    double add(double a, double b) { return a + b; }
+}
+
+// Overloading based on:
+// 1. Number of parameters
+// 2. Type of parameters
+// 3. Order of parameters
+// NOT based on return type alone!</pre>
+
+                <h3>Method Overriding (Runtime Polymorphism)</h3>
+                <pre>class Shape {
+    void draw() { System.out.println("Drawing shape"); }
+}
+
+class Circle extends Shape {
+    @Override
+    void draw() { System.out.println("Drawing circle"); }
+}
+
+class Square extends Shape {
+    @Override
+    void draw() { System.out.println("Drawing square"); }
+}
+
+// Runtime polymorphism
+Shape s1 = new Circle();
+Shape s2 = new Square();
+s1.draw();  // "Drawing circle"
+s2.draw();  // "Drawing square"</pre>
+
+                <h3>Upcasting and Downcasting</h3>
+                <pre>// Upcasting (implicit) - child to parent
+Animal a = new Dog();  // OK
+
+// Downcasting (explicit) - parent to child
+Dog d = (Dog) a;       // OK if 'a' actually refers to Dog
+
+// Check before downcasting
+if (a instanceof Dog) {
+    Dog d = (Dog) a;
+}</pre>
+
+                <div class="note"><strong>MCQ Tip:</strong> Overloading = compile-time = same class. Overriding =
+                    runtime = inheritance.</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">5. Abstraction</div>
+            <div class="dropdown-content">
+                <h3>What is Abstraction?</h3>
+                <p>Hiding implementation details and showing only essential features. Achieved through abstract classes
+                    and interfaces.</p>
+
+                <h3>Abstract Class</h3>
+                <pre>abstract class Animal {
+    String name;
+    
+    // Abstract method (no body)
+    abstract void sound();
+    
+    // Concrete method (has body)
+    void sleep() {
+        System.out.println("Sleeping...");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    void sound() {
+        System.out.println("Bark");
+    }
+}
+
+// Cannot instantiate abstract class
+// Animal a = new Animal();  // ERROR!
+Animal a = new Dog();        // OK</pre>
+
+                <h3>Abstract Class Rules</h3>
+                <ul>
+                    <li>Cannot be instantiated</li>
+                    <li>Can have abstract and concrete methods</li>
+                    <li>Can have constructors, fields, static methods</li>
+                    <li>Child must implement all abstract methods (or be abstract itself)</li>
+                    <li>Can have final methods (cannot be overridden)</li>
+                </ul>
+
+                <h3>Abstract vs Concrete</h3>
+                <table>
+                    <tr>
+                        <th>Abstract Class</th>
+                        <th>Concrete Class</th>
+                    </tr>
+                    <tr>
+                        <td>abstract keyword</td>
+                        <td>No abstract keyword</td>
+                    </tr>
+                    <tr>
+                        <td>Can have abstract methods</td>
+                        <td>All methods have body</td>
+                    </tr>
+                    <tr>
+                        <td>Cannot instantiate</td>
+                        <td>Can instantiate</td>
+                    </tr>
+                    <tr>
+                        <td>Meant to be extended</td>
+                        <td>Can be final</td>
+                    </tr>
+                </table>
+
+                <div class="important"><strong>Key:</strong> If a class has even ONE abstract method, the class MUST be
+                    declared abstract!</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">6. Static Members</div>
+            <div class="dropdown-content">
+                <h3>Static Variables</h3>
+                <pre>class Counter {
+    static int count = 0;  // shared by all objects
+    int id;
+    
+    Counter() {
+        count++;
+        id = count;
+    }
+}
+
+Counter c1 = new Counter();  // count = 1
+Counter c2 = new Counter();  // count = 2
+System.out.println(Counter.count);  // 2 (access via class name)</pre>
+
+                <h3>Static Methods</h3>
+                <pre>class MathUtils {
+    static int add(int a, int b) {
+        return a + b;
+    }
+}
+
+// Call directly with class name
+int sum = MathUtils.add(5, 3);</pre>
+
+                <h3>Static Method Restrictions</h3>
+                <ul>
+                    <li>Cannot use <code>this</code> or <code>super</code></li>
+                    <li>Cannot access non-static members directly</li>
+                    <li>Cannot be overridden (but can be hidden)</li>
+                </ul>
+
+                <h3>Static Block</h3>
+                <pre>class Example {
+    static int x;
+    
+    // Static block - runs once when class is loaded
+    static {
+        x = 10;
+        System.out.println("Static block executed");
+    }
+}</pre>
+
+                <h3>Static Import</h3>
+                <pre>import static java.lang.Math.*;
+
+double result = sqrt(16);  // No need for Math.sqrt()</pre>
+
+                <div class="note"><strong>MCQ Tip:</strong> Static methods cannot access instance variables directly.
+                    They need an object reference.</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">7. final Keyword</div>
+            <div class="dropdown-content">
+                <h3>final Variable</h3>
+                <pre>final int MAX = 100;
+MAX = 200;  // ERROR! Cannot reassign
+
+// Blank final - assigned in constructor
+class Example {
+    final int x;
+    Example(int x) {
+        this.x = x;  // Must initialize
+    }
+}</pre>
+
+                <h3>final Method</h3>
+                <pre>class Parent {
+    final void show() {
+        System.out.println("Cannot override");
+    }
+}
+
+class Child extends Parent {
+    void show() {}  // ERROR! Cannot override
+}</pre>
+
+                <h3>final Class</h3>
+                <pre>final class FinalClass {
+    // Cannot be extended
+}
+
+class Child extends FinalClass {}  // ERROR!</pre>
+
+                <h3>final Summary</h3>
+                <table>
+                    <tr>
+                        <th>Applied To</th>
+                        <th>Effect</th>
+                    </tr>
+                    <tr>
+                        <td>Variable</td>
+                        <td>Constant, cannot reassign</td>
+                    </tr>
+                    <tr>
+                        <td>Method</td>
+                        <td>Cannot be overridden</td>
+                    </tr>
+                    <tr>
+                        <td>Class</td>
+                        <td>Cannot be extended</td>
+                    </tr>
+                </table>
+
+                <div class="important"><strong>Key:</strong> String, Integer, and all wrapper classes are final!</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">8. Object Class</div>
+            <div class="dropdown-content">
+                <h3>java.lang.Object</h3>
+                <p>Root class of all Java classes. Every class implicitly extends Object.</p>
+
+                <h3>Important Methods</h3>
+                <table>
+                    <tr>
+                        <th>Method</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td><code>toString()</code></td>
+                        <td>String representation</td>
+                    </tr>
+                    <tr>
+                        <td><code>equals(Object)</code></td>
+                        <td>Compares objects</td>
+                    </tr>
+                    <tr>
+                        <td><code>hashCode()</code></td>
+                        <td>Returns hash code</td>
+                    </tr>
+                    <tr>
+                        <td><code>getClass()</code></td>
+                        <td>Returns runtime class</td>
+                    </tr>
+                    <tr>
+                        <td><code>clone()</code></td>
+                        <td>Creates copy (protected)</td>
+                    </tr>
+                    <tr>
+                        <td><code>finalize()</code></td>
+                        <td>Called before GC (deprecated)</td>
+                    </tr>
+                    <tr>
+                        <td><code>wait(), notify(), notifyAll()</code></td>
+                        <td>Thread synchronization</td>
+                    </tr>
+                </table>
+
+                <h3>Overriding toString() and equals()</h3>
+                <pre>class Person {
+    String name;
+    int age;
+    
+    @Override
+    public String toString() {
+        return "Person{name='" + name + "', age=" + age + "}";
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Person p = (Person) obj;
+        return age == p.age && name.equals(p.name);
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, age);
+    }
+}</pre>
+
+                <div class="note"><strong>MCQ Tip:</strong> If you override <code>equals()</code>, you MUST override
+                    <code>hashCode()</code> too!</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.querySelectorAll('.dropdown-header').forEach(h => {
+            h.addEventListener('click', () => h.parentElement.classList.toggle('active'));
+        });
+    </script>
+</body>
+
+</html>

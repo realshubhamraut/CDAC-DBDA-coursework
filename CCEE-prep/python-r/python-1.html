@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Notes Part 1 - Basics to Lists</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px
+        }
+
+        h1 {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 2px solid #333;
+            margin-bottom: 20px
+        }
+
+        .dropdown {
+            background: #fff;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px
+        }
+
+        .dropdown-header {
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 1.1em
+        }
+
+        .dropdown-header:hover {
+            background: #f9f9f9
+        }
+
+        .dropdown-header::after {
+            content: '+';
+            font-size: 1.5em
+        }
+
+        .dropdown.active .dropdown-header::after {
+            content: '−'
+        }
+
+        .dropdown-content {
+            display: none;
+            padding: 20px;
+            border-top: 1px solid #ddd;
+            background: #fafafa
+        }
+
+        .dropdown.active .dropdown-content {
+            display: block
+        }
+
+        h3 {
+            margin: 15px 0 10px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px
+        }
+
+        code {
+            background: #e8e8e8;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.95em
+        }
+
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 10px 0
+        }
+
+        ul,
+        ol {
+            margin-left: 25px;
+            margin-bottom: 10px
+        }
+
+        li {
+            margin-bottom: 5px
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0
+        }
+
+        th,
+        td {
+            border: 1px solid #333;
+            padding: 10px;
+            text-align: left
+        }
+
+        th {
+            background: #333;
+            color: #fff
+        }
+
+        tr:nth-child(even) {
+            background: #f2f2f2
+        }
+
+        .note {
+            background: #fff3cd;
+            padding: 10px;
+            border-left: 4px solid #ffc107;
+            margin: 10px 0
+        }
+
+        .important {
+            background: #f8d7da;
+            padding: 10px;
+            border-left: 4px solid #dc3545;
+            margin: 10px 0
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Python Programming Notes<br><small style="font-size:0.5em">Part 1: Basics to Lists</small></h1>
+
+        <div class="dropdown">
+            <div class="dropdown-header">1. Python Basics</div>
+            <div class="dropdown-content">
+                <h3>What is Python?</h3>
+                <p>High-level, interpreted, dynamically-typed programming language. Known for readability and
+                    simplicity.</p>
+
+                <h3>Key Features</h3>
+                <ul>
+                    <li><strong>Interpreted</strong> - No compilation, runs line by line</li>
+                    <li><strong>Dynamically Typed</strong> - No need to declare variable types</li>
+                    <li><strong>Indentation-based</strong> - Uses whitespace for blocks (no braces)</li>
+                    <li><strong>Case Sensitive</strong> - <code>name</code> ≠ <code>Name</code></li>
+                </ul>
+
+                <h3>Variables & Assignment</h3>
+                <pre># No declaration needed
+x = 10          # int
+y = 3.14        # float
+name = "John"   # str
+flag = True     # bool
+
+# Multiple assignment
+a, b, c = 1, 2, 3
+x = y = z = 0</pre>
+
+                <h3>Data Types</h3>
+                <table>
+                    <tr>
+                        <th>Type</th>
+                        <th>Example</th>
+                        <th>Mutable?</th>
+                    </tr>
+                    <tr>
+                        <td>int</td>
+                        <td><code>x = 10</code></td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>float</td>
+                        <td><code>x = 3.14</code></td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>str</td>
+                        <td><code>x = "hello"</code></td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>bool</td>
+                        <td><code>x = True</code></td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>list</td>
+                        <td><code>x = [1, 2, 3]</code></td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>tuple</td>
+                        <td><code>x = (1, 2, 3)</code></td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>dict</td>
+                        <td><code>x = {"a": 1}</code></td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>set</td>
+                        <td><code>x = {1, 2, 3}</code></td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>NoneType</td>
+                        <td><code>x = None</code></td>
+                        <td>-</td>
+                    </tr>
+                </table>
+
+                <h3>Type Checking & Conversion</h3>
+                <pre>type(x)         # Returns type
+isinstance(x, int)  # Check type
+
+int("10")       # String to int
+float("3.14")   # String to float
+str(100)        # Int to string
+list("abc")     # ['a', 'b', 'c']
+tuple([1,2,3])  # (1, 2, 3)</pre>
+
+                <h3>Input/Output</h3>
+                <pre># Input (always returns string)
+name = input("Enter name: ")
+age = int(input("Enter age: "))
+
+# Output
+print("Hello")
+print("Name:", name)
+print(f"Age is {age}")      # f-string
+print("Sum =", 2+3, sep="") # SumSum =5</pre>
+
+                <h3>Operators</h3>
+                <table>
+                    <tr>
+                        <th>Type</th>
+                        <th>Operators</th>
+                    </tr>
+                    <tr>
+                        <td>Arithmetic</td>
+                        <td><code>+ - * / // % **</code></td>
+                    </tr>
+                    <tr>
+                        <td>Comparison</td>
+                        <td><code>== != > < >= <=</code></td>
+                    </tr>
+                    <tr>
+                        <td>Logical</td>
+                        <td><code>and or not</code></td>
+                    </tr>
+                    <tr>
+                        <td>Assignment</td>
+                        <td><code>= += -= *= /= //= %= **=</code></td>
+                    </tr>
+                    <tr>
+                        <td>Identity</td>
+                        <td><code>is  is not</code></td>
+                    </tr>
+                    <tr>
+                        <td>Membership</td>
+                        <td><code>in  not in</code></td>
+                    </tr>
+                </table>
+
+                <pre># Special operators
+5 // 2    # 2 (floor division)
+5 ** 2    # 25 (power)
+5 % 2     # 1 (modulo)
+
+"a" in "abc"    # True
+x is None       # True if x is None</pre>
+
+                <div class="important"><strong>Key:</strong> <code>//</code> is floor division, <code>/</code> is true
+                    division. <code>5/2 = 2.5</code>, <code>5//2 = 2</code></div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">2. Conditional Statements (if, if-else, nested)</div>
+            <div class="dropdown-content">
+                <h3>if Statement</h3>
+                <pre>if condition:
+    # code (must be indented)</pre>
+
+                <h3>if-else</h3>
+                <pre>if condition:
+    # if block
+else:
+    # else block</pre>
+
+                <h3>if-elif-else</h3>
+                <pre>if condition1:
+    # code
+elif condition2:
+    # code
+elif condition3:
+    # code
+else:
+    # code</pre>
+
+                <h3>Nested if-else</h3>
+                <pre>if condition1:
+    if condition2:
+        # nested code
+    else:
+        # code
+else:
+    # code</pre>
+
+                <h3>Ternary Operator (One-liner if-else)</h3>
+                <pre>result = value_if_true if condition else value_if_false
+
+# Example
+x = 10
+msg = "Even" if x % 2 == 0 else "Odd"</pre>
+
+                <h3>Truthy and Falsy Values</h3>
+                <table>
+                    <tr>
+                        <th>Falsy (evaluates to False)</th>
+                        <th>Truthy (evaluates to True)</th>
+                    </tr>
+                    <tr>
+                        <td><code>False</code></td>
+                        <td><code>True</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>None</code></td>
+                        <td>Non-zero numbers</td>
+                    </tr>
+                    <tr>
+                        <td><code>0, 0.0</code></td>
+                        <td>Non-empty strings</td>
+                    </tr>
+                    <tr>
+                        <td><code>"", '', """"""</code> (empty string)</td>
+                        <td>Non-empty collections</td>
+                    </tr>
+                    <tr>
+                        <td><code>[], (), {}, set()</code> (empty)</td>
+                        <td>Objects</td>
+                    </tr>
+                </table>
+
+                <pre># Truthy/Falsy in conditions
+if []:          # False (empty list)
+    print("Yes")
+
+if [1, 2]:      # True (non-empty list)
+    print("Yes")
+
+if "":          # False (empty string)
+    print("Yes")
+
+if "hello":     # True
+    print("Yes")</pre>
+
+                <div class="note"><strong>MCQ Tip:</strong> Empty collections, 0, None, and empty strings are Falsy.
+                    Everything else is Truthy.</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">3. Loops (for, while, nested)</div>
+            <div class="dropdown-content">
+                <h3>for Loop</h3>
+                <pre># Iterate over sequence
+for item in sequence:
+    # code
+
+# Examples
+for i in range(5):        # 0,1,2,3,4
+    print(i)
+
+for i in range(2, 6):     # 2,3,4,5
+    print(i)
+
+for i in range(0, 10, 2): # 0,2,4,6,8 (step=2)
+    print(i)
+
+for char in "hello":      # h,e,l,l,o
+    print(char)
+
+for item in [1, 2, 3]:    # iterating list
+    print(item)</pre>
+
+                <h3>while Loop</h3>
+                <pre>while condition:
+    # code
+    # must update condition
+
+# Example
+i = 0
+while i < 5:
+    print(i)
+    i += 1</pre>
+
+                <h3>Nested Loops</h3>
+                <pre>for i in range(3):
+    for j in range(3):
+        print(i, j)
+
+# Output: (0,0)(0,1)(0,2)(1,0)...</pre>
+
+                <h3>Loop with else</h3>
+                <pre># else executes if loop completes without break
+for i in range(5):
+    print(i)
+else:
+    print("Loop completed!")  # This runs
+
+for i in range(5):
+    if i == 3:
+        break
+else:
+    print("Won't print")  # Skipped due to break</pre>
+
+                <h3>enumerate() and zip()</h3>
+                <pre># enumerate - get index and value
+for idx, val in enumerate(['a', 'b', 'c']):
+    print(idx, val)  # 0 a, 1 b, 2 c
+
+# zip - iterate multiple sequences
+for x, y in zip([1,2,3], ['a','b','c']):
+    print(x, y)  # 1 a, 2 b, 3 c</pre>
+
+                <h3>range() Function</h3>
+                <pre>range(stop)           # 0 to stop-1
+range(start, stop)    # start to stop-1
+range(start, stop, step)  # with step
+
+list(range(5))        # [0, 1, 2, 3, 4]
+list(range(5, 0, -1)) # [5, 4, 3, 2, 1]</pre>
+
+                <div class="important"><strong>Remember:</strong> <code>range()</code> end is exclusive!
+                    <code>range(5)</code> gives 0-4, not 0-5</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">4. Control Structures (break, continue, pass)</div>
+            <div class="dropdown-content">
+                <h3>break</h3>
+                <p>Exits the loop completely.</p>
+                <pre>for i in range(10):
+    if i == 5:
+        break       # exits loop
+    print(i)        # prints 0,1,2,3,4</pre>
+
+                <h3>continue</h3>
+                <p>Skips current iteration, continues to next.</p>
+                <pre>for i in range(5):
+    if i == 2:
+        continue    # skip 2
+    print(i)        # prints 0,1,3,4</pre>
+
+                <h3>pass</h3>
+                <p>Does nothing - placeholder for empty blocks.</p>
+                <pre># Empty function/class placeholder
+def my_function():
+    pass            # avoids error
+
+class MyClass:
+    pass
+
+# Empty loop
+for i in range(5):
+    pass            # do nothing</pre>
+
+                <h3>Comparison</h3>
+                <table>
+                    <tr>
+                        <th>Keyword</th>
+                        <th>Effect</th>
+                    </tr>
+                    <tr>
+                        <td><code>break</code></td>
+                        <td>Exit loop entirely</td>
+                    </tr>
+                    <tr>
+                        <td><code>continue</code></td>
+                        <td>Skip to next iteration</td>
+                    </tr>
+                    <tr>
+                        <td><code>pass</code></td>
+                        <td>Do nothing (placeholder)</td>
+                    </tr>
+                </table>
+
+                <div class="note"><strong>MCQ Tip:</strong> <code>break</code> also skips the else clause of a loop.
+                    <code>continue</code> does not.</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">5. Strings</div>
+            <div class="dropdown-content">
+                <h3>Creating Strings</h3>
+                <pre>s = "Hello"
+s = 'Hello'
+s = """Multi
+line"""
+s = '''Also
+multiline'''</pre>
+
+                <h3>String Immutability</h3>
+                <pre>s = "hello"
+s[0] = "H"  # ERROR! Strings are immutable
+s = "Hello" # OK - reassignment creates new string</pre>
+
+                <h3>Accessing Characters (Indexing)</h3>
+                <pre>s = "Python"
+s[0]    # 'P' (first)
+s[-1]   # 'n' (last)
+s[-2]   # 'o' (second last)</pre>
+
+                <h3>String Slicing</h3>
+                <pre>s = "Python"
+s[start:end]      # start to end-1
+s[start:end:step] # with step
+
+s[0:3]    # "Pyt"
+s[:3]     # "Pyt" (from start)
+s[3:]     # "hon" (to end)
+s[::2]    # "Pto" (every 2nd char)
+s[::-1]   # "nohtyP" (reverse)</pre>
+
+                <h3>String Operations</h3>
+                <pre>s1 + s2         # Concatenation
+s * 3           # Repetition "aaa"
+"a" in s        # Membership check
+len(s)          # Length</pre>
+
+                <h3>String Methods</h3>
+                <table>
+                    <tr>
+                        <th>Method</th>
+                        <th>Purpose</th>
+                        <th>Example</th>
+                    </tr>
+                    <tr>
+                        <td><code>upper()</code></td>
+                        <td>Uppercase</td>
+                        <td><code>"hi".upper() → "HI"</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>lower()</code></td>
+                        <td>Lowercase</td>
+                        <td><code>"HI".lower() → "hi"</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>strip()</code></td>
+                        <td>Remove whitespace</td>
+                        <td><code>" hi ".strip() → "hi"</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>split()</code></td>
+                        <td>Split to list</td>
+                        <td><code>"a,b".split(",") → ['a','b']</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>join()</code></td>
+                        <td>Join list</td>
+                        <td><code>",".join(['a','b']) → "a,b"</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>replace()</code></td>
+                        <td>Replace</td>
+                        <td><code>"hi".replace("i","o") → "ho"</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>find()</code></td>
+                        <td>Find index (-1 if not found)</td>
+                        <td><code>"hello".find("l") → 2</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>index()</code></td>
+                        <td>Find index (error if not found)</td>
+                        <td><code>"hello".index("l") → 2</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>count()</code></td>
+                        <td>Count occurrences</td>
+                        <td><code>"hello".count("l") → 2</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>startswith()</code></td>
+                        <td>Check prefix</td>
+                        <td><code>"hello".startswith("he") → True</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>endswith()</code></td>
+                        <td>Check suffix</td>
+                        <td><code>"hello".endswith("lo") → True</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>isdigit()</code></td>
+                        <td>All digits?</td>
+                        <td><code>"123".isdigit() → True</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>isalpha()</code></td>
+                        <td>All letters?</td>
+                        <td><code>"abc".isalpha() → True</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>isalnum()</code></td>
+                        <td>Alphanumeric?</td>
+                        <td><code>"abc123".isalnum() → True</code></td>
+                    </tr>
+                </table>
+
+                <h3>String Formatting</h3>
+                <pre># f-strings (Python 3.6+)
+name = "John"
+age = 25
+print(f"Name: {name}, Age: {age}")
+print(f"2 + 2 = {2+2}")
+
+# format() method
+"Name: {}, Age: {}".format(name, age)
+"Name: {0}, Age: {1}".format(name, age)
+
+# % formatting (old style)
+"Name: %s, Age: %d" % (name, age)</pre>
+
+                <div class="important"><strong>Key:</strong> <code>find()</code> returns -1 if not found.
+                    <code>index()</code> raises ValueError.</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">6. Lists</div>
+            <div class="dropdown-content">
+                <h3>Creating Lists</h3>
+                <pre>lst = [1, 2, 3, 4, 5]
+lst = list("abc")       # ['a', 'b', 'c']
+lst = list(range(5))    # [0, 1, 2, 3, 4]
+lst = []                # empty list
+lst = [0] * 5           # [0, 0, 0, 0, 0]</pre>
+
+                <h3>List Characteristics</h3>
+                <ul>
+                    <li><strong>Ordered</strong> - maintains insertion order</li>
+                    <li><strong>Mutable</strong> - can modify after creation</li>
+                    <li><strong>Allows duplicates</strong></li>
+                    <li><strong>Heterogeneous</strong> - can mix types</li>
+                </ul>
+
+                <h3>Accessing Elements</h3>
+                <pre>lst = [10, 20, 30, 40, 50]
+lst[0]      # 10 (first)
+lst[-1]     # 50 (last)
+lst[1:3]    # [20, 30] (slice)
+lst[::-1]   # [50, 40, 30, 20, 10] (reverse)</pre>
+
+                <h3>Modifying Lists</h3>
+                <pre>lst[0] = 100        # Change element
+lst[1:3] = [5, 6]   # Replace slice</pre>
+
+                <h3>List Methods</h3>
+                <table>
+                    <tr>
+                        <th>Method</th>
+                        <th>Purpose</th>
+                        <th>Returns</th>
+                    </tr>
+                    <tr>
+                        <td><code>append(x)</code></td>
+                        <td>Add to end</td>
+                        <td>None</td>
+                    </tr>
+                    <tr>
+                        <td><code>insert(i, x)</code></td>
+                        <td>Insert at index</td>
+                        <td>None</td>
+                    </tr>
+                    <tr>
+                        <td><code>extend(lst)</code></td>
+                        <td>Add all from iterable</td>
+                        <td>None</td>
+                    </tr>
+                    <tr>
+                        <td><code>remove(x)</code></td>
+                        <td>Remove first x</td>
+                        <td>None (error if not found)</td>
+                    </tr>
+                    <tr>
+                        <td><code>pop()</code></td>
+                        <td>Remove & return last</td>
+                        <td>Removed element</td>
+                    </tr>
+                    <tr>
+                        <td><code>pop(i)</code></td>
+                        <td>Remove & return at index</td>
+                        <td>Removed element</td>
+                    </tr>
+                    <tr>
+                        <td><code>clear()</code></td>
+                        <td>Remove all</td>
+                        <td>None</td>
+                    </tr>
+                    <tr>
+                        <td><code>index(x)</code></td>
+                        <td>Find index of x</td>
+                        <td>Index (error if not found)</td>
+                    </tr>
+                    <tr>
+                        <td><code>count(x)</code></td>
+                        <td>Count occurrences</td>
+                        <td>int</td>
+                    </tr>
+                    <tr>
+                        <td><code>sort()</code></td>
+                        <td>Sort in place</td>
+                        <td>None</td>
+                    </tr>
+                    <tr>
+                        <td><code>reverse()</code></td>
+                        <td>Reverse in place</td>
+                        <td>None</td>
+                    </tr>
+                    <tr>
+                        <td><code>copy()</code></td>
+                        <td>Shallow copy</td>
+                        <td>New list</td>
+                    </tr>
+                </table>
+
+                <pre># Examples
+lst = [3, 1, 2]
+lst.append(4)       # [3, 1, 2, 4]
+lst.insert(0, 0)    # [0, 3, 1, 2, 4]
+lst.extend([5, 6])  # [0, 3, 1, 2, 4, 5, 6]
+lst.pop()           # returns 6, lst = [0, 3, 1, 2, 4, 5]
+lst.remove(3)       # [0, 1, 2, 4, 5]
+lst.sort()          # [0, 1, 2, 4, 5]
+lst.reverse()       # [5, 4, 2, 1, 0]</pre>
+
+                <h3>List Comprehension</h3>
+                <pre># Basic syntax
+[expression for item in iterable]
+[expression for item in iterable if condition]
+
+# Examples
+squares = [x**2 for x in range(5)]      # [0, 1, 4, 9, 16]
+evens = [x for x in range(10) if x%2==0] # [0, 2, 4, 6, 8]
+upper = [s.upper() for s in ['a','b']]  # ['A', 'B']</pre>
+
+                <h3>Nested Lists (2D)</h3>
+                <pre>matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+matrix[0]       # [1, 2, 3] (first row)
+matrix[0][1]    # 2 (row 0, col 1)</pre>
+
+                <h3>List Functions</h3>
+                <pre>len(lst)        # Length
+sum(lst)        # Sum of elements
+min(lst)        # Minimum
+max(lst)        # Maximum
+sorted(lst)     # Returns new sorted list (original unchanged)
+list(reversed(lst))  # Returns reversed iterator</pre>
+
+                <div class="note"><strong>MCQ Tip:</strong> <code>sort()</code> modifies in place & returns None.
+                    <code>sorted()</code> returns new list.</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">7. Tuples</div>
+            <div class="dropdown-content">
+                <h3>Creating Tuples</h3>
+                <pre>t = (1, 2, 3)
+t = 1, 2, 3         # parentheses optional
+t = tuple([1,2,3])  # from list
+t = ()              # empty tuple
+t = (1,)            # single element (comma required!)
+t = (1)             # NOT a tuple, just int</pre>
+
+                <h3>Tuple Characteristics</h3>
+                <ul>
+                    <li><strong>Ordered</strong> - maintains order</li>
+                    <li><strong>Immutable</strong> - cannot modify after creation</li>
+                    <li><strong>Allows duplicates</strong></li>
+                    <li><strong>Faster than lists</strong></li>
+                </ul>
+
+                <h3>Accessing Elements</h3>
+                <pre>t = (10, 20, 30, 40)
+t[0]        # 10
+t[-1]       # 40
+t[1:3]      # (20, 30)
+
+# t[0] = 100  # ERROR! Immutable</pre>
+
+                <h3>Tuple Methods</h3>
+                <pre>t.count(x)   # Count occurrences of x
+t.index(x)   # Find index of x</pre>
+
+                <h3>Tuple Unpacking</h3>
+                <pre>t = (1, 2, 3)
+a, b, c = t     # a=1, b=2, c=3
+
+# Swap using tuples
+a, b = b, a
+
+# Extended unpacking
+a, *rest = (1, 2, 3, 4)  # a=1, rest=[2,3,4]
+*start, last = (1, 2, 3) # start=[1,2], last=3</pre>
+
+                <h3>Tuple vs List</h3>
+                <table>
+                    <tr>
+                        <th>Tuple</th>
+                        <th>List</th>
+                    </tr>
+                    <tr>
+                        <td>Immutable</td>
+                        <td>Mutable</td>
+                    </tr>
+                    <tr>
+                        <td>() parentheses</td>
+                        <td>[] brackets</td>
+                    </tr>
+                    <tr>
+                        <td>Faster</td>
+                        <td>Slower</td>
+                    </tr>
+                    <tr>
+                        <td>Can be dict key</td>
+                        <td>Cannot be dict key</td>
+                    </tr>
+                    <tr>
+                        <td>Less memory</td>
+                        <td>More memory</td>
+                    </tr>
+                </table>
+
+                <div class="important"><strong>Key:</strong> Single element tuple needs comma: <code>(1,)</code> not
+                    <code>(1)</code></div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">8. Dictionaries</div>
+            <div class="dropdown-content">
+                <h3>Creating Dictionaries</h3>
+                <pre>d = {"name": "John", "age": 25}
+d = dict(name="John", age=25)
+d = {}                  # empty dict
+d = dict()              # empty dict</pre>
+
+                <h3>Dictionary Characteristics</h3>
+                <ul>
+                    <li><strong>Key-Value pairs</strong></li>
+                    <li><strong>Keys must be immutable</strong> (str, int, tuple)</li>
+                    <li><strong>Keys are unique</strong></li>
+                    <li><strong>Ordered</strong> (Python 3.7+)</li>
+                    <li><strong>Mutable</strong></li>
+                </ul>
+
+                <h3>Accessing Values</h3>
+                <pre>d = {"name": "John", "age": 25}
+d["name"]           # "John"
+d["city"]           # KeyError!
+d.get("city")       # None (no error)
+d.get("city", "NA") # "NA" (default)</pre>
+
+                <h3>Modifying Dictionaries</h3>
+                <pre>d["age"] = 30           # Update
+d["city"] = "NYC"       # Add new key
+del d["age"]            # Delete key</pre>
+
+                <h3>Dictionary Methods</h3>
+                <table>
+                    <tr>
+                        <th>Method</th>
+                        <th>Purpose</th>
+                    </tr>
+                    <tr>
+                        <td><code>keys()</code></td>
+                        <td>Return all keys</td>
+                    </tr>
+                    <tr>
+                        <td><code>values()</code></td>
+                        <td>Return all values</td>
+                    </tr>
+                    <tr>
+                        <td><code>items()</code></td>
+                        <td>Return key-value pairs</td>
+                    </tr>
+                    <tr>
+                        <td><code>get(key, default)</code></td>
+                        <td>Get value safely</td>
+                    </tr>
+                    <tr>
+                        <td><code>pop(key)</code></td>
+                        <td>Remove & return value</td>
+                    </tr>
+                    <tr>
+                        <td><code>popitem()</code></td>
+                        <td>Remove last item</td>
+                    </tr>
+                    <tr>
+                        <td><code>update(dict2)</code></td>
+                        <td>Merge dictionaries</td>
+                    </tr>
+                    <tr>
+                        <td><code>clear()</code></td>
+                        <td>Remove all</td>
+                    </tr>
+                    <tr>
+                        <td><code>copy()</code></td>
+                        <td>Shallow copy</td>
+                    </tr>
+                    <tr>
+                        <td><code>setdefault(k, v)</code></td>
+                        <td>Get or set default</td>
+                    </tr>
+                </table>
+
+                <pre># Iterating
+for key in d:
+    print(key, d[key])
+
+for key, value in d.items():
+    print(key, value)</pre>
+
+                <h3>Dictionary Comprehension</h3>
+                <pre>{key: value for item in iterable}
+
+# Examples
+squares = {x: x**2 for x in range(5)}
+# {0:0, 1:1, 2:4, 3:9, 4:16}
+
+# Filter
+evens = {k:v for k,v in d.items() if v > 10}</pre>
+
+                <h3>Nested Dictionaries</h3>
+                <pre>students = {
+    "s1": {"name": "John", "age": 20},
+    "s2": {"name": "Jane", "age": 22}
+}
+students["s1"]["name"]  # "John"</pre>
+
+                <div class="note"><strong>MCQ Tip:</strong> Lists cannot be dictionary keys (mutable), but tuples can
+                    (immutable).</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">9. Sets</div>
+            <div class="dropdown-content">
+                <h3>Creating Sets</h3>
+                <pre>s = {1, 2, 3}
+s = set([1, 2, 2, 3])   # {1, 2, 3} - duplicates removed
+s = set()               # empty set (not {}!)
+s = set("hello")        # {'h', 'e', 'l', 'o'}</pre>
+
+                <h3>Set Characteristics</h3>
+                <ul>
+                    <li><strong>Unordered</strong> - no index access</li>
+                    <li><strong>No duplicates</strong></li>
+                    <li><strong>Mutable</strong> (but elements must be immutable)</li>
+                </ul>
+
+                <h3>Set Methods</h3>
+                <pre>s.add(x)        # Add element
+s.remove(x)     # Remove (error if not found)
+s.discard(x)    # Remove (no error)
+s.pop()         # Remove random element
+s.clear()       # Remove all</pre>
+
+                <h3>Set Operations</h3>
+                <pre>a = {1, 2, 3}
+b = {2, 3, 4}
+
+a | b           # Union: {1, 2, 3, 4}
+a & b           # Intersection: {2, 3}
+a - b           # Difference: {1}
+a ^ b           # Symmetric diff: {1, 4}
+
+a.union(b)
+a.intersection(b)
+a.difference(b)
+a.symmetric_difference(b)</pre>
+
+                <h3>Frozenset (Immutable Set)</h3>
+                <pre>fs = frozenset([1, 2, 3])
+# Cannot add/remove elements
+# Can be used as dict key</pre>
+
+                <div class="important"><strong>Key:</strong> <code>{}</code> creates empty dict, not set! Use
+                    <code>set()</code> for empty set.</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.querySelectorAll('.dropdown-header').forEach(h => {
+            h.addEventListener('click', () => h.parentElement.classList.toggle('active'));
+        });
+    </script>
+</body>
+
+</html>

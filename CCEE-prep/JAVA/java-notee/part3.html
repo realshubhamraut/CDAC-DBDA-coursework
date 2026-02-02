@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Notes Part 3 - Inner Classes, Interfaces, Packages</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px
+        }
+
+        h1 {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 2px solid #333;
+            margin-bottom: 20px
+        }
+
+        .dropdown {
+            background: #fff;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px
+        }
+
+        .dropdown-header {
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 1.1em
+        }
+
+        .dropdown-header:hover {
+            background: #f9f9f9
+        }
+
+        .dropdown-header::after {
+            content: '+';
+            font-size: 1.5em
+        }
+
+        .dropdown.active .dropdown-header::after {
+            content: '−'
+        }
+
+        .dropdown-content {
+            display: none;
+            padding: 20px;
+            border-top: 1px solid #ddd;
+            background: #fafafa
+        }
+
+        .dropdown.active .dropdown-content {
+            display: block
+        }
+
+        h3 {
+            margin: 15px 0 10px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px
+        }
+
+        code {
+            background: #e8e8e8;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.95em
+        }
+
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 10px 0
+        }
+
+        ul,
+        ol {
+            margin-left: 25px;
+            margin-bottom: 10px
+        }
+
+        li {
+            margin-bottom: 5px
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0
+        }
+
+        th,
+        td {
+            border: 1px solid #333;
+            padding: 10px;
+            text-align: left
+        }
+
+        th {
+            background: #333;
+            color: #fff
+        }
+
+        tr:nth-child(even) {
+            background: #f2f2f2
+        }
+
+        .note {
+            background: #fff3cd;
+            padding: 10px;
+            border-left: 4px solid #ffc107;
+            margin: 10px 0
+        }
+
+        .important {
+            background: #f8d7da;
+            padding: 10px;
+            border-left: 4px solid #dc3545;
+            margin: 10px 0
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Java Programming Notes<br><small style="font-size:0.5em">Part 3: Inner Classes, Interfaces &
+                Packages</small></h1>
+
+        <div class="dropdown">
+            <div class="dropdown-header">1. Inner Classes (Nested Classes)</div>
+            <div class="dropdown-content">
+                <h3>Types of Nested Classes</h3>
+                <table>
+                    <tr>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>Member Inner Class</td>
+                        <td>Non-static class inside another class</td>
+                    </tr>
+                    <tr>
+                        <td>Static Nested Class</td>
+                        <td>Static class inside another class</td>
+                    </tr>
+                    <tr>
+                        <td>Local Inner Class</td>
+                        <td>Class inside a method</td>
+                    </tr>
+                    <tr>
+                        <td>Anonymous Inner Class</td>
+                        <td>Class without name, declared and instantiated together</td>
+                    </tr>
+                </table>
+
+                <h3>Member Inner Class</h3>
+                <pre>class Outer {
+    int x = 10;
+    
+    class Inner {
+        void display() {
+            System.out.println("x = " + x);  // Can access outer members
+        }
+    }
+}
+
+// Creating inner class object
+Outer outer = new Outer();
+Outer.Inner inner = outer.new Inner();
+inner.display();</pre>
+
+                <h3>Static Nested Class</h3>
+                <pre>class Outer {
+    static int x = 10;
+    int y = 20;
+    
+    static class StaticNested {
+        void display() {
+            System.out.println("x = " + x);  // Can access static only
+            // System.out.println(y);  // ERROR! Cannot access non-static
+        }
+    }
+}
+
+// No need for outer instance
+Outer.StaticNested nested = new Outer.StaticNested();
+nested.display();</pre>
+
+                <h3>Local Inner Class</h3>
+                <pre>class Outer {
+    void method() {
+        final int localVar = 100;  // effectively final
+        
+        class LocalInner {
+            void display() {
+                System.out.println(localVar);
+            }
+        }
+        
+        LocalInner li = new LocalInner();
+        li.display();
+    }
+}</pre>
+
+                <h3>Anonymous Inner Class</h3>
+                <pre>// With interface
+interface Greeting {
+    void greet();
+}
+
+Greeting g = new Greeting() {
+    @Override
+    public void greet() {
+        System.out.println("Hello!");
+    }
+};
+g.greet();
+
+// With abstract class
+abstract class Animal {
+    abstract void sound();
+}
+
+Animal a = new Animal() {
+    @Override
+    void sound() {
+        System.out.println("Bark");
+    }
+};</pre>
+
+                <h3>Inner Class Comparison</h3>
+                <table>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Member</th>
+                        <th>Static Nested</th>
+                        <th>Local</th>
+                        <th>Anonymous</th>
+                    </tr>
+                    <tr>
+                        <td>Access outer instance</td>
+                        <td>✓</td>
+                        <td>✗</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                    </tr>
+                    <tr>
+                        <td>Can have static members</td>
+                        <td>✗</td>
+                        <td>✓</td>
+                        <td>✗</td>
+                        <td>✗</td>
+                    </tr>
+                    <tr>
+                        <td>Can be abstract</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                        <td>✗</td>
+                    </tr>
+                </table>
+
+                <div class="important"><strong>Key:</strong> Local/anonymous classes can only access local variables
+                    that are final or effectively final!</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">2. Interfaces</div>
+            <div class="dropdown-content">
+                <h3>What is an Interface?</h3>
+                <p>A contract/blueprint that specifies what a class must do, but not how. Supports multiple inheritance.
+                </p>
+
+                <h3>Interface Declaration</h3>
+                <pre>interface Drawable {
+    // Constants (implicitly public static final)
+    int MAX = 100;
+    
+    // Abstract methods (implicitly public abstract)
+    void draw();
+    
+    // Default method (Java 8+)
+    default void show() {
+        System.out.println("Showing...");
+    }
+    
+    // Static method (Java 8+)
+    static void info() {
+        System.out.println("Drawable interface");
+    }
+    
+    // Private method (Java 9+)
+    private void helper() {
+        // helper code
+    }
+}</pre>
+
+                <h3>Implementing Interface</h3>
+                <pre>class Circle implements Drawable {
+    @Override
+    public void draw() {
+        System.out.println("Drawing circle");
+    }
+}
+
+// Multiple interfaces
+class Rectangle implements Drawable, Printable {
+    // Must implement all abstract methods
+}</pre>
+
+                <h3>Extending Interfaces</h3>
+                <pre>interface A {
+    void methodA();
+}
+
+interface B extends A {
+    void methodB();
+}
+
+// Interface can extend multiple interfaces!
+interface C extends A, B {
+    void methodC();
+}</pre>
+
+                <h3>Functional Interface (Java 8+)</h3>
+                <pre>@FunctionalInterface
+interface Calculator {
+    int calculate(int a, int b);
+    // Only ONE abstract method allowed!
+}
+
+// Can use lambda expression
+Calculator add = (a, b) -> a + b;
+System.out.println(add.calculate(5, 3));  // 8</pre>
+
+                <h3>Interface vs Abstract Class</h3>
+                <table>
+                    <tr>
+                        <th>Interface</th>
+                        <th>Abstract Class</th>
+                    </tr>
+                    <tr>
+                        <td>implements keyword</td>
+                        <td>extends keyword</td>
+                    </tr>
+                    <tr>
+                        <td>Only public members</td>
+                        <td>Any access modifier</td>
+                    </tr>
+                    <tr>
+                        <td>No constructors</td>
+                        <td>Can have constructors</td>
+                    </tr>
+                    <tr>
+                        <td>Variables: public static final</td>
+                        <td>Any type of variables</td>
+                    </tr>
+                    <tr>
+                        <td>Multiple inheritance ✓</td>
+                        <td>Single inheritance only</td>
+                    </tr>
+                    <tr>
+                        <td>Methods: abstract, default, static</td>
+                        <td>abstract + concrete methods</td>
+                    </tr>
+                </table>
+
+                <div class="note"><strong>MCQ Tip:</strong> Interface variables are implicitly
+                    <code>public static final</code>. Interface methods are implicitly <code>public abstract</code>.
+                </div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">3. Packages</div>
+            <div class="dropdown-content">
+                <h3>What is a Package?</h3>
+                <p>A namespace that organizes classes and interfaces. Prevents naming conflicts and controls access.</p>
+
+                <h3>Creating a Package</h3>
+                <pre>// File: com/example/MyClass.java
+package com.example;  // Must be first statement
+
+public class MyClass {
+    public void display() {
+        System.out.println("Hello from package!");
+    }
+}</pre>
+
+                <h3>Importing Packages</h3>
+                <pre>// Import specific class
+import java.util.ArrayList;
+
+// Import all classes from package
+import java.util.*;
+
+// Static import
+import static java.lang.Math.*;
+
+// Use class
+ArrayList<String> list = new ArrayList<>();
+double result = sqrt(16);  // static import</pre>
+
+                <h3>Built-in Packages</h3>
+                <table>
+                    <tr>
+                        <th>Package</th>
+                        <th>Contains</th>
+                    </tr>
+                    <tr>
+                        <td>java.lang</td>
+                        <td>Core classes (String, Math, Object) - auto imported</td>
+                    </tr>
+                    <tr>
+                        <td>java.util</td>
+                        <td>Collections, Date, Scanner, Random</td>
+                    </tr>
+                    <tr>
+                        <td>java.io</td>
+                        <td>I/O classes (File, Stream)</td>
+                    </tr>
+                    <tr>
+                        <td>java.net</td>
+                        <td>Networking (URL, Socket)</td>
+                    </tr>
+                    <tr>
+                        <td>java.sql</td>
+                        <td>JDBC classes</td>
+                    </tr>
+                    <tr>
+                        <td>java.awt</td>
+                        <td>GUI classes</td>
+                    </tr>
+                </table>
+
+                <h3>Package Access</h3>
+                <pre>// Same package - default access works
+package com.example;
+class A { }  // accessible within com.example
+
+// Different package - need public
+package com.other;
+import com.example.A;  // ERROR if A is not public</pre>
+
+                <h3>Classpath</h3>
+                <pre>// Compile with package
+javac -d . MyClass.java
+
+// Run
+java com.example.MyClass</pre>
+
+                <div class="important"><strong>Key:</strong> <code>java.lang</code> is automatically imported. You don't
+                    need <code>import java.lang.*;</code></div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">4. Exception Handling</div>
+            <div class="dropdown-content">
+                <h3>Exception Hierarchy</h3>
+                <pre>Throwable
+├── Error (serious, not handled)
+│   ├── OutOfMemoryError
+│   ├── StackOverflowError
+│   └── ...
+└── Exception
+    ├── RuntimeException (unchecked)
+    │   ├── NullPointerException
+    │   ├── ArrayIndexOutOfBoundsException
+    │   ├── ArithmeticException
+    │   └── ...
+    └── Checked Exceptions
+        ├── IOException
+        ├── SQLException
+        └── ...</pre>
+
+                <h3>Checked vs Unchecked</h3>
+                <table>
+                    <tr>
+                        <th>Checked</th>
+                        <th>Unchecked</th>
+                    </tr>
+                    <tr>
+                        <td>Compile-time check</td>
+                        <td>Runtime check</td>
+                    </tr>
+                    <tr>
+                        <td>Must handle or declare</td>
+                        <td>No mandatory handling</td>
+                    </tr>
+                    <tr>
+                        <td>IOException, SQLException</td>
+                        <td>RuntimeException and subclasses</td>
+                    </tr>
+                </table>
+
+                <h3>try-catch-finally</h3>
+                <pre>try {
+    // risky code
+    int result = 10 / 0;
+} catch (ArithmeticException e) {
+    System.out.println("Cannot divide by zero");
+} catch (Exception e) {
+    System.out.println("General exception: " + e.getMessage());
+} finally {
+    // always executes
+    System.out.println("Cleanup code");
+}</pre>
+
+                <h3>Multiple Exceptions (Java 7+)</h3>
+                <pre>try {
+    // code
+} catch (IOException | SQLException e) {
+    // handle both
+}</pre>
+
+                <h3>throw vs throws</h3>
+                <pre>// throw - throws an exception
+void divide(int a, int b) {
+    if (b == 0) {
+        throw new ArithmeticException("Cannot divide by zero");
+    }
+}
+
+// throws - declares exceptions
+void readFile() throws IOException {
+    // may throw IOException
+}</pre>
+
+                <h3>try-with-resources (Java 7+)</h3>
+                <pre>// Auto-closes resources
+try (FileReader fr = new FileReader("file.txt");
+     BufferedReader br = new BufferedReader(fr)) {
+    String line = br.readLine();
+} catch (IOException e) {
+    e.printStackTrace();
+}
+// No need for finally to close!</pre>
+
+                <h3>Custom Exception</h3>
+                <pre>class InvalidAgeException extends Exception {
+    public InvalidAgeException(String message) {
+        super(message);
+    }
+}
+
+void validateAge(int age) throws InvalidAgeException {
+    if (age < 0) {
+        throw new InvalidAgeException("Age cannot be negative");
+    }
+}</pre>
+
+                <h3>Common Exceptions</h3>
+                <table>
+                    <tr>
+                        <th>Exception</th>
+                        <th>Cause</th>
+                    </tr>
+                    <tr>
+                        <td>NullPointerException</td>
+                        <td>Accessing null reference</td>
+                    </tr>
+                    <tr>
+                        <td>ArrayIndexOutOfBoundsException</td>
+                        <td>Invalid array index</td>
+                    </tr>
+                    <tr>
+                        <td>ArithmeticException</td>
+                        <td>Division by zero</td>
+                    </tr>
+                    <tr>
+                        <td>ClassCastException</td>
+                        <td>Invalid casting</td>
+                    </tr>
+                    <tr>
+                        <td>NumberFormatException</td>
+                        <td>Invalid number parsing</td>
+                    </tr>
+                    <tr>
+                        <td>IllegalArgumentException</td>
+                        <td>Invalid method argument</td>
+                    </tr>
+                    <tr>
+                        <td>FileNotFoundException</td>
+                        <td>File not found</td>
+                    </tr>
+                </table>
+
+                <div class="note"><strong>MCQ Tip:</strong> <code>throw</code> is used to throw exception,
+                    <code>throws</code> is used to declare in method signature.</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">5. Exception Handling Rules</div>
+            <div class="dropdown-content">
+                <h3>Catch Ordering</h3>
+                <pre>// Most specific to most general
+try {
+    // code
+} catch (FileNotFoundException e) {
+    // specific first
+} catch (IOException e) {
+    // then more general
+} catch (Exception e) {
+    // most general last
+}</pre>
+
+                <h3>Override Rules with Exceptions</h3>
+                <pre>class Parent {
+    void method() throws IOException {
+        // code
+    }
+}
+
+class Child extends Parent {
+    @Override
+    void method() throws FileNotFoundException {
+        // Can throw same or narrower exception
+        // Cannot throw broader exception!
+    }
+}</pre>
+
+                <h3>finally Behavior</h3>
+                <pre>// finally always runs (except System.exit())
+int test() {
+    try {
+        return 1;
+    } finally {
+        return 2;  // This is returned!
+    }
+}
+// Returns 2, not 1!</pre>
+
+                <h3>Exception Propagation</h3>
+                <pre>void method1() {
+    method2();  // exception propagates up
+}
+
+void method2() {
+    throw new RuntimeException();  // unchecked - no need to declare
+}</pre>
+
+                <div class="important"><strong>Key:</strong> Overriding method cannot throw broader (parent) exception
+                    than the overridden method!</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.querySelectorAll('.dropdown-header').forEach(h => {
+            h.addEventListener('click', () => h.parentElement.classList.toggle('active'));
+        });
+    </script>
+</body>
+
+</html>

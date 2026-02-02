@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java MCQ TRAPS - Part 2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px
+        }
+
+        h1 {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 2px solid #333;
+            margin-bottom: 20px
+        }
+
+        h2 {
+            margin: 20px 0 10px;
+            padding: 10px;
+            background: #333;
+            color: #fff
+        }
+
+        .trap {
+            background: #fff;
+            margin: 10px 0;
+            padding: 15px;
+            border-left: 4px solid #dc3545;
+            border-radius: 0 4px 4px 0
+        }
+
+        .trap-q {
+            font-weight: bold;
+            margin-bottom: 10px
+        }
+
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 10px 0
+        }
+
+        details {
+            margin-top: 10px;
+            cursor: pointer
+        }
+
+        summary {
+            background: #e8e8e8;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #333
+        }
+
+        summary:hover {
+            background: #ddd
+        }
+
+        .answer {
+            color: #28a745;
+            font-weight: bold;
+            padding: 10px 0
+        }
+
+        .why {
+            background: #e7f5ff;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 4px
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🔥 Java MCQ TRAPS 🔥<br><small style="font-size:0.5em">Questions 51-100</small></h1>
+
+        <h2>Collections</h2>
+
+        <div class="trap">
+            <div class="trap-q">51. What is the output?</div>
+            <pre>List&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+list.add(1);
+list.add(2);
+list.remove(1);
+System.out.println(list);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">[1]</div>
+                <div class="why">remove(1) removes at INDEX 1, not value 1!</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">52. What is the output?</div>
+            <pre>List&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+list.add(1);
+list.add(2);
+list.remove(Integer.valueOf(1));
+System.out.println(list);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">[2]</div>
+                <div class="why">remove(Object) removes by VALUE</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">53. What is the output?</div>
+            <pre>Set&lt;String&gt; set = new HashSet&lt;&gt;();
+set.add("A");
+set.add("B");
+set.add("A");
+System.out.println(set.size());</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">2</div>
+                <div class="why">Set ignores duplicates</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">54. What is the output?</div>
+            <pre>Map&lt;String, Integer&gt; map = new HashMap&lt;&gt;();
+map.put("A", 1);
+map.put("A", 2);
+System.out.println(map.get("A"));</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">2</div>
+                <div class="why">Duplicate key replaces value</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">55. What is the output?</div>
+            <pre>Map&lt;String, Integer&gt; map = new HashMap&lt;&gt;();
+map.put("A", 1);
+System.out.println(map.get("B"));</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">null</div>
+                <div class="why">get() returns null if key not found</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">56. Will this compile?</div>
+            <pre>List&lt;int&gt; list = new ArrayList&lt;&gt;();</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Compile Error</div>
+                <div class="why">Generics don't support primitives! Use Integer</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">57. What is the output?</div>
+            <pre>List&lt;String&gt; list = Arrays.asList("A", "B", "C");
+list.add("D");</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">UnsupportedOperationException</div>
+                <div class="why">Arrays.asList returns fixed-size list!</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">58. What is the output?</div>
+            <pre>TreeSet&lt;String&gt; set = new TreeSet&lt;&gt;();
+set.add(null);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">NullPointerException</div>
+                <div class="why">TreeSet doesn't allow null!</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">59. What is the output?</div>
+            <pre>HashSet&lt;String&gt; set = new HashSet&lt;&gt;();
+set.add(null);
+set.add(null);
+System.out.println(set.size());</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">1</div>
+                <div class="why">HashSet allows one null, duplicates ignored</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">60. What is the output?</div>
+            <pre>List&lt;String&gt; list = new ArrayList&lt;&gt;();
+list.add("A");
+list.add("B");
+for (String s : list) {
+    if (s.equals("A")) {
+        list.remove(s);
+    }
+}</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">ConcurrentModificationException</div>
+                <div class="why">Cannot modify collection while iterating with for-each!</div>
+            </details>
+        </div>
+
+        <h2>Threads</h2>
+
+        <div class="trap">
+            <div class="trap-q">61. What is wrong?</div>
+            <pre>class MyThread extends Thread {
+    public void run() { System.out.println("Running"); }
+}
+MyThread t = new MyThread();
+t.run();</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">No new thread created!</div>
+                <div class="why">Call start() not run()! run() executes in current thread</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">62. What is the output?</div>
+            <pre>Thread t = new Thread(() -&gt; {
+    try { Thread.sleep(1000); } catch(Exception e) {}
+    System.out.println("Thread");
+});
+t.start();
+System.out.println("Main");</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Main Thread (usually)</div>
+                <div class="why">Main doesn't wait for t. Order depends on scheduling</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">63. What is the output?</div>
+            <pre>Thread t = new Thread(() -&gt; System.out.println("Thread"));
+t.start();
+t.start();</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">IllegalThreadStateException</div>
+                <div class="why">Cannot start a thread twice!</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">64. What is the output?</div>
+            <pre>synchronized void method1() { method2(); }
+synchronized void method2() { }</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Works fine - no deadlock</div>
+                <div class="why">Java allows reentrant synchronization on same lock</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">65. What happens?</div>
+            <pre>Object lock = new Object();
+lock.wait();</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">IllegalMonitorStateException</div>
+                <div class="why">wait() must be called from synchronized block!</div>
+            </details>
+        </div>
+
+        <h2>Lambda & Streams</h2>
+
+        <div class="trap">
+            <div class="trap-q">66. What is the output?</div>
+            <pre>List&lt;Integer&gt; list = Arrays.asList(1, 2, 3);
+list.stream().filter(n -&gt; n &gt; 1);
+System.out.println(list);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">[1, 2, 3]</div>
+                <div class="why">Stream operations don't modify original. Need terminal op!</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">67. What is the output?</div>
+            <pre>Stream&lt;Integer&gt; s = Stream.of(1, 2, 3);
+s.forEach(System.out::println);
+s.forEach(System.out::println);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">IllegalStateException on second forEach</div>
+                <div class="why">Stream can only be consumed once!</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">68. What is the output?</div>
+            <pre>List&lt;String&gt; list = Arrays.asList("a", "b", "c");
+long count = list.stream()
+    .filter(s -&gt; s.length() &gt; 0)
+    .peek(System.out::println)
+    .count();
+System.out.println(count);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">3 (but peek may not print!)</div>
+                <div class="why">Since Java 9, count() may skip intermediate ops if size known</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">69. Will this compile?</div>
+            <pre>Runnable r = () -&gt; System.out.println("Hello");
+Callable c = () -&gt; System.out.println("Hello");</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Callable won't compile</div>
+                <div class="why">Callable.call() must return a value!</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">70. What is the output?</div>
+            <pre>int x = 10;
+Runnable r = () -&gt; System.out.println(x);
+x = 20;
+r.run();</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Compile Error</div>
+                <div class="why">Lambda can only capture effectively final variables!</div>
+            </details>
+        </div>
+
+        <h2>More OOPs</h2>
+
+        <div class="trap">
+            <div class="trap-q">71. What is the output?</div>
+            <pre>class Parent {
+    void show() throws IOException {}
+}
+class Child extends Parent {
+    void show() throws Exception {}
+}</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Compile Error</div>
+                <div class="why">Overriding method cannot throw broader exception!</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">72. What is the output?</div>
+            <pre>class Parent {
+    private void show() { System.out.println("Parent"); }
+}
+class Child extends Parent {
+    public void show() { System.out.println("Child"); }
+}
+Parent p = new Child();
+p.show();</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Compile Error</div>
+                <div class="why">Parent.show() is private, not accessible via Parent reference!</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">73. What is the output?</div>
+            <pre>abstract class A {
+    A() { show(); }
+    abstract void show();
+}
+class B extends A {
+    int x = 10;
+    void show() { System.out.println(x); }
+}
+new B();</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">0</div>
+                <div class="why">Constructor called before instance var initialized!</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">74. What is the output?</div>
+            <pre>interface A { int x = 1; }
+interface B { int x = 2; }
+class C implements A, B {
+    void show() { System.out.println(x); }
+}</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Compile Error</div>
+                <div class="why">Ambiguous reference! Must use A.x or B.x</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">75. Will this compile?</div>
+            <pre>class Outer {
+    int x = 10;
+    static class Inner {
+        void show() { System.out.println(x); }
+    }
+}</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Compile Error</div>
+                <div class="why">Static inner class cannot access non-static outer members!</div>
+            </details>
+        </div>
+
+        <h2>More Exceptions</h2>
+
+        <div class="trap">
+            <div class="trap-q">76. What is the output?</div>
+            <pre>try {
+    try {
+        throw new Exception();
+    } finally {
+        System.out.println("Inner finally");
+    }
+} catch (Exception e) {
+    System.out.println("Outer catch");
+}</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Inner finally Outer catch</div>
+                <div class="why">Exception propagates after finally runs</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">77. What is the output?</div>
+            <pre>try {
+    throw new RuntimeException();
+} catch (RuntimeException e) {
+    throw new RuntimeException();
+} finally {
+    System.out.println("Finally");
+}</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Finally, then RuntimeException thrown</div>
+                <div class="why">finally runs even if catch throws</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">78. What is the output?</div>
+            <pre>try {
+    System.exit(0);
+} finally {
+    System.out.println("Finally");
+}</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Nothing (program terminated)</div>
+                <div class="why">System.exit() prevents finally from running!</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">79. Will this compile?</div>
+            <pre>try {
+    // code
+} catch (FileNotFoundException e) {
+    // handle
+} catch (IOException e) {
+    // handle
+}</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Yes</div>
+                <div class="why">Specific exception before general - correct order</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">80. Will this compile?</div>
+            <pre>try {
+    // code
+} catch (IOException e) {
+    // handle
+} catch (FileNotFoundException e) {
+    // handle
+}</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Compile Error</div>
+                <div class="why">FileNotFoundException already caught by IOException (parent)!</div>
+            </details>
+        </div>
+
+        <h2>Wrapper Classes & Boxing</h2>
+
+        <div class="trap">
+            <div class="trap-q">81. What is the output?</div>
+            <pre>Integer a = new Integer(5);
+Integer b = new Integer(5);
+System.out.println(a == b);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">false</div>
+                <div class="why">new creates different objects, bypasses cache</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">82. What is the output?</div>
+            <pre>Integer a = 1000;
+int b = 1000;
+System.out.println(a == b);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">true</div>
+                <div class="why">Unboxing occurs, values compared</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">83. What is the output?</div>
+            <pre>Integer a = null;
+int b = a;</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">NullPointerException</div>
+                <div class="why">Cannot unbox null!</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">84. What is the output?</div>
+            <pre>Double d1 = 1.0;
+Double d2 = 1.0;
+System.out.println(d1 == d2);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">false</div>
+                <div class="why">Double has no cache unlike Integer!</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">85. What is the output?</div>
+            <pre>System.out.println(Integer.valueOf("10", 2));</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">2</div>
+                <div class="why">Second arg is radix. "10" in binary = 2</div>
+            </details>
+        </div>
+
+        <h2>Method Signatures</h2>
+
+        <div class="trap">
+            <div class="trap-q">86. Will this overload?</div>
+            <pre>void method(int... a) {}
+void method(int[] a) {}</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Compile Error</div>
+                <div class="why">Varargs int... is same as int[] - duplicate method!</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">87. What is called?</div>
+            <pre>void method(int a, int b) { System.out.println(1); }
+void method(int... a) { System.out.println(2); }
+method(1, 2);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">1</div>
+                <div class="why">Exact match preferred over varargs</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">88. Will this compile?</div>
+            <pre>void method(int... a, int b) {}</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Compile Error</div>
+                <div class="why">Varargs must be last parameter!</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">89. What is the output?</div>
+            <pre>void method(Object o) { System.out.println("Object"); }
+void method(String s) { System.out.println("String"); }
+method(null);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">String</div>
+                <div class="why">Most specific type selected</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">90. What is the output?</div>
+            <pre>void method(String s) { System.out.println("String"); }
+void method(Integer i) { System.out.println("Integer"); }
+method(null);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Compile Error</div>
+                <div class="why">Ambiguous - null could be either type!</div>
+            </details>
+        </div>
+
+        <h2>Miscellaneous</h2>
+
+        <div class="trap">
+            <div class="trap-q">91. What is the output?</div>
+            <pre>class A {}
+class B extends A {}
+A a = new B();
+System.out.println(a instanceof B);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">true</div>
+                <div class="why">Actual object type is B</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">92. What is the output?</div>
+            <pre>String s = "A,B,C";
+String[] parts = s.split(",");
+System.out.println(parts.length);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">3</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">93. What is the output?</div>
+            <pre>String s = "A,B,C,";
+String[] parts = s.split(",");
+System.out.println(parts.length);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">3</div>
+                <div class="why">Trailing empty strings are discarded by default!</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">94. What is the output?</div>
+            <pre>String s = "A,B,C,";
+String[] parts = s.split(",", -1);
+System.out.println(parts.length);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">4</div>
+                <div class="why">Negative limit keeps trailing empties</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">95. What is the output?</div>
+            <pre>System.out.println("abc".substring(3));</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">"" (empty string)</div>
+                <div class="why">substring from length returns empty, no exception</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">96. What is the output?</div>
+            <pre>System.out.println("abc".substring(4));</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">StringIndexOutOfBoundsException</div>
+                <div class="why">Index > length throws exception</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">97. What is the output?</div>
+            <pre>StringBuilder sb = new StringBuilder("Hello");
+sb.reverse();
+System.out.println(sb);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">olleH</div>
+                <div class="why">StringBuilder modifies in place</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">98. What is the output?</div>
+            <pre>System.out.println(Math.round(-2.5));</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">-2</div>
+                <div class="why">Math.round rounds towards positive infinity on .5</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">99. What is the output?</div>
+            <pre>System.out.println(Math.round(2.5));</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">3</div>
+                <div class="why">Rounds up on .5 (towards positive infinity)</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">100. What is the output?</div>
+            <pre>System.out.println("Hello" == "Hel" + "lo");</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">true</div>
+                <div class="why">Compile-time constant folding puts result in pool!</div>
+            </details>
+        </div>
+
+    </div>
+</body>
+
+</html>

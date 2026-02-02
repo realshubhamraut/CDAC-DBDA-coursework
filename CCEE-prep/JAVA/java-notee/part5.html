@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Notes Part 5 - java.lang, java.util, Lambda, Streams, JDBC</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px
+        }
+
+        h1 {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 2px solid #333;
+            margin-bottom: 20px
+        }
+
+        .dropdown {
+            background: #fff;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px
+        }
+
+        .dropdown-header {
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 1.1em
+        }
+
+        .dropdown-header:hover {
+            background: #f9f9f9
+        }
+
+        .dropdown-header::after {
+            content: '+';
+            font-size: 1.5em
+        }
+
+        .dropdown.active .dropdown-header::after {
+            content: '−'
+        }
+
+        .dropdown-content {
+            display: none;
+            padding: 20px;
+            border-top: 1px solid #ddd;
+            background: #fafafa
+        }
+
+        .dropdown.active .dropdown-content {
+            display: block
+        }
+
+        h3 {
+            margin: 15px 0 10px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px
+        }
+
+        code {
+            background: #e8e8e8;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.95em
+        }
+
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 10px 0
+        }
+
+        ul,
+        ol {
+            margin-left: 25px;
+            margin-bottom: 10px
+        }
+
+        li {
+            margin-bottom: 5px
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0
+        }
+
+        th,
+        td {
+            border: 1px solid #333;
+            padding: 10px;
+            text-align: left
+        }
+
+        th {
+            background: #333;
+            color: #fff
+        }
+
+        tr:nth-child(even) {
+            background: #f2f2f2
+        }
+
+        .note {
+            background: #fff3cd;
+            padding: 10px;
+            border-left: 4px solid #ffc107;
+            margin: 10px 0
+        }
+
+        .important {
+            background: #f8d7da;
+            padding: 10px;
+            border-left: 4px solid #dc3545;
+            margin: 10px 0
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Java Programming Notes<br><small style="font-size:0.5em">Part 5: java.lang, java.util, Lambda, Streams,
+                JDBC</small></h1>
+
+        <div class="dropdown">
+            <div class="dropdown-header">1. java.lang Package</div>
+            <div class="dropdown-content">
+                <h3>Key Classes (Auto-imported)</h3>
+                <table>
+                    <tr>
+                        <th>Class</th>
+                        <th>Purpose</th>
+                    </tr>
+                    <tr>
+                        <td>Object</td>
+                        <td>Root of all classes</td>
+                    </tr>
+                    <tr>
+                        <td>String</td>
+                        <td>Immutable character sequences</td>
+                    </tr>
+                    <tr>
+                        <td>StringBuilder/StringBuffer</td>
+                        <td>Mutable strings</td>
+                    </tr>
+                    <tr>
+                        <td>Math</td>
+                        <td>Mathematical operations</td>
+                    </tr>
+                    <tr>
+                        <td>Wrapper classes</td>
+                        <td>Integer, Double, Boolean, etc.</td>
+                    </tr>
+                    <tr>
+                        <td>System</td>
+                        <td>System operations (I/O, exit, gc)</td>
+                    </tr>
+                    <tr>
+                        <td>Thread</td>
+                        <td>Thread operations</td>
+                    </tr>
+                    <tr>
+                        <td>Throwable</td>
+                        <td>Exception/Error base class</td>
+                    </tr>
+                </table>
+
+                <h3>String Class</h3>
+                <pre>String s = "Hello";
+
+// Methods
+s.length();              // 5
+s.charAt(0);             // 'H'
+s.substring(1, 4);       // "ell"
+s.toUpperCase();         // "HELLO"
+s.toLowerCase();         // "hello"
+s.trim();                // Remove whitespace
+s.replace("l", "L");     // "HeLLo"
+s.split(",");            // Split to array
+s.contains("ell");       // true
+s.startsWith("He");      // true
+s.endsWith("lo");        // true
+s.indexOf("l");          // 2
+s.lastIndexOf("l");      // 3
+s.equals("Hello");       // true (content)
+s.equalsIgnoreCase("HELLO"); // true
+
+// String Pool
+String s1 = "Hello";
+String s2 = "Hello";
+s1 == s2  // true (same pool object)
+
+String s3 = new String("Hello");
+s1 == s3  // false (different objects)
+s1.equals(s3)  // true (same content)</pre>
+
+                <h3>StringBuilder vs StringBuffer</h3>
+                <pre>StringBuilder sb = new StringBuilder("Hello");
+sb.append(" World");     // "Hello World"
+sb.insert(5, ",");       // "Hello, World"
+sb.delete(5, 6);         // "Hello World"
+sb.reverse();            // "dlroW olleH"
+sb.toString();           // Convert to String</pre>
+
+                <table>
+                    <tr>
+                        <th>StringBuilder</th>
+                        <th>StringBuffer</th>
+                    </tr>
+                    <tr>
+                        <td>Not synchronized</td>
+                        <td>Synchronized (thread-safe)</td>
+                    </tr>
+                    <tr>
+                        <td>Faster</td>
+                        <td>Slower</td>
+                    </tr>
+                    <tr>
+                        <td>Single-threaded use</td>
+                        <td>Multi-threaded use</td>
+                    </tr>
+                </table>
+
+                <h3>Math Class</h3>
+                <pre>Math.abs(-5);        // 5
+Math.max(10, 20);    // 20
+Math.min(10, 20);    // 10
+Math.pow(2, 3);      // 8.0
+Math.sqrt(16);       // 4.0
+Math.round(3.7);     // 4
+Math.floor(3.7);     // 3.0
+Math.ceil(3.2);      // 4.0
+Math.random();       // 0.0 to 1.0</pre>
+
+                <h3>Wrapper Classes</h3>
+                <pre>// Autoboxing
+Integer i = 100;           // int → Integer
+
+// Unboxing
+int x = i;                 // Integer → int
+
+// Parsing
+int num = Integer.parseInt("100");
+double d = Double.parseDouble("3.14");
+
+// Constants
+Integer.MAX_VALUE;         // 2147483647
+Integer.MIN_VALUE;         // -2147483648
+
+// Compare
+Integer.compare(10, 20);   // negative (10 < 20)</pre>
+
+                <div class="note"><strong>MCQ Tip:</strong> String is immutable. StringBuilder/StringBuffer are mutable!
+                </div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">2. java.util Package</div>
+            <div class="dropdown-content">
+                <h3>Key Classes</h3>
+                <table>
+                    <tr>
+                        <th>Class</th>
+                        <th>Purpose</th>
+                    </tr>
+                    <tr>
+                        <td>Scanner</td>
+                        <td>Read input</td>
+                    </tr>
+                    <tr>
+                        <td>Random</td>
+                        <td>Generate random numbers</td>
+                    </tr>
+                    <tr>
+                        <td>Date, Calendar</td>
+                        <td>Date/time (legacy)</td>
+                    </tr>
+                    <tr>
+                        <td>Arrays</td>
+                        <td>Array utilities</td>
+                    </tr>
+                    <tr>
+                        <td>Collections</td>
+                        <td>Collection utilities</td>
+                    </tr>
+                    <tr>
+                        <td>Optional</td>
+                        <td>Null-safe container</td>
+                    </tr>
+                </table>
+
+                <h3>Scanner</h3>
+                <pre>Scanner sc = new Scanner(System.in);
+
+String line = sc.nextLine();
+String word = sc.next();
+int i = sc.nextInt();
+double d = sc.nextDouble();
+boolean b = sc.nextBoolean();
+
+sc.hasNextInt();  // Check before reading
+sc.close();</pre>
+
+                <h3>Random</h3>
+                <pre>Random rand = new Random();
+
+rand.nextInt();           // Any int
+rand.nextInt(100);        // 0 to 99
+rand.nextDouble();        // 0.0 to 1.0
+rand.nextBoolean();       // true or false</pre>
+
+                <h3>Arrays Utility Class</h3>
+                <pre>int[] arr = {3, 1, 4, 1, 5};
+
+Arrays.sort(arr);                    // Sort
+Arrays.binarySearch(arr, 4);         // Find
+Arrays.fill(arr, 0);                 // Fill all with 0
+Arrays.equals(arr1, arr2);           // Compare
+Arrays.copyOf(arr, 10);              // Copy with new length
+Arrays.toString(arr);                // "[0, 0, 0, 0, 0]"
+Arrays.asList("a", "b", "c");        // Convert to List</pre>
+
+                <h3>Collections Utility Class</h3>
+                <pre>List<Integer> list = new ArrayList<>();
+
+Collections.sort(list);              // Sort
+Collections.reverse(list);           // Reverse
+Collections.shuffle(list);           // Randomize
+Collections.max(list);               // Maximum
+Collections.min(list);               // Minimum
+Collections.frequency(list, 5);      // Count occurrences
+Collections.binarySearch(list, 10);  // Find (sorted list)
+Collections.swap(list, 0, 1);        // Swap elements
+Collections.fill(list, 0);           // Fill all
+Collections.unmodifiableList(list);  // Read-only view</pre>
+
+                <h3>Optional (Java 8+)</h3>
+                <pre>Optional<String> opt = Optional.of("Hello");
+Optional<String> empty = Optional.empty();
+Optional<String> nullable = Optional.ofNullable(null);
+
+opt.isPresent();          // true
+opt.get();                // "Hello"
+opt.orElse("Default");    // "Hello" or "Default" if empty
+opt.orElseThrow(() -> new RuntimeException());
+
+opt.ifPresent(s -> System.out.println(s));</pre>
+
+                <div class="important"><strong>Key:</strong> <code>Arrays.sort()</code> for arrays.
+                    <code>Collections.sort()</code> for List!</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">3. Lambda Expressions (Java 8+)</div>
+            <div class="dropdown-content">
+                <h3>What is Lambda?</h3>
+                <p>Anonymous function that implements functional interface. Enables functional programming in Java.</p>
+
+                <h3>Syntax</h3>
+                <pre>// Full syntax
+(parameters) -> { statements; }
+
+// Shortened forms
+(a, b) -> a + b              // Expression body
+a -> a * 2                   // Single parameter
+() -> System.out.println()   // No parameters</pre>
+
+                <h3>Functional Interface</h3>
+                <pre>@FunctionalInterface
+interface Calculator {
+    int calculate(int a, int b);  // Single abstract method
+}
+
+// Lambda implementation
+Calculator add = (a, b) -> a + b;
+Calculator sub = (a, b) -> a - b;
+
+System.out.println(add.calculate(5, 3));  // 8</pre>
+
+                <h3>Built-in Functional Interfaces</h3>
+                <table>
+                    <tr>
+                        <th>Interface</th>
+                        <th>Method</th>
+                        <th>Purpose</th>
+                    </tr>
+                    <tr>
+                        <td><code>Predicate&lt;T&gt;</code></td>
+                        <td><code>test(T)</code></td>
+                        <td>Returns boolean</td>
+                    </tr>
+                    <tr>
+                        <td><code>Function&lt;T,R&gt;</code></td>
+                        <td><code>apply(T)</code></td>
+                        <td>Returns R</td>
+                    </tr>
+                    <tr>
+                        <td><code>Consumer&lt;T&gt;</code></td>
+                        <td><code>accept(T)</code></td>
+                        <td>Returns void</td>
+                    </tr>
+                    <tr>
+                        <td><code>Supplier&lt;T&gt;</code></td>
+                        <td><code>get()</code></td>
+                        <td>Returns T</td>
+                    </tr>
+                    <tr>
+                        <td><code>BiFunction&lt;T,U,R&gt;</code></td>
+                        <td><code>apply(T,U)</code></td>
+                        <td>Two inputs, returns R</td>
+                    </tr>
+                </table>
+
+                <pre>// Predicate - test condition
+Predicate<Integer> isEven = n -> n % 2 == 0;
+isEven.test(4);  // true
+
+// Function - transform
+Function<String, Integer> length = s -> s.length();
+length.apply("Hello");  // 5
+
+// Consumer - consume value
+Consumer<String> printer = s -> System.out.println(s);
+printer.accept("Hello");
+
+// Supplier - supply value
+Supplier<Double> random = () -> Math.random();
+random.get();  // 0.xxx</pre>
+
+                <h3>Method References</h3>
+                <pre>// Static method
+Function<String, Integer> parse = Integer::parseInt;
+
+// Instance method
+Consumer<String> print = System.out::println;
+
+// Constructor
+Supplier<ArrayList> newList = ArrayList::new;
+
+// Types:
+// ClassName::staticMethod
+// object::instanceMethod
+// ClassName::instanceMethod
+// ClassName::new</pre>
+
+                <div class="note"><strong>MCQ Tip:</strong> Functional interface = exactly ONE abstract method. Can have
+                    default/static methods.</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">4. Streams API (Java 8+)</div>
+            <div class="dropdown-content">
+                <h3>What is a Stream?</h3>
+                <p>Sequence of elements supporting functional-style operations. Does NOT store data, processes
+                    on-demand.</p>
+
+                <h3>Creating Streams</h3>
+                <pre>// From Collection
+List<String> list = Arrays.asList("a", "b", "c");
+Stream<String> stream = list.stream();
+
+// From Array
+Stream<Integer> arrStream = Arrays.stream(new Integer[]{1, 2, 3});
+
+// Using Stream.of()
+Stream<String> stream2 = Stream.of("a", "b", "c");
+
+// Infinite streams
+Stream<Integer> infinite = Stream.iterate(0, n -> n + 1);</pre>
+
+                <h3>Intermediate Operations (Lazy)</h3>
+                <pre>list.stream()
+    .filter(s -> s.length() > 3)     // Keep matching
+    .map(s -> s.toUpperCase())       // Transform
+    .sorted()                         // Sort
+    .distinct()                       // Remove duplicates
+    .limit(10)                        // First n elements
+    .skip(5);                         // Skip first n</pre>
+
+                <h3>Terminal Operations (Execute)</h3>
+                <pre>list.stream().forEach(System.out::println);  // Print each
+list.stream().collect(Collectors.toList());  // To List
+list.stream().toArray();                      // To array
+list.stream().count();                        // Count elements
+list.stream().findFirst();                    // First element
+list.stream().anyMatch(s -> s.isEmpty());    // Any match?
+list.stream().allMatch(s -> s.length() > 0); // All match?
+list.stream().noneMatch(s -> s.isEmpty());   // None match?
+list.stream().reduce((a, b) -> a + b);       // Combine all</pre>
+
+                <h3>Common Patterns</h3>
+                <pre>// Filter and collect
+List<Integer> evens = numbers.stream()
+    .filter(n -> n % 2 == 0)
+    .collect(Collectors.toList());
+
+// Map and collect
+List<String> names = persons.stream()
+    .map(Person::getName)
+    .collect(Collectors.toList());
+
+// Sum
+int sum = numbers.stream()
+    .mapToInt(Integer::intValue)
+    .sum();
+
+// Group by
+Map<String, List<Person>> byCity = persons.stream()
+    .collect(Collectors.groupingBy(Person::getCity));
+
+// Join strings
+String result = list.stream()
+    .collect(Collectors.joining(", "));</pre>
+
+                <h3>Parallel Streams</h3>
+                <pre>list.parallelStream()
+    .filter(...)
+    .collect(...);
+    
+// Or convert
+list.stream().parallel();</pre>
+
+                <div class="important"><strong>Key:</strong> Streams are lazy - intermediate ops don't execute until
+                    terminal op is called!</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">5. JDBC API</div>
+            <div class="dropdown-content">
+                <h3>What is JDBC?</h3>
+                <p>Java Database Connectivity - API to connect and execute queries on databases.</p>
+
+                <h3>JDBC Architecture</h3>
+                <pre>Java Application
+      ↓
+JDBC API (java.sql)
+      ↓
+JDBC Driver Manager
+      ↓
+JDBC Driver (vendor-specific)
+      ↓
+Database</pre>
+
+                <h3>Steps to Connect</h3>
+                <pre>// 1. Load driver (optional in JDBC 4.0+)
+Class.forName("com.mysql.cj.jdbc.Driver");
+
+// 2. Get connection
+Connection conn = DriverManager.getConnection(
+    "jdbc:mysql://localhost:3306/mydb",
+    "username",
+    "password"
+);
+
+// 3. Create statement
+Statement stmt = conn.createStatement();
+
+// 4. Execute query
+ResultSet rs = stmt.executeQuery("SELECT * FROM users");
+
+// 5. Process results
+while (rs.next()) {
+    int id = rs.getInt("id");
+    String name = rs.getString("name");
+}
+
+// 6. Close resources
+rs.close();
+stmt.close();
+conn.close();</pre>
+
+                <h3>Statement Types</h3>
+                <table>
+                    <tr>
+                        <th>Type</th>
+                        <th>Use Case</th>
+                    </tr>
+                    <tr>
+                        <td>Statement</td>
+                        <td>Simple SQL, no parameters</td>
+                    </tr>
+                    <tr>
+                        <td>PreparedStatement</td>
+                        <td>Parameterized, precompiled</td>
+                    </tr>
+                    <tr>
+                        <td>CallableStatement</td>
+                        <td>Stored procedures</td>
+                    </tr>
+                </table>
+
+                <h3>PreparedStatement</h3>
+                <pre>String sql = "INSERT INTO users (name, age) VALUES (?, ?)";
+PreparedStatement pstmt = conn.prepareStatement(sql);
+pstmt.setString(1, "John");
+pstmt.setInt(2, 25);
+pstmt.executeUpdate();
+
+// For SELECT
+ResultSet rs = pstmt.executeQuery();</pre>
+
+                <h3>Execute Methods</h3>
+                <table>
+                    <tr>
+                        <th>Method</th>
+                        <th>Use For</th>
+                        <th>Returns</th>
+                    </tr>
+                    <tr>
+                        <td><code>executeQuery()</code></td>
+                        <td>SELECT</td>
+                        <td>ResultSet</td>
+                    </tr>
+                    <tr>
+                        <td><code>executeUpdate()</code></td>
+                        <td>INSERT/UPDATE/DELETE</td>
+                        <td>int (affected rows)</td>
+                    </tr>
+                    <tr>
+                        <td><code>execute()</code></td>
+                        <td>Any SQL</td>
+                        <td>boolean</td>
+                    </tr>
+                </table>
+
+                <h3>Transaction Management</h3>
+                <pre>try {
+    conn.setAutoCommit(false);
+    
+    stmt.executeUpdate("UPDATE accounts SET balance = balance - 100 WHERE id = 1");
+    stmt.executeUpdate("UPDATE accounts SET balance = balance + 100 WHERE id = 2");
+    
+    conn.commit();
+} catch (SQLException e) {
+    conn.rollback();
+}</pre>
+
+                <h3>Try-with-resources</h3>
+                <pre>try (Connection conn = DriverManager.getConnection(url, user, pass);
+     PreparedStatement pstmt = conn.prepareStatement(sql);
+     ResultSet rs = pstmt.executeQuery()) {
+    
+    while (rs.next()) {
+        // process
+    }
+} // Auto-closed!</pre>
+
+                <div class="note"><strong>MCQ Tip:</strong> <code>executeQuery()</code> for SELECT.
+                    <code>executeUpdate()</code> for INSERT/UPDATE/DELETE!</div>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-header">6. MCQ Quick Reference Table</div>
+            <div class="dropdown-content">
+                <h3>Access Modifiers</h3>
+                <table>
+                    <tr>
+                        <th>Modifier</th>
+                        <th>Class</th>
+                        <th>Package</th>
+                        <th>Subclass</th>
+                        <th>World</th>
+                    </tr>
+                    <tr>
+                        <td>private</td>
+                        <td>✓</td>
+                        <td>✗</td>
+                        <td>✗</td>
+                        <td>✗</td>
+                    </tr>
+                    <tr>
+                        <td>default</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                        <td>✗</td>
+                        <td>✗</td>
+                    </tr>
+                    <tr>
+                        <td>protected</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                        <td>✗</td>
+                    </tr>
+                    <tr>
+                        <td>public</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                    </tr>
+                </table>
+
+                <h3>Keywords Summary</h3>
+                <table>
+                    <tr>
+                        <th>Keyword</th>
+                        <th>Use</th>
+                    </tr>
+                    <tr>
+                        <td>final</td>
+                        <td>Constant var / No override / No extend</td>
+                    </tr>
+                    <tr>
+                        <td>static</td>
+                        <td>Class-level member</td>
+                    </tr>
+                    <tr>
+                        <td>abstract</td>
+                        <td>Abstract class/method</td>
+                    </tr>
+                    <tr>
+                        <td>synchronized</td>
+                        <td>Thread-safe</td>
+                    </tr>
+                    <tr>
+                        <td>volatile</td>
+                        <td>Thread visibility</td>
+                    </tr>
+                    <tr>
+                        <td>transient</td>
+                        <td>Not serialized</td>
+                    </tr>
+                    <tr>
+                        <td>native</td>
+                        <td>Native code (C/C++)</td>
+                    </tr>
+                </table>
+
+                <h3>Collection Comparison</h3>
+                <table>
+                    <tr>
+                        <th>Type</th>
+                        <th>Ordered</th>
+                        <th>Duplicates</th>
+                        <th>Null</th>
+                    </tr>
+                    <tr>
+                        <td>ArrayList</td>
+                        <td>Yes</td>
+                        <td>Yes</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>HashSet</td>
+                        <td>No</td>
+                        <td>No</td>
+                        <td>1 null</td>
+                    </tr>
+                    <tr>
+                        <td>TreeSet</td>
+                        <td>Sorted</td>
+                        <td>No</td>
+                        <td>No null</td>
+                    </tr>
+                    <tr>
+                        <td>HashMap</td>
+                        <td>No</td>
+                        <td>Keys: No</td>
+                        <td>1 null key</td>
+                    </tr>
+                    <tr>
+                        <td>TreeMap</td>
+                        <td>Sorted</td>
+                        <td>Keys: No</td>
+                        <td>No null key</td>
+                    </tr>
+                </table>
+
+                <h3>Thread-Safe Classes</h3>
+                <table>
+                    <tr>
+                        <th>Not Thread-Safe</th>
+                        <th>Thread-Safe Alternative</th>
+                    </tr>
+                    <tr>
+                        <td>ArrayList</td>
+                        <td>Vector, CopyOnWriteArrayList</td>
+                    </tr>
+                    <tr>
+                        <td>HashMap</td>
+                        <td>Hashtable, ConcurrentHashMap</td>
+                    </tr>
+                    <tr>
+                        <td>StringBuilder</td>
+                        <td>StringBuffer</td>
+                    </tr>
+                </table>
+
+                <h3>Exception Types</h3>
+                <table>
+                    <tr>
+                        <th>Checked</th>
+                        <th>Unchecked</th>
+                    </tr>
+                    <tr>
+                        <td>IOException</td>
+                        <td>NullPointerException</td>
+                    </tr>
+                    <tr>
+                        <td>SQLException</td>
+                        <td>ArrayIndexOutOfBoundsException</td>
+                    </tr>
+                    <tr>
+                        <td>ClassNotFoundException</td>
+                        <td>ArithmeticException</td>
+                    </tr>
+                    <tr>
+                        <td>FileNotFoundException</td>
+                        <td>ClassCastException</td>
+                    </tr>
+                </table>
+
+                <h3>Important Differences</h3>
+                <table>
+                    <tr>
+                        <th>Concept 1</th>
+                        <th>Concept 2</th>
+                    </tr>
+                    <tr>
+                        <td>== (reference)</td>
+                        <td>.equals() (content)</td>
+                    </tr>
+                    <tr>
+                        <td>throw (throws exception)</td>
+                        <td>throws (declares)</td>
+                    </tr>
+                    <tr>
+                        <td>final (constant)</td>
+                        <td>finally (cleanup)</td>
+                    </tr>
+                    <tr>
+                        <td>Collection (interface)</td>
+                        <td>Collections (utility)</td>
+                    </tr>
+                    <tr>
+                        <td>Comparable (compareTo)</td>
+                        <td>Comparator (compare)</td>
+                    </tr>
+                    <tr>
+                        <td>sleep() (keeps lock)</td>
+                        <td>wait() (releases lock)</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.querySelectorAll('.dropdown-header').forEach(h => {
+            h.addEventListener('click', () => h.parentElement.classList.toggle('active'));
+        });
+    </script>
+</body>
+
+</html>

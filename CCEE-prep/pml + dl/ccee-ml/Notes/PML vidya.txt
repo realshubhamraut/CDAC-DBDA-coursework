@@ -1,0 +1,22 @@
+SVM = https://www.analyticsvidhya.com/blog/2017/10/svm-skilltest/
+
+K-NN = https://www.analyticsvidhya.com/blog/2017/09/30-questions-test-k-nearest-neighbors-algorithm/
+
+LINEAR REGRESSION = https://www.analyticsvidhya.com/blog/2017/07/30-questions-to-test-a-data-scientist-on-linear-regression/
+
+LOGISTIC REGRESSION = https://www.analyticsvidhya.com/blog/2017/08/skilltest-logistic-regression/
+ 
+DESION TREE =  https://www.analyticsvidhya.com/blog/2021/05/25-questions-to-test-your-skills-on-decision-trees/
+
+RANDOM FOREST = 
+
+ENSEMBLED LEARING = https://www.analyticsvidhya.com/blog/2017/02/40-questions-to-ask-a-data-scientist-on-ensemble-modeling-techniques-skilltest-solution/
+
+GRADIENT BOOST =
+
+
+PCA = https://www.analyticsvidhya.com/blog/2017/03/questions-dimensionality-reduction-data-scientist/
+
+Clustering Techniques = https://www.analyticsvidhya.com/blog/2017/02/test-data-scientist-clustering/
+
+Data Science Interviews = https://www.analyticsvidhya.com/blog/2021/04/top-30-mcqs-to-ace-your-data-science-questions-interviews/

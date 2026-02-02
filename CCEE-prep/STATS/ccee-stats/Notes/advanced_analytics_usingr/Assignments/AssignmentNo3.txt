@@ -1,0 +1,11 @@
+
+
+
+
+Q.No.1 Find the mean, median, mode and range for the following list of values using formula:
+ 1] 13, 18, 13, 14, 13, 16, 14, 21, 13
+ 2] 1, 2, 4, 7 
+
+Q.No.2 Explain the difference between Correlation and Regression
+
+Q.No.3 What are the disadvantages of the linear regression Algorithm?

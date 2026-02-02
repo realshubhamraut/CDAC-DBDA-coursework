@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java MCQ TRAPS - Part 4</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px
+        }
+
+        h1 {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 2px solid #333;
+            margin-bottom: 20px
+        }
+
+        h2 {
+            margin: 20px 0 10px;
+            padding: 10px;
+            background: #333;
+            color: #fff
+        }
+
+        .trap {
+            background: #fff;
+            margin: 10px 0;
+            padding: 15px;
+            border-left: 4px solid #dc3545;
+            border-radius: 0 4px 4px 0
+        }
+
+        .trap-q {
+            font-weight: bold;
+            margin-bottom: 10px
+        }
+
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 10px 0
+        }
+
+        details {
+            margin-top: 10px;
+            cursor: pointer
+        }
+
+        summary {
+            background: #e8e8e8;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #333
+        }
+
+        summary:hover {
+            background: #ddd
+        }
+
+        .answer {
+            color: #28a745;
+            font-weight: bold;
+            padding: 10px 0
+        }
+
+        .why {
+            background: #e7f5ff;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 4px
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🔥 Java MCQ TRAPS 🔥<br><small style="font-size:0.5em">Questions 151-200 (Final)</small></h1>
+
+        <h2>More JVM & Memory</h2>
+
+        <div class="trap">
+            <div class="trap-q">151. Where are local variables stored?</div>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Stack</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">152. Where are objects stored?</div>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Heap</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">153. Where is String pool located?</div>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Heap (In Metaspace after Java 7)</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">154. What is the output?</div>
+            <pre>String s1 = new String("Hello");
+String s2 = s1.intern();
+String s3 = "Hello";
+System.out.println(s2 == s3);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">true</div>
+                <div class="why">intern() returns pool reference</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">155. Can we force garbage collection?</div>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">No, only suggest via System.gc()</div>
+            </details>
+        </div>
+
+        <h2>More Control Flow</h2>
+
+        <div class="trap">
+            <div class="trap-q">156. What is the output?</div>
+            <pre>outer: for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 3; j++) {
+        if (j == 1) break outer;
+        System.out.print(j);
+    }
+}</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">0</div>
+                <div class="why">Labeled break exits outer loop</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">157. What is the output?</div>
+            <pre>outer: for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 3; j++) {
+        if (j == 1) continue outer;
+        System.out.print(j);
+    }
+}</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">000</div>
+                <div class="why">Labeled continue skips to next outer iteration</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">158. What is the output?</div>
+            <pre>int i = 0;
+do {
+    System.out.println(i);
+} while (i++ < 2);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">0 1 2</div>
+                <div class="why">do-while executes first, then checks. Post-increment</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">159. What is the output?</div>
+            <pre>for (int i = 0; i < 5; i++) {
+    if (i == 3) continue;
+    System.out.print(i);
+}</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">0124</div>
+                <div class="why">continue skips 3</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">160. What is the output?</div>
+            <pre>boolean b = true;
+switch (b) {
+    case true: System.out.println("True");
+}</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Compile Error (pre-Java 17)</div>
+                <div class="why">switch didn't support boolean until Java 17!</div>
+            </details>
+        </div>
+
+        <h2>Arrays Advanced</h2>
+
+        <div class="trap">
+            <div class="trap-q">161. What is the output?</div>
+            <pre>int[] a = {1, 2, 3};
+int[] b = {1, 2, 3};
+System.out.println(a.equals(b));</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">false</div>
+                <div class="why">Arrays inherit Object.equals() - checks reference! Use Arrays.equals()</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">162. What is the output?</div>
+            <pre>int[] a = {1, 2, 3};
+int[] b = {1, 2, 3};
+System.out.println(Arrays.equals(a, b));</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">true</div>
+                <div class="why">Arrays.equals() compares content</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">163. What is the output?</div>
+            <pre>int[][] a = {{1, 2}, {3, 4}};
+int[][] b = {{1, 2}, {3, 4}};
+System.out.println(Arrays.equals(a, b));</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">false</div>
+                <div class="why">For 2D arrays, use Arrays.deepEquals()!</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">164. What is the output?</div>
+            <pre>int[] arr = {3, 1, 2};
+System.out.println(Arrays.binarySearch(arr, 2));</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Undefined (must sort first!)</div>
+                <div class="why">binarySearch requires sorted array</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">165. What is the output?</div>
+            <pre>int[] arr = {1, 2, 3};
+Arrays.sort(arr);
+System.out.println(Arrays.binarySearch(arr, 2));</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">1</div>
+                <div class="why">Returns index of element</div>
+            </details>
+        </div>
+
+        <h2>More Math & Utilities</h2>
+
+        <div class="trap">
+            <div class="trap-q">166. What is the output?</div>
+            <pre>System.out.println(Math.min(Double.NaN, 1));</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">NaN</div>
+                <div class="why">Any operation with NaN returns NaN</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">167. What is the output?</div>
+            <pre>System.out.println(Double.NaN == Double.NaN);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">false</div>
+                <div class="why">NaN is not equal to anything including itself!</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">168. What is the output?</div>
+            <pre>System.out.println(Double.isNaN(Double.NaN));</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">true</div>
+                <div class="why">Use isNaN() to check for NaN</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">169. What is the output?</div>
+            <pre>System.out.println(1.0 / 0);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Infinity</div>
+                <div class="why">Floating point division by zero = Infinity</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">170. What is the output?</div>
+            <pre>System.out.println(1 / 0);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">ArithmeticException</div>
+                <div class="why">Integer division by zero throws exception!</div>
+            </details>
+        </div>
+
+        <h2>More Inheritance</h2>
+
+        <div class="trap">
+            <div class="trap-q">171. What is the output?</div>
+            <pre>class A { void show() { System.out.println("A"); } }
+class B extends A { void show() { System.out.println("B"); } }
+A[] arr = {new A(), new B()};
+for (A a : arr) a.show();</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">A B</div>
+                <div class="why">Runtime polymorphism for each object</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">172. Can a static method be overridden?</div>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">No, only hidden</div>
+                <div class="why">Static methods belong to class, not instance</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">173. Can a private method be overridden?</div>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">No</div>
+                <div class="why">Private methods are not visible to subclass</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">174. Can a final method be overridden?</div>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">No</div>
+                <div class="why">final prevents overriding</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">175. What is covariant return type?</div>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Overriding method can return subtype</div>
+                <div class="why">Example: Parent returns Object, Child can return String</div>
+            </details>
+        </div>
+
+        <h2>Generics</h2>
+
+        <div class="trap">
+            <div class="trap-q">176. Will this compile?</div>
+            <pre>List&lt;Object&gt; list = new ArrayList&lt;String&gt;();</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Compile Error</div>
+                <div class="why">Generics are invariant! List&lt;Object&gt; ≠ List&lt;String&gt;</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">177. What does ? extends T mean?</div>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Unknown type that extends T (upper bound)</div>
+                <div class="why">Can read as T, but can't add (except null)</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">178. What does ? super T mean?</div>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Unknown type that is T or supertype (lower bound)</div>
+                <div class="why">Can add T, but reads as Object</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">179. What is type erasure?</div>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Generic type info removed at runtime</div>
+                <div class="why">List&lt;String&gt; becomes List at runtime</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">180. Will this compile?</div>
+            <pre>T[] arr = new T[10];</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Compile Error</div>
+                <div class="why">Cannot create generic array due to type erasure</div>
+            </details>
+        </div>
+
+        <h2>Final Mixed Traps</h2>
+
+        <div class="trap">
+            <div class="trap-q">181. What is the output?</div>
+            <pre>System.out.println('a' + 'b');</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">195</div>
+                <div class="why">char + char = int (97 + 98)</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">182. What is the output?</div>
+            <pre>System.out.println("" + 'a' + 'b');</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">"ab"</div>
+                <div class="why">String + char = String concatenation</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">183. What is the output?</div>
+            <pre>Object o = "Hello";
+if (o instanceof String s) {
+    System.out.println(s.length());
+}</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">5</div>
+                <div class="why">Pattern matching in instanceof (Java 16+)</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">184. What is the output?</div>
+            <pre>var x = 10;
+System.out.println(x);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">10</div>
+                <div class="why">var infers type at compile time (Java 10+)</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">185. Will this compile?</div>
+            <pre>var x;</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Compile Error</div>
+                <div class="why">var requires initializer for type inference</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">186. What is the output?</div>
+            <pre>record Person(String name, int age) {}
+Person p = new Person("John", 25);
+System.out.println(p.name());</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">John</div>
+                <div class="why">Records auto-generate accessor methods (Java 16+)</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">187. Are records immutable?</div>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Yes, fields are final</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">188. What is the output?</div>
+            <pre>List&lt;String&gt; list = List.of("a", "b", "c");
+list.add("d");</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">UnsupportedOperationException</div>
+                <div class="why">List.of() creates immutable list!</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">189. What is the output?</div>
+            <pre>Map&lt;String, Integer&gt; map = Map.of("a", 1, "b", 2);
+System.out.println(map.size());</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">2</div>
+                <div class="why">Map.of() creates immutable map</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">190. What is sealed class?</div>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Class that restricts which classes can extend it (Java 17+)</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">191. What is the output?</div>
+            <pre>System.out.println("""
+    Hello
+    World""");</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Hello\nWorld</div>
+                <div class="why">Text blocks (Java 15+)</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">192. Is this valid?</div>
+            <pre>switch (x) {
+    case 1, 2, 3 -&gt; System.out.println("Low");
+}</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">Yes (Java 14+)</div>
+                <div class="why">Switch expressions with arrow syntax</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">193. What is the output?</div>
+            <pre>String s = null;
+String result = switch (s) {
+    case null -&gt; "null";
+    default -&gt; "not null";
+};</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">"null" (Java 21+)</div>
+                <div class="why">Switch can handle null cases in Java 21</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">194. What is the output?</div>
+            <pre>IntStream.range(1, 5).forEach(System.out::print);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">1234</div>
+                <div class="why">range is exclusive of end</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">195. What is the output?</div>
+            <pre>IntStream.rangeClosed(1, 5).forEach(System.out::print);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">12345</div>
+                <div class="why">rangeClosed is inclusive of end</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">196. What is the output?</div>
+            <pre>List&lt;Integer&gt; list = Arrays.asList(1, 2, 3);
+list.set(0, 10);
+System.out.println(list);</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">[10, 2, 3]</div>
+                <div class="why">asList allows modification, just not add/remove</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">197. What is the output?</div>
+            <pre>System.out.println(Objects.equals(null, null));</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">true</div>
+                <div class="why">Objects.equals handles null safely</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">198. What is the output?</div>
+            <pre>System.out.println(Objects.hashCode(null));</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">0</div>
+                <div class="why">Objects.hashCode returns 0 for null</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">199. What is the output?</div>
+            <pre>System.out.println(Objects.isNull(null));</pre>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">true</div>
+            </details>
+        </div>
+
+        <div class="trap">
+            <div class="trap-q">200. What does Objects.requireNonNull(null) throw?</div>
+            <details>
+                <summary>Show Answer</summary>
+                <div class="answer">NullPointerException</div>
+                <div class="why">Checks and throws if null</div>
+            </details>
+        </div>
+
+        <h2 style="background:#28a745">🎉 Congratulations! 200 Java Traps Completed!</h2>
+
+    </div>
+</body>
+
+</html>

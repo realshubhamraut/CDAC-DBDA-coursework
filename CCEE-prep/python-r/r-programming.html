@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R Programming Notes - MCQ Exam Prep</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Times New Roman', Times, serif; background: #f5f5f5; color: #333; line-height: 1.6; }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        h1 { text-align: center; padding: 30px 0; border-bottom: 2px solid #333; margin-bottom: 20px; }
+        .dropdown { background: #fff; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px; }
+        .dropdown-header { padding: 15px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 1.1em; }
+        .dropdown-header:hover { background: #f9f9f9; }
+        .dropdown-header::after { content: '+'; font-size: 1.5em; }
+        .dropdown.active .dropdown-header::after { content: '−'; }
+        .dropdown-content { display: none; padding: 20px; border-top: 1px solid #ddd; background: #fafafa; }
+        .dropdown.active .dropdown-content { display: block; }
+        h3 { margin: 15px 0 10px; border-bottom: 1px solid #ccc; padding-bottom: 5px; }
+        code { background: #e8e8e8; padding: 2px 6px; border-radius: 3px; font-size: 0.95em; }
+        pre { background: #2d2d2d; color: #f8f8f2; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 10px 0; }
+        ul, ol { margin-left: 25px; margin-bottom: 10px; }
+        li { margin-bottom: 5px; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th, td { border: 1px solid #333; padding: 10px; text-align: left; }
+        th { background: #333; color: #fff; }
+        tr:nth-child(even) { background: #f2f2f2; }
+        .note { background: #fff3cd; padding: 10px; border-left: 4px solid #ffc107; margin: 10px 0; }
+        .important { background: #f8d7da; padding: 10px; border-left: 4px solid #dc3545; margin: 10px 0; }
+    </style>
+</head>
+<body>
+<div class="container">
+<h1>R Programming Notes<br><small style="font-size:0.5em">MCQ Exam Preparation</small></h1>
+
+<!-- Section 1 -->
+<div class="dropdown">
+<div class="dropdown-header">1. Reading and Getting Data into R</div>
+<div class="dropdown-content">
+<h3>Key Functions for Reading Data</h3>
+<table>
+<tr><th>Function</th><th>Purpose</th><th>Example</th></tr>
+<tr><td><code>read.csv()</code></td><td>Read CSV files</td><td><code>data <- read.csv("file.csv")</code></td></tr>
+<tr><td><code>read.table()</code></td><td>Read text/tab files</td><td><code>data <- read.table("file.txt", header=TRUE)</code></td></tr>
+<tr><td><code>read.delim()</code></td><td>Read tab-delimited</td><td><code>data <- read.delim("file.txt")</code></td></tr>
+<tr><td><code>readLines()</code></td><td>Read lines as vector</td><td><code>lines <- readLines("file.txt")</code></td></tr>
+<tr><td><code>scan()</code></td><td>Read data into vector</td><td><code>data <- scan("file.txt")</code></td></tr>
+<tr><td><code>read.xlsx()</code></td><td>Read Excel files</td><td>Requires <code>xlsx</code> package</td></tr>
+</table>
+
+<h3>Important Parameters</h3>
+<ul>
+<li><code>header = TRUE/FALSE</code> - First row as column names</li>
+<li><code>sep = ","</code> - Field separator (comma, tab, space)</li>
+<li><code>na.strings = "NA"</code> - Define missing values</li>
+<li><code>stringsAsFactors = FALSE</code> - Keep strings as character</li>
+<li><code>skip = n</code> - Skip first n lines</li>
+<li><code>nrows = n</code> - Read only n rows</li>
+</ul>
+
+<h3>Reading from URLs</h3>
+<pre>data <- read.csv("https://example.com/data.csv")</pre>
+
+<h3>Working Directory</h3>
+<ul>
+<li><code>getwd()</code> - Get current working directory</li>
+<li><code>setwd("path")</code> - Set working directory</li>
+</ul>
+
+<div class="note"><strong>MCQ Tip:</strong> <code>read.csv()</code> uses comma as default separator, <code>read.csv2()</code> uses semicolon (European format).</div>
+</div>
+</div>
+
+<!-- Section 2 -->
+<div class="dropdown">
+<div class="dropdown-header">2. Exporting Data from R</div>
+<div class="dropdown-content">
+<h3>Key Export Functions</h3>
+<table>
+<tr><th>Function</th><th>Purpose</th><th>Example</th></tr>
+<tr><td><code>write.csv()</code></td><td>Export to CSV</td><td><code>write.csv(df, "output.csv")</code></td></tr>
+<tr><td><code>write.table()</code></td><td>Export to text file</td><td><code>write.table(df, "output.txt")</code></td></tr>
+<tr><td><code>writeLines()</code></td><td>Write character vector</td><td><code>writeLines(text, "file.txt")</code></td></tr>
+<tr><td><code>save()</code></td><td>Save R objects (.RData)</td><td><code>save(x, y, file="data.RData")</code></td></tr>
+<tr><td><code>saveRDS()</code></td><td>Save single object</td><td><code>saveRDS(obj, "file.rds")</code></td></tr>
+</table>
+
+<h3>Important Parameters</h3>
+<ul>
+<li><code>row.names = FALSE</code> - Don't include row numbers</li>
+<li><code>quote = FALSE</code> - Don't quote strings</li>
+<li><code>sep = ","</code> - Field separator</li>
+<li><code>na = "NA"</code> - How to represent missing values</li>
+<li><code>append = TRUE</code> - Append to existing file</li>
+</ul>
+
+<h3>Loading Saved Objects</h3>
+<pre>load("data.RData")  # Loads all saved objects
+obj <- readRDS("file.rds")  # Load single object</pre>
+
+<div class="important"><strong>Remember:</strong> <code>save()</code> saves multiple objects with names; <code>saveRDS()</code> saves one object without name.</div>
+</div>
+</div>
+
+<!-- Section 3 -->
+<div class="dropdown">
+<div class="dropdown-header">3. Data Types in R</div>
+<div class="dropdown-content">
+<h3>Basic Data Types (Atomic Types)</h3>
+<table>
+<tr><th>Type</th><th>Description</th><th>Example</th><th>Check Function</th></tr>
+<tr><td><strong>numeric</strong></td><td>Real numbers (double)</td><td><code>x <- 3.14</code></td><td><code>is.numeric()</code></td></tr>
+<tr><td><strong>integer</strong></td><td>Whole numbers</td><td><code>x <- 5L</code></td><td><code>is.integer()</code></td></tr>
+<tr><td><strong>character</strong></td><td>Text/strings</td><td><code>x <- "hello"</code></td><td><code>is.character()</code></td></tr>
+<tr><td><strong>logical</strong></td><td>Boolean TRUE/FALSE</td><td><code>x <- TRUE</code></td><td><code>is.logical()</code></td></tr>
+<tr><td><strong>complex</strong></td><td>Complex numbers</td><td><code>x <- 3+2i</code></td><td><code>is.complex()</code></td></tr>
+<tr><td><strong>raw</strong></td><td>Raw bytes</td><td><code>x <- charToRaw("A")</code></td><td><code>is.raw()</code></td></tr>
+</table>
+
+<h3>Type Checking & Conversion</h3>
+<ul>
+<li><code>class(x)</code> - Returns class of object</li>
+<li><code>typeof(x)</code> - Returns storage type</li>
+<li><code>mode(x)</code> - Returns mode of object</li>
+<li><code>as.numeric()</code>, <code>as.character()</code>, <code>as.logical()</code> - Type conversion</li>
+</ul>
+
+<h3>Special Values</h3>
+<ul>
+<li><code>NA</code> - Missing value (Not Available)</li>
+<li><code>NULL</code> - Empty/undefined object</li>
+<li><code>NaN</code> - Not a Number (0/0)</li>
+<li><code>Inf</code>, <code>-Inf</code> - Infinity</li>
+</ul>
+
+<div class="note"><strong>MCQ Tip:</strong> Use <code>L</code> suffix for integer: <code>5L</code>. Without it, numbers are stored as double.</div>
+</div>
+</div>
+
+<!-- Section 4 -->
+<div class="dropdown">
+<div class="dropdown-header">4. Data Structures in R</div>
+<div class="dropdown-content">
+<h3>Overview of Data Structures</h3>
+<table>
+<tr><th>Structure</th><th>Dimensions</th><th>Homogeneous?</th><th>Creation</th></tr>
+<tr><td><strong>Vector</strong></td><td>1D</td><td>Yes</td><td><code>c(1,2,3)</code></td></tr>
+<tr><td><strong>Matrix</strong></td><td>2D</td><td>Yes</td><td><code>matrix()</code></td></tr>
+<tr><td><strong>Array</strong></td><td>n-D</td><td>Yes</td><td><code>array()</code></td></tr>
+<tr><td><strong>List</strong></td><td>1D</td><td>No</td><td><code>list()</code></td></tr>
+<tr><td><strong>Data Frame</strong></td><td>2D</td><td>No</td><td><code>data.frame()</code></td></tr>
+<tr><td><strong>Factor</strong></td><td>1D</td><td>Yes</td><td><code>factor()</code></td></tr>
+</table>
+
+<h3>Vectors</h3>
+<pre>v <- c(1, 2, 3, 4, 5)          # Numeric vector
+v <- 1:10                       # Sequence
+v <- seq(1, 10, by=2)           # Sequence with step
+v <- rep(1, times=5)            # Repeat value
+length(v)                       # Length of vector</pre>
+
+<h3>Matrix</h3>
+<pre>m <- matrix(1:6, nrow=2, ncol=3)        # 2x3 matrix
+m <- matrix(1:6, nrow=2, byrow=TRUE)    # Fill by row
+dim(m)                                   # Dimensions
+nrow(m); ncol(m)                         # Rows, columns</pre>
+
+<h3>Array</h3>
+<pre>a <- array(1:24, dim=c(2,3,4))   # 3D array</pre>
+
+<h3>List</h3>
+<pre>l <- list(name="John", age=25, scores=c(90,85,88))
+l$name                    # Access by name
+l[[1]]                    # Access by index
+l[["age"]]                # Access by name (alternative)</pre>
+
+<h3>Data Frame</h3>
+<pre>df <- data.frame(
+  name = c("A", "B", "C"),
+  age = c(20, 25, 30),
+  stringsAsFactors = FALSE
+)
+df$name                   # Column access
+df[1, ]                   # First row
+df[, 2]                   # Second column
+df[1, 2]                  # Specific cell</pre>
+
+<h3>Factor</h3>
+<pre>f <- factor(c("low", "high", "medium", "high"))
+levels(f)                 # Get levels
+nlevels(f)                # Number of levels</pre>
+
+<div class="important"><strong>Key Difference:</strong> Vectors/Matrix/Array are homogeneous (same type). Lists/Data Frames are heterogeneous (different types).</div>
+</div>
+</div>
+
+<!-- Section 5 -->
+<div class="dropdown">
+<div class="dropdown-header">5. Viewing Named Objects & Structure</div>
+<div class="dropdown-content">
+<h3>Viewing Objects in Environment</h3>
+<table>
+<tr><th>Function</th><th>Purpose</th></tr>
+<tr><td><code>ls()</code></td><td>List all objects in environment</td></tr>
+<tr><td><code>objects()</code></td><td>Same as ls()</td></tr>
+<tr><td><code>ls.str()</code></td><td>List objects with structure</td></tr>
+<tr><td><code>exists("x")</code></td><td>Check if object exists</td></tr>
+<tr><td><code>rm(x)</code></td><td>Remove object</td></tr>
+<tr><td><code>rm(list=ls())</code></td><td>Remove all objects</td></tr>
+</table>
+
+<h3>Examining Object Structure</h3>
+<pre>str(df)         # Structure (MOST USEFUL)
+class(df)       # Class of object
+typeof(df)      # Storage type
+mode(df)        # Storage mode
+attributes(df)  # All attributes
+names(df)       # Column/element names
+dim(df)         # Dimensions
+length(df)      # Length/number of columns</pre>
+
+<h3>Viewing Data</h3>
+<pre>head(df)        # First 6 rows
+head(df, 10)    # First 10 rows
+tail(df)        # Last 6 rows
+View(df)        # Open in viewer (RStudio)
+print(df)       # Print to console
+summary(df)     # Statistical summary</pre>
+
+<div class="note"><strong>MCQ Tip:</strong> <code>str()</code> is the most comprehensive function to understand object structure.</div>
+</div>
+</div>
+
+<!-- Section 6 -->
+<div class="dropdown">
+<div class="dropdown-header">6. Manipulating Data Frames</div>
+<div class="dropdown-content">
+<h3>Creating Data Frames</h3>
+<pre>df <- data.frame(
+  col1 = c(1, 2, 3),
+  col2 = c("a", "b", "c"),
+  stringsAsFactors = FALSE
+)</pre>
+
+<h3>Accessing Data</h3>
+<pre>df$column           # By column name
+df[, "column"]      # By column name (alternative)
+df[, 1]             # By column index
+df[1, ]             # First row
+df[1:3, ]           # Rows 1-3
+df[c(1,3), ]        # Rows 1 and 3
+df[df$age > 25, ]   # Conditional selection</pre>
+
+<h3>Adding/Modifying Columns</h3>
+<pre>df$new_col <- c(1, 2, 3)              # Add column
+df["new_col"] <- c(1, 2, 3)           # Alternative
+df$col1 <- df$col1 * 2                # Modify column
+df <- transform(df, new=col1+col2)    # Transform</pre>
+
+<h3>Sorting Data</h3>
+<pre>df[order(df$age), ]                   # Sort by age (ascending)
+df[order(-df$age), ]                  # Sort descending
+df[order(df$name, df$age), ]          # Sort by multiple columns</pre>
+
+<h3>Extracting Subsets</h3>
+<pre>subset(df, age > 25)                  # Filter rows
+subset(df, age > 25, select=c(name))  # Filter + select columns
+df[df$age > 25, c("name", "age")]     # Base R method</pre>
+
+<h3>Combining Data Frames</h3>
+<pre>rbind(df1, df2)     # Row bind (stack vertically)
+cbind(df1, df2)     # Column bind (side by side)</pre>
+
+<h3>Merging Data Frames</h3>
+<pre>merge(df1, df2, by="id")                      # Inner join
+merge(df1, df2, by="id", all=TRUE)            # Full outer join
+merge(df1, df2, by="id", all.x=TRUE)          # Left join
+merge(df1, df2, by="id", all.y=TRUE)          # Right join
+merge(df1, df2, by.x="id1", by.y="id2")       # Different column names</pre>
+
+<h3>Reshaping Data</h3>
+<pre># Wide to Long
+reshape(df, direction="long", varying=list(c("var1","var2")))
+
+# Using tidyr (modern approach)
+library(tidyr)
+pivot_longer(df, cols=c(col1, col2), names_to="name", values_to="value")
+pivot_wider(df, names_from=name, values_from=value)</pre>
+
+<div class="important"><strong>Remember:</strong> <code>rbind()</code> = rows, <code>cbind()</code> = columns, <code>merge()</code> = SQL-like joins</div>
+</div>
+</div>
+
+<!-- Section 7 -->
+<div class="dropdown">
+<div class="dropdown-header">7. Control Structures</div>
+<div class="dropdown-content">
+<h3>If-Else Statements</h3>
+<pre>if (condition) {
+  # code
+} else if (condition2) {
+  # code
+} else {
+  # code
+}
+
+# Vectorized if-else
+ifelse(condition, yes_value, no_value)</pre>
+
+<h3>For Loop</h3>
+<pre>for (i in 1:10) {
+  print(i)
+}
+
+for (item in vector) {
+  print(item)
+}</pre>
+
+<h3>While Loop</h3>
+<pre>while (condition) {
+  # code
+  # must update condition to avoid infinite loop
+}</pre>
+
+<h3>Repeat Loop</h3>
+<pre>repeat {
+  # code
+  if (condition) break
+}</pre>
+
+<h3>Loop Control</h3>
+<ul>
+<li><code>break</code> - Exit loop completely</li>
+<li><code>next</code> - Skip to next iteration (like continue)</li>
+</ul>
+
+<h3>Apply Family (Vectorized - Preferred)</h3>
+<table>
+<tr><th>Function</th><th>Input</th><th>Output</th></tr>
+<tr><td><code>apply(X, MARGIN, FUN)</code></td><td>Matrix/Array</td><td>Vector/Matrix</td></tr>
+<tr><td><code>lapply(X, FUN)</code></td><td>List/Vector</td><td>List</td></tr>
+<tr><td><code>sapply(X, FUN)</code></td><td>List/Vector</td><td>Vector/Matrix</td></tr>
+<tr><td><code>mapply(FUN, ...)</code></td><td>Multiple inputs</td><td>Vector/Matrix</td></tr>
+<tr><td><code>tapply(X, INDEX, FUN)</code></td><td>Vector + Factor</td><td>Array</td></tr>
+</table>
+
+<pre># apply: MARGIN=1 for rows, MARGIN=2 for columns
+apply(matrix, 1, sum)    # Row sums
+apply(matrix, 2, mean)   # Column means
+
+lapply(list, function(x) x^2)   # Returns list
+sapply(list, function(x) x^2)   # Returns vector</pre>
+
+<div class="note"><strong>MCQ Tip:</strong> <code>next</code> in R = <code>continue</code> in other languages. Apply family is faster than loops.</div>
+</div>
+</div>
+
+<!-- Section 8 -->
+<div class="dropdown">
+<div class="dropdown-header">8. Functions in R</div>
+<div class="dropdown-content">
+<h3>Creating Functions</h3>
+<pre>my_function <- function(arg1, arg2 = default_value) {
+  # code
+  return(result)  # or just result
+}</pre>
+
+<h3>Numeric Functions</h3>
+<table>
+<tr><th>Function</th><th>Purpose</th></tr>
+<tr><td><code>sum()</code></td><td>Sum of elements</td></tr>
+<tr><td><code>mean()</code></td><td>Arithmetic mean</td></tr>
+<tr><td><code>median()</code></td><td>Median value</td></tr>
+<tr><td><code>min()</code>, <code>max()</code></td><td>Minimum/Maximum</td></tr>
+<tr><td><code>range()</code></td><td>Min and max</td></tr>
+<tr><td><code>abs()</code></td><td>Absolute value</td></tr>
+<tr><td><code>sqrt()</code></td><td>Square root</td></tr>
+<tr><td><code>round(x, n)</code></td><td>Round to n decimals</td></tr>
+<tr><td><code>floor()</code>, <code>ceiling()</code></td><td>Round down/up</td></tr>
+<tr><td><code>log()</code>, <code>log10()</code>, <code>log2()</code></td><td>Logarithms</td></tr>
+<tr><td><code>exp()</code></td><td>e^x</td></tr>
+</table>
+
+<h3>Character Functions</h3>
+<table>
+<tr><th>Function</th><th>Purpose</th><th>Example</th></tr>
+<tr><td><code>nchar()</code></td><td>Number of characters</td><td><code>nchar("hello") # 5</code></td></tr>
+<tr><td><code>paste()</code></td><td>Concatenate with space</td><td><code>paste("a", "b") # "a b"</code></td></tr>
+<tr><td><code>paste0()</code></td><td>Concatenate without space</td><td><code>paste0("a", "b") # "ab"</code></td></tr>
+<tr><td><code>substr()</code></td><td>Extract substring</td><td><code>substr("hello", 1, 3) # "hel"</code></td></tr>
+<tr><td><code>strsplit()</code></td><td>Split string</td><td><code>strsplit("a,b", ",")</code></td></tr>
+<tr><td><code>toupper()</code></td><td>Convert to uppercase</td><td><code>toupper("hello")</code></td></tr>
+<tr><td><code>tolower()</code></td><td>Convert to lowercase</td><td><code>tolower("HELLO")</code></td></tr>
+<tr><td><code>gsub()</code></td><td>Replace all matches</td><td><code>gsub("a", "b", "aaa") # "bbb"</code></td></tr>
+<tr><td><code>sub()</code></td><td>Replace first match</td><td><code>sub("a", "b", "aaa") # "baa"</code></td></tr>
+<tr><td><code>grep()</code></td><td>Find pattern (indices)</td><td><code>grep("a", c("a","b","a"))</code></td></tr>
+<tr><td><code>grepl()</code></td><td>Find pattern (logical)</td><td><code>grepl("a", "apple") # TRUE</code></td></tr>
+</table>
+
+<h3>Statistical Functions</h3>
+<table>
+<tr><th>Function</th><th>Purpose</th></tr>
+<tr><td><code>sd()</code></td><td>Standard deviation</td></tr>
+<tr><td><code>var()</code></td><td>Variance</td></tr>
+<tr><td><code>cor()</code></td><td>Correlation</td></tr>
+<tr><td><code>cov()</code></td><td>Covariance</td></tr>
+<tr><td><code>quantile()</code></td><td>Quantiles</td></tr>
+<tr><td><code>IQR()</code></td><td>Interquartile range</td></tr>
+<tr><td><code>t.test()</code></td><td>T-test</td></tr>
+<tr><td><code>chisq.test()</code></td><td>Chi-square test</td></tr>
+<tr><td><code>lm()</code></td><td>Linear regression</td></tr>
+<tr><td><code>summary()</code></td><td>Statistical summary</td></tr>
+</table>
+
+<div class="note"><strong>MCQ Tip:</strong> <code>paste()</code> adds spaces between elements; <code>paste0()</code> does not.</div>
+</div>
+</div>
+
+<!-- Section 9 -->
+<div class="dropdown">
+<div class="dropdown-header">9. Working with Objects</div>
+<div class="dropdown-content">
+<h3>Object Manipulation</h3>
+<pre>x <- 10                  # Assignment
+x <<- 10                 # Global assignment
+assign("x", 10)          # Assign by name
+get("x")                 # Get by name</pre>
+
+<h3>Viewing Objects Within Objects</h3>
+<pre># For Lists
+my_list$element          # $ notation
+my_list[["element"]]     # [[ ]] notation
+my_list["element"]       # Single bracket (returns list)
+
+# For Data Frames
+df$column
+df[["column"]]
+df[, "column"]
+
+# Nested Access
+my_list$nested$element
+my_list[["nested"]][["element"]]</pre>
+
+<h3>Constructing Data Objects</h3>
+<pre># Vector
+v <- c(1, 2, 3)
+v <- vector("numeric", length=10)
+
+# Matrix
+m <- matrix(1:9, nrow=3, ncol=3)
+m <- cbind(v1, v2, v3)
+m <- rbind(v1, v2, v3)
+
+# List
+l <- list(a=1, b="text", c=c(1,2,3))
+l <- vector("list", length=3)
+
+# Data Frame
+df <- data.frame(col1=v1, col2=v2)
+df <- as.data.frame(matrix)</pre>
+
+<h3>Modifying Attributes</h3>
+<pre>names(x) <- c("a", "b")       # Set names
+rownames(df) <- c("r1", "r2") # Set row names
+colnames(df) <- c("c1", "c2") # Set column names
+attr(x, "custom") <- "value"  # Set custom attribute</pre>
+
+<div class="important"><strong>Key:</strong> <code>[[]]</code> extracts single element; <code>[]</code> returns subset maintaining structure.</div>
+</div>
+</div>
+
+<!-- Section 10 -->
+<div class="dropdown">
+<div class="dropdown-header">10. Packages - Tidyverse, dplyr, tidyr</div>
+<div class="dropdown-content">
+<h3>Package Management</h3>
+<pre>install.packages("package")   # Install
+library(package)              # Load package
+require(package)              # Load (returns TRUE/FALSE)
+installed.packages()          # List installed
+update.packages()             # Update all
+remove.packages("package")    # Uninstall</pre>
+
+<h3>Tidyverse</h3>
+<p>Collection of packages: ggplot2, dplyr, tidyr, readr, purrr, tibble, stringr, forcats</p>
+<pre>library(tidyverse)  # Loads all core packages</pre>
+
+<h3>dplyr - Data Manipulation</h3>
+<table>
+<tr><th>Function</th><th>Purpose</th><th>Example</th></tr>
+<tr><td><code>select()</code></td><td>Choose columns</td><td><code>select(df, col1, col2)</code></td></tr>
+<tr><td><code>filter()</code></td><td>Filter rows</td><td><code>filter(df, age > 25)</code></td></tr>
+<tr><td><code>mutate()</code></td><td>Create/modify columns</td><td><code>mutate(df, new = col1 + col2)</code></td></tr>
+<tr><td><code>arrange()</code></td><td>Sort rows</td><td><code>arrange(df, desc(age))</code></td></tr>
+<tr><td><code>summarise()</code></td><td>Aggregate data</td><td><code>summarise(df, avg = mean(age))</code></td></tr>
+<tr><td><code>group_by()</code></td><td>Group data</td><td><code>group_by(df, category)</code></td></tr>
+<tr><td><code>rename()</code></td><td>Rename columns</td><td><code>rename(df, new = old)</code></td></tr>
+<tr><td><code>distinct()</code></td><td>Unique rows</td><td><code>distinct(df, col)</code></td></tr>
+<tr><td><code>count()</code></td><td>Count occurrences</td><td><code>count(df, category)</code></td></tr>
+<tr><td><code>slice()</code></td><td>Select rows by position</td><td><code>slice(df, 1:5)</code></td></tr>
+</table>
+
+<h3>Pipe Operator %>%</h3>
+<pre>df %>%
+  filter(age > 25) %>%
+  select(name, age) %>%
+  arrange(desc(age))</pre>
+
+<h3>dplyr Joins</h3>
+<pre>inner_join(df1, df2, by="id")
+left_join(df1, df2, by="id")
+right_join(df1, df2, by="id")
+full_join(df1, df2, by="id")
+anti_join(df1, df2, by="id")   # Rows in df1 not in df2
+semi_join(df1, df2, by="id")   # Rows in df1 that have match</pre>
+
+<h3>tidyr - Data Tidying</h3>
+<table>
+<tr><th>Function</th><th>Purpose</th></tr>
+<tr><td><code>pivot_longer()</code></td><td>Wide to long format</td></tr>
+<tr><td><code>pivot_wider()</code></td><td>Long to wide format</td></tr>
+<tr><td><code>separate()</code></td><td>Split column into multiple</td></tr>
+<tr><td><code>unite()</code></td><td>Combine columns</td></tr>
+<tr><td><code>drop_na()</code></td><td>Remove rows with NA</td></tr>
+<tr><td><code>fill()</code></td><td>Fill missing values</td></tr>
+<tr><td><code>replace_na()</code></td><td>Replace NA with value</td></tr>
+</table>
+
+<pre># pivot_longer example
+pivot_longer(df, cols = c(col1, col2), 
+             names_to = "variable", values_to = "value")
+
+# pivot_wider example
+pivot_wider(df, names_from = variable, values_from = value)</pre>
+
+<div class="note"><strong>MCQ Tip:</strong> <code>%>%</code> pipe passes left side as first argument to right side function.</div>
+</div>
+</div>
+
+<!-- Section 11 -->
+<div class="dropdown">
+<div class="dropdown-header">11. Queuing Theory</div>
+<div class="dropdown-content">
+<h3>Basic Concepts</h3>
+<ul>
+<li><strong>Queue</strong>: Waiting line for service</li>
+<li><strong>Arrival Rate (λ)</strong>: Average arrivals per time unit</li>
+<li><strong>Service Rate (μ)</strong>: Average services per time unit</li>
+<li><strong>Traffic Intensity (ρ)</strong>: λ/μ (must be < 1 for stable queue)</li>
+</ul>
+
+<h3>Kendall Notation: A/B/c/K/N/D</h3>
+<ul>
+<li><strong>A</strong>: Arrival process (M=Markovian/Poisson, D=Deterministic, G=General)</li>
+<li><strong>B</strong>: Service distribution (M, D, G)</li>
+<li><strong>c</strong>: Number of servers</li>
+<li><strong>K</strong>: System capacity (default: infinite)</li>
+<li><strong>N</strong>: Population size (default: infinite)</li>
+<li><strong>D</strong>: Queue discipline (FIFO, LIFO, SIRO)</li>
+</ul>
+
+<h3>M/M/1 Queue Formulas</h3>
+<table>
+<tr><th>Metric</th><th>Formula</th><th>Meaning</th></tr>
+<tr><td>ρ</td><td>λ/μ</td><td>Utilization</td></tr>
+<tr><td>L</td><td>λ/(μ-λ)</td><td>Avg customers in system</td></tr>
+<tr><td>Lq</td><td>λ²/[μ(μ-λ)]</td><td>Avg customers in queue</td></tr>
+<tr><td>W</td><td>1/(μ-λ)</td><td>Avg time in system</td></tr>
+<tr><td>Wq</td><td>λ/[μ(μ-λ)]</td><td>Avg time in queue</td></tr>
+<tr><td>P₀</td><td>1-ρ</td><td>Probability of empty system</td></tr>
+<tr><td>Pn</td><td>(1-ρ)ρⁿ</td><td>Probability of n customers</td></tr>
+</table>
+
+<h3>R Implementation</h3>
+<pre># M/M/1 Queue calculations
+lambda <- 6  # Arrival rate
+mu <- 10     # Service rate
+rho <- lambda/mu
+L <- lambda/(mu-lambda)
+Lq <- lambda^2/(mu*(mu-lambda))
+W <- 1/(mu-lambda)
+Wq <- lambda/(mu*(mu-lambda))
+
+# queueing package
+library(queueing)
+i <- NewInput.MM1(lambda=6, mu=10)
+m <- QueueingModel(i)
+summary(m)</pre>
+
+<div class="important"><strong>Remember:</strong> For stable queue, ρ = λ/μ must be less than 1.</div>
+</div>
+</div>
+
+<!-- Section 12 - MCQ Quick Reference Table -->
+<div class="dropdown">
+<div class="dropdown-header">12. MCQ Quick Reference Table</div>
+<div class="dropdown-content">
+<h3>Data Types & Structures</h3>
+<table>
+<tr><th>Keyword</th><th>Definition/Meaning</th><th>Function</th></tr>
+<tr><td>Integer literal</td><td>Whole number with L suffix</td><td><code>5L</code></td></tr>
+<tr><td>NA</td><td>Missing value (Not Available)</td><td><code>is.na()</code></td></tr>
+<tr><td>NULL</td><td>Empty/undefined object</td><td><code>is.null()</code></td></tr>
+<tr><td>NaN</td><td>Not a Number (0/0 result)</td><td><code>is.nan()</code></td></tr>
+<tr><td>Vector</td><td>1D homogeneous collection</td><td><code>c()</code></td></tr>
+<tr><td>Matrix</td><td>2D homogeneous structure</td><td><code>matrix()</code></td></tr>
+<tr><td>List</td><td>1D heterogeneous collection</td><td><code>list()</code></td></tr>
+<tr><td>Data Frame</td><td>2D heterogeneous (table)</td><td><code>data.frame()</code></td></tr>
+<tr><td>Factor</td><td>Categorical variable</td><td><code>factor()</code></td></tr>
+</table>
+
+<h3>Reading/Writing Data</h3>
+<table>
+<tr><th>Keyword</th><th>Definition/Meaning</th><th>Function</th></tr>
+<tr><td>CSV import</td><td>Comma-separated values</td><td><code>read.csv()</code></td></tr>
+<tr><td>CSV export</td><td>Write to CSV file</td><td><code>write.csv()</code></td></tr>
+<tr><td>Save R objects</td><td>Binary R format</td><td><code>save()</code>, <code>saveRDS()</code></td></tr>
+<tr><td>Load R objects</td><td>Load saved objects</td><td><code>load()</code>, <code>readRDS()</code></td></tr>
+<tr><td>header</td><td>First row as column names</td><td>Parameter</td></tr>
+<tr><td>sep</td><td>Field separator</td><td>Parameter</td></tr>
+</table>
+
+<h3>Data Manipulation</h3>
+<table>
+<tr><th>Keyword</th><th>Definition/Meaning</th><th>Function</th></tr>
+<tr><td>Row bind</td><td>Stack data frames vertically</td><td><code>rbind()</code></td></tr>
+<tr><td>Column bind</td><td>Combine data frames horizontally</td><td><code>cbind()</code></td></tr>
+<tr><td>Merge/Join</td><td>Combine by common column</td><td><code>merge()</code></td></tr>
+<tr><td>Sort ascending</td><td>Order data by column</td><td><code>order(df$col)</code></td></tr>
+<tr><td>Sort descending</td><td>Reverse order</td><td><code>order(-df$col)</code></td></tr>
+<tr><td>Filter rows</td><td>Select rows by condition</td><td><code>subset()</code>, <code>filter()</code></td></tr>
+<tr><td>Select columns</td><td>Choose specific columns</td><td><code>df[, cols]</code>, <code>select()</code></td></tr>
+</table>
+
+<h3>Control Structures</h3>
+<table>
+<tr><th>Keyword</th><th>Definition/Meaning</th><th>Syntax</th></tr>
+<tr><td>if-else</td><td>Conditional execution</td><td><code>if(cond){} else {}</code></td></tr>
+<tr><td>ifelse</td><td>Vectorized conditional</td><td><code>ifelse(cond, yes, no)</code></td></tr>
+<tr><td>for</td><td>Iterate over sequence</td><td><code>for(i in seq){}</code></td></tr>
+<tr><td>while</td><td>Loop while condition true</td><td><code>while(cond){}</code></td></tr>
+<tr><td>repeat</td><td>Infinite loop (use break)</td><td><code>repeat{if(cond) break}</code></td></tr>
+<tr><td>break</td><td>Exit loop</td><td><code>break</code></td></tr>
+<tr><td>next</td><td>Skip to next iteration</td><td><code>next</code></td></tr>
+</table>
+
+<h3>Apply Family</h3>
+<table>
+<tr><th>Keyword</th><th>Definition/Meaning</th><th>Function</th></tr>
+<tr><td>apply</td><td>Apply to matrix margins</td><td><code>apply(X, MARGIN, FUN)</code></td></tr>
+<tr><td>lapply</td><td>Apply to list, return list</td><td><code>lapply(X, FUN)</code></td></tr>
+<tr><td>sapply</td><td>Apply to list, return vector</td><td><code>sapply(X, FUN)</code></td></tr>
+<tr><td>mapply</td><td>Multivariate apply</td><td><code>mapply(FUN, ...)</code></td></tr>
+<tr><td>tapply</td><td>Apply by groups</td><td><code>tapply(X, INDEX, FUN)</code></td></tr>
+<tr><td>MARGIN=1</td><td>Apply to rows</td><td>Parameter</td></tr>
+<tr><td>MARGIN=2</td><td>Apply to columns</td><td>Parameter</td></tr>
+</table>
+
+<h3>String Functions</h3>
+<table>
+<tr><th>Keyword</th><th>Definition/Meaning</th><th>Function</th></tr>
+<tr><td>Concatenate (space)</td><td>Join strings with separator</td><td><code>paste()</code></td></tr>
+<tr><td>Concatenate (no space)</td><td>Join strings directly</td><td><code>paste0()</code></td></tr>
+<tr><td>String length</td><td>Number of characters</td><td><code>nchar()</code></td></tr>
+<tr><td>Substring</td><td>Extract part of string</td><td><code>substr()</code></td></tr>
+<tr><td>Split string</td><td>Divide by delimiter</td><td><code>strsplit()</code></td></tr>
+<tr><td>Replace all</td><td>Global substitution</td><td><code>gsub()</code></td></tr>
+<tr><td>Replace first</td><td>Single substitution</td><td><code>sub()</code></td></tr>
+<tr><td>Pattern match (index)</td><td>Find matching positions</td><td><code>grep()</code></td></tr>
+<tr><td>Pattern match (logical)</td><td>Check if pattern exists</td><td><code>grepl()</code></td></tr>
+</table>
+
+<h3>Statistical Functions</h3>
+<table>
+<tr><th>Keyword</th><th>Definition/Meaning</th><th>Function</th></tr>
+<tr><td>Mean</td><td>Average value</td><td><code>mean()</code></td></tr>
+<tr><td>Median</td><td>Middle value</td><td><code>median()</code></td></tr>
+<tr><td>Standard Deviation</td><td>Spread measure</td><td><code>sd()</code></td></tr>
+<tr><td>Variance</td><td>sd squared</td><td><code>var()</code></td></tr>
+<tr><td>Correlation</td><td>Linear relationship</td><td><code>cor()</code></td></tr>
+<tr><td>Summary</td><td>Min, Q1, Med, Mean, Q3, Max</td><td><code>summary()</code></td></tr>
+<tr><td>Quantile</td><td>Value at percentile</td><td><code>quantile()</code></td></tr>
+</table>
+
+<h3>dplyr Functions</h3>
+<table>
+<tr><th>Keyword</th><th>Definition/Meaning</th><th>Function</th></tr>
+<tr><td>Select columns</td><td>Choose columns</td><td><code>select()</code></td></tr>
+<tr><td>Filter rows</td><td>Row conditions</td><td><code>filter()</code></td></tr>
+<tr><td>Create column</td><td>Add/modify columns</td><td><code>mutate()</code></td></tr>
+<tr><td>Sort</td><td>Order rows</td><td><code>arrange()</code></td></tr>
+<tr><td>Aggregate</td><td>Compute summaries</td><td><code>summarise()</code></td></tr>
+<tr><td>Group</td><td>Group for aggregation</td><td><code>group_by()</code></td></tr>
+<tr><td>Pipe</td><td>Chain operations</td><td><code>%>%</code></td></tr>
+</table>
+
+<h3>tidyr Functions</h3>
+<table>
+<tr><th>Keyword</th><th>Definition/Meaning</th><th>Function</th></tr>
+<tr><td>Wide to Long</td><td>Unpivot columns</td><td><code>pivot_longer()</code></td></tr>
+<tr><td>Long to Wide</td><td>Pivot values to columns</td><td><code>pivot_wider()</code></td></tr>
+<tr><td>Split column</td><td>Divide one column</td><td><code>separate()</code></td></tr>
+<tr><td>Combine columns</td><td>Merge columns</td><td><code>unite()</code></td></tr>
+<tr><td>Remove NA rows</td><td>Drop missing</td><td><code>drop_na()</code></td></tr>
+</table>
+
+<h3>Object Inspection</h3>
+<table>
+<tr><th>Keyword</th><th>Definition/Meaning</th><th>Function</th></tr>
+<tr><td>List objects</td><td>Show all variables</td><td><code>ls()</code></td></tr>
+<tr><td>Structure</td><td>Detailed object info</td><td><code>str()</code></td></tr>
+<tr><td>Class</td><td>Object class type</td><td><code>class()</code></td></tr>
+<tr><td>First rows</td><td>Preview data</td><td><code>head()</code></td></tr>
+<tr><td>Last rows</td><td>End of data</td><td><code>tail()</code></td></tr>
+<tr><td>Dimensions</td><td>Rows x Columns</td><td><code>dim()</code></td></tr>
+<tr><td>Length</td><td>Number of elements</td><td><code>length()</code></td></tr>
+<tr><td>Names</td><td>Column/element names</td><td><code>names()</code></td></tr>
+</table>
+
+<h3>Queuing Theory</h3>
+<table>
+<tr><th>Keyword</th><th>Definition/Meaning</th><th>Formula</th></tr>
+<tr><td>λ (lambda)</td><td>Arrival rate</td><td>Arrivals per unit time</td></tr>
+<tr><td>μ (mu)</td><td>Service rate</td><td>Services per unit time</td></tr>
+<tr><td>ρ (rho)</td><td>Traffic intensity/utilization</td><td>λ/μ</td></tr>
+<tr><td>L</td><td>Avg customers in system</td><td>λ/(μ-λ)</td></tr>
+<tr><td>Lq</td><td>Avg customers in queue</td><td>λ²/[μ(μ-λ)]</td></tr>
+<tr><td>W</td><td>Avg time in system</td><td>1/(μ-λ)</td></tr>
+<tr><td>Wq</td><td>Avg waiting time</td><td>λ/[μ(μ-λ)]</td></tr>
+<tr><td>M/M/1</td><td>Single server Poisson queue</td><td>Kendall notation</td></tr>
+</table>
+</div>
+</div>
+
+</div>
+
+<script>
+document.querySelectorAll('.dropdown-header').forEach(header => {
+    header.addEventListener('click', () => {
+        header.parentElement.classList.toggle('active');
+    });
+});
+</script>
+</body>
+</html>

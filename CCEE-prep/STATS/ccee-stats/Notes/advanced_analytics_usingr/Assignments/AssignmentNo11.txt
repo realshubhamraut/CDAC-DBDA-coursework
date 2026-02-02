@@ -1,0 +1,10 @@
+Q.NO.1] 1. Out of 300 students in a school, 95 play cricket only, 120 play football only, 80 play volleyball only and 5 play no games. If one student is chosen at random, find the probability that
+
+(i) he plays volleyball
+
+(ii) he plays either cricket or volleyball
+
+(iii) he plays neither football nor volleyball.
+
+Q.NO.2]  A bag contains 8 red balls and some white balls. If the probability of drawing a white ball is half of the probability of drawing a red ball then find the number of white balls in the bag.
+
